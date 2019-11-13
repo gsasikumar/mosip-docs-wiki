@@ -20,7 +20,7 @@ This section details about the service APIs in the Registration-Processor module
 
 [10. Uincard Service](#10-uincard-service)
 
-[11. Lost UIN or RID Service](#11-lostuin-uin-or-rid-service)
+[11. Lost UIN Or RID Service](#11-lost-uin-or-rid-service)
 
 # 1 Packet Receiver Service
 ## 1.1 Packet-receiver service
@@ -1121,7 +1121,7 @@ Error response :
 ```
 
 
-# 11 Lost UIN or RID Service
+# 11 Lost UIN Or RID Service
 - #### `POST /registrationprocessor/v1/requesthandler/lost`
 The residence service portal would call this api to search lost uin OR rid. The request type is post since request json is expected in request body.
 
