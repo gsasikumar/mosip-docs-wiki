@@ -1075,9 +1075,9 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Comment
 -----|----------|-------------|---------------|
-id|Yes|reprint id|mosip.uincard.reprint
-version|Yes|the version for sync|1.0
-requesttime|Yes|the requesttime for sync|2019-02-14T12:40:59.768Z
+id|Yes|reprint id|mosip.print
+version|Yes|the version |1.0
+requesttime|Yes|the requesttime |2019-02-14T12:40:59.768Z
 request|Yes|the request object|1.0
 cardType|Yes|the type of the card|'UIN' OR 'MASKED_UIN'
 idType|Yes|type of id provided|'UIN' OR 'VID' OR 'RID'
@@ -1135,16 +1135,15 @@ https://mosip.io/registrationprocessor/v1/requesthandler/lost
 Resource Details | Description
 ------------ | -------------
 Request format | JSON
-Response format | application/pdf
-Error Response format | JSON
+Response format | JSON
 Requires Authentication | Yes
 
 ### Parameters
 Name | Required | Description | Comment
 -----|----------|-------------|---------------|
-id|Yes|reprint id|mosip.uincard.reprint
-version|Yes|the version for sync|1.0
-requesttime|Yes|the requesttime for sync|2019-02-14T12:40:59.768Z
+id|Yes|the id |mosip.registration.lost
+version|Yes|the version |1.0
+requesttime|Yes|the requesttime |2019-02-14T12:40:59.768Z
 request|Yes|the request object|1.0
 idType|Yes|the type of id|'UIN' OR 'RID'
 name|Yes|Fullname of the resident|resident name
@@ -1204,3 +1203,11 @@ Error response :
 }
 ```
 
+#### Failure details
+Error Code | Error Message | Error Description
+-----|----------|-------------
+RPR-SER-001 |	No Records Found	|   No Records Found
+RPR-SER-002 |   Multiple Records Found | Multiple UIN is found
+RPR-SER-003 | Invalid Input Value - ID Type | Invalid ID Type
+RPR-SER-004 | Invalid Input Value - Name cannot be NULL or Empty| Name is Empty or NULL
+RPR-SER-005 | Invalid Input Value - Contact Type | Invalid Contact Type
