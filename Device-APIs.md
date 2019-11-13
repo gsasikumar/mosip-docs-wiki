@@ -467,6 +467,8 @@ Error Code | Error Message | Error Description
 KER-MSD-053 |  Error occurred while inserting Device Type details | Insertion Issue
 KER-MSD-003 |  Required Device Type detail Not Found | Data Not Found
 KER-MSD-002 |  Error occurred while mapping Device Type details | Mapping Issue
+KER-MSD-061 |  Error occurred while inserting Machine Type details | Insertion Issue
+KER-MSD-054 |  Error occurred while fetching Device Type details | Fetch Issue
 
 
 # Device Specifications
