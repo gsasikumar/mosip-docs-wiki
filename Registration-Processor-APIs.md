@@ -50,7 +50,8 @@ MultipartFile|Yes|The encrypted zip file|
 ![Request](_images/reg_processor/packet_receiver_sample_input.PNG)
 
 #### Response
-
+#### Response Header
+##### Response-Signature = `<the response signature>`
 ##### Success response
 ###### Status Code: 200
 ###### Description: Packet is in PACKET_RECEIVED status
@@ -235,7 +236,8 @@ langCode|Yes|language code used |eng or ara
 }
 ```
 #### Response
-
+#### Response Header
+##### Response-Signature = `<the response signature>`
 ###### Response Code: 200
 ###### Description: Successfully synced
 
@@ -1168,6 +1170,9 @@ contactValue|Yes|contact value|the email id or phone number
 #### Response
 ###### Status Code:200
 ###### Description : response code is always 200 if server receives the request.
+#### Response Header
+##### Response-Signature = `<the response signature>`
+
 
 Success response :
 ```JSON
