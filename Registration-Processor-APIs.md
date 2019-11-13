@@ -20,6 +20,8 @@ This section details about the service APIs in the Registration-Processor module
 
 [10. Uincard Service](#10-uincard-service)
 
+[11. Lost UIN or RID Service](#11-lostuin-uin-or-rid-service)
+
 # 1 Packet Receiver Service
 ## 1.1 Packet-receiver service
 
@@ -1117,3 +1119,83 @@ Error response :
   "response": null
 }
 ```
+
+
+# 11 Lost UIN or RID Service
+- #### `POST /registrationprocessor/v1/requesthandler/lost`
+The residence service portal would call this api to search lost uin OR rid. The request type is post since request json is expected in request body.
+
+#### Resource URL
+https://mosip.io/registrationprocessor/v1/requesthandler/lost
+
+#### Resource details
+
+Resource Details | Description
+------------ | -------------
+Request format | JSON
+Response format | application/pdf
+Error Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Comment
+-----|----------|-------------|---------------|
+id|Yes|reprint id|mosip.uincard.reprint
+version|Yes|the version for sync|1.0
+requesttime|Yes|the requesttime for sync|2019-02-14T12:40:59.768Z
+request|Yes|the request object|1.0
+idType|Yes|the type of id|'UIN' OR 'RID'
+name|Yes|Fullname of the resident|resident name
+postalCode|Yes|the pincode or postalcode|postalcode of resident address
+contactType|Yes|contact type of applicant|"EMAIL" or "PHONE"
+contactValue|Yes|contact value|the email id or phone number
+
+#### Request
+```JSON
+{
+  "id": "mosip.registration.lost",
+  "request": {
+    "idType": "UIN",
+    "name": "Monobikash Das",
+	"postalCode": "14022",
+    "contactType": "EMAIL",
+	"contactValue": "monobikash.das@mindtree.com"
+  },
+  "requesttime": "2019-09-13T11:34:13.827Z",
+  "version": "1.0"
+}
+```
+#### Response
+###### Status Code:200
+###### Description : response code is always 200 if server receives the request.
+
+Success response :
+```JSON
+{
+    "id": "mosip.registration.lost",
+    "version": "1.0",
+    "responsetime": "2019-09-13T11:54:55.313Z",
+    "response": {
+       "idValue": "8787567820"
+    },
+    "errors": null
+}
+```
+
+Error response :
+
+```
+{
+  "id": "mosip.registration.lost",
+  "version": "1.0",
+  "responsetime": "2019-09-18T06:28:55.676Z",
+  "errors": [
+    {
+      "errorCode": "RPR-SER-001",
+      "message": "No Records Found."
+    }
+  ],
+  "response": null
+}
+```
+
