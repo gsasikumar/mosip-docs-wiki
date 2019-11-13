@@ -674,7 +674,9 @@ request: biometrics|N| Biometric data of an Individual| |
         "data": { // Base64 encoded
           "bioType": "FMR",
           "bioSubType": "UNKNOWN",
+          // For symmetric key encryption of bioValue, base64 encoded value of last 16 digits of timestamp should be used as aad parameter,  and base 64 encoded value of last 12 digits of timestamp should be used as iv (salt) parameter. 
           "bioValue": "<encrypted with session key and base64 encoded biometric data>",
+          "timestamp": "2019-02-15T10:01:57.086+05:30"
         },
         "hash": "sha256(sha256 hash of the previous data block + sha256 of the current data block before encoding)",
         "sessionKey": "<encrypted with MOSIP public key and encoded session key biometric>",
@@ -684,7 +686,9 @@ request: biometrics|N| Biometric data of an Individual| |
         "data": { // Base64 encoded
           "bioType": "IIR",
           "bioSubType": "RIGHT",
+          // For symmetric key encryption of bioValue, base64 encoded value of last 16 digits of timestamp should be used as aad parameter,  and base 64 encoded value of last 12 digits of timestamp should be used as iv (salt) parameter. 
           "bioValue": "<encrypted with session key and base64 encoded biometric data>",
+          "timestamp": "2019-02-15T10:01:57.087+05:30"
         },
         "hash": "sha256(sha256 hash of the previous data block + sha256 of the current data block before encoding)",
         "sessionKey": "<encrypted with MOSIP public key and encoded session key biometric>",
