@@ -677,6 +677,8 @@ Description: Not Found
 Error Code | Error Message | Error Description
 ------------|------------------------------|-------------
 KER-MSD-061 | Error occurred while inserting Machine Type details | Insertion Issue
+KER-MSD-062 | Error occurred while fetching Machine Type details | Fetch Issue
+KER-MSD-063 | Machine Type Not Found | Data Not Found
 
 # Machine Type search APIs
 
