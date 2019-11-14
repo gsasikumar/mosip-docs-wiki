@@ -1158,9 +1158,9 @@ contactValue|Yes|contact value|the email id or phone number
   "request": {
     "idType": "UIN",
     "name": "Monobikash Das",
-	"postalCode": "14022",
+    "postalCode": "14022",
     "contactType": "EMAIL",
-	"contactValue": "monobikash.das@mindtree.com"
+    "contactValue": "monobikash.das@mindtree.com"
   },
   "requesttime": "2019-09-13T11:34:13.827Z",
   "version": "1.0"
