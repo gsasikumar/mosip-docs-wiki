@@ -1150,6 +1150,7 @@ name|Yes|Fullname of the resident|resident name
 postalCode|Yes|the pincode or postalcode|postalcode of resident address
 contactType|Yes|contact type of applicant|"EMAIL" or "PHONE"
 contactValue|Yes|contact value|the email id or phone number
+langCode|Yes|Language Code|Primary or secondary language as configured by country
 
 #### Request
 ```JSON
@@ -1160,7 +1161,8 @@ contactValue|Yes|contact value|the email id or phone number
     "name": "Monobikash Das",
     "postalCode": "14022",
     "contactType": "EMAIL",
-    "contactValue": "monobikash.das@mindtree.com"
+    "contactValue": "monobikash.das@mindtree.com",
+    "langCode": "eng"
   },
   "requesttime": "2019-09-13T11:34:13.827Z",
   "version": "1.0"
