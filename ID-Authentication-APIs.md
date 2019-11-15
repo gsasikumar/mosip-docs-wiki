@@ -47,17 +47,17 @@ individualId| Y | VID of Individual | | 9830872690593682
 individualIdType| Y | Allowed Type of Individual ID - VID, UIN | VID |
 consentObtained| Y | If consent of Individual is obtained | true
 keyIndex| Y | Thumbprint of public key certificate used for encryption of sessionKey | 
-requestSessionKey| Y | Session Key encrypted using MOSIP Public Key | | 
-requestHMAC| Y | sha256 of request block before encryption and hash is encrypted using requestSessionKey | |
-request| Y | Auth request attributes to be used for authenticating Individual | | 
+requestSessionKey| Y | Symmetric Key to be created, and then encrypt the generated Session Key using 'MOSIP Public Key' shared using RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING algorithm| | 
+requestHMAC| Y | SHA-256 hash of request block before encryption and then hash is encrypted with 'requestSessionKey' using AES/GCM/PKCS5Padding algorithm | |
+request| Y | Auth request attributes to be used for authenticating Individual, encrypted with 'requestSessionKey' using AES/GCM/PKCS5Padding algorithm | | 
 request: otp| N | OTP | | 
 request: timestamp| N | Timestamp when request block was captured| | 
 request: demographics|N| Demographic data of an Individual| |
 request: biometrics|N| Biometric data of an Individual| |
-request: biometrics: data|N| Biometric data of an Individual, encrypted by MDS using below sessionKey using symmetric algorithm - AES/GCM/PKCS5Padding | |
-request: biometrics: hash|N| This is SHA-256 hashing of above biometric data of an Individual| |
-request: biometrics: sessionKey|N| This is the symmetric key used to encrypt above biometric data attribute. This symmetric key is encrypted by MOSIP Public Key shared to Partners and Device Providers using asymmetric key algorithm - RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING| |
-request: biometrics: signature|N| This is the signature of above biometric data attribute of an Individual, which contains X509 certificate containing public key to verify the signature| |
+request: biometrics: data|N| Biometric data of an Individual captured by device is encrypted by Device MDS with below sessionKey using symmetric encryption algorithm - AES/GCM/PKCS5Padding, in JWS format with X509 certificate containing public key to verify the signature | |
+request: biometrics: hash|N| SHA-256 hash of above biometric data of an Individual, which is then Base64-URL-encoded| |
+request: biometrics: sessionKey|N| Symmetric key used by MDS to encrypt above biometric data attribute. This symmetric key is encrypted by MOSIP Public Key shared to Partners and Device Providers using asymmetric key algorithm - RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING| |
+
 
 Mandatory fields for different types of authentications- 
 1. **OTP Auth** - request: **otp** attribute is mandatory 
