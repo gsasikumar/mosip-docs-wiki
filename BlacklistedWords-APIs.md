@@ -34,10 +34,10 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-description|optional|blacklisted word description||
-isActive|Yes|is active or not||
-langCode|Yes|language code||
-word|Yes|blacklisted word name|| 
+description | optional | blacklisted word description ||
+isActive | Yes | is active or not ||
+langCode | Yes | language code ||
+word | Yes | blacklisted word name || 
 
 ### Example Request
 ```JSON
@@ -74,6 +74,7 @@ word|Yes|blacklisted word name||
 }
 ```
 ### Response codes
+
 201
 
 Description: Created
@@ -107,11 +108,11 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-description|optional|blacklistedword description||
-isActive|Yes|is active or not||
-langCode|Yes|language code||
-oldWord|Yes|old blacklisted word name|| 
-word|Yes|blacklistedword name
+description | optional | blacklisted word description ||
+isActive | Yes| is active or not ||
+langCode | Yes | language code ||
+oldWord | Yes | old blacklisted word || 
+word |Yes |blacklisted word ||
 
 ### Example Request
 ```JSON
@@ -149,6 +150,7 @@ word|Yes|blacklistedword name
 }
 ```
 ### Response codes
+
 201
 
 Description: Created
@@ -212,6 +214,7 @@ langcode|Yes| language code ||
 }
 ```
 ### Response codes
+
 200
 
 Description: Success
@@ -267,6 +270,7 @@ word | Yes | blacklisted word to be deleted ||
 }
 ```
 ### Response codes
+
 200
 
 Description: Success
@@ -339,6 +343,7 @@ sortBy | optional | sort the requested data based on param value | createdDateTi
 }
 
 ### Response codes
+
 200
 
 Description: Success
@@ -377,10 +382,10 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-description|optional|blacklisted word description||
-isActive|Yes|is active or not||
-langCode|Yes|language code||
-word|Yes|blacklisted word name|| 
+description | optional | blacklisted word description ||
+isActive | Yes | is active or not ||
+langCode | Yes | language code ||
+word | Yes | blacklisted word name || 
 
 ### Example Request
 ```JSON
@@ -417,6 +422,7 @@ word|Yes|blacklisted word name||
 }
 ```
 ###Response codes
+
 200
 
 Description: Success
@@ -456,7 +462,7 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-blacklistedwords |Yes | blacklisted words to be validated ||
+blacklisted words | Yes | blacklisted words to be validated  ||
 
 ### Example Request
 ```JSON
@@ -487,6 +493,7 @@ blacklistedwords |Yes | blacklisted words to be validated ||
 }
 ```
 ###Response Codes
+
 200
 
 Description: Success
