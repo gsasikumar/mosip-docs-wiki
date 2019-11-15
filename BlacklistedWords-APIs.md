@@ -517,7 +517,9 @@ Description: Forbidden
 404
 
 Description: Not found
+
 ----
+
 #### Failure details
 Error Code | Error Message | Error Description
 ------------|------------------------------|-------------
@@ -529,7 +531,7 @@ KER-MSD-106 | Error occurred while deleting Blacklisted Word | Deletion Issue
 
 ----
 
-### POST /blacklistedwords/filtervalues
+# POST /blacklistedwords/filtervalues
 
 This service returns the filter values which are required in the dropdown entries of the filter screen.  
 
