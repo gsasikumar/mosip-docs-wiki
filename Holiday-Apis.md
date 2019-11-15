@@ -109,6 +109,7 @@ langCode |Yes | language code ||
 isActive |Yes | is active? ||
 
 ### Example Request
+```JSON
 {
   "id": "string",
   "metadata": {},
@@ -256,7 +257,7 @@ This service will provides the service to delete a holiday.
 
 
 ### Resource URL
-### `DELETE /blacklistedwords/{word}`
+### `DELETE /holidays`
 
 ### Resource details
 
