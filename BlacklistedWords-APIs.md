@@ -368,7 +368,7 @@ Description: Error occured while retrieving blacklisted words
 
 ------
 
-#PUT /blacklistedwords/details
+# PUT /blacklistedwords/details
 
 This service will update the blacklisted word details except the word itself. 
 
