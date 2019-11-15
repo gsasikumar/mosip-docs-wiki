@@ -423,7 +423,7 @@ word | Yes | blacklisted word name ||
   "version": "string"
 }
 ```
-###Response codes
+### Response codes
 
 200
 
@@ -494,7 +494,7 @@ blacklisted words | Yes | blacklisted words to be validated  ||
   "errors": null
 }
 ```
-###Response Codes
+### Response Codes
 
 200
 
