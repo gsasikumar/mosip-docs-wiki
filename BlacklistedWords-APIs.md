@@ -622,3 +622,101 @@ Description: Forbidden
 404
 
 Description: Not found
+
+----
+
+## POST /blacklistedwords/search
+
+This service is for the blacklisted words search functionality. All the filter parameters are passed and the blacklisted words are searched and the matching results are returned. 
+
+### Resource URL
+### `POST /blacklistedwords/search`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+filters|No|Array of the filter applied. In case of "list" screen, this array will be empty| -NA- |
+columnName|No|The column name in the JSON response| -NA- |
+type|No|The value have to be in  ["contains","equals","startsWith","between"]| -NA- |
+value|No|Value or id selected in the filter by the end user| -NA- |
+fromValue|No|If the type is "between", this field is the value of the start range| -NA- |
+toValue|No|If the type is "between", this field is the value of the end range| -NA- |
+languagecode|Yes|Language code in Language code in ISO 639-2 format| | 
+sort|No|This is an array of the sort field and type| | 
+sortfield| The field on which the sort is applied | | modifiedDate
+sorttype| This should be either of ['ASC','DESC']| | ASC
+pagination|The pagination parameter object| |
+pageStart|This is the start index | 0 | 10
+pageFetch| This is the amount of records to be fetched | 10 | 10
+
+
+### Example Request
+```JSON
+{
+  "id": "string",
+  "metadata": {},
+  "request": {
+    "filters": [
+      {
+        "value": "string",
+        "fromValue": "string",
+        "toValue": "string",
+        "columnName": "string",
+        "type": "string"
+      }
+    ],
+    "sort": [
+      {
+        "sortField": "string",
+        "sortType": "string"
+      }
+    ],
+    "pagination": {
+      "pageStart": 0,
+      "pageFetch": 0
+    },
+    "languageCode": "string"
+  },
+  "requesttime": "2018-12-10T06:12:52.994Z",
+  "version": "string"
+}
+```
+
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "data": [
+      {
+        "createdBy": "string",
+        "description": "string",
+        "isActive": true,
+        "isDeleted": true,
+        "langCode": "string",
+        "updatedBy": "string",
+        "word": "string"
+      }
+    ],
+    "fromRecord": 0,
+    "toRecord": 0,
+    "totalRecord": 0
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
