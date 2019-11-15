@@ -17,7 +17,7 @@ This section details about the service APIs for the BlacklistedWords
 * [POST /blacklistedwords/search](#post-blacklistedwordssearch)
 
 
-# POST /blacklistedwords
+## POST /blacklistedwords
 
 This service will create a blacklistedword which will be used in the MOSIP platform. 
 
@@ -93,7 +93,7 @@ Description: Forbidden
 
 -----
 
-# PUT /blacklistedwords
+## PUT /blacklistedwords
 This service will update the blacklisted word which is used in the MOSIP platform. 
 
 ### Resource URL
@@ -170,7 +170,7 @@ Description: Not Found
 
 
 -----
-# GET /blacklistedwords/{langcode}
+## GET /blacklistedwords/{langcode}
 
 This service will provides the service for the List of blacklisted words based on the passed language code. 
 
@@ -233,7 +233,7 @@ Description: Forbidden
 Description: Not Found
 
 -----
-# DELETE /blacklistedwords/{word}
+## DELETE /blacklistedwords/{word}
 
 This service will provides the service to delete the blacklisted word. 
 
@@ -290,7 +290,7 @@ Description: Unauthorized
 Description: Forbidden
 
 ----
-# GET /blacklistedwords/all 
+## GET /blacklistedwords/all 
 
 This service will provides the service for the List of blacklistedwords. 
 
@@ -368,7 +368,7 @@ Description: Error occured while retrieving blacklisted words
 
 ------
 
-# PUT /blacklistedwords/details
+## PUT /blacklistedwords/details
 
 This service will update the blacklisted word details except the word itself. 
 
@@ -449,7 +449,7 @@ Description: Not Found
 
 ----
 
-# POST /blacklistedwords/words
+## POST /blacklistedwords/words
 
 This service will validate list of words if they are blacklisted or not. 
 
@@ -520,7 +520,7 @@ Description: Not found
 
 ----
 
-#### Failure details
+## Failure details
 Error Code | Error Message | Error Description
 ------------|------------------------------|-------------
 KER-MSD-007 | Error occurred while fetching Blacklisted words | Fetch Issue
@@ -531,7 +531,7 @@ KER-MSD-106 | Error occurred while deleting Blacklisted Word | Deletion Issue
 
 ----
 
-# POST /blacklistedwords/filtervalues
+## POST /blacklistedwords/filtervalues
 
 This service returns the filter values which are required in the dropdown entries of the filter screen.  
 
