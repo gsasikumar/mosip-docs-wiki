@@ -90,6 +90,7 @@ Description: Unauthorized
 403
 
 Description: Forbidden
+
 -----
 
 # PUT /blacklistedwords
@@ -230,6 +231,7 @@ Description: Forbidden
 404
 
 Description: Not Found
+
 -----
 # DELETE /blacklistedwords/{word}
 
@@ -341,7 +343,7 @@ sortBy | optional | sort the requested data based on param value | createdDateTi
   "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
   "version": "string"
 }
-
+```
 ### Response codes
 
 200
