@@ -8,7 +8,7 @@ This section details about the service APIs for the Zones
 
 * [GET /zones/hierarchy/{langCode}](#get-zoneshierarchylangcode)
 * [GET /zones/leafs/{langCode}](#get-zonesleafslangcode)
-* [GET /zones/zonename](#put-zoneszonename)
+* [GET /zones/zonename](#get-zoneszonename)
 
 
 ## GET /zones/hierarchy/{langCode}
