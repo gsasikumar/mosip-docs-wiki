@@ -11,8 +11,8 @@ This section details about the service APIs for the Holidays
 * [PUT /holidays](#put-holidays)
 * [DELETE /holidays](#delete-holidays)
 * [GET /holidays/{holidayid}](#get-holidaysholidayid)
-* [GET /holidays/{holidayid}/{langcode}](#put-holidaysholidayidlangcode)
-* [GET /holidays/all](#post-holidaysall)
+* [GET /holidays/{holidayid}/{langcode}](#get-holidaysholidayidlangcode)
+* [GET /holidays/all](#get-holidaysall)
 * [POST /holidays/filtervalues](#post-holidaysfiltervalues)
 * [POST /holidays/search](#post-holidayssearch)
 
