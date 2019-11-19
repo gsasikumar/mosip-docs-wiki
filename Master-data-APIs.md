@@ -71,8 +71,6 @@ This section details about the service APIs in the Master data modules
 * [GET /holidays/{holidayid}](#get-holidaysholidayid)
 * [GET /holidays/{holidayid}/{langcode}](#put-holidaysholidayidlangcode)
 * [GET /holidays/all](#post-holidaysall)
-* [POST /holidays/filtervalues](#post-holidaysfiltervalues)
-* [POST /holidays/search](#post-holidayssearch)
 
 
 ## GET /holidays
