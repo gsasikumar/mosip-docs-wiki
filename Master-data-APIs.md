@@ -69,8 +69,8 @@ This section details about the service APIs in the Master data modules
 * [PUT /holidays](#put-holidays)
 * [DELETE /holidays](#delete-holidays)
 * [GET /holidays/{holidayid}](#get-holidaysholidayid)
-* [GET /holidays/{holidayid}/{langcode}](#put-holidaysholidayidlangcode)
-* [GET /holidays/all](#post-holidaysall)
+* [GET /holidays/{holidayid}/{langcode}](#get-holidaysholidayidlangcode)
+* [GET /holidays/all](#get-holidaysall)
 
 
 ## GET /holidays
