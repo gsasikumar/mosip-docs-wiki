@@ -618,15 +618,17 @@ KER-MSD-026 | Location not found | Data Not Found
 # Blacklisted words Master API
 
 * [POST /blacklistedwords](#post-blacklistedwords)
-* [GET /blacklistedwords](#get-blacklistedwords)
-* [GET /blacklistedwords/{id}/{languagecode}](#get-blacklistedwords-id-languagecode)
 * [PUT /blacklistedwords](#put-blacklistedwords)
-* [DELETE /blacklistedwords/{word}](#delete-blacklistedwords-word)
+* [GET /blacklistedwords/{langcode}](#get-blacklistedwordslangcode)
+* [DELETE /blacklistedwords/{word}](#delete-blacklistedwordsword)
+* [GET /blacklistedwords/all](#get-blacklistedwordsall)
+* [PUT /blacklistedwords/details](#put-blacklistedwordsdetails)
+* [POST /blacklistedwords/words](#post-blacklistedwordswords)
 
-## POST /blacklistedwords 
-Master data is required across the platform. 
 
-This service will the create the list of blacklisted words in the Blacklisted Master module. 
+## POST /blacklistedwords
+
+This service will create a blacklistedword which will be used in the MOSIP platform. 
 
 ### Resource URL
 ### `POST /blacklistedwords`
@@ -641,47 +643,54 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-blacklistedwords|Yes|List of black listed words| | 
-languagecode|Yes|Language code in ISO 639-2 Code of the holiday| | eng
-
+description | optional | blacklisted word description ||
+isActive | Yes | is active or not ||
+langCode | Yes | language code ||
+word | Yes | blacklisted word name || 
 
 ### Example Request
 ```JSON
 {
   "id": "string",
-  "version": "string",
   "metadata": {},
-  "requesttime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "request" : {
-		"blacklistedwords": ["asdf","lkjh","qwer"],
-		"languagecode": "string"
-	}
+  "request": {
+    "description": "string",
+    "isActive": true,
+    "langCode": "string",
+    "word": "string"
+  },
+  "requesttime": "2018-12-10T06:12:52.994Z",
+  "version": "string"
 }
 ```
 ### Example Response
 ```JSON
 {
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [{
+  "errors": [
+    {
       "errorCode": "string",
       "message": "string"
-    }],
-"response" : {
-  "successfully_created_words": ["asdf","lkjh","qwer"]
-            }
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "langCode": "string",
+    "word": "string"
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
 }
 ```
 ### Response codes
-202
 
-Description: Accepted
+201
 
-400
+Description: Created
 
-Description: Bad request
+404
+
+Description: Not Found
 
 401
 
@@ -691,147 +700,10 @@ Description: Unauthorized
 
 Description: Forbidden
 
-## GET /blacklistedwords
-Master data is required across the platform. 
+-----
 
-This service will provides the service for the List of blacklistedwords. 
-
-
-
-### Resource URL
-### `GET /blacklistedwords`
-
-### Resource details
-
-Resource Details | Description
------------- | -------------
-Response format | JSON
-Requires Authentication | Yes
-
-### Parameters
-Name | Required | Description | Default Value | Example
------|----------|-------------|---------------|--------
--NA-
-
-### Example Request
-```JSON
--NA-
-```
-### Example Response
-```JSON
-{
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [{
-      "errorCode": "string",
-      "message": "string"
-    }],
- "response" : {
-		"blacklistedwords":[
-			{
-				"id":"string",
-				"value":"asdf",
-				"languagecode":"string"
-			},
-	                {
-				"id":"string",
-				"value":"asdf",
-				"languagecode" :"string"
-			}
-		]
-	}
-}
-```
-200
-
-Description: Success
-
-400
-
-Description: Bad request
-
-401
-
-Description: Unauthorized
-
-404
-
-Description: Not Found
-
-
-## GET /blacklistedwords/{id}/{languagecode}
-
-This service will provides the service for the List of blacklistedwords based on the id. 
-
-### Resource URL
-### `GET /blacklistedwords/{id}/{languagecode}`
-
-### Resource details
-
-Resource Details | Description
------------- | -------------
-Response format | JSON
-Requires Authentication | Yes
-
-### Parameters
-Name | Required | Description | Default Value | Example
------|----------|-------------|---------------|--------
--NA-
-
-### Example Request
-```JSON
--NA-
-```
-### Example Response
-```JSON
-{
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [
-    {
-      "errorCode": "string",
-      "message": "string"
-    }
-  ],
-"response":{
-	"blacklistedwords":[
-		{
-			"id":"string",
-			"value":"asdf",
-			"languagecode":"string"
-		},
-		{
-			"id":"string",
-			"value":"asdf",
-			"languagecode":"string"
-		}
-	]
-     }
-}
-```
-200
-
-Description: Success
-
-400
-
-Description: Bad request
-
-401
-
-Description: Unauthorized
-
-404
-
-Description: Not Found
-
-# PUT /blacklistedwords
-
-This service will provides the service to update blacklistedwords. 
+## PUT /blacklistedwords
+This service will update the blacklisted word which is used in the MOSIP platform. 
 
 ### Resource URL
 ### `PUT /blacklistedwords`
@@ -846,64 +718,134 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-word |YES|Blacklisted word| |abc|
-description|YES|Description of the blacklisted word|||
-langCode|YES|Language Code of the blacklisted word|||
-isActive|YES|Blacklisted word is active|||
- 
+description | optional | blacklisted word description ||
+isActive | Yes| is active or not ||
+langCode | Yes | language code ||
+oldWord | Yes | old blacklisted word || 
+word |Yes |blacklisted word ||
 
 ### Example Request
 ```JSON
-"request":{
-          "id": "string",
-          "ver": "string",
-          "timestamp": "2018-12-31T10:01:24.578Z",
-          "request": {
-                      "description": "string",
-                      "isActive": true,
-                      "langCode": "string",
-                      "word": "string"
-                    }
-          }
+{
+  "id": "string",
+  "metadata": {},
+  "request": {
+    "description": "string",
+    "isActive": true,
+    "langCode": "string",
+    "oldWord": "string",
+    "word": "string"
+  },
+  "requesttime": "2018-12-10T06:12:52.994Z",
+  "version": "string"
+}
 ```
 ### Example Response
 ```JSON
 {
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
   "errors": [
     {
       "errorCode": "string",
       "message": "string"
     }
   ],
-"resonpse" : {
-              "langCode": "string",
-              "word": "string"
-             }
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "langCode": "string",
+    "word": "string"
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
 }
 ```
-200
+### Response codes
 
-Description: Success
+201
 
-400
-
-Description: Bad request
+Description: Created
 
 401
 
 Description: Unauthorized
 
+403
+
+Description: Forbidden
+
+404 
+
+Description: Not Found
+
+
+-----
+## GET /blacklistedwords/{langcode}
+
+This service will provides the service for the List of blacklisted words based on the passed language code. 
+
+### Resource URL
+### `GET /blacklistedwords/{langcode}`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+langcode|Yes| language code ||
+
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "blacklistedwords": [
+      {
+        "description": "string",
+        "isActive": true,
+        "langCode": "string",
+        "word": "string"
+      }
+    ]
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
+### Response codes
+
+200
+
+Description: Success
+
+401
+
+Description: Unauthorized
+
+403
+
+Description: Forbidden
+
 404
 
 Description: Not Found
 
-# DELETE /blacklistedwords/{word}
+-----
+## DELETE /blacklistedwords/{word}
 
-This service will provides the service to delete blacklistedwords. 
+This service will provides the service to delete the blacklisted word. 
+
 
 ### Resource URL
 ### `DELETE /blacklistedwords/{word}`
@@ -918,32 +860,285 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-word |YES|Blacklisted word| |abc||
- 
+word | Yes | blacklisted word to be deleted ||
 
-### Example Request
-```JSON
-NA
-```
 ### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "code": "string"
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
 ```
-word(String)
-```
+### Response codes
+
 200
 
 Description: Success
 
-400
+204
 
-Description: Bad request
+Description: No Content
 
 401
 
 Description: Unauthorized
 
+403
+
+Description: Forbidden
+
+----
+## GET /blacklistedwords/all 
+
+This service will provides the service for the List of blacklistedwords. 
+
+
+### Resource URL
+### `GET /blacklistedwords/all`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+orderBy | optional | response order | desc ||
+pageNumber | optional | page no for the requested data | 0 ||
+pageSize | optional | page size for the requested data | 10 ||
+sortBy | optional | sort the requested data based on param value | createdDateTime || 
+
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "data": [
+      {
+        "createdBy": "string",
+        "description": "string",
+        "isActive": true,
+        "isDeleted": true,
+        "langCode": "string",
+        "updatedBy": "string",
+        "word": "string"
+      }
+    ],
+    "pageNo": 0,
+    "totalItems": 0,
+    "totalPages": 0
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
+### Response codes
+
+200
+
+Description: Success
+
+401
+
+Description: Unauthorized
+
+403
+
+Description: Forbidden
+
 404
 
+Description: Not found
+
+500
+
+Description: Error occured while retrieving blacklisted words
+
+------
+
+## PUT /blacklistedwords/details
+
+This service will update the blacklisted word details except the word itself. 
+
+
+### Resource URL
+### `PUT /blacklistedwords/details`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+description | optional | blacklisted word description ||
+isActive | Yes | is active or not ||
+langCode | Yes | language code ||
+word | Yes | blacklisted word name || 
+
+### Example Request
+```JSON
+{
+  "id": "string",
+  "metadata": {},
+  "request": {
+    "description": "string",
+    "isActive": true,
+    "langCode": "string",
+    "word": "string"
+  },
+  "requesttime": "2018-12-10T06:12:52.994Z",
+  "version": "string"
+}
+```
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "langCode": "string",
+    "word": "string"
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
+### Response codes
+
+200
+
+Description: Success
+
+201
+
+Description: Created
+
+401
+
+Description: Unauthorized
+
+403
+
+Description: Forbidden
+
+404 
+
 Description: Not Found
+
+----
+
+## POST /blacklistedwords/words
+
+This service will validate list of words if they are blacklisted or not. 
+
+### Resource URL
+### `POST /blacklistedwords/words`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+blacklisted words | Yes | blacklisted words to be validated  ||
+
+### Example Request
+```JSON
+{
+  "id": "string",
+  "metadata": {},
+  "request": {
+    "blacklistedwords": [
+      "string"
+    ]
+  },
+  "requesttime": "2018-12-10T06:12:52.994Z",
+  "version": "string"
+}
+```
+
+### Example Response
+```JSON
+{
+  "id": "string",
+  "version": "string",
+  "responsetime": "2019-11-15T08:04:42.310Z",
+  "metadata": null,
+  "response": {
+    "code": "Valid"
+  },
+  "errors": null
+}
+```
+### Response Codes
+
+200
+
+Description: Success
+
+201
+
+Description: Created
+
+401
+
+Description: Unauthorized
+
+403
+
+Description: Forbidden
+
+404
+
+Description: Not found
+
+----
+
+## Failure details
+Error Code | Error Message | Error Description
+------------|------------------------------|-------------
+KER-MSD-007 | Error occurred while fetching Blacklisted words | Fetch Issue
+KER-MSD-008 | Blacklisted word not found | Data Not Found
+KER-MSD-070 | Error occurred while inserting Blacklisted words | Insertion Issue
+KER-MSD-105 | Error occurred while updating Blacklisted Word | Update Issue
+KER-MSD-106 | Error occurred while deleting Blacklisted Word | Deletion Issue
+
+----
 
 # Documents Category Master API
 
