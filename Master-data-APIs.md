@@ -64,82 +64,20 @@ This section details about the service APIs in the Master data modules
 
 # Holiday Master API
 
-* [POST /holidays](#post-holidays)
 * [GET /holidays](#get-holidays)
-* [GET /holidays/{languagecode}](#get-holidays-languagecode)
-
-## POST /holidays
-Master data is required across the platform. 
-
-This service will create the holiday in the Holiday Master module. 
-
-### Resource URL
-### `POST /holidays`
-
-### Resource details
-
-Resource Details | Description
------------- | -------------
-Response format | JSON
-Requires Authentication | Yes
-
-### Parameters
-Name | Required | Description | Default Value | Example
------|----------|-------------|---------------|--------
-holidayDate|Yes|Holiday date in UTC standard ISO8601 format| | 2028-10-04T05:57:20.929Z
-holidayName|Yes|Name of the holiday| | 
-
-### Example Request
-```JSON
-{
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "requesttime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-	"request" : { 
-		  "holiday":{ "holidayDate": "string", "holidayName": "string", "languagecode": "string" }
-	}
-}  
-```
-### Example Response
-```JSON
- {
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [
-    {
-      "errorCode": "string",
-      "message": "string"
-    }
-  ],
-  "response" : { "holidayID": "string" }
-}
-```
-### Response codes
-202
-
-Description: Accepted
-
-400
-
-Description: Bad request
-
-401
-
-Description: Unauthorized
-
-403
-
-Description: Forbidden
+* [POST /holidays](#post-holidays)
+* [PUT /holidays](#put-holidays)
+* [DELETE /holidays](#delete-holidays)
+* [GET /holidays/{holidayid}](#get-holidaysholidayid)
+* [GET /holidays/{holidayid}/{langcode}](#put-holidaysholidayidlangcode)
+* [GET /holidays/all](#post-holidaysall)
+* [POST /holidays/filtervalues](#post-holidaysfiltervalues)
+* [POST /holidays/search](#post-holidayssearch)
 
 
 ## GET /holidays
-Master data is required across the platform. 
 
-This service will provides the service for the List of holidays. 
-It will also ensure audit data stored is archived based on the defined archival policy.
+This service will get all the holidays. 
 
 ### Resource URL
 ### `GET /holidays`
@@ -154,59 +92,60 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
+--NA-- 
 
 
 ### Example Response
 ```JSON
 {
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [ {
-             "errorCode": "string",
-             "message": "string"
-             }
-           ],
- "response" : {
-             "holidays": [
-	                 "holiday" : {
-		                      "holidayID": "string",
-		                      "holidayDate": "string",
-		                      "holidayName": "string",
-		                      "holidayDay": "string",	
-		                      "holidayMonth": "string",
-		                      "holidayYear": "string",
-		                      "languagecode": "string"
-	                             }
-                          ]
-                 }
- }
+  "id": null,
+  "version": null,
+  "responsetime": "2019-11-15T09:41:14.274Z",
+  "metadata": null,
+  "response": {
+    "holidays": [
+      {
+        "id": 2000001,
+        "locationCode": "KTA",
+        "holidayDate": "2019-01-01",
+        "holidayDay": "2",
+        "holidayMonth": "1",
+        "holidayYear": "2019",
+        "holidayName": "New Year's Day",
+        "holidayDesc": "National Holiday",
+        "langCode": "eng",
+        "isActive": true
+      }
+	]
+  },
+  "errors": null
+}
 ```
+### Response codes
+
 200
 
 Description: Success
-
-400
-
-Description: Bad request
-
-401
-
-Description: Unauthorized
 
 404
 
 Description: Not Found
 
+401
 
-## GET /holidays/{languagecode}
+Description: Unauthorized
 
-This service will provides the service for the List of holidays based on the holiday ID
-It will also ensure audit data stored is archived based on the defined archival policy.
+403
+
+Description: Forbidden
+
+-----
+
+## POST /holidays
+This service will create a new holiday. 
 
 ### Resource URL
-### `GET /holidays/{languagecode}`
+### `POST /holidays`
 
 ### Resource details
 
@@ -218,49 +157,463 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-languagecode|Yes|Language code in ISO 639-2 Code of the holiday| | eng
+locationCode | Yes | location code ||
+holidayDate | Yes| date ||
+holidayMonth | Yes | month || 
+holidayYear |Yes | year ||
+holidayName |Yes | name ||
+holidayDesc |Yes | description ||
+langCode |Yes | language code ||
+isActive |Yes | is active? ||
 
-### Example Response
+### Example Request
 ```JSON
 {
   "id": "string",
-  "version": "string",
   "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [{ 
-               "errorCode": "string",
-               "message": "string"
-             }],
-  "response" : {
-           "holidays": [
-	              "holiday" : {
-		                   "holidayID": "string",
-		                   "holidayDate": "string",
-		                   "holidayName": "string",
-		                   "holidayDay": "string",	
-		                   "holidayMonth": "string",
-		                   "holidayYear": "string"		
-		                   "languagecode": "string"
-	                          }
-                         ]
-               }
+  "request": {
+    "holidayDate": "string",
+    "holidayDay": "string",
+    "holidayDesc": "string",
+    "holidayMonth": "string",
+    "holidayName": "string",
+    "holidayYear": "string",
+    "id": 0,
+    "isActive": true,
+    "langCode": "string",
+    "locationCode": "string"
+  },
+  "requesttime": "2018-12-10T06:12:52.994Z",
+  "version": "string"
 }
 ```
-200
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "holidayDate": "string",
+    "holidayName": "string",
+    "langCode": "string",
+    "locationCode": "string"
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
+### Response codes
 
-Description: Success
+201
 
-400
-
-Description: Bad request
+Description: Created
 
 401
 
 Description: Unauthorized
 
+403
+
+Description: Forbidden
+
+204 
+
+Description: Not Found
+
+
+-----
+## PUT /holidays
+
+This service will update a holiday. 
+
+### Resource URL
+### `PUT /holidays`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+locationCode | Yes | location code ||
+holidayDate | Yes| date ||
+newHolidayDate | Yes | new date || 
+newHolidayName | Yes | new name ||
+holidayName | Yes | name ||
+holidayDesc | Yes | description ||
+langCode | Yes | language code ||
+isActive | Yes | is active? ||
+newHolidayDesc | Yes | new description ||
+
+### Example Request
+```JSON
+{
+  "id": "string",
+  "metadata": {},
+  "request": {
+    "id": 0,
+    "locationCode": "string",
+    "holidayDate": "string",
+    "holidayName": "string",
+    "holidayDesc": "string",
+    "langCode": "string",
+    "isActive": true,
+    "newHolidayName": "string",
+    "newHolidayDate": "string",
+    "newHolidayDesc": "string"
+  },
+  "requesttime": "2018-12-10T06:12:52.994Z",
+  "version": "string"
+}
+```
+### Example Response
+```JSON
+{
+  "holidayDate": "string",
+  "holidayName": "string",
+  "langCode": "string",
+  "locationCode": "string"
+}
+```
+### Response codes
+
+200
+
+Description: Success
+
+201
+
+Description: Created
+
+401
+
+Description: Unauthorized
+
+403
+
+Description: Forbidden
+
 404
 
-Description: Not Found 
+Description: Not Found
+
+-----
+
+## DELETE /holidays
+
+This service will provides the service to delete a holiday. 
+
+
+### Resource URL
+### `DELETE /holidays`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+holidayDate | Yes | date to be deleted ||
+holidayName | Yes | name of the holiday to be deleted ||
+locationCode | Yes | location code ||
+
+### Example Request
+```JSON
+{
+  "id": "string",
+  "metadata": {},
+  "request": {
+    "holidayDate": "string",
+    "holidayName": "string",
+    "locationCode": "string"
+  },
+  "requesttime": "2018-12-10T06:12:52.994Z",
+  "version": "string"
+}
+```
+
+### Example Response
+```JSON
+{
+  "holidayDate": "string",
+  "holidayName": "string",
+  "locationCode": "string"
+}
+```
+### Response codes
+
+200
+
+Description: Success
+
+204
+
+Description: No Content
+
+401
+
+Description: Unauthorized
+
+403
+
+Description: Forbidden
+
+----
+
+## GET /holidays/{holidayid}
+
+This service will provides the service to get all holidays by Id. 
+
+
+### Resource URL
+### `GET /holidays/{holidayid}`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+holidayid | yes | holiday Id ||
+
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "holidays": [
+      {
+        "holidayDate": "string",
+        "holidayDay": "string",
+        "holidayDesc": "string",
+        "holidayMonth": "string",
+        "holidayName": "string",
+        "holidayYear": "string",
+        "id": 0,
+        "isActive": true,
+        "langCode": "string",
+        "locationCode": "string"
+      }
+    ]
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
+### Response codes
+
+200
+
+Description: Success
+
+401
+
+Description: Unauthorized
+
+403
+
+Description: Forbidden
+
+404
+
+Description: Not found
+
+------
+
+## GET /holidays/{holidayid}/{langcode}
+
+This service will get all the holidays by holidayid and language code. 
+
+
+### Resource URL
+### `GET /holidays/{holidayid}/{langcode}`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+holidayid | yes | holiday Id ||||
+langCode | Yes | language code ||
+
+
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "holidays": [
+      {
+        "holidayDate": "string",
+        "holidayDay": "string",
+        "holidayDesc": "string",
+        "holidayMonth": "string",
+        "holidayName": "string",
+        "holidayYear": "string",
+        "id": 0,
+        "isActive": true,
+        "langCode": "string",
+        "locationCode": "string"
+      }
+    ]
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
+### Response codes
+
+200
+
+Description: Success
+
+401
+
+Description: Unauthorized
+
+403
+
+Description: Forbidden
+
+404 
+
+Description: Not Found
+
+----
+
+## GET /holidays/all
+
+This service will retrieve all the holidays with additional metadata. 
+
+### Resource URL
+### `GET /holidays/all`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+orderBy | optional | response order	| desc	||
+pageNumber |optional | page no for the requested data | 0 ||	
+pageSize | optional	| page size for the requested data	| 10 ||
+sortBy | optional | sort the requested data based on param value | createdDateTime ||
+
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "data": [
+      {
+        "createdBy": "string",
+        "holidayDate": 0,
+        "holidayDay": "string",
+        "holidayDesc": "string",
+        "holidayId": 0,
+        "holidayMonth": "string",
+        "holidayName": "string",
+        "holidayYear": "string",
+        "isActive": true,
+        "isDeleted": true,
+        "langCode": "string",
+        "locationCode": "string",
+        "name": "string",
+        "updatedBy": "string"
+      }
+    ],
+    "pageNo": 0,
+    "totalItems": 0,
+    "totalPages": 0
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
+### Response Codes
+
+200
+
+Description: Success
+
+500
+
+Description: Error occured while retrieving holidays
+
+401
+
+Description: Unauthorized
+
+403
+
+Description: Forbidden
+
+404
+
+Description: Not found
+
+----
+
+## Failure details
+Error Code | Error Message | Error Description
+------------|------------------------------|-------------
+KER-MSD-019 | Error occured while fetching Holidays | Fetch Issue
+KER-MSD-020 | Holiday not found | Data Not Found
+KER-MSD-065 | Error occurred while inserting holiday | Insertion Issue
+KER-MSD-099 | Error occurred while updating holiday | Update Issue
+KER-MSD-100 | Error occurred while deleting holiday | Deletion Issue
+KER-MSD-025 | Error occured while fetching Location Hierarchy | fetch issue
+KER-MSD-026 | Location not found | Data Not Found
+----
+ 
 
  
 
