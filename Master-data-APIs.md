@@ -2505,6 +2505,17 @@ Description: When Device not found
 
 Description: Error occurred while deleting Device
 
+#### Failure details
+Error Code | Error Message | Error Description
+------------|------------------------------|-------------
+KER-MSD-009 | Error occured while fetching Devices | Fetch Issue
+KER-MSD-069 | Error occurred while inserting Device details | Insertion Issue
+KER-MSD-010 | Device not Found | Data Not Found
+KER-MSD-083 | Error while updating | Update Issue
+KER-MSD-084 | Error while deleting | Deletion Issue
+KER-MSD-147 | Cannot delete as dependency found | Deletion Issue because of dependency
+
+
 # Languages Master API
 
 * [POST /languages](#post-languages)
