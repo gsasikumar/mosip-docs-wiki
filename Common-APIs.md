@@ -1994,6 +1994,102 @@ KER-MSD-025 | Error occured while fetching Location Hierarchy | fetch issue
 KER-MSD-026 | Location not found | Data Not Found
 ----
 
+# Holiday filtervalues APIs
+
+* [POST /holidays/filtervalues](#post-holidaysfiltervalues)
+## POST /holidays/filtervalues
+
+This service returns the filter values which are required in the dropdown entries of the filter screen.  
+
+### Resource URL
+### `POST /holidays/filtervalues`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+filters | No| Array of the filter applied. In case of "list" screen, this array will be empty | -NA- |
+columnName |No | The column name in the JSON response | -NA- |
+type | No | The value have to be in ["unique","all"] | unique | unique
+languagecode | Yes | Language code in Language code in ISO 639-2 format | | 
+
+
+### Example Request
+```JSON
+{
+  "id": "string",
+  "metadata": {},
+  "request": {
+    "filters": [
+      {
+        "columnName": "string",
+        "type": "string",
+        "text": "string"
+      }
+    ],
+    "languageCode": "string",
+    "optionalFilters": [
+      {
+        "value": "string",
+        "fromValue": "string",
+        "toValue": "string",
+        "columnName": "string",
+        "type": "string"
+      }
+    ]
+  },
+  "requesttime": "2018-12-10T06:12:52.994Z",
+  "version": "string"
+}
+```
+
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "filters": [
+      {
+        "fieldID": "string",
+        "fieldValue": "string"
+      }
+    ]
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
+### Response codes
+200
+
+Description: Success
+
+401
+
+Description: Unauthorized
+
+403
+
+Description: Forbidden
+
+404
+
+Description: Not found
+
+----
 
 # Holiday search APIs
 
