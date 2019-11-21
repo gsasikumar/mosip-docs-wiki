@@ -46,17 +46,17 @@ requestedAuth: bio| Y | Biometric Authentication Type | false|false
 individualId| Y | VID of Individual | | 9830872690593682 
 individualIdType| Y | Allowed Type of Individual ID - VID, UIN | VID |
 consentObtained| Y | If consent of Individual is obtained | true
-keyIndex| Y | Thumbprint of public key certificate used for encryption of sessionKey | 
-requestSessionKey| Y | Symmetric Key to be created, and then encrypt the generated Session Key using 'MOSIP Public Key' shared using RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING algorithm| | 
-requestHMAC| Y | SHA-256 hash of request block before encryption and then hash is encrypted with 'requestSessionKey' using AES/GCM/PKCS5Padding algorithm | |
-request| Y | Auth request attributes to be used for authenticating Individual, encrypted with 'requestSessionKey' using AES/GCM/PKCS5Padding algorithm | | 
+keyIndex| Y | Thumbprint of public key certificate used for encryption of sessionKey &lt;Not used currently&gt;| 
+requestSessionKey| Y | Symmetric Key to be created, and then encrypt the generated Symmetric Key using 'MOSIP Public Key' shared using RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING algorithm, and then Base-64-URL encoded| | 
+requestHMAC| Y | SHA-256 hash of request block before encryption, which is encrypted with 'requestSessionKey' using AES/GCM/PKCS5Padding algorithm, and then Base-64-URL encoded | |
+request| Y | Request block to be used for authenticating Individual, encrypted with 'requestSessionKey' using AES/GCM/PKCS5Padding algorithm, and then Base-64-URL encoded | | 
 request: otp| N | OTP | | 
 request: timestamp| N | Timestamp when request block was captured| | 
 request: demographics|N| Demographic data of an Individual| |
-request: biometrics|N| Biometric data of an Individual which is set with the response from the Capture API of [MDS v0.9.2](https://github.com/mosip/mosip-docs/wiki/MOSIP-Device-Service-Specification/5495eff4efe79718b4bb57cd95178e917d517671#53-capture) The fields are summarized below. Refer to the specification for complete information. | |
-request: biometrics: data|N| JWS format of Biometric data of an Individual with X509 certificate. The biometric data is encrypted by below sessionKey using symmetric encryption algorithm - AES/GCM/PKCS5Padding | |
-request: biometrics: hash|N| SHA-256 hash of above biometric data of an Individual, which is then Base64-URL-encoded| |
-request: biometrics: sessionKey|N| Symmetric key used by [MDS v0.9.2](https://github.com/mosip/mosip-docs/wiki/MOSIP-Device-Service-Specification/5495eff4efe79718b4bb57cd95178e917d517671#53-capture) to encrypt above biometric data attribute. This symmetric key is encrypted by MOSIP Public Key shared to Partners and Device Providers using asymmetric key algorithm - RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING| |
+request: biometrics|N| Biometric data of an Individual which is sent in the response from the Capture API of MDS v0.9.2. Refer to the [MDS v0.9.2](https://github.com/mosip/mosip-docs/wiki/MOSIP-Device-Service-Specification/5495eff4efe79718b4bb57cd95178e917d517671#53-capture) specification for complete information. | |
+request: biometrics: data|N| JWS format of Biometric data of an Individual with X509 certificate. The payload present in JWS is encrypted by below biometrics.sessionKey using symmetric encryption algorithm - AES/GCM/PKCS5Padding | |
+request: biometrics: hash|N| SHA-256 hash of above biometric data of an Individual in Hex format| |
+request: biometrics: sessionKey|N| Symmetric key used by [MDS v0.9.2](https://github.com/mosip/mosip-docs/wiki/MOSIP-Device-Service-Specification/5495eff4efe79718b4bb57cd95178e917d517671#53-capture) to encrypt above biometric data attribute. This symmetric key is encrypted by MOSIP Public Key shared to Partners and Device Providers using asymmetric key algorithm - RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING, and then Base64 url-encoded| |
 
 
 Mandatory fields for different types of authentications- 
