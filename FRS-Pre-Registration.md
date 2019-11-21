@@ -188,7 +188,7 @@ The user opts to view the available slots for a selected registration center.
 1. For a Selected Registration Center 8 hours (configurable) are considered as working hours
 1. An Individual can view time slots of 15 minutes (configurable) each for the selected calendar day and view Available slots for every time slot shown in the selected calendar day
 1. An applicant can further choose the preferred timeslot
-1. An individual can book the appointment for the preferred/chosen time slot – Subsequently the timeslots are locked
+1. An individual can confirm the appointment selection of the preferred/chosen time slot – Subsequently the timeslot(s) are locked
 
 
 ### 2.4.4 Cancel Appointment [**[↑]**](#table-of-contents)
