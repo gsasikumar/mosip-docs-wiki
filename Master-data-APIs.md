@@ -2561,8 +2561,8 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-languagecode|Yes|Code of the language| | 
-languagename|Yes|Name of the language| | 
+code|Yes|Code of the language| | 
+name|Yes|Name of the language| | 
 
 ### Example Request
 ```JSON
@@ -2629,8 +2629,8 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-languagecode|Yes|Code of the language| | 
-languagename|Yes|Name of the language| | 
+code|Yes|Code of the language| | 
+name|Yes|Name of the language| | 
 
 
 ### Example Request
@@ -2691,8 +2691,8 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-languagecode|Yes|Code of the language| | 
-languagename|Yes|Name of the language| | 
+code|Yes|Code of the language| | 
+name|Yes|Name of the language| | 
 
 ### Example Request
 ```JSON
@@ -8800,7 +8800,7 @@ code|Yes|id of the Template|
 Error Code | Error Message | Error Description
 ------------|------------------------------|-------------
 KER-MSD-125 | Cannot delete dependency found. | Dependency Issue
-KER-MSD-046 | Holiday not found | Data Not Found
+KER-MSD-046 | Template not found | Data Not Found
 KER-MSD-055 | Error occurred while inserting Template File Format details | Insertion Issue
 KER-MSD-093 | Error occurred while updating Template | Update Issue
 KER-MSD-094 | Error occurred while deleting Template | Deletion Issue
@@ -9184,6 +9184,8 @@ languages|Yes| list of languages ||
   ]
 }
 ```
+
+
 ### Response codes
 200
 
