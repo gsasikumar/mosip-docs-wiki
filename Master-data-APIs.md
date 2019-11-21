@@ -9184,8 +9184,6 @@ languages|Yes| list of languages ||
   ]
 }
 ```
-
-
 ### Response codes
 200
 
