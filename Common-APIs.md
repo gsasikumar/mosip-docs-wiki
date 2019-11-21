@@ -18,6 +18,8 @@ This section details about the service APIs in the common modules
 
 * [Holidays API](#holiday-master-api) 
 
+* [Holiday filtervalues APIs](#post-holidaysfiltervalues)
+
 * [Holiday Search API](#post-holidayssearch)
 
 * [Locations API](#locations-master-api)
