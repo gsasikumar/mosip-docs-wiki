@@ -53,10 +53,10 @@ request| Y | Auth request attributes to be used for authenticating Individual, e
 request: otp| N | OTP | | 
 request: timestamp| N | Timestamp when request block was captured| | 
 request: demographics|N| Demographic data of an Individual| |
-request: biometrics|N| Biometric data of an Individual| |
-request: biometrics: data|N| Biometric data of an Individual captured by device is encrypted by Device MDS with below sessionKey using symmetric encryption algorithm - AES/GCM/PKCS5Padding, in JWS format with X509 certificate containing public key to verify the signature | |
+request: biometrics|N| Biometric data of an Individual which is set with the response from the Capture API of [MDS v0.9.2](https://github.com/mosip/mosip-docs/wiki/MOSIP-Device-Service-Specification/5495eff4efe79718b4bb57cd95178e917d517671#53-capture) The fields are summarized below. Refer to the specification for complete information. | |
+request: biometrics: data|N| JWS format of Biometric data of an Individual with X509 certificate. The biometric data is encrypted by below sessionKey using symmetric encryption algorithm - AES/GCM/PKCS5Padding | |
 request: biometrics: hash|N| SHA-256 hash of above biometric data of an Individual, which is then Base64-URL-encoded| |
-request: biometrics: sessionKey|N| Symmetric key used by MDS to encrypt above biometric data attribute. This symmetric key is encrypted by MOSIP Public Key shared to Partners and Device Providers using asymmetric key algorithm - RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING| |
+request: biometrics: sessionKey|N| Symmetric key used by [MDS v0.9.2](https://github.com/mosip/mosip-docs/wiki/MOSIP-Device-Service-Specification/5495eff4efe79718b4bb57cd95178e917d517671#53-capture) to encrypt above biometric data attribute. This symmetric key is encrypted by MOSIP Public Key shared to Partners and Device Providers using asymmetric key algorithm - RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING| |
 
 
 Mandatory fields for different types of authentications- 
@@ -119,18 +119,17 @@ Mandatory fields for different types of authentications-
         }
       ]
     },
+    //biometrics section below is set with the response from the Capture API of MDS v0.9.2. The fields are summarized below. Refer to the specification for complete information.
     "biometrics": [
       {
-        "data": "<Base64 encoded response from Capture API of MDS v0.9.1>",
-        "hash": "<sha256 hash of (sha256 hash of previous data block in hex format + sha256 of current data block before encoding in hex format) in hex format>",
-        "sessionKey": "<encrypted with MOSIP public key and encoded session key biometric>",
-        "signature": "<base64 signature of data block>"
+        "data": "<JWS signature format of data containing encrypted biometric information and device information>",
+        "hash": "<sha256 hash in hex format of (sha256 hash of previous data block in hex format + sha256 of current data block before encoding in hex format) in hex format>",
+        "sessionKey": "<session key encrypted with MOSIP public key and Base-64-URL encoded>"
       },
       {
-        "data": "<Base64 encoded response from Capture API of MDS v0.9.1>",
-        "hash": "<sha256 hash of (sha256 hash of previous data block in hex format + sha256 of current data block before encoding in hex format) in hex format>",
-        "sessionKey": "<encrypted with MOSIP public key and encoded session key biometric>",
-        "signature": "<base64 signature of data block>"
+        "data": "<JWS signature format of data containing encrypted biometric information and device information>",
+        "hash": "<sha256 hash in hex format of (sha256 hash of previous data block in hex format + sha256 of current data block before encoding in hex format) in hex format>",
+        "sessionKey": "<session key encrypted with MOSIP public key and Base-64-URL encoded>"
       }
     ]
   }
@@ -678,7 +677,7 @@ request: biometrics|N| Biometric data of an Individual| |
           "bioValue": "<encrypted with session key and base64 encoded biometric data>",
           "timestamp": "2019-02-15T10:01:57.086+05:30"
         },
-        "hash": "sha256(sha256 hash of the previous data block + sha256 of the current data block before encoding)",
+        "hash": "sha256 hash in hex format of(sha256 hash in hex format of the previous data block + sha256 hash in hex format of the current data block before encoding)", // For first entry assume empty string as previous data block
         "sessionKey": "<encrypted with MOSIP public key and encoded session key biometric>",
         "signature": "base64 signature of the data and metaData block"
       },
@@ -690,7 +689,7 @@ request: biometrics|N| Biometric data of an Individual| |
           "bioValue": "<encrypted with session key and base64 encoded biometric data>",
           "timestamp": "2019-02-15T10:01:57.087+05:30"
         },
-        "hash": "sha256(sha256 hash of the previous data block + sha256 of the current data block before encoding)",
+        "hash": "sha256 hash in hex format of(sha256 hash in hex format of the previous data block + sha256 hash in hex format of the current data block before encoding)",
         "sessionKey": "<encrypted with MOSIP public key and encoded session key biometric>",
         "signature": "base64 signature of the data and metaData block"
       }
