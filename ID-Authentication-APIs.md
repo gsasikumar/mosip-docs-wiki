@@ -54,9 +54,9 @@ request: otp| N | OTP | |
 request: timestamp| N | Timestamp when request block was captured| | 
 request: demographics|N| Demographic data of an Individual| |
 request: biometrics|N| Biometric data of an Individual which is sent in the response from the Capture API of MDS v0.9.2. Refer to the [MDS v0.9.2](https://github.com/mosip/mosip-docs/wiki/MOSIP-Device-Service-Specification/5495eff4efe79718b4bb57cd95178e917d517671#53-capture) specification for complete information. | |
-request: biometrics: data|N| JWS format of Biometric data of an Individual with X509 certificate. The payload present in JWS is encrypted by below biometrics.sessionKey using symmetric encryption algorithm - AES/GCM/PKCS5Padding | |
-request: biometrics: hash|N| SHA-256 hash of above biometric data of an Individual in Hex format| |
-request: biometrics: sessionKey|N| Symmetric key used by [MDS v0.9.2](https://github.com/mosip/mosip-docs/wiki/MOSIP-Device-Service-Specification/5495eff4efe79718b4bb57cd95178e917d517671#53-capture) to encrypt above biometric data attribute. This symmetric key is encrypted by MOSIP Public Key shared to Partners and Device Providers using asymmetric key algorithm - RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING, and then Base64-url-encoded| |
+request: biometrics: data|Y| JWS format of Biometric data of an Individual with X509 certificate. The payload present in JWS is encrypted by below biometrics.sessionKey using symmetric encryption algorithm - AES/GCM/PKCS5Padding | |
+request: biometrics: hash|Y| SHA-256 hash of (SHA-256 hash of previous data block in hex format + SHA-256 of current data block before encrypting in hex format) in hex format. While calculating the hash for the first biometrics.data entry assume empty string as previous data block.| |
+request: biometrics: sessionKey|Y| Symmetric key used by [MDS v0.9.2](https://github.com/mosip/mosip-docs/wiki/MOSIP-Device-Service-Specification/5495eff4efe79718b4bb57cd95178e917d517671#53-capture) to encrypt above biometric data attribute. This symmetric key is encrypted by MOSIP Public Key shared to Partners and Device Providers using asymmetric key algorithm - RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING, and then Base64-url-encoded| |
 
 
 Mandatory fields for different types of authentications- 
@@ -194,7 +194,7 @@ IDA-BIA-006|Biometric data &lt;Biometric Attribute&gt; not available in database
 IDA-BIA-007|Duplicate Irises in request.|Duplicate Irises used|Please try again with distinct Irises
 IDA-BIA-008|Number of IIR should not exceed 2.|Irises exceeding 2|
 IDA-BIA-009|Number of FID records should not exceed 1.|Face exceeding 1|
-IDA-BIA-013|Number of FMR should not exceed 10.|Fingers exceeding 10 for Internal Auth|
+IDA-BIA-013|Number of Fingers should not exceed 10.| |
 IDA-DEA-001|Demographic data  &lt;demo attribute&gt;  in  &lt;Language Code&gt; (if applicable) did not match|name, Full Address, Address line Items, Gender, Phone,e-mail,DOB,DOB Type, and age Mismatch in any language|Please re-enter your  &lt;demo attribute&gt;  in &lt;Language Code&gt; 
 IDA-DEA-002|Unsupported Language Code &lt;XX&gt;|Unsupported language Code used in the Lang attribute|
 IDA-DEA-003|Demographic data  &lt;Demographic Attribute&gt; in &lt;Language Code&gt; (if applicable)  not available in database.|Individual&rsquo;s data not available|
@@ -260,7 +260,7 @@ Requires Authentication | Yes
 #### Request Body Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-id | Y | API Id | | mosip.identity.auth
+id | Y | API Id | | mosip.identity.kyc
 version | Y | API version | | v1
 transactionID| Y | Transaction ID of request | | 1234567890
 requestTime| Y |Time when Request was captured| | 2019-02-15T10:01:57.086+05:30
@@ -280,9 +280,9 @@ request: otp| N | OTP | |
 request: timestamp| N | Timestamp when request block was captured| | 
 request: demographics|N| Demographic data of an Individual| |
 request: biometrics|N| Biometric data of an Individual which is sent in the response from the Capture API of MDS v0.9.2. Refer to the [MDS v0.9.2](https://github.com/mosip/mosip-docs/wiki/MOSIP-Device-Service-Specification/5495eff4efe79718b4bb57cd95178e917d517671#53-capture) specification for complete information. | |
-request: biometrics: data|N| JWS format of Biometric data of an Individual with X509 certificate. The payload present in JWS is encrypted by below biometrics.sessionKey using symmetric encryption algorithm - AES/GCM/PKCS5Padding | |
-request: biometrics: hash|N| SHA-256 hash of above biometric data of an Individual in Hex format| |
-request: biometrics: sessionKey|N| Symmetric key used by [MDS v0.9.2](https://github.com/mosip/mosip-docs/wiki/MOSIP-Device-Service-Specification/5495eff4efe79718b4bb57cd95178e917d517671#53-capture) to encrypt above biometric data attribute. This symmetric key is encrypted by MOSIP Public Key shared to Partners and Device Providers using asymmetric key algorithm - RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING, and then Base64-url-encoded| |
+request: biometrics: data|Y| JWS format of Biometric data of an Individual with X509 certificate. The payload present in JWS is encrypted by below biometrics.sessionKey using symmetric encryption algorithm - AES/GCM/PKCS5Padding | |
+request: biometrics: hash|Y| SHA-256 hash of (SHA-256 hash of previous data block in hex format + SHA-256 of current data block before encrypting in hex format) in hex format. While calculating the hash for the first biometrics.data entry assume empty string as previous data block.| |
+request: biometrics: sessionKey|Y| Symmetric key used by [MDS v0.9.2](https://github.com/mosip/mosip-docs/wiki/MOSIP-Device-Service-Specification/5495eff4efe79718b4bb57cd95178e917d517671#53-capture) to encrypt above biometric data attribute. This symmetric key is encrypted by MOSIP Public Key shared to Partners and Device Providers using asymmetric key algorithm - RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING, and then Base64-url-encoded| |
 
 
 #### Request Body
@@ -433,7 +433,7 @@ IDA-BIA-006|Biometric data &lt;Biometric Attribute&gt; not available in database
 IDA-BIA-007|Duplicate Irises in request.|Duplicate Irises used|Please try again with distinct Irises
 IDA-BIA-008|Number of IIR should not exceed 2.|Irises exceeding 2|
 IDA-BIA-009|Number of FID records should not exceed 1.|Face exceeding 1|
-IDA-BIA-013|Number of FMR should not exceed 10.|Fingers exceeding 10 for Internal Auth|
+IDA-BIA-013|Number of Fingers should not exceed 10.| |
 IDA-EKA-001|Unable to encrypt eKYC response|Invalid encryption of eKYC response|
 IDA-MLC-001|Request to be received at MOSIP within&lt;x&gt; hrs/min|Invalid Time stamp|Please send the request within &lt;x&gt; hrs/min
 IDA-MLC-002|Invalid UIN|Invalid UIN|Please retry with the correct UIN.
@@ -635,12 +635,20 @@ requestedAuth: bio| Y | Biometric Authentication Type | false|false
 individualId| Y | UserID of Operator/Supervisor | | 9830872690593682 
 individualIdType| Y | Allowed Type of Individual ID - USERID, VID, UIN | USERID |
 consentObtained| Y | If consent of Individual is obtained | true
-keyIndex| Y | Thumbprint of public key certificate used for encryption of sessionKey | 
-requestSessionKey| Y | Session Key encrypted using MOSIP Public Key | | 
-requestHMAC| Y | sha256 of request block before encryption and hash is encrypted using requestSessionKey | |
-request| Y | Auth request attributes to be used for authenticating Individual | | 
+keyIndex| Y | Thumbprint of public key certificate used for encryption of sessionKey &lt;Not used currently&gt;| 
+requestSessionKey| Y | Symmetric Key to be created, and then encrypt the generated Symmetric Key using 'MOSIP Public Key' shared using RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING algorithm, and then Base-64-URL encoded| | 
+requestHMAC| Y | SHA-256 hash of request block before encryption, which is encrypted with 'requestSessionKey' using AES/GCM/PKCS5Padding algorithm, and then Base-64-URL encoded | |
+request| Y | Request block to be used for authenticating Individual, encrypted with 'requestSessionKey' using AES/GCM/PKCS5Padding algorithm, and then Base-64-URL encoded | | 
+request: otp| N | OTP | | 
 request: timestamp| N | Timestamp when request block was captured| | 
 request: biometrics|N| Biometric data of an Individual| |
+request: biometrics: data|Y| Base-64-URL encoded Biometric data of an Individual which is encrypted by below biometrics.sessionKey using symmetric encryption algorithm - AES/GCM/PKCS5Padding | |
+request: biometrics: data: bioType|Y| Biometric data type - FIR/IIR/FACE | |
+request: biometrics: data: bioSubType|Y| Biometric data sub-type - "Left IndexFinger", "Left MiddleFinger","Left RingFinger","Left LittleFinger","Left Thumb","Right IndexFinger", "Right MiddleFinger","Right RingFinger","Right LittleFinger","Right Thumb","Left Iris","Right Iris","Face", "UNKNOWN" | |
+request: biometrics: data: bioValue|Y| Biometric data encrypted with session key and base-64-URL encoded. For symmetric key encryption of bioValue, base64 encoded value of last 16 digits of biometrics.data.timestamp should be used as aad parameter,  and base 64 encoded value of last 12 digits of biometrics.data.timestamp should be used as iv (salt) parameter.| |
+request: biometrics: data: timestamp|Y|  | |
+request: biometrics: hash|Y| SHA-256 hash of (SHA-256 hash of previous data block in hex format + SHA-256 of current data block before encrypting in hex format) in hex format. While calculating the hash for the first biometrics.data entry assume empty string as previous data block.| |
+request: biometrics: sessionKey|Y| Symmetric key used to encrypt above biometric data attribute. This symmetric key is encrypted by MOSIP Public Key shared to Partners and Device Providers using asymmetric key algorithm - RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING, and then Base64-url-encoded| |
 
 
 #### Request Body
@@ -664,28 +672,24 @@ request: biometrics|N| Biometric data of an Individual| |
     "timestamp": "2019-02-15T10:01:56.086+05:30 - ISO format timestamp",
     "biometrics": [
       {
-        "data": { // Base64 encoded
-          "bioType": "FMR",
+        "data": { // Base-64-URL encoded
+          "bioType": "FIR",
           "bioSubType": "UNKNOWN",
-          // For symmetric key encryption of bioValue, base64 encoded value of last 16 digits of timestamp should be used as aad parameter,  and base 64 encoded value of last 12 digits of timestamp should be used as iv (salt) parameter. 
-          "bioValue": "<encrypted with session key and base64 encoded biometric data>",
+          "bioValue": "<encrypted with session key and base-64-URL encoded biometric data>",
           "timestamp": "2019-02-15T10:01:57.086+05:30"
         },
-        "hash": "sha256 hash in hex format of(sha256 hash in hex format of the previous data block + sha256 hash in hex format of the current data block before encoding)", // For the first entry assume empty string as previous data block
-        "sessionKey": "<encrypted with MOSIP public key and encoded session key biometric>",
-        "signature": "base64 signature of the data and metaData block"
+        "hash": "<SHA-256 hash of (SHA-256 hash of previous data block in hex format + SHA-256 of current data block before encrypting in hex format) in hex format>",,
+        "sessionKey": "<Encrypted and Base64 url-encoded session key>",
       },
       {
-        "data": { // Base64 encoded
+        "data": { // Base-64-URL encoded
           "bioType": "IIR",
           "bioSubType": "RIGHT",
-          // For symmetric key encryption of bioValue, base64 encoded value of last 16 digits of timestamp should be used as aad parameter,  and base 64 encoded value of last 12 digits of timestamp should be used as iv (salt) parameter. 
-          "bioValue": "<encrypted with session key and base64 encoded biometric data>",
-          "timestamp": "2019-02-15T10:01:57.087+05:30"
+          "bioValue": "<encrypted with session key and base-64-URL encoded biometric data>",
+          "timestamp": "2019-02-15T10:01:57.086+05:30"
         },
-        "hash": "sha256 hash in hex format of(sha256 hash in hex format of the previous data block + sha256 hash in hex format of the current data block before encoding)",
-        "sessionKey": "<encrypted with MOSIP public key and encoded session key biometric>",
-        "signature": "base64 signature of the data and metaData block"
+        "hash": "<SHA-256 hash of (SHA-256 hash of previous data block in hex format + SHA-256 of current data block before encrypting in hex format) in hex format>",,
+        "sessionKey": "<Encrypted and Base64 url-encoded session key>",
       }
     ]
   }
@@ -748,7 +752,7 @@ IDA-BIA-006|Biometric data &lt;Biometric Attribute&gt; not available in database
 IDA-BIA-007|Duplicate Irises in request.|Duplicate Irises used|Please try again with distinct Irises
 IDA-BIA-008|Number of IIR should not exceed 2.|Irises exceeding 2|
 IDA-BIA-009|Number of FID records should not exceed 1.|Face exceeding 1|
-IDA-BIA-013|Number of FMR should not exceed 10.|Fingers exceeding 10 for Internal Auth|
+IDA-BIA-013|Number of Fingers should not exceed 10.| |
 IDA-MLC-001|Request to be received at MOSIP within&lt;x&gt; hrs/min|Invalid Time stamp|Please send the request within &lt;x&gt; hrs/min
 IDA-MLC-002|Invalid UIN|Invalid UIN|Please retry with the correct UIN.
 IDA-MLC-003|UIN has been deactivated|UIN Deactivated|Your UIN status is not active.
