@@ -1147,7 +1147,7 @@ KER-MSD-106 | Error occurred while deleting Blacklisted Word | Deletion Issue
 * [GET /documentcategories](#get-documentcategories)
 * [GET /documentcategories/{code}/{langcode}](#get-documentcategories-code-langcode)
 * [GET /documentcategories/{languagecode}](#get-documentcategories-languagecode)
-* [DELETE /documentcategories/{code}](#get-documentcategories-code)
+* [DELETE /documentcategories/{code}](#delete-documentcategories-code)
 
 # POST /documentcategories
 
@@ -1525,6 +1525,7 @@ Description: Not Found
 
 ### Failure details
 Error Code | Error Message | Error Description 
+------------|------------------------------|-------------
 KER-MSD-013 | Error occured while fetching Document Category details | Fetch Issue
 KER-MSD-051 | Error occured while inserting Document Category details | Insertion Issue
 KER-MSD-014 | Document Category not found | Data Not Found
@@ -2159,6 +2160,7 @@ Description: While updating machine any error occurred
 ### Failure details
 
 Error Code | Error Message | Error Description
+------------|------------------------------|-------------
 KER-MSD-029 | Error occured while fetching Machines | Fetch Issue
 KER-MSD-063 | Error occurred while inserting Machine details | Insertion Issue
 KER-MSD-030 | Machine not Found | Data Not Found
@@ -2170,7 +2172,7 @@ KER-MSD-148 | Cannot delete as dependency found	Deletion | Issue because of depe
 # Devices Master API
 
 * [POST /devices](#post-devices)
-* [GET /devices]/{languagecode}(#get-devices)
+* [GET /devices]/{languagecode}](#get-devices)
 * [GET /devices/{languagecode}/{deviceType}](#get-deviceType-languagecode)
 * [PUT /devices](#put-devices)
 * [DELETE /devices/{id}](#delete-devices-id)
