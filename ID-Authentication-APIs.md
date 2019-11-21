@@ -260,26 +260,29 @@ Requires Authentication | Yes
 #### Request Body Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-version | Y | API version |  | v1
-partnerId | Y | eKYC Partner ID | |
+id | Y | API Id | | mosip.identity.auth
+version | Y | API version | | v1
 transactionID| Y | Transaction ID of request | | 1234567890
 requestTime| Y |Time when Request was captured| | 2019-02-15T10:01:57.086+05:30
 requestedAuth| Y | Authentication Types requested| | 
 requestedAuth: otp| Y | OTP Authentication Type | false| false
-requestedAuth: demo| N | Demographic Authentication Type | false| false
+requestedAuth: demo| Y | Demographic Authentication Type | false| false
 requestedAuth: bio| Y | Biometric Authentication Type | false|false
 individualId| Y | VID of Individual | | 9830872690593682 
 individualIdType| Y | Allowed Type of Individual ID - VID, UIN | VID |
 consentObtained| Y | If consent of Individual is obtained | true
 secondaryLangCode| Y | Secondary Language Code | |
-keyIndex| Y | Thumbprint of public key certificate used for encryption of sessionKey | 
-requestSessionKey| Y | Session Key encrypted using MOSIP Public Key | | 
-requestHMAC| Y | sha256 of request block before encryption and hash is encrypted using requestSessionKey | |
-request| Y | Auth request attributes to be used for authenticating Individual | | 
+keyIndex| Y | Thumbprint of public key certificate used for encryption of sessionKey &lt;Not used currently&gt;| 
+requestSessionKey| Y | Symmetric Key to be created, and then encrypt the generated Symmetric Key using 'MOSIP Public Key' shared using RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING algorithm, and then Base-64-URL encoded| | 
+requestHMAC| Y | SHA-256 hash of request block before encryption, which is encrypted with 'requestSessionKey' using AES/GCM/PKCS5Padding algorithm, and then Base-64-URL encoded | |
+request| Y | Request block to be used for authenticating Individual, encrypted with 'requestSessionKey' using AES/GCM/PKCS5Padding algorithm, and then Base-64-URL encoded | | 
 request: otp| N | OTP | | 
 request: timestamp| N | Timestamp when request block was captured| | 
-request: biometrics|N| Biometrics of an Individual| |
-request: transactionID|N| Transaction ID provided by Device Service| |
+request: demographics|N| Demographic data of an Individual| |
+request: biometrics|N| Biometric data of an Individual which is sent in the response from the Capture API of MDS v0.9.2. Refer to the [MDS v0.9.2](https://github.com/mosip/mosip-docs/wiki/MOSIP-Device-Service-Specification/5495eff4efe79718b4bb57cd95178e917d517671#53-capture) specification for complete information. | |
+request: biometrics: data|N| JWS format of Biometric data of an Individual with X509 certificate. The payload present in JWS is encrypted by below biometrics.sessionKey using symmetric encryption algorithm - AES/GCM/PKCS5Padding | |
+request: biometrics: hash|N| SHA-256 hash of above biometric data of an Individual in Hex format| |
+request: biometrics: sessionKey|N| Symmetric key used by [MDS v0.9.2](https://github.com/mosip/mosip-docs/wiki/MOSIP-Device-Service-Specification/5495eff4efe79718b4bb57cd95178e917d517671#53-capture) to encrypt above biometric data attribute. This symmetric key is encrypted by MOSIP Public Key shared to Partners and Device Providers using asymmetric key algorithm - RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING, and then Base64-url-encoded| |
 
 
 #### Request Body
@@ -299,31 +302,22 @@ request: transactionID|N| Transaction ID provided by Device Service| |
   "individualId": "9830872690593682",
   "individualIdType": "VID",
   "keyIndex": "<thumbprint of the public key certficate used for enryption of sessionKey. This is necessary for key rotaion>",
-  "requestSessionKey": "<encrypted with MOSIP public key and encoded session key>",
-  "requestHMAC": "<sha256 of the request block before encryption and the hash is encrypted using the requestSessionKey>",
-  "request": { // Encrypted with session key and base64 encoded
+  "requestSessionKey": "<Encrypted and Base64-URL-encoded session key>",
+  "requestHMAC": "<SHA-256 of request block before encryption and then hash is encrypted using the requestSessionKey>",
+  "request": { // Encrypted with session key and base-64-URL encoded
     "timestamp": "2019-02-15T10:01:56.086+05:30 - ISO format timestamp",
     "otp": "123456",
+    //biometrics section below is set with the response from the Capture API of MDS v0.9.2. Refer to the MDS v0.9.2 specification for complete information.
     "biometrics": [
       {
-        "data": { // Base64 encoded
-          "mosipProcess": "",
-          "environment": "",
-          "version": "",
-          "deviceCode": "",
-          "digitalId": "",
-          "deviceServiceVersion": "",
-          "bioType": "FMR",
-          "bioSubType": "UNKNOWN",
-          "bioValue": "<encrypted with session key and base64 encoded biometric data>",
-          "transactionID": "1234567890",
-          "timestamp": "2019-02-15T10:01:57.086+05:30",
-          "requestedScore": "<floating point number to represent the minimum required score for the capture>",
-          "qualityScore": "<floating point number representing the score for the current capture>"
-        },
-        "hash": "sha256(sha256 hash of the previous data block + sha256 of the current data block before encoding)",
-        "sessionKey": "<encrypted with MOSIP public key and encoded session key biometric>",
-        "signature": "base64 signature of the data and metaData block"
+        "data": "<JWS signature format of data containing encrypted biometrics and device details>",
+        "hash": "<SHA-256 hash of (SHA-256 hash of previous data block in hex format + SHA-256 of current data block before encrypting in hex format) in hex format>", // For the first entry assume empty string as previous data block
+        "sessionKey": "<Encrypted and Base64 url-encoded session key>"
+      },
+      {
+        "data": "<JWS signature format of data containing encrypted biometrics and device details>",
+        "hash": "<SHA-256 hash of (SHA-256 hash of previous data block in hex format + SHA-256 of current data block before encrypting in hex format) in hex format>",
+        "sessionKey": "<Encrypted and Base64 url-encoded session key>"
       }
     ]
   }
