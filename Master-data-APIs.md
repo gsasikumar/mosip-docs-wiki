@@ -3888,46 +3888,48 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-applicationtypetype|Yes|Array of applicationtype| | 
+code|Yes|code of applicationtype| |
+description|Yes | description of applicationtype| |
 
 ### Example Request
 ```JSON
 {
   "id": "string",
-  "version": "string",
   "metadata": {},
-  "requesttime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "request":  {
-	      "applicationtypes": [
-		                       {"applicationtypetype":"string"},
-		                       {"languagecode":"string"}
-	                          ]
-	      }
+  "request": {
+    "code": "string",
+    "description": "string",
+    "isActive": true,
+    "langCode": "string",
+    "name": "string"
+  },
+  "requesttime": "2018-12-10T06:12:52.994Z",
+  "version": "string"
 }
 ```
 ### Example Response
 ```JSON
 {
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [{
+  "errors": [
+    {
       "errorCode": "string",
       "message": "string"
-    }],
+    }
+  ],
+  "id": "string",
+  "metadata": {},
   "response": {
-  "successfully_created_applicationtypes": [
-	                	               {"applicationtypeid":"string"},
-		                               {"languagecode":"string"}
-                                           ]
-             }
+    "code": "string",
+    "langCode": "string"
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
 }
 ```
 ### Response codes
-202
+201
 
-Description: Accepted
+Description: Created
 
 400
 
@@ -3961,39 +3963,33 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-applicationtypeid|Yes|Code of the language| | 
-applicationtype|Yes|Name of the language| | 
+NA ||
 
 
 ### Example Response
 ```JSON
 {
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [{
+  "errors": [
+    {
       "errorCode": "string",
       "message": "string"
-    }],
+    }
+  ],
+  "id": "string",
+  "metadata": {},
   "response": {
-  "applicationtypes": [
-				{ 
-					"applicationtype": [
-						{"applicationtypeid":"string"},
-						{"applicationtypetype":"string"},
-						{"languagecode":"string"}
-					]
-				}, 
-				{ 
-					"applicationtype": [
-						{"applicationtypeid":"string"},
-						{"applicationtypetype":"string"}
-						{"languagecode":"string"}
-					]
-				}
-			] 
-              }
+    "applicationtypes": [
+      {
+        "code": "string",
+        "description": "string",
+        "isActive": true,
+        "langCode": "string",
+        "name": "string"
+      }
+    ]
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
 }
 ```
 200
@@ -4033,7 +4029,7 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-code |Yes|Code of the language| | 
+code |Yes|Code of the applicationtype| | 
 langcode|Yes|Name of the language| | 
 
 
