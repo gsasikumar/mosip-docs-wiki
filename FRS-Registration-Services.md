@@ -416,8 +416,9 @@ When an individual approaches the registration officer for UIN update, the follo
 1. If none of the fields is set up to be update-able, then the system does not allow a registration officer to update any field\s 
 
 #### C. UIN Update
-1. The registration officer selects the fields to update for an individual seeking modification of UIN data. Select one or more of the following fields to update the corresponding data: Name, Age or Date of Birth, Gender, Foreigner/National, Address, Email ID, Phone Number, PIN/Residence Card Number, parent/guardian Details, Biometrics.
-1. Registration officer captures the mandatory demographic attributes (individual's name is captured) and other demographic fields selected for update. In case of update of parent/guardian details, the applicable fields that are updated will be ‘Parent/Guardian Name’ and ‘Parent/Guardian UIN’. The system at this stage also validates that the parent/guardian’s UIN is different from the individual’s UIN. If they are same, displays an error message 
+1. The registration officer selects the fields to update for an individual seeking modification of UIN data. The Officer may select one or more of the following fields to update the corresponding data: Name, Age or Date of Birth, Gender, Foreigner/National, Address, Email ID, Phone Number, PIN/Residence Card Number, parent/guardian Details, Biometrics.
+Based on whether the field “Parent/Guardian Details” is checked for Update, system will identify if the update is initiated for an Adult/Child
+1. Registration officer further captures the mandatory demographic attributes (individual's name is captured) and other demographic fields selected for update. In case of update of parent/guardian details, the applicable fields that are updated will be ‘Parent/Guardian Name’ and ‘Parent/Guardian UIN’. At this stage, the system also validates that the parent/guardian’s UIN is different from the individual’s UIN. If they are identified to be the same, an error message would be rendered 
 1. Registration officer then uploads documents. The applicable documents are determined by the system based on the fields marked for update
 EG: PoI is mandatory if Name, Age/DoB, Gender is updated
 EG: PoA is mandatory if Address is updated
