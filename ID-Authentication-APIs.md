@@ -79,7 +79,7 @@ Mandatory fields for different types of authentications-
   "consentObtained": true,
   "individualId": "9830872690593682",
   "individualIdType": "VID",
-  "keyIndex": "<thumbprint of the public key certficate used for enryption of sessionKey. This is necessary for key rotaion>",
+  "keyIndex": "<Thumbprint of the public key certficate used for enryption of sessionKey. This is necessary for key rotaion>",
   "requestSessionKey": "<Encrypted and Base64-URL-encoded session key>",
   "requestHMAC": "<SHA-256 of request block before encryption and then hash is encrypted using the requestSessionKey>",
   "request": { // Encrypted with session key and base-64-URL encoded
@@ -301,7 +301,7 @@ request: biometrics: sessionKey|Y| Symmetric key used by [MDS v0.9.2](https://gi
   "secondaryLangCode": "<sec-lang-code>",
   "individualId": "9830872690593682",
   "individualIdType": "VID",
-  "keyIndex": "<thumbprint of the public key certficate used for enryption of sessionKey. This is necessary for key rotaion>",
+  "keyIndex": "<Thumbprint of the public key certficate used for enryption of sessionKey. This is necessary for key rotaion>",
   "requestSessionKey": "<Encrypted and Base64-URL-encoded session key>",
   "requestHMAC": "<SHA-256 of request block before encryption and then hash is encrypted using the requestSessionKey>",
   "request": { // Encrypted with session key and base-64-URL encoded
@@ -665,10 +665,10 @@ request: biometrics: sessionKey|Y| Symmetric key used to encrypt above biometric
   "consentObtained": true,
   "individualId": "9830872690593682",
   "individualIdType": "USERID",
-  "keyIndex": "<thumbprint of the public key certificate used for encryption of sessionKey. This is necessary for key rotaion>",
-  "requestSessionKey": "<encrypted with MOSIP public key and encoded session key>",
-  "requestHMAC": "<sha256 of the request block before encryption and the hash is encrypted using the requestSessionKey>",
-  "request": { // Encrypted with session key and base64 encoded
+  "keyIndex": "<Thumbprint of the public key certficate used for enryption of sessionKey. This is necessary for key rotaion>",
+  "requestSessionKey": "<Encrypted and Base64-URL-encoded session key>",
+  "requestHMAC": "<SHA-256 of request block before encryption and then hash is encrypted using the requestSessionKey>",
+  "request": { // Encrypted with session key and base-64-URL encoded
     "timestamp": "2019-02-15T10:01:56.086+05:30 - ISO format timestamp",
     "biometrics": [
       {
