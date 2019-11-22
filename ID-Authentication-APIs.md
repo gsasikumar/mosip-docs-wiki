@@ -678,7 +678,7 @@ request: biometrics: sessionKey|Y| Symmetric key used to encrypt above biometric
           "bioValue": "<encrypted with session key and base-64-URL encoded biometric data>",
           "timestamp": "2019-02-15T10:01:57.086+05:30"
         },
-        "hash": "<SHA-256 hash of (SHA-256 hash of previous data block in hex format + SHA-256 of current data block before encrypting in hex format) in hex format>",,
+        "hash": "<SHA-256 hash of (SHA-256 hash of previous data block in hex format + SHA-256 of current data block before encrypting in hex format) in hex format>",
         "sessionKey": "<Encrypted and Base64 url-encoded session key>",
       },
       {
@@ -688,7 +688,7 @@ request: biometrics: sessionKey|Y| Symmetric key used to encrypt above biometric
           "bioValue": "<encrypted with session key and base-64-URL encoded biometric data>",
           "timestamp": "2019-02-15T10:01:57.086+05:30"
         },
-        "hash": "<SHA-256 hash of (SHA-256 hash of previous data block in hex format + SHA-256 of current data block before encrypting in hex format) in hex format>",,
+        "hash": "<SHA-256 hash of (SHA-256 hash of previous data block in hex format + SHA-256 of current data block before encrypting in hex format) in hex format>",
         "sessionKey": "<Encrypted and Base64 url-encoded session key>",
       }
     ]
