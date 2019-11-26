@@ -669,7 +669,13 @@ request: transactionID| Y | Transaction ID of request | | dabed834-974f-11e9-bc4
 request: individualId| Y | UIN | | 9830872690593682
 request: individualIdType| Y | Allowed Type of Individual ID - VID, UIN | UIN 
 request: otp| Y | OTP | | 
-request: demographics|Y| Demographic data of an Individual| |
+request: identityJson|Y| Demographic data of an Individual| |
+request: proofOfAddress|Y| address document of an Individual| |
+request: proofOfIdentity|Y| Identity document of an Individual| |
+request: proofOfRelationship|Y| Relationship proof document of an Individual| |
+request: proofOfDateOfBirth|Y| DOB proof document of an Individual| |
+request: centerId|Y| Constant center Id of resident service portal to generate rid| |
+request: machineId|Y| Constant machine id of resident service portal to generate rid| |
 
 
 #### Request Body
@@ -683,57 +689,13 @@ request: demographics|Y| Demographic data of an Individual| |
   "individualId": "9830872690593682",
   "individualIdType": "UIN",
   "otp": "123456",
-  "demographics": {
-      "addressLine1": [
-      {
-        "language": "ara",
-        "value": "عنوان العينة سطر 1"
-      },
-      {
-        "language": "fra",
-        "value": "exemple d'adresse ligne 1"
-      }
-    ],
-    "addressLine2": [
-      {
-        "language": "ara",
-        "value": "عنوان العينة سطر 2"
-      },
-      {
-        "language": "fra",
-        "value": "exemple d'adresse ligne 2"
-      }
-    ],
-    "addressLine3": [
-      {
-        "language": "ara",
-        "value": "عنوان العينة سطر 2"
-      },
-      {
-        "language": "fra",
-        "value": "exemple d'adresse ligne 2"
-      }
-    ],
-    "region": [
-      {
-        "language": "fra",
-        "value": "RSK"
-      }
-    ],
-    "province": [
-      {
-        "language": "fra",
-        "value": "Kénitra"
-      }
-    ],
-    "city": [
-      {
-        "language": "fra",
-        "value": "Kénitra"
-      }
-    ],
-    "postalCode": "10111"
-    }
+  "centerId": "1234",
+  "machineId": "12345678",
+  "identityJson": "<base 64 encoded string>",
+  "proofOfAddress": "<base 64 encoded string>",
+  "proofOfIdentity": "<base 64 encoded string>",
+  "proofOfRelationship": "<base 64 encoded string>",
+  "proofOfDateOfBirth": "<base 64 encoded string>"
   }
 }
 ```
