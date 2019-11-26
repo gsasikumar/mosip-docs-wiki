@@ -415,7 +415,7 @@ This request will authenticate an Individual based on provided OTP and respond w
 
 
 #### Resource URL
-<div>https://mosip.io//registrationprocessor/v1/requesthandler/lost</div>
+<div>https://mosip.io/registrationprocessor/v1/requesthandler/lost</div>
 
 #### Resource details
 
@@ -443,6 +443,8 @@ langCode|Yes|Language Code|Primary or secondary language as configured by countr
 ```JSON
 {
   "id": "mosip.registration.lost",
+  "requesttime": "2019-09-13T11:34:13.827Z",
+  "version": "1.0",
   "request": {
     "idType": "UIN",
     "name": "Monobikash Das",
@@ -450,9 +452,7 @@ langCode|Yes|Language Code|Primary or secondary language as configured by countr
     "contactType": "EMAIL",
     "contactValue": "monobikash.das@mindtree.com",
     "langCode": "eng"
-  },
-  "requesttime": "2019-09-13T11:34:13.827Z",
-  "version": "1.0"
+  }
 }
 ```
 
@@ -538,17 +538,15 @@ request: machineId|Y| Constant machine id of resident service portal to generate
   "version": "v1",
   "requestTime": "2018-12-09T06:39:04.683Z",
   "request": {
-  "transactionID": "dabed834-974f-11e9-bc42-526af7764f64",
-  "individualId": "9830872690593682",
-  "individualIdType": "UIN",
-  "otp": "123456",
-  "centerId": "1234",
-  "machineId": "12345678",
-  "identityJson": "<base 64 encoded string>",
-  "proofOfAddress": "<base 64 encoded string>",
-  "proofOfIdentity": "<base 64 encoded string>",
-  "proofOfRelationship": "<base 64 encoded string>",
-  "proofOfDateOfBirth": "<base 64 encoded string>"
+      "idValue": "9830872690593682",
+      "idType": "UIN",
+      "centerId": "1234",
+      "machineId": "12345678",
+      "identityJson": "<base 64 encoded string>",
+      "proofOfAddress": "<base 64 encoded string>",
+      "proofOfIdentity": "<base 64 encoded string>",
+      "proofOfRelationship": "<base 64 encoded string>",
+      "proofOfDateOfBirth": "<base 64 encoded string>"
   }
 }
 ```
