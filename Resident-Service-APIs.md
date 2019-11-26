@@ -8,11 +8,9 @@ This section details out all Resident Service REST APIs
 
 * [Re-print UIN API](#post-residentv1reqprint-uin)
 
-* [Retrieve Lost UIN API](#post-residentv1requin)
+* [Retrieve Lost UIN or RID API](#post-registrationprocessorv1requesthandlerlost)
 
-* [Retrieve Lost RID API](#post-residentv1reqrid)
-
-* [UIN Update API](#post-residentv1requpdate-uin)
+* [UIN Update API](#post-registrationprocessorv1requesthandlerupdate)
 
 * [VID Generate API](#post-/residentv1vid)
 
@@ -412,12 +410,12 @@ RES-REP-004| No Registered Mobile/email ID found.
 
 
 
-## POST /resident/v1/req/uin
-This request will authenticate an Individual based on provided OTP and respond with UIN. Notification will be sent to phone/email.
+## POST /registrationprocessor/v1/requesthandler/lost
+This request will authenticate an Individual based on provided OTP and respond with lost UIN or RID. Notification will be sent to phone/email.
 
 
 #### Resource URL
-<div>https://mosip.io/resident/v1/req/uin</div>
+<div>https://mosip.io//registrationprocessor/v1/requesthandler/lost</div>
 
 #### Resource details
 
@@ -427,59 +425,34 @@ Response format | JSON
 Requires Authentication | Yes
 
 #### Request Body Parameters
-Name | Required | Description | Default Value | Example
------|----------|-------------|---------------|--------
-id | Y | API Id | | mosip.resident.lostuin
-version | Y | API version | | v1
-requestTime| Y |Time when Request was captured| | 2018-12-09T06:39:04.683Z
-request: transactionID| Y | Transaction ID of request | | dabed834-974f-11e9-bc42-526af7764f64
-request: individualIdType| Y | Allowed Type of Individual ID - demo | demo 
-request: otp| Y | OTP | | 
-request: demographics|N| Demographic data of an Individual| |
+Name | Required | Description | Comment
+-----|----------|-------------|---------------|
+id|Yes|the id |mosip.registration.lost
+version|Yes|the version |1.0
+requesttime|Yes|the requesttime |2019-02-14T12:40:59.768Z
+request|Yes|the request object|1.0
+idType|Yes|the type of id|'UIN' OR 'RID'
+name|Yes|Fullname of the resident|resident name
+postalCode|Yes|the pincode or postalcode|postalcode of resident address
+contactType|Yes|contact type of applicant|"EMAIL" or "PHONE"
+contactValue|Yes|contact value|the email id or phone number
+langCode|Yes|Language Code|Primary or secondary language as configured by country
 
 
 #### Request Body
 ```JSON
 {
-  "id": "mosip.resident.lostuin",
-  "version": "v1",
-  "requestTime": "2018-12-09T06:39:04.683Z",
+  "id": "mosip.registration.lost",
   "request": {
-  "transactionID": "dabed834-974f-11e9-bc42-526af7764f64",
-  "individualIdType": "demo",
-  "otp": "123456",
-  "demographics": {
-      "name": [
-        {
-          "language": "ara",
-          "value": "ابراهيم بن علي"
-        },
-        {
-          "language": "fra",
-          "value": "Ibrahim Ibn Ali"
-        }
-      ],
-      "gender": [
-        {
-          "language": "ara",
-          "value": "الذكر"
-        },
-        {
-          "language": "fra",
-          "value": "mâle"
-        }
-      ],
-      "postalCode": {
-          "type": "10004"
-        },
-      "phone": {
-          "type": "998989989809"
-        },
-      "email": {
-          "type": "abcdefgh@xyz.com"
-        }
-    }
-  }
+    "idType": "UIN",
+    "name": "Monobikash Das",
+    "postalCode": "14022",
+    "contactType": "EMAIL",
+    "contactValue": "monobikash.das@mindtree.com",
+    "langCode": "eng"
+  },
+  "requesttime": "2019-09-13T11:34:13.827Z",
+  "version": "1.0"
 }
 ```
 
@@ -489,11 +462,12 @@ request: demographics|N| Demographic data of an Individual| |
 
 ```JSON
 {
-  "id": "mosip.resident.lostuin",
+  "id": "mosip.registration.lost",
   "version": "v1",
   "responseTime": "2018-12-09T06:39:04.683Z",
   "response": {
-	"uin": "989768897876565",
+    "idType": "UIN",
+	"idValue": "989768897876565",
     "status": "success",
     "message": "Notification has been sent to abXXXXXXXXXcd@xyz.com"
   },
@@ -502,16 +476,14 @@ request: demographics|N| Demographic data of an Individual| |
 ```
 
 ##### Failed Response:
-###### Status Code : 200 (OK)    
+###### Status Code : 200 (OK)
 
 ```JSON
 {
-  "id": "mosip.resident.lostuin",
+  "id": "mosip.registration.lost",
   "version": "v1",
   "responseTime": "2018-12-09T06:39:04.683Z",
-  "response": {
-
-  },
+  "response": null,
   "errors": [
     {
       "errorCode": "XXX-XXX-002",
@@ -528,129 +500,11 @@ RES-LOU-002|Data entered does not match.
 RES-LOU-004|No Registered Mobile/email ID found.
 
 
-
-## POST /resident/v1/req/rid
-This request will authenticate an Individual based on provided OTP and respond with RID. Notification will be sent to phone/email.
-
-
-#### Resource URL
-<div>https://mosip.io/resident/v1/req/rid</div>
-
-#### Resource details
-
-Resource Details | Description
------------- | -------------
-Response format | JSON
-Requires Authentication | Yes
-
-#### Request Body Parameters
-Name | Required | Description | Default Value | Example
------|----------|-------------|---------------|--------
-id | Y | API Id | | mosip.resident.lostrid
-version | Y | API version | | v1
-requestTime| Y |Time when Request was captured| | 2018-12-09T06:39:04.683Z
-request: transactionID| Y | Transaction ID of request | | dabed834-974f-11e9-bc42-526af7764f64
-request: individualIdType| Y | Allowed Type of Individual ID - demo | demo 
-request: otp| Y | OTP | | 
-request: demographics|N| Demographic data of an Individual| |
-
-
-#### Request Body
-```JSON
-{
-  "id": "mosip.resident.lostrid",
-  "version": "v1",
-  "requestTime": "2018-12-09T06:39:04.683Z",
-  "request": {
-  "transactionID": "dabed834-974f-11e9-bc42-526af7764f64",
-  "individualIdType": "demo",
-  "otp": "123456",
-  "demographics": {
-      "name": [
-        {
-          "language": "ara",
-          "value": "ابراهيم بن علي"
-        },
-        {
-          "language": "fra",
-          "value": "Ibrahim Ibn Ali"
-        }
-      ],
-      "gender": [
-        {
-          "language": "ara",
-          "value": "الذكر"
-        },
-        {
-          "language": "fra",
-          "value": "mâle"
-        }
-      ],
-      "postalCode": {
-          "type": "10004"
-        },
-      "phone": {
-          "type": "998989989809"
-        },
-      "email": {
-          "type": "abcdefgh@xyz.com"
-        }
-    }
-  }
-}
-```
-
-#### Responses:
-##### Success Response:
-###### Status Code : 200 (OK)
-
-```JSON
-{
-  "id": "mosip.resident.lostrid",
-  "version": "v1",
-  "responseTime": "2018-12-09T06:39:04.683Z",
-  "response": {
-    "rid": "989768897876565",
-    "status": "success",
-    "message": "Notification has been sent to abXXXXXXXXXcd@xyz.com"
-  },
-  "errors": null
-}
-```
-
-##### Failed Response:
-###### Status Code : 200 (OK)    
-
-```JSON
-{
-  "id": "mosip.resident.lostrid",
-  "version": "v1",
-  "responseTime": "2018-12-09T06:39:04.683Z",
-  "response": {
-
-  },
-  "errors": [
-    {
-      "errorCode": "XXX-XXX-002",
-      "errorMessage": "OTP Authentication Failed"
-    }
-  ]
-}
-```
-#### Failure details
-Error Code | Error Message | Error Description
-------------|------------------------------|-------------
-RES-LOR-001|OTP Validation Failed.
-RES-LOR-002|Data entered does not match.
-RES-LOR-004|No Registered Mobile/email ID found.
-
-
-
-## POST /resident/v1/req/update-uin
+## POST /registrationprocessor/v1/requesthandler/update
 This request will authenticate an Individual based on provided OTP and respond with RID after successfully placing update request to Registration Processor. Notification will be sent to phone/email.
 
 #### Resource URL
-<div>https://mosip.io/resident/v1/req/update-uin</div>
+<div>https://mosip.io/registrationprocessor/v1/requesthandler/update</div>
 
 #### Resource details
 
@@ -740,11 +594,12 @@ request: machineId|Y| Constant machine id of resident service portal to generate
 
 #### Failure details
 Error Code | Error Message | Error Description
-------------|------------------------------|-------------
-RES-UIU-001| OTP Authentication Failed.
-RES-UIU-002| Data entered does not match or not valid.
-RES-UIU-004| No Registered Mobile/email ID found.
-RES-UIU-005| Status of UIN Update is UnSuccessful.
+-----|----------|-------------
+RPR-SER-001 |	No Records Found	|   No Records Found
+RPR-SER-002 |   Multiple Records Found | Multiple UIN is found
+RPR-SER-003 | Invalid Input Value - ID Type | Invalid ID Type
+RPR-SER-004 | Invalid Input Value - Name cannot be NULL or Empty| Name is Empty or NULL
+RPR-SER-005 | Invalid Input Value - Contact Type | Invalid Contact Type
 
 
 
