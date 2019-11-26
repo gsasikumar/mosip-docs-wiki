@@ -1,33 +1,34 @@
 This section details about the service APIs in the Registration-Processor modules
 
-[1. Packet receiver Service](#1-packet-receiver-service)
+[1. Packet receiver API](#1-packet-receiver-api)
 
-[2. Registration status Service](#2-registration-status-service)
+[2. Registration status API](#2-registration-status-api)
 
-[3. Sync Registration Service](#3-sync-registration-service)
+[3. Sync Registration API](#3-sync-registration-api)
 
-[4. Manual Adjudication Service](#4-manual-adjudication-service)
+[4. Manual Verification APIs](#4-manual-verification-apis)
 
-[5. Bio Dedupe Service](#5-bio-dedupe-service)
+[5. Bio Dedupe API](#5-bio-dedupe-api)
 
-[6. Packet Generator Service](#6-packet-generator-service)
+[6. Packet Generator API](#6-packet-generator-api)
 
-[7. Packet Uploader Service](#7-packet-uploader-service)
+[7. Packet Uploader API](#7-packet-uploader-api)
 
-[8. Registration Process Request Handler Service](#8-registration-process-request-handler-service)
+[8. Request Handler API](#8-request-handler-api)
 
-[9. Registration Transaction Service](#9-registration-transaction-service)
+[9. Registration Transaction API](#9-registration-transaction-api)
 
-[10. Uincard Service](#10-uincard-service)
+[10. Uincard API](#10-uincard-api)
 
-[11. Lost UIN Or RID Service](#11-lost-uin-or-rid-service)
+[11. Lost UIN Or RID API](#11-lost-uin-or-rid-api)
 
-# 1 Packet Receiver Service
-## 1.1 Packet-receiver service
+[11. Update UIN Api](#11-update-uin-api)
+
+# 1 Packet Receiver API
 
 - #### `POST /registrationprocessor/v1/packetreceiver/registrationpackets`
 
-This service receives registration packet from client. Before moving packet to landing zone it is sent for virus scan and then trustworthiness of the packet is validated using hash value and size.
+This API receives registration packet from reg-client. Before moving packet to landing zone virus scan is performed and then trustworthiness of the packet is validated using hash value and size.
 
 
 #### Resource URL
@@ -85,11 +86,11 @@ MultipartFile|Yes|The encrypted zip file|
 }
 ```
 
-# 2 Registration Status Service
+# 2 Registration Status API
 
 - ### `POST /registrationprocessor/v1/registrationstatus/search`
 
-This service return the registration current status for list of input registration ids.
+This API return the registration current status for list of registration ids.
 
 #### Resource URL
 https://mosip.io/registrationprocessor/v1/registrationstatus/search
@@ -162,8 +163,8 @@ Record not found :
 ```
 
 
-# 3 Sync registration Service
-The registration ids has to be synced with server before uploading packet to landing zone. This service is used to syncs registration ids.
+# 3 Sync registration API
+The registration ids has to be synced with server before uploading packet to landing zone. This API is used to sync registration ids.
 
 - #### `POST /registrationprocessor/v1/registrationstatus/sync`
 
@@ -311,11 +312,11 @@ Failure response
 }
 ```
 
-# 4 Manual Adjudication Service
-## 4.1 manual-adjudication-assignment service
+# 4 Manual Verification APIs
+## 4.1 Manual Verification Assignment API
 
 - #### `POST /registrationprocessor/v1/manualverification/assignment`
-This service is used to assign one single unassigned applicant record to the input user.
+This API is used to assign one single unassigned applicant record to the input user.
 
 #### Resource URL
 https://mosip.io/registrationprocessor/v1/manualverification/assignment
@@ -381,11 +382,11 @@ Failure response
 ```
 
 
-## 4.2 manual-adjudication-decision service
+## 4.2 Manual Verification Decision API
 
 - #### `POST /registrationprocessor/v1/manualverification/decision`
 
-This service is used to get the decision from manual adjudicator for an applicant and update the decision in table.
+This API is used to get the decision from manual verifier for an applicant and update the decision in table. The packet is sent for further processing based on decision.
 
 #### Resource URL
 https://mosip.io/registrationprocessor/v1/manualverification/decision
@@ -454,11 +455,11 @@ Failure response
 }
 ```
 
-## 4.3 manual-adjudication-applicant-biometric service
+## 4.3 Manual Verification Applicant Biometric API
 
 - #### `POST /registrationprocessor/v1/manualverification/applicantBiometric`
 
-The manual adjudicator would need to verify the applicant biometric and demographic records. This service is used to get the applicant biometric from packet store by registration id.
+The manual verifier would need to verify the applicant biometric and demographic records. This API is used to get the applicant biometric file from packet.
 
 #### Resource URL
 
@@ -518,11 +519,11 @@ Failure :
 }
 ```
 
-## 4.4 manual-adjudication-applicant-demographic service
+## 4.4 Manual Verification Applicant Demographic API
 
 - #### `POST /registrationprocessor/v1/manualverification/applicantDemographic`
 
-The manual adjudicator would need to verify the applicant biometric and demographic records. This service is used to get the applicant demographic from packet store by registration id.
+The manual verifier has to verify the applicant demographic information. This API is used to get the applicant demographic information from packet.
 
 #### Resource URL
 https://mosip.io/registrationprocessor/v1/manualverification/applicantDemographic
@@ -580,11 +581,11 @@ Failure :
   }]
 }
 ```
-## 4.5 manual-adjudication-packet-metainfo service
+## 4.5 Manual Verification Packet Info API
 
 - #### `POST /registrationprocessor/v1/manualverification/packetInfo`
 
-The manual adjudicator would need to verify the operator/supervisor/introducer information present inside packet meta info file. This service fetches the file from inside the packet by registration id.
+The manual adjudicator has to verify the operator/supervisor/introducer etc information. This API fetches the additional information from packet.
 
 #### Resource URL
 https://mosip.io/registrationprocessor/v1/manualverification/packetInfo
@@ -644,11 +645,11 @@ Failure :
 ```
 
 
-# 5 Bio Dedupe Service
+# 5 Bio Dedupe API
 
 - #### `GET /registrationprocessor/v1/bio-dedupe/biometricfile/{referenceid}`
 
-The abis would call bio-dedupe service to get the biometric cbeff file.
+The abis would call bio-dedupe callback API to get the biometric cbeff file.
 
 #### Resource URL
 https://mosip.io/registrationprocessor/v1/bio-dedupe/biometricfile/{referenceid}
@@ -674,9 +675,9 @@ byte[]|Yes|byte array of CBEFF file|
 // byte array of CBEFF xml file
 ```
 
-# 6 Packet Generator Service
+# 6 Packet Generator API
 - #### `POST /registrationprocessor/v1/requesthandler/packetgenerator`
-The residence service portal would call packet generator service to activate or deactivate uin.
+The residence service portal would call packet generator API to activate or deactivate uin.
 
 #### Resource URL
 https://mosip.io/registrationprocessor/v1/requesthandler/packetgenerator
@@ -727,9 +728,9 @@ PacketGeneratorRequestDto|Yes|Dto containing information required for activate o
 }
 ```
 
-# 7 Packet Uploader Service
+# 7 Packet Uploader API
 - #### `POST /registrationprocessor/v1/uploader/securezone`
-The dmz stage will call packet uploader service to upload the packet in file system(Hdfs, ceph etc). This service is a bridge between dmz and secure network. It accepts json request and connects to dmz VM to get the packet and move it to archive location.
+The dmz camel-bridge calls packet uploader API to upload the packet in file system(Hdfs, ceph etc). This service is a bridge between dmz and secure network. It accepts json request and connects to dmz VM to get the packet and move it to archive location.
 
 #### Resource URL
 https://mosip.io/registrationprocessor/v1/uploader/securezone
@@ -770,7 +771,7 @@ Packet with registrationId 10003100030000420190625111842 has not been uploaded t
 ###### Status Code:200
 ###### Description : response code is always 200 if server receives the request.
 
-# 8 Registration Process Request Handler Service
+# 8 Request Handler API
 - #### `POST /registrationprocessor/v1/requesthandler/reprint`
 The residence service portal would call this api to reprint uin card upon receiving request from the applicant.
 
@@ -856,8 +857,8 @@ Error response
 }
 ```
 
-# 9 Registration Transaction Service
-This service is used to find all the transactions for a registration id. This service accepts a registration id and returns all transactions associated with it.
+# 9 Registration Transaction API
+This API is used to find all the transactions for a registration id. This service accepts a registration id and returns all transactions associated with it.
 
 ### Resource URL
 ### `GET /registrationprocessor/v1/registrationtransaction/search/{langcode}/{rid}`
@@ -1056,9 +1057,9 @@ Record not found :
 }
 
 ```
-# 10 Uincard Service
+# 10 Uincard API
 - #### `POST /registrationprocessor/v1/print/uincard`
-The residence service portal would call this api to get uin card upon receiving request from the applicant.
+The residence service portal would call this API to get uin card upon receiving request from the applicant.
 
 #### Resource URL
 https://mosip.io/registrationprocessor/v1/print/uincard
@@ -1123,7 +1124,7 @@ Error response :
 ```
 
 
-# 11 Lost UIN Or RID Service
+# 11 Lost UIN Or RID API
 - #### `POST /registrationprocessor/v1/requesthandler/lost`
 The residence service portal would call this api to search lost uin OR rid. The request type is post since request json is expected in request body.
 
@@ -1156,23 +1157,20 @@ langCode|Yes|Language Code|Primary or secondary language as configured by countr
 ```JSON
 {
   "id": "mosip.registration.lost",
+  "requesttime": "2019-09-13T11:34:13.827Z",
+  "version": "1.0",
   "request": {
     "idType": "UIN",
     "name": "Monobikash Das",
     "postalCode": "14022",
     "contactType": "EMAIL",
-    "contactValue": "monobikash.das@mindtree.com",
-    "langCode": "eng"
-  },
-  "requesttime": "2019-09-13T11:34:13.827Z",
-  "version": "1.0"
+    "contactValue": "monobikash.das@mindtree.com"
+  }
 }
 ```
 #### Response
 ###### Status Code:200
 ###### Description : response code is always 200 if server receives the request.
-#### Response Header
-##### Response-Signature = `<the response signature>`
 
 
 Success response :
@@ -1213,3 +1211,94 @@ RPR-SER-002 |   Multiple Records Found | Multiple UIN is found
 RPR-SER-003 | Invalid Input Value - ID Type | Invalid ID Type
 RPR-SER-004 | Invalid Input Value - Name cannot be NULL or Empty| Name is Empty or NULL
 RPR-SER-005 | Invalid Input Value - Contact Type | Invalid Contact Type
+
+# 12 Update UIN API
+- #### `POST /registrationprocessor/v1/requesthandler/update`
+The residence service portal would call this api to update demographic information along with documents.
+
+#### Resource URL
+https://mosip.io/registrationprocessor/v1/requesthandler/update
+
+#### Resource details
+
+Resource Details | Description
+------------ | -------------
+Request format | JSON
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+id | Y | API Id | | mosip.resident.uin
+version | Y | API version | | v1
+requestTime| Y |Time when Request was captured| | 2018-12-09T06:39:04.683Z
+request: idValue| Y | UIN | | 9830872690593682
+request: idType| Y | Allowed Type of Individual ID - VID, UIN | UIN 
+request: identityJson|Y| Demographic data of an Individual| |
+request: proofOfAddress|Y| address document of an Individual| |
+request: proofOfIdentity|Y| Identity document of an Individual| |
+request: proofOfRelationship|Y| Relationship proof document of an Individual| |
+request: proofOfDateOfBirth|Y| DOB proof document of an Individual| |
+request: centerId|Y| Constant center Id of resident service portal to generate rid| |
+request: machineId|Y| Constant machine id of resident service portal to generate rid| |
+
+#### Request
+```JSON
+{
+  "id": "mosip.registration.update",
+  "version": "v1",
+  "requestTime": "2018-12-09T06:39:04.683Z",
+  "request": {
+      "idValue": "9830872690593682",
+      "idType": "UIN",
+      "centerId": "1234",
+      "machineId": "12345678",
+      "identityJson": "<base 64 encoded string>",
+      "proofOfAddress": "<base 64 encoded string>",
+      "proofOfIdentity": "<base 64 encoded string>",
+      "proofOfRelationship": "<base 64 encoded string>",
+      "proofOfDateOfBirth": "<base 64 encoded string>"
+  }
+}
+```
+#### Response
+###### Status Code:200
+###### Description : response code is always 200 if server receives the request.
+
+
+Success response :
+```JSON
+{
+  "id": "mosip.registration.update",
+  "version": "v1",
+  "responseTime": "2018-12-09T06:39:04.683Z",
+  "response": {
+    "rid": "989768897876565",
+  },
+  "errors": null
+}
+```
+
+Error response :
+
+```
+{
+  "id": "mosip.registration.update",
+  "version": "v1",
+  "responseTime": "2018-12-09T06:39:04.683Z",
+  "response": null,
+  "errors": [
+    {
+      "errorCode": "XXX-XXX-002",
+      "errorMessage": "Invalid UIN"
+    }
+  ]
+}
+```
+
+#### Failure details
+Error Code | Error Message | Error Description
+-----|----------|-------------
+ |	Invalid UIN	|   Invalid UIN
+  |	Invalid Request type	|   Invalid Request type
