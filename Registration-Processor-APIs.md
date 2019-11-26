@@ -22,7 +22,7 @@ This section details about the service APIs in the Registration-Processor module
 
 [11. Lost UIN Or RID API](#11-lost-uin-or-rid-api)
 
-[11. Update UIN Api](#11-update-uin-api)
+[11. Update UIN API](#11-update-uin-api)
 
 # 1 Packet Receiver API
 
