@@ -467,8 +467,7 @@ langCode|Yes|Language Code|Primary or secondary language as configured by countr
   "responseTime": "2018-12-09T06:39:04.683Z",
   "response": {
     "idType": "UIN",
-	"idValue": "989768897876565",
-    "status": "success",
+    "idValue": "989768897876565",
     "message": "Notification has been sent to abXXXXXXXXXcd@xyz.com"
   },
   "errors": null
@@ -535,7 +534,7 @@ request: machineId|Y| Constant machine id of resident service portal to generate
 #### Request Body
 ```JSON
 {
-  "id": "mosip.resident.uin",
+  "id": "mosip.registration.update",
   "version": "v1",
   "requestTime": "2018-12-09T06:39:04.683Z",
   "request": {
@@ -560,12 +559,11 @@ request: machineId|Y| Constant machine id of resident service portal to generate
 
 ```JSON
 {
-  "id": "mosip.resident.uin",
+  "id": "mosip.registration.update",
   "version": "v1",
   "responseTime": "2018-12-09T06:39:04.683Z",
   "response": {
     "rid": "989768897876565",
-    "status": "success",
     "message": "Notification has been sent to abXXXXXXXXXcd@xyz.com"
   },
   "errors": null
@@ -577,12 +575,10 @@ request: machineId|Y| Constant machine id of resident service portal to generate
 
 ```JSON
 {
-  "id": "mosip.resident.uin",
+  "id": "mosip.registration.update",
   "version": "v1",
   "responseTime": "2018-12-09T06:39:04.683Z",
-  "response": {
-
-  },
+  "response": null,
   "errors": [
     {
       "errorCode": "XXX-XXX-002",
