@@ -3038,14 +3038,7 @@ request.value |Yes|Any string that you want to generate QR code|
   "id": "mosip.pre-registration.qrcode.generate",
   "version": "1.0",
   "requesttime": "2019-01-09T15:31:32.957Z",
-  "request": {
-	"name": "sanober noor",
-	"preRegistrationId": "37802950913289",
-	"appointmentDate": "2019-01-22",
-	"appointmentTime": "22:57",
-	"mobNum": "9748107386",
-	"emailID": "sanober.noor2@mindtree.com"
-   }
+  "request": "37802950913289"	
 }
 ```
 #### Responses:
