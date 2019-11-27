@@ -600,6 +600,10 @@ You can read more about it https://fedoraproject.org/wiki/EPEL.
     ```
     sudo certbot --nginx certonly
     ```
+To renew ssl certificate -
+    ```
+    sudo certbot renew
+    ```
 
 **Troubleshooting:** If you facing getting this issue in nginx <br/> (13: Permission denied) while connecting to upstream:[nginx] <br/>
 Please  run below command - 
