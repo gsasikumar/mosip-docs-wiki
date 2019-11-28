@@ -226,7 +226,7 @@ When a registration officer starts a new registration by entering a pre-registra
 1. If data are not available in local database, checks if data for that ID are available on the server.
    * If available, downloads the pre-registration packet from the server and pre-populate on screen.
 1. Based on the availability of data, the system populates the demographic details of the individual and pre-populates the registration form.
-1. The demographic details can still be edited at this stage.
+1. The demographic details can still be edited at this stage. Additionally, the system validates for any blacklisted words entered (as configured by the Country)
 1. The registration officer can then view the documents, which were uploaded during pre-registration
 1. If no matching PRID available in local system and server, the system displays an error message.
 
