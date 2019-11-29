@@ -4,10 +4,10 @@ This section details about the REST services in ID Repository module.
 
 ## Identity Services (Private)
 These services is used by Registration Processor to store/update during registration process and ID Authentication to retrieve Identity of an Individual for their authentication.
-* [POST /idrepository/v1/identity](#post-idrepositoryv1identity)
-* [GET /idrepository/v1/identity/UIN/{UIN}?type=bio](#get-idrepositoryv1identityuinuintypebio)
-* [GET /idrepository/v1/identity/RID/{RID}?type=bio](#get-idrepositoryv1identityridridtypebio)
-* [PATCH /idrepository/v1/identity](#patch-idrepositoryv1identity)     
+* [POST /idrepository/v1/identity/](#post-idrepositoryv1identity)
+* [GET /idrepository/v1/identity/uin/{uin}?type=bio](#get-idrepositoryv1identityuinuintypebio)
+* [GET /idrepository/v1/identity/rid/{rid}?type=bio](#get-idrepositoryv1identityridridtypebio)
+* [PATCH /idrepository/v1/identity/](#patch-idrepositoryv1identity)     
 
 #### Users of Identity service -
 1. `Registration Processor` - *Registration Processor* will create a new ID record or update an existing ID record in ID repository and store corresponding demographic and bio-metric documents. *Registration Processor* can also retrieve Identity details of an Individual using RID.
@@ -15,12 +15,12 @@ These services is used by Registration Processor to store/update during registra
 
 **Note** - Identity Services does not support search based on attributes of an ID.
 
-### POST /idrepository/v1/identity     
+### POST /idrepository/v1/identity/     
 
 This service will create a new ID record in ID repository and store corresponding demographic and bio-metric documents. 
 
 #### Resource URL
-<div>https://mosip.io/idrepository/v1/identity</div>
+<div>https://mosip.io/idrepository/v1/identity/</div>
 
 #### Resource details
 Resource Details | Description
@@ -216,7 +216,7 @@ request: documents | yes | Documents that are to be uploaded for any ID attribut
   "responsetime": "2018-12-11T06:13:05.218Z",
   "response": {
     "status": "ACTIVATED",
-    "entity": "http://mosip.io/idrepository/v1/identity/UIN/{UIN}"
+    "entity": "http://mosip.io/idrepository/v1/identity/uin/{uin}"
   }
 }
 ```
@@ -227,11 +227,11 @@ Error Code | Error Message | Error Description
 IDR-IDC-001|Missing Input Parameter - %s|Input Parameter Missing
 IDR-IDC-002|Invalid Input Parameter - %s|Invalid Input Parameter
 IDR-IDC-003|Invalid Request|Invalid Request attribute
-IDR-IDC-004|Unknown error occured |An unknown error occurred
+IDR-IDC-004|Unknown error occurred |An unknown error occurred
 IDR-IDC-005|Input Data Validation Failed|Validation on input fails
-IDR-IDC-006|Error occured while performing DB operations|DB connectivity error
-IDR-IDC-008|4XX - Client Error occured|4XX error from Kernel APIs
-IDR-IDC-009|5XX - Server Error occured|5XX error from Kernel APIs
+IDR-IDC-006|Error occurred while performing DB operations|DB connectivity error
+IDR-IDC-008|4XX - Client Error occurred|4XX error from Kernel APIs
+IDR-IDC-009|5XX - Server Error occurred|5XX error from Kernel APIs
 IDR-IDC-010|Connection timed out|Connection timed out while invoking REST APIs
 IDR-IDC-011|Authorization Failed|Input role is not authorized to access the service
 IDR-IDC-012|Record already exists in DB|Identity with input UIN or RID already exists in DB      
@@ -241,7 +241,7 @@ IDR-IDS-005|Failed to process Id Object using kernel Id Object validator|Error w
 IDR-IDS-007|Failed to retrieve data from kernel Masterdata|Error while retrieving data from Kernel MasterData
 
 
-### GET /idrepository/v1/identity/UIN/{UIN}?type=bio         
+### GET /idrepository/v1/identity/uin/{uin}?type=bio         
 
 This service will retrieve an ID record from ID repository for a given UIN (Unique Identification Number) and identity type as bio/demo/all. 
 1. When type=bio is selected, individualBiometrics along with Identity details of the Individual are returned
@@ -251,7 +251,7 @@ This service will retrieve an ID record from ID repository for a given UIN (Uniq
 If no identity type is provided, stored Identity details of the Individual will be returned as a default response.
 
 #### Resource URL
-<div>https://mosip.io/idrepository/v1/identity/UIN/{UIN}?type=bio</div>
+<div>https://mosip.io/idrepository/v1/identity/uin/{uin}?type=bio</div>
 
 #### Resource details
 Resource Details | Description
@@ -414,11 +414,11 @@ Requires Authentication | Yes
 ##### Failure details
 Error Code | Error Message | Error Description
 -----|----------|-------------
-IDR-IDC-004|Unknown error occured |An unknown error occurred
-IDR-IDC-006|Error occured while performing DB operations|DB connectivity error
+IDR-IDC-004|Unknown error occurred |An unknown error occurred
+IDR-IDC-006|Error occurred while performing DB operations|DB connectivity error
 IDR-IDC-007|No Record(s) found|Identity with input UIN does not exist
-IDR-IDC-008|4XX - Client Error occured|4XX error from Kernel APIs
-IDR-IDC-009|5XX - Server Error occured|5XX error from Kernel APIs
+IDR-IDC-008|4XX - Client Error occurred|4XX error from Kernel APIs
+IDR-IDC-009|5XX - Server Error occurred|5XX error from Kernel APIs
 IDR-IDC-010|Connection timed out|Connection timed out while invoking REST APIs
 IDR-IDC-011|Authorization Failed|Input role is not authorized to access the service     
 IDR-IDS-001|Identity Element hash does not match|Error while matching Identity hash with hash of decrypted Identity
@@ -430,7 +430,7 @@ IDR-IDS-007|Failed to retrieve data from kernel Masterdata|Error while retrievin
 
 
 
-### GET /idrepository/v1/identity/RID/{RID}?type=bio         
+### GET /idrepository/v1/identity/rid/{rid}?type=bio         
 
 This operation will retrieve an ID record from ID repository for a given RID (Registration ID) and identity type as bio/demo/all. 
 1. When type=bio is selected, individualBiometrics along with Identity details of Individual are returned
@@ -440,7 +440,7 @@ This operation will retrieve an ID record from ID repository for a given RID (Re
 If no identity type is provided, stored latest Identity details of Individual mapped to the UIN of input RID will be returned as a default response.
 
 #### Resource URL
-<div>https://mosip.io/idrepository/v1/identity/RID/{RID}?type=bio</div>
+<div>https://mosip.io/idrepository/v1/identity/rid/{rid}?type=bio</div>
 
 #### Resource details
 Resource Details | Description
@@ -603,11 +603,11 @@ Requires Authentication | Yes
 ##### Failure details
 Error Code | Error Message | Error Description
 -----------|----------|-------------
-IDR-IDC-004|Unknown error occured |An unknown error occurred
-IDR-IDC-006|Error occured while performing DB operations|DB connectivity error
+IDR-IDC-004|Unknown error occurred |An unknown error occurred
+IDR-IDC-006|Error occurred while performing DB operations|DB connectivity error
 IDR-IDC-007|No Record(s) found|Identity with input RID does not exist
-IDR-IDC-008|4XX - Client Error occured|4XX error from Kernel APIs
-IDR-IDC-009|5XX - Server Error occured|5XX error from Kernel APIs
+IDR-IDC-008|4XX - Client Error occurred|4XX error from Kernel APIs
+IDR-IDC-009|5XX - Server Error occurred|5XX error from Kernel APIs
 IDR-IDC-010|Connection timed out|Connection timed out while invoking REST APIs
 IDR-IDC-011|Authorization Failed|Input role is not authorized to access the service    
 IDR-IDS-001|Identity Element hash does not match|Error while matching Identity hash with hash of decrypted Identity
@@ -618,11 +618,11 @@ IDR-IDS-006|File(s) not found in DFS|Requested Biometric/Demographic documents n
 IDR-IDS-007|Failed to retrieve data from kernel Masterdata|Error while retrieving data from Kernel MasterData
 
 
-### PATCH /idrepository/v1/identity      
+### PATCH /idrepository/v1/identity/     
 This operation will update an existing ID record in the ID repository for a given UIN (Unique Identification Number)
 
 #### Resource URL
-<div>https://mosip.io/idrepository/v1/identity</div>
+<div>https://mosip.io/idrepository/v1/identity/</div>
 
 #### Resource details
 Resource Details | Description
@@ -696,11 +696,11 @@ Error Code | Error Message | Error Description
 IDR-IDC-001|Missing Input Parameter - %s|Input Parameter Missing
 IDR-IDC-002|Invalid Input Parameter - %s|Invalid Input Parameter
 IDR-IDC-003|Invalid Request|Invalid Request attribute
-IDR-IDC-004|Unknown error occured |An unknown error occurred
+IDR-IDC-004|Unknown error occurred |An unknown error occurred
 IDR-IDC-005|Input Data Validation Failed|Validation on input fails
-IDR-IDC-006|Error occured while performing DB operations|DB connectivity error
-IDR-IDC-008|4XX - Client Error occured|4XX error from Kernel APIs
-IDR-IDC-009|5XX - Server Error occured|5XX error from Kernel APIs
+IDR-IDC-006|Error occurred while performing DB operations|DB connectivity error
+IDR-IDC-008|4XX - Client Error occurred|4XX error from Kernel APIs
+IDR-IDC-009|5XX - Server Error occurred|5XX error from Kernel APIs
 IDR-IDC-010|Connection timed out|Connection timed out while invoking REST APIs
 IDR-IDC-011|Authorization Failed|Input role is not authorized to access the service
 IDR-IDC-012|Record already exists in DB|Identity with input RID already exists in DB      
@@ -786,11 +786,11 @@ IDR-VID-005|Failed to retrieve uin data using Identity Service|Error while retri
 IDR-IDC-001|Missing Input Parameter - %s|Input Parameter Missing
 IDR-IDC-002|Invalid Input Parameter - %s|Invalid Input Parameter
 IDR-IDC-003|Invalid Request|Invalid Request attribute
-IDR-IDC-004|Unknown error occured |An unknown error occurred
+IDR-IDC-004|Unknown error occurred |An unknown error occurred
 IDR-IDC-005|Input Data Validation Failed|Validation on input fails
-IDR-IDC-006|Error occured while performing DB operations|DB connectivity error
-IDR-IDC-008|4XX - Client Error occured|4XX error from Kernel APIs
-IDR-IDC-009|5XX - Server Error occured|5XX error from Kernel APIs
+IDR-IDC-006|Error occurred while performing DB operations|DB connectivity error
+IDR-IDC-008|4XX - Client Error occurred|4XX error from Kernel APIs
+IDR-IDC-009|5XX - Server Error occurred|5XX error from Kernel APIs
 IDR-IDC-010|Connection timed out|Connection timed out while invoking REST APIs
 IDR-IDC-011|Authorization Failed|Input role is not authorized to access the service    
  
@@ -832,11 +832,11 @@ IDR-VID-001|VID is <vid-status>|Here status could be REVOKED, EXPIRED, USED, INV
 IDR-VID-004|<uin-status> UIN |Here, uin-status could be either de-activated or blocked
 IDR-VID-005|Failed to retrieve uin data using Identity Service|Error while retrieving UIN details from Identity Service
 IDR-VID-006|Uin hash does not match|Error while matching hash of UIN against decrypted UIN 
-IDR-IDC-004|Unknown error occured |An unknown error occurred
-IDR-IDC-006|Error occured while performing DB operations|DB connectivity error
+IDR-IDC-004|Unknown error occurred |An unknown error occurred
+IDR-IDC-006|Error occurred while performing DB operations|DB connectivity error
 IDR-IDC-007|No Record(s) found|Input VID does not exist in DB
-IDR-IDC-008|4XX - Client Error occured|4XX error from Kernel APIs
-IDR-IDC-009|5XX - Server Error occured|5XX error from Kernel APIs
+IDR-IDC-008|4XX - Client Error occurred|4XX error from Kernel APIs
+IDR-IDC-009|5XX - Server Error occurred|5XX error from Kernel APIs
 IDR-IDC-010|Connection timed out|Connection timed out while invoking REST APIs
 IDR-IDC-011|Authorization Failed|Input role is not authorized to access the service    
 
@@ -906,11 +906,11 @@ IDR-VID-001|VID is DEACTIVATED or VID is REVOKED|VID is REVOKED,EXPIRED,USED,INV
 IDR-VID-004|Deactivate UIN or Blocked UIN|UIN is either de-activated or blocked
 IDR-VID-005|Failed to retrieve uin data using Identity Service|Error while retrieving UIN details from Identity Service
 IDR-VID-006|Uin hash does not match|Error while matching hash of UIN against decrypted UIN 
-IDR-IDC-004|Unknown error occured |An unknown error occurred
-IDR-IDC-006|Error occured while performing DB operations|DB connectivity error
+IDR-IDC-004|Unknown error occurred |An unknown error occurred
+IDR-IDC-006|Error occurred while performing DB operations|DB connectivity error
 IDR-IDC-007|No Record(s) found|Input VID does not exist in DB
-IDR-IDC-008|4XX - Client Error occured|4XX error from Kernel APIs
-IDR-IDC-009|5XX - Server Error occured|5XX error from Kernel APIs
+IDR-IDC-008|4XX - Client Error occurred|4XX error from Kernel APIs
+IDR-IDC-009|5XX - Server Error occurred|5XX error from Kernel APIs
 IDR-IDC-010|Connection timed out|Connection timed out while invoking REST APIs
 IDR-IDC-011|Authorization Failed|Input role is not authorized to access the service   
 
@@ -955,10 +955,10 @@ IDR-VID-005|Failed to retrieve uin data using Identity Service|Error while retri
 IDR-IDC-001|Missing Input Parameter - %s|Input Parameter Missing
 IDR-IDC-002|Invalid Input Parameter - %s|Invalid Input Parameter
 IDR-IDC-003|Invalid Request|Invalid Request attribute
-IDR-IDC-004|Unknown error occured |An unknown error occurred
+IDR-IDC-004|Unknown error occurred |An unknown error occurred
 IDR-IDC-005|Input Data Validation Failed|Validation on input fails
-IDR-IDC-006|Error occured while performing DB operations|DB connectivity error
-IDR-IDC-008|4XX - Client Error occured|4XX error from Kernel APIs
-IDR-IDC-009|5XX - Server Error occured|5XX error from Kernel APIs
+IDR-IDC-006|Error occurred while performing DB operations|DB connectivity error
+IDR-IDC-008|4XX - Client Error occurred|4XX error from Kernel APIs
+IDR-IDC-009|5XX - Server Error occurred|5XX error from Kernel APIs
 IDR-IDC-010|Connection timed out|Connection timed out while invoking REST APIs
 IDR-IDC-011|Authorization Failed|Input role is not authorized to access the service   
