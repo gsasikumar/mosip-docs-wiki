@@ -96,7 +96,7 @@ Kernel is a platform to build higher-level services as well as a secure sandbox.
 * [UIN Generation](UIN-Generation)
 * [Configuration Server](Configuration-Server)
 * [Audit Manager](Audit-Manager)
-  * [Log manager](log-manager)
+  * [Log manager](Audit-Manager#log-manager)
 * [Authentication and Authorization](Authentication-and-Authorization)
 * [Common Services](FRS-Common-Services)
 * [Data Services](FRS-Data-Services)
