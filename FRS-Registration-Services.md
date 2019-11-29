@@ -240,7 +240,7 @@ When a registration officer starts a new registration by entering a pre-registra
 
 A registration officer can download the pre-registration data while being online. The system allows the registration officer to download the demographic data of an applicant.
 
-The pre-registration data can be downloaded only for any registration center.
+Bulk pre-registration data can be downloaded only for that specific registration center. However, by keying in a specific PRID, pre-registration data of that specific PRID can be downloaded (for/from any center)
 
 It is possible to download the pre-registration data within the date range (Current date - End Date). This date range is  configurable.
 
