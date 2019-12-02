@@ -37,7 +37,7 @@
 - [10. Software Version Upgrade](#10-software-version-upgrade-) _(REG_FR_10)_
 - [11. Clean up](#11-clean-up-)
   * [11.1 Data retention policies](#111-data-retention-policies-) _(REG_FR_11.1)_
-  * [11.2 Machine Retirement](#112-machine-retirement-) _(REG_FR_11.2)_
+  * [11.2 Machine Retirement & Re-mapping](#112-machine-retirement-) _(REG_FR_11.2)_
 - [List of Configurable Parameters and Processes](#list-of-configurable-parameters-and-processes-)
 - [Process View](#process-view-)
 
@@ -829,8 +829,22 @@ Machine is termed as machine retirement due to following reason:
 Before the machine is decommissioned, the following checks must be performed:
 
 1. All packets created must either be uploaded to server or exported to external device.
-2. All pending end of day approvals are completed and re-registrations pending action are cleared
+2. All pending end of day approvals are completed and re-registrations pending action are cleared, refer below for more details
 3. All data locally saved in the machine must be cleaned up.
+
+Re-mapping of Machine:
+If a Machine has been re-mapped to another center, then:
+1. Officer will not be allowed to do any operation in Registration Client except,
+  a. Login/Logout
+  b. Approve packets as part of End of Day Approval process
+  c. Upload Packets
+  d. Inform Residents to Re-Register and mark action accordingly
+2. Once Packet Approval and Informing Resident is Completed, then
+  a. Packets will be auto uploaded if anything is pending
+  b. Initial Sync Flag is Turned On
+3. Once the Officer logs out and tries to login again, then
+  a. New Master data gets downloaded for the newly mapped Center
+
 ### List of Configurable Parameters and Processes [**[↑]**](#table-of-contents)
 
 1. Configurable Parameters
