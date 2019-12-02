@@ -1274,7 +1274,9 @@ Success response :
   "version": "v1",
   "responseTime": "2018-12-09T06:39:04.683Z",
   "response": {
-    "rid": "989768897876565",
+    "registrationId": "10031100110005020190313110030",
+    "status": "SUCCESS",
+    "message": "Update request received"
   },
   "errors": null
 }
