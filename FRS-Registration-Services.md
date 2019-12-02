@@ -434,7 +434,7 @@ The System will render a standard set of mapped Doc Types for each Doc Category,
 1. System initiates the process to update UIN after the RID is generated.
    * Receiving a RID do not mean UIN update is successful.
 1. Registration officer views and prints acknowledgement. 
-1. SMS and/or email notifications are sent to the individual if the contact details are entered during the update process.
+1. SMS and/or email notifications are sent to the individual if the contact details are entered during the update process (Subject to notification configuration, refer Sec. 4.4.B)
 1. Refer to the [**Track Status of UIN Update**](FRS-Resident-Services#7-track-status-of-uin-update-) in Resident Services.
 
 #### D. UIN Update of Child
@@ -449,7 +449,7 @@ The system automatically calculates the age of an individual using date of birth
 
 ### 4.3 Lost UIN [**[↑]**](#table-of-contents)
 
-When an individual has lost his UIN and visits registration center for retrieval of UIN, the registration officer captures the biometric and demographic details of the individual and processes a request to retrieve the lost UIN. The system sends a notification to the individual upon successful creation of the UIN retrieval request.
+When an individual has lost his UIN and visits registration center for retrieval of UIN, the registration officer captures the biometric and demographic details of the individual and processes a request to retrieve the lost UIN. The system sends a notification to the individual upon successful creation of the UIN retrieval request. (Subject to notification configuration, refer Sec. 4.4.B)
 
 The registration officer performs the following steps to retrieve a lost UIN of the individual:
 
@@ -462,8 +462,8 @@ The registration officer performs the following steps to retrieve a lost UIN of 
 1. Views acknowledgement of Lost UIN request with a Registration ID assigned to it.
 1. System initiates the process to retrieve a lost UIN after the RID is provided to the individual.
    * Receiving a RID do not mean UIN is successfully retrieved.
-8. Prints acknowledgement of the UIN, then SMS and email notifications are sent to the individual if contact details of the individual are entered.
-1. The individual will be informed after a Lost UIN gets retrieve. Refer to [**Notification**](FRS-Registration-Processor#331-notification-pluggable-by-si-)
+8. Prints acknowledgement of the UIN, then SMS and email notifications are sent to the individual if contact details of the individual are entered. (Subject to notification configuration, refer Sec. 4.4.B)
+1. The individual will be informed after a Lost UIN gets retrieve. Refer to [**Notification**](FRS-Registration-Processor#331-notification-pluggable-by-si-) (Subject to notification configuration, refer Sec. 4.4.B)
 1. System captures and stores the transaction details for audit purpose (except PII data).
 
 [**Link to design**](/mosip/mosip-platform/blob/master/design/registration/registration-lost-UIN.md)
@@ -480,17 +480,19 @@ The registration officer performs the following steps to retrieve a lost UIN of 
 4. This print friendly receipt can then be printed using a printer
 
 #### B. Acknowledgement receipt sent by email on completion of registration process [**[↑]**](#table-of-contents)
-1.The system sends an acknowledgement email to the individual after a registration is completed and Registration ID has been generated and assigned as per the configured notification language.
+Note: Notification Configuration: The trigger of notification is driven by the Notification configuration setup by the administrator, to allow a notification to be triggered by SMS/Email/Both or None
+
+1.The system sends an acknowledgement email to the individual after a registration is completed and Registration ID has been generated and assigned as per the configured notification language. (Subject to notification configuration, refer Sec. 4.4.B)
    * Notification language is set by a country's admin, who determines in which language, a notification is sent to the individual. Notification language can be either primary language or combination of both primary and secondary language.
    * In case of UIN Update or Lost UIN, the system sends a notification to the individual.
 2. The email template is defined by the admin at country level.
 3. Email is sent to the email address entered during registration.
 4. The subject and the body of the acknowledgement email are configured by admin.
 5. No email is sent under the following scenario
-   * If mode of confirmation is not set to ‘email’ or ‘email and SMS’
+   * If mode of confirmation is not set to ‘email’ or ‘email and SMS’ or is set to 'None'
    * If an email address is not provided during registration
    * If the client is not online during registration completion
-#### C. Acknowledgement receipt sent by SMS on completion of registration process
+#### C. Acknowledgement receipt sent by SMS on completion of registration process (Subject to notification configuration, refer Sec. 4.4.B)
 1.  The system sends an acknowledgement SMS to the individual after a registration is completed and Registration ID has been generated and assigned as per the configured notification language.
    * Notification language is set by a country's admin, who determines in which language, a notification is sent to the individual. Notification language can be either primary language or combination of both primary and secondary language.
    * In case of UIN Update or Lost UIN, the system sends a notification to the individual.
@@ -822,12 +824,13 @@ When a set of audit data is uploaded to the server and the server has acknowledg
 
 Machine is termed as machine retirement due to following reason:
 * If the machine has obsolete specification.
-* When the machine is moved from one center to another, then the machine will retire from that old center.
+* When the machine is moved from one center to another (re-mapped), then the machine will retire from that old center.
 
 Before the machine is decommissioned, the following checks must be performed:
 
 1. All packets created must either be uploaded to server or exported to external device.
-2. All data locally saved in the machine must be cleaned up.
+2. All pending end of day approvals are completed and re-registrations pending action are cleared
+3. All data locally saved in the machine must be cleaned up.
 ### List of Configurable Parameters and Processes [**[↑]**](#table-of-contents)
 
 1. Configurable Parameters
