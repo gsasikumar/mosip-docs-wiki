@@ -19,7 +19,7 @@
   * [4.2 UIN Update](#42-uin-update-) _(REG_FR_4.2)_
   * [4.3 Lost UIN](#43-lost-uin-) _(REG_FR_4.3)_
   * [4.4 Acknowledgement and Notifications](#44-acknowledgement-and-notifications-) _(REG_FR_4.4)_
-  * [4.5 Biometric Capture (SDK Integration, Extract and Match) (WIP)](#45-biometric-capture-sdk-integration-extract-and-match-wip-) _(REG_FR_4.5)_
+  * [4.5 Biometric Capture (SDK Integration, Extract and Match)](#45-biometric-capture-sdk-integration-extract-and-match-) _(REG_FR_4.5)_
   * [4.6 Biometric Exceptions](#46-biometric-exceptions-) _(REG_FR_4.6)_
   * [4.7 Registration Officer and Supervisor Approval](#47-registration-officer-and-supervisor-approval-) _(REG_FR_4.7)_
   * [4.8 End of Day Approval Process & Re-registration](#48-end-of-day-process-) _(REG_FR_4.8)_
@@ -29,7 +29,9 @@
   * [6.2 Transliteration](#62-transliteration-) _(REG_FR_6.2)_
 - [7. Packet Upload](#7-packet-upload-)
   * [7.1 Registration Packet Upload](#71-registration-packet-upload-) _(REG_FR_7.1)_
-  * [7.2 Offline upload (Packet Exporter) (Work in Progress)](#72-offline-upload-packet-exporter-work-in-progress-) _(REG_FR_7.2)_
+  * [7.2 Packet Exporter & Offline Upload from External Device](#72-offline-upload-packet-exporter-) _(REG_FR_7.2)_
+    * [7.2.1 Export Packets to External Device] _(REG_FR_7.2.1)_
+    * [7.2.2 Upload Packets from External Device to Server (To be Developed)] _(REG_FR_7.2.2)_
 - [8. Analytics and Audit Logs](#8-analytics-and-audit-logs-) _(REG_FR_8)_
 - [9. Data Security](#9-data-security-)
 - [10. Software Version Upgrade](#10-software-version-upgrade-) _(REG_FR_10)_
@@ -504,7 +506,7 @@ This feature enables Registration Client to send SMS and email acknowledgements 
 
 [**Link to design**](/mosip/mosip-platform/blob/master/design/registration/registration-acknowledgement-notification.md)
 
-### 4.5 Biometric Capture (SDK Integration, Extract and Match) (WIP) [**[↑]**](#table-of-contents)
+### 4.5 Biometric Capture (SDK Integration, Extract and Match) [**[↑]**](#table-of-contents)
 
 Registration Client performs a local duplicate check for irises and face of an individual against the mapped registration officers' biometrics
 1. The registration officer captures the irises of the individual and opts to proceed further in the registration process
@@ -699,8 +701,9 @@ The system then enables a registration officer to view the registration confirma
 
 [**Link to design**](/mosip/mosip-platform/blob/master/design/registration/registration-packetupload.md)
 
-### 7.2 Offline upload (Packet Exporter) (Work in Progress) [**[↑]**](#table-of-contents)
+### 7.2 Packet Exporter & Offline Upload from External Device [**[↑]**](#table-of-contents)
 
+#### 7.2.1 Export Packets to External Device
 System exports registration packet data from client machine to an external device as follows:
 1. Allows the registration officer to select a destination folder.
    * The destination folder includes the laptop/desktop, an external hard drive or a remote location.
@@ -710,14 +713,16 @@ System exports registration packet data from client machine to an external devic
    * Identifies the packets in ‘Ready to Upload’ state.
    * If EoD process is turned ON, packets that have been approved or rejected and packet ID sync is completed are considered ‘Ready to Upload’.
    * If EoD process is turned OFF, packets are considered ‘Ready to Upload’ as soon as the registration is submitted and packet ID sync is completed.
-   * Puts the packets in the destination folder.
-1. Once the server acknowledges that the packets have been received, which is uploaded from the external device to the server, the packets in the client will be marked as ‘Uploaded’.
-   * Packets that remain in ‘Ready to Upload’ status will be exported again when the next export is executed.
-   * Packets in ‘Uploaded’ or any other status will not be exported again.
+   * Puts the packets in the destination folder
 1. All the Registration Officers and supervisors on-boarded to the client machine are able to export all packets.
 1. Supports the partial export. If the system is able to export some packets to the folder and no other files due to lack of storage space or unavailability of the folder, the successfully exported packets will remain on the destination folder.
 1. For partial or full failure, the system displays error message.
 1. System captures and stores the transaction details for audit purpose (except PII data).
+
+#### 7.2.2 Upload Packets from External Device to Server (To be Developed)
+1. Once the server acknowledges that the packets have been received (which is uploaded from the external device to the server through a defined mechanism - Yet to be defined/developed), the packets in the client will be marked as ‘Uploaded’ upon the next sync with Server.
+   * Packets that remain in ‘Ready to Upload’ status will be exported again when the next export is executed.
+   * Packets in ‘Uploaded’ or any other status will not be exported again.
 
 [**Link to design**](/mosip/mosip-platform/blob/master/design/registration/registrtaion-packet_export.md)
 
