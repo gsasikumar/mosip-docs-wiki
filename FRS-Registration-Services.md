@@ -835,15 +835,15 @@ Before the machine is decommissioned, the following checks must be performed:
 Re-mapping of Machine:
 If a Machine has been re-mapped to another center, then:
 1. Officer will not be allowed to do any operation in Registration Client except,
-  a. Login/Logout
-  b. Approve packets as part of End of Day Approval process
-  c. Upload Packets
-  d. Inform Residents to Re-Register and mark action accordingly
+- Login/Logout
+- Approve packets as part of End of Day Approval process
+- Upload Packets
+- Inform Residents to Re-Register and mark action accordingly
 2. Once Packet Approval and Informing Resident is Completed, then
-  a. Packets will be auto uploaded if anything is pending
-  b. Initial Sync Flag is Turned On
+- Packets will be auto uploaded if anything is pending
+- Initial Sync Flag is Turned On
 3. Once the Officer logs out and tries to login again, then
-  a. New Master data gets downloaded for the newly mapped Center
+- New Master data gets downloaded for the newly mapped Center
 
 ### List of Configurable Parameters and Processes [**[↑]**](#table-of-contents)
 
