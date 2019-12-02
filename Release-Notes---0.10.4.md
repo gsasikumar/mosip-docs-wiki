@@ -17,8 +17,11 @@
 ## Scope [**[↑]**](#table-of-contents)
 This release is with **real biometrics**. This means that MOSIP Platform is now integrated with SDK, MDS (MOSIP  Device Service), ABIS (Automated Biometrics Identification System) and Biometric devices. Also, this version is tested for Biometric functionalities. Non-functional requirements (Performance, Scale and Security) will be taken up in subsequent releases.
 
-* Features included – Pre-Registration, Registration Client, Registration Processor, ID Authentication, Administration, Reference GUI implementation of Pre-Registration and Registration Client. 
-* Features not included – Partner Management, Resident Services, Reference GUI implementation of Administration, 
+* Modules included – Pre-Registration, Registration Client, Registration Processor, ID Authentication, Administration, Reference GUI implementation of Pre-Registration and Registration Client. 
+* Modules not included – Partner Management, Resident Services, Reference GUI implementation of Administration
+
+Module-wise features released as part of this release can be found [here]()
+
 ## Documentation [**[↑]**](#table-of-contents)
 ### 1. Platform Documentation 
 Includes Functional requirements, Process flows, Architecture and High level design, Getting started and Deployment guide, Developer documentation etc.  
