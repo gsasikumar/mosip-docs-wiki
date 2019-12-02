@@ -234,11 +234,13 @@ The acknowledgement template is language and channel (email, sms, on screen) s
 [**Reference Templates**](_files/requirements/templates/Pre-registration.zip)
 
 ### 2.5.2 Send Acknowledgement to Email/Phone [**[↑]**](#table-of-contents)
-The system sends an acknowledgement to the  applicant through SMS, Email and on-screen as per the details provided in Demographic details. However, this is driven by the Notification configuration setup by the administrator, to allow a notification to be triggered by SMS/Email/Both or None.
+The system sends an acknowledgement to the  applicant through SMS/Email as per the details provided in Demographic form. However, the trigger of notification is driven by the Notification configuration setup by the administrator, to allow a notification to be triggered by SMS/Email/Both or None.
 
-In case of multiple application, the system sends notifications to each applicant (as defined in the demographic details of the applicant\s)
+In case of multiple application, the system sends notifications for each applicant to the details provided in the demographic form of that applicant.
 
-An individual can opt to manually trigger notification\s to the contact details of additional recipients.
+Additionally, an individual can opt to manually trigger notification(s) to the contact details of additional recipients. However, this is driven by the Notification configuration setup by the administrator, to allow a notification to be triggered by SMS/Email/Both or None.
+
+The confirmation acknowledgement is also rendered on screen with a confirmation message of the notification being triggered. (Subject to the notification parameter configuration and if any mobile/email id was provided)
 
 [**Link to design for notification**](/mosip/mosip-platform/blob/master/design/pre-registration/pre-registration-notification-service.md)
 
