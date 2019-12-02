@@ -92,7 +92,14 @@ Once the Demographic Details are filled and the Documents are uploaded, if the I
 
 ### 2.2.4 Provide Data in Preferred Language [**[↑]**](#table-of-contents)
 
-The Individual can select their language of preference, which is referred as Primary (from a list of 2 languages as set by Admin) from the Login screen, the other language from the list is considered as secondary. The Individual can then provide data in the preferred language (primary) as selected. The data in the right side of the Demographic page will be Transliterated to secondary language. The labels in the right hand side will be translated. The Individual can verify Transliterated data and edit if required. The data will be stored in the database along with language codes.
+The Individual can select their language of preference, which is referred as Primary (from a list of 2 languages as set by Admin) from the Login screen, the other language from the list is considered as secondary. The Individual can then provide data in the preferred language (primary) as selected. The data in the right side of the Demographic page will be Transliterated to secondary language. The labels in the right hand side will be translated to the Secondary language. The Individual can verify the transliterated data and edit if required. The data will subsequently be stored in the database along with the respective language codes.
+
+Language Configuration: 
+If Primary language is set by the administrator and Secondary language is marked as NULL, then the Login language dropdown will display two languages - The set Primary language and default language as English.
+
+If Secondary language is set by the administrator and Primary language is marked as NULL, then the Login language dropdown will display two languages > The set Secondary language and default language as English.
+
+Based on the configuration setup by the administrator, we may end up in a scenario of both Primary and Secondary language listed in the dropdown being the same language and hence, this should be appropriately setup by the administrator.
 
 [**Link to design**](/mosip/mosip-platform/blob/master/design/pre-registration/pre-registration-transliteration-service.md)
 
