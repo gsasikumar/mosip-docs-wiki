@@ -15,16 +15,16 @@
 - [Support Process (To Be Determined)](#support-process-to-be-determined-)
 - [List Of Acronyms](#list-of-acronyms-)
 ## Scope [**[↑]**](#table-of-contents)
-This release is with **proxy biometrics**. This means that the implementation of Print system, SDK, MDM (MOSIP  Device Manager), ABIS (Automated Biometrics Identification System) and Biometric devices has been stubbed. Also, this version is tested for functionality. Non-functional requirements (Performance, Scale and Security) will be taken up in subsequent releases.
+This release is with **real biometrics**. This means that MOSIP Platform is now integrated with SDK, MDS (MOSIP  Device Service), ABIS (Automated Biometrics Identification System) and Biometric devices. Also, this version is tested for Biometric functionalities. Non-functional requirements (Performance, Scale and Security) will be taken up in subsequent releases.
 
-* Features included – Pre-Registration, Registration Client, Registration Processor, ID Authentication, Reference GUI implementation of Pre-Registration and Registration Client. 
-* Features not included – Administration, Partner Management, Resident Services
+* Features included – Pre-Registration, Registration Client, Registration Processor, ID Authentication, Administration, Reference GUI implementation of Pre-Registration and Registration Client. 
+* Features not included – Partner Management, Resident Services, Reference GUI implementation of Administration, 
 ## Documentation [**[↑]**](#table-of-contents)
 ### 1. Platform Documentation 
 Includes Functional requirements, Process flows, Architecture and High level design, Getting started and Deployment guide, Developer documentation etc.  
    [**Link to Platform Documentation**](Platform-Documentation)
 ### 2. Detailed Documentation
-[**Low Level design**](https://github.com/mosip/mosip-platform/wiki/MOSIP-Platform-Detailed-Design) and [**Test cases excel**](https://github.com/mosip/mosip-functional-tests/wiki/_files/testing/Test_automation/MOSIP-TCs-V1.0.xlsx)
+[**Low Level design**](https://github.com/mosip/mosip-platform/tree/master/design) and [**Test cases excel**](https://github.com/mosip/mosip-functional-tests/wiki/_files/testing/Test_automation/MOSIP-TCs-V1.0.xlsx)
 
 ## Key Points [**[↑]**](#table-of-contents)
 
@@ -46,7 +46,7 @@ Includes Functional requirements, Process flows, Architecture and High level des
 |Transliteration|	ICU4J (Library with French, Arabic languages)|
 
 ## Code [**[↑]**](#table-of-contents)
-The [code](https://github.com/mosip/mosip-platform) and [automation tests](https://github.com/mosip/mosip-functional-tests) are available on GitHub. The code needs to be built and deployed as per the procedure documented in [**Building And Deploying MOSIP**](Platform-Documentation#10-building-and-deploying-mosip). We will actively support System Integrators during their first deployment.
+The [code](https://github.com/mosip/mosip-platform/releases/tag/0.10.3) and [automation tests](https://github.com/mosip/mosip-functional-tests) are available on GitHub. The code needs to be built and deployed as per the procedure documented in [**Building And Deploying MOSIP**](Platform-Documentation#9-building-and-deploying-mosip). We will actively support System Integrators during their first deployment.
 
 ## Tests [**[↑]**](#table-of-contents)
 **Testing Scope**
