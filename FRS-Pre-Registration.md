@@ -236,7 +236,7 @@ The acknowledgement template is language and channel (email, sms, on screen) s
 ### 2.5.2 Send Acknowledgement to Email/Phone [**[↑]**](#table-of-contents)
 The system sends an acknowledgement to the  applicant through SMS/Email as per the details provided in Demographic form. However, the trigger of notification is driven by the Notification configuration setup by the administrator, to allow a notification to be triggered by SMS/Email/Both or None.
 
-In case of multiple application, the system sends notifications for each applicant to the details provided in the demographic form of that applicant.
+In case of multiple applications, the system sends notifications for each applicant to the details provided in the demographic form of that applicant.
 
 Additionally, an individual can opt to manually trigger notification(s) to the contact details of additional recipients. However, this is driven by the Notification configuration setup by the administrator, to allow a notification to be triggered by SMS/Email/Both or None.
 
