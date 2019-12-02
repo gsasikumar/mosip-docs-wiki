@@ -27,6 +27,7 @@
     * [2.4.3 Choosing Appointment Slots](#243-choosing-appointment-slots) _(PRE_FR_4.3)_
       * [2.4.3.1 Get Slots Availability](#2431-get-slots-availability-) 
     * [2.4.4 Cancel Appointment](#244-cancel-appointment-) _(PRE_FR_4.4)_
+      * [2.4.4.1 Auto-cancel Appointment based on change in working days/holidays](#244-Auto-cancel Appointment based on change in working days/holidays-) _(PRE_FR_4.4.1)_
     * [2.4.5 Re-book Appointment](#245-re-book-appointment-) _(PRE_FR_4.5)_
   * [2.5 Appointment Acknowledgement (PRID)](#25-appointment-acknowledgement-prid-) _(PRE_FR_5)_
     * [2.5.1 Download Acknowledgement](#251-download-acknowledgement-) _(PRE_FR_5.1)_
@@ -200,13 +201,12 @@ The user opts to view the available slots for a selected registration center.
 
 ### 2.4.4 Cancel Appointment [**[↑]**](#table-of-contents)
 1. An Individual can opt to cancel selected Appointment\s against application which is\are in Booked Status.
-1. In such case the system notifies the user about the successful cancellation 
+1. In such case the system notifies the user about the successful cancellation (Subject to the Notification Configuration - Refer Sec. 2.5.2)
 1. Following a successful Appointment Cancellation the system unlocks the time slot of the Registration Center
-1. In case a working day is changed to a non-working day by the administrator for any reason, the affected appointments will be automatically cancelled and a notification will be sent to the mobile number or email id of the resident (Subject to the Notification Configuration - Refer section 2.5.2)
 
 [**Link to design**](/mosip/mosip-platform/blob/master/design/pre-registration/pre-registration-booking-service.md)
-
-Additionally, in case of any change made by the administrator in terms of updating a working day/Non-holiday day to a non-working day/holiday for a Registration Center or updating the working hours of a Registration Center, the system will automatically cancel the affected appointments and trigger a notification to the mobile number or email id of the associated PRID, notifying regarding cancellation of appointment. 
+#### 2.4.4.1 [**[↑]**](#table-of-contents)
+Additionally, in case of any change made by the administrator in terms of updating a working day/Non-holiday day to a non-working day/holiday for a Registration Center or updating the working hours of a Registration Center, the system will automatically cancel the affected appointment(s) and trigger a notification to the mobile number or email id of the associated PRID, notifying regarding cancellation of appointment. (Subject to the Notification Configuration - Refer section 2.5.2)
 [**Link to design**](/mosip/mosip-platform-mt/blob/0.9.1/design/pre-registration/pre-registration-batch-job.md)
 
 ### 2.4.5 Re-book Appointment [**[↑]**](#table-of-contents)
