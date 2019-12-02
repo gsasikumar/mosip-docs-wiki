@@ -194,7 +194,6 @@ IDA-BIA-006|Biometric data &lt;Biometric Attribute&gt; not available in database
 IDA-BIA-007|Duplicate Irises in request.|Duplicate Irises used|Please try again with distinct Irises
 IDA-BIA-008|Number of IIR should not exceed 2.|Irises exceeding 2|
 IDA-BIA-009|Number of FACE records should not exceed 1.|Face exceeding 1|
-IDA-BIA-013|Number of Fingers should not exceed 10.| |
 IDA-DEA-001|Demographic data  &lt;demo attribute&gt;  in  &lt;Language Code&gt; (if applicable) did not match|name, Full Address, Address line Items, Gender, Phone,e-mail,DOB,DOB Type, and age Mismatch in any language|Please re-enter your  &lt;demo attribute&gt;  in &lt;Language Code&gt; 
 IDA-DEA-002|Unsupported Language Code &lt;XX&gt;|Unsupported language Code used in the Lang attribute|
 IDA-DEA-003|Demographic data  &lt;Demographic Attribute&gt; in &lt;Language Code&gt; (if applicable)  not available in database.|Individual&rsquo;s data not available|
