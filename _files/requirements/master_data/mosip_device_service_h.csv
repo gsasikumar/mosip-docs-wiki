@@ -1,0 +1,5 @@
+﻿id,sw_binary_hash,sw_version,dprovider_id,dtype_code,dstype_code,make,model,sw_cr_dtimes,sw_expiry_dtimes,is_active,cr_by,cr_dtimes,eff_dtimes
+1001,dummy data,SB.WIN.001,SYNCBYTE.TCI322,Iris,DoubleIris,EYECOOL,TCI322,now(),now(),TRUE,now(),now(),now()
+1002,dummy data,SB.WIN.001,SYNCBYTE.TCI322,Finger,Slab,Greenbit,DactyScan84c,now(),now(),TRUE,now(),now(),now()
+1003,dummy data,SB.WIN.001,SYNCBYTE.MC01A,Finger,Single,MC01A,SMIDCL,now(),now(),TRUE,now(),now(),now()
+1004,dummy data,SB.WIN.001,SYNCBYTE.TCI322,Face,Full face,Microsoft,ca3e7ab9-b4c3-4ae6-8251-579ef933890f,now(),now(),TRUE,now(),now(),now()

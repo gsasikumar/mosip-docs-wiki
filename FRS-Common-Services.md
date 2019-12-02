@@ -239,13 +239,13 @@ MOSIP system provides base exception framework.
 [**Link to design for Utilities**](/mosip/mosip/blob/master/docs/design/kernel/kernel-utils.md)
 
 ## 7 Virus Scanner [**[↑]**](#table-of-contents)
-Virus Scanner utility allows for virus scanning across MOSIP at various places. These includes:
-1. Scanning of Document uploaded in Pre-Registration
+Virus Scanner utility allows for virus scanning across MOSIP at various places. This includes:
+1. Scanning of Document uploaded in Pre-registration
 2. Scanning in Registration Client Software
 3. Scanning of Registration packet in Registration Processor
 
-Currently for Virus Scanner, MOSIP has integrated with Clam Antivirus which currently allows for 290 concurrent license.
-A country can integrate their own Licensed version of anti virus as per their requirement.
+Currently for Virus Scanner, MOSIP has integrated with Clam Antivirus which allows for 290 concurrent users.
+A Country may integrate their own Licensed version of anti virus as per their requirement.
 
 ### List of Configurable Parameters and Processes [**[↑]**](#table-of-contents)
 

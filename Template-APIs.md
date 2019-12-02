@@ -13,6 +13,11 @@ This section details about the service APIs in the template modules
 * [POST /templates](#post-templates)
 * [PUT /templates](#put-templates)
 * [DELETE /templates/{id}](#delete-templatesid)
+* [GET /templates](#get-templates)
+* [GET /templates/{langcode}](#get-templateslangcode)
+* [GET /templates/{langcode}/{templatetypecode}](#get-templateslangcodetemplatetypecode)
+* [GET /templates/all](#get-templatesall)
+* [GET /templates/templatetypecode/{code}](#get-templatestemplatetypecodecode)
 
 # POST /templates
 
@@ -186,26 +191,14 @@ id|Yes|id of the Template|
 }
 ```
 
-#### Failure details
-Error Code | Error Message | Error Description
-------------|------------------------------|-------------
-KER-MSD-045 | Error occurred while fetching templates | Fetch Issue
-KER-MSD-145 | Exception during inserting data into db | Insertion Issue
-KER-MSD-046 | Template not found. | Data Not Found
-KER-MSD-095 | Error occurred while updating template | Update Issue
-KER-MSD-096 | Error occurred while deleting template | Delete Issue
+# GET /templates
 
-# Template Types API
+Master data is required across the platform. 
 
-* [GET /templatetype/{code}](#get-templatetypecode)
-
-# GET /templatetype/{code}
-
-This service fetches the template types irrespective of the language. The service returns the results in all the languages. 
-
+This service will fetch a list of Template from the Template master module. 
 
 ### Resource URL
-### `GET /templatetype/{code}`
+### `GET /templates`
 
 ### Resource details
 
@@ -217,39 +210,381 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-code|Yes|This is the template code field|-NA-|auth-email-content
+NA ||
+
+
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "templates": [
+      {
+        "createdBy": "string",
+        "description": "string",
+        "fileFormatCode": "string",
+        "fileText": "string",
+        "id": "string",
+        "isActive": true,
+        "isDeleted": true,
+        "langCode": "string",
+        "model": "string",
+        "moduleId": "string",
+        "moduleName": "string",
+        "name": "string",
+        "templateTypeCode": "string",
+        "updatedBy": "string"
+      }
+    ]
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
+
+# GET /templates/{langcode}
+
+Master data is required across the platform. 
+
+This service will fetch a list of Templates as per the language code from the Template master module. 
+
+### Resource URL
+### `GET /templates/{langcode}`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+langcode | Yes | language code||
+
+
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "templates": [
+      {
+        "createdBy": "string",
+        "description": "string",
+        "fileFormatCode": "string",
+        "fileText": "string",
+        "id": "string",
+        "isActive": true,
+        "isDeleted": true,
+        "langCode": "string",
+        "model": "string",
+        "moduleId": "string",
+        "moduleName": "string",
+        "name": "string",
+        "templateTypeCode": "string",
+        "updatedBy": "string"
+      }
+    ]
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
+
+# GET /templates/{langcode}/{templatetypecode}
+
+Master data is required across the platform. 
+
+This service will fetch a list of Templates as per the language code and template type code from the Template master module. 
+
+### Resource URL
+### `GET /templates/{langcode}/{templatetypecode}`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+langcode | Yes | language code||
+templatetypecode | Yes | template type code ||
+
+
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "templates": [
+      {
+        "createdBy": "string",
+        "description": "string",
+        "fileFormatCode": "string",
+        "fileText": "string",
+        "id": "string",
+        "isActive": true,
+        "isDeleted": true,
+        "langCode": "string",
+        "model": "string",
+        "moduleId": "string",
+        "moduleName": "string",
+        "name": "string",
+        "templateTypeCode": "string",
+        "updatedBy": "string"
+      }
+    ]
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
+
+# GET /templates/all
+
+Master data is required across the platform. 
+
+This service will fetch all Templates from the Template master module. 
+
+### Resource URL
+### `GET /templates/all`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+orderBy | optional | order the requested data based on param||
+pageNumber | optional | page no for the requested data ||
+pageSize | optional | page size for the requested data||
+sortBy | optional | sort the requested data based on param value ||
+
+
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "data": [
+      {
+        "createdBy": "string",
+        "description": "string",
+        "fileFormatCode": "string",
+        "fileText": "string",
+        "id": "string",
+        "isActive": true,
+        "isDeleted": true,
+        "langCode": "string",
+        "model": "string",
+        "moduleId": "string",
+        "moduleName": "string",
+        "name": "string",
+        "templateTypeCode": "string",
+        "updatedBy": "string"
+      }
+    ],
+    "pageNo": 0,
+    "totalItems": 0,
+    "totalPages": 0
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
+
+# GET /templates/templatetypecode/{code}
+Master data is required across the platform. 
+
+This service will fetch all Templates as per the template type code from the Template master module. 
+
+### Resource URL
+### `GET /templates/templatetypecode/{code}`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+code | Yes | template type code||
+
+
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "templates": [
+      {
+        "createdBy": "string",
+        "description": "string",
+        "fileFormatCode": "string",
+        "fileText": "string",
+        "id": "string",
+        "isActive": true,
+        "isDeleted": true,
+        "langCode": "string",
+        "model": "string",
+        "moduleId": "string",
+        "moduleName": "string",
+        "name": "string",
+        "templateTypeCode": "string",
+        "updatedBy": "string"
+      }
+    ]
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
+
+### Failure details
+Error Code | Error Message | Error Description
+------------|------------------------------|-------------
+KER-MSD-045 | Error occurred while fetching templates | Fetch Issue
+KER-MSD-145 | Exception during inserting data into db | Insertion Issue
+KER-MSD-046 | Template not found. | Data Not Found
+KER-MSD-095 | Error occurred while updating template | Update Issue
+KER-MSD-096 | Error occurred while deleting template | Delete Issue
+
+# Template Types API
+
+* [POST /templatetypes](#post-templatetypes)
+
+# POST /templatetypes
+
+This service creates template type based on provided. 
+
+
+### Resource URL
+### `POST /templatetypes`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+code|Yes|This is the template code field||
+description|Yes| Description of the template type ||
+isActive|Yes| is active? ||
+langCode|Yes| language code ||
 
 ### Example Request
 ```JSON
--NA-
+{
+  "id": "string",
+  "metadata": {},
+  "request": {
+    "code": "string",
+    "description": "string",
+    "isActive": true,
+    "langCode": "string"
+  },
+  "requesttime": "2018-12-10T06:12:52.994Z",
+  "version": "string"
+}
 ```
 
 ### Example Response
 ```JSON
 {
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [{
+  "errors": [
+    {
       "errorCode": "string",
       "message": "string"
-    }],
-  "response":   {
-		"code": "string",
-		"descr": "string",
-		"langCode": "string",
-		"isactive": boolean
-	} 
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "code": "string",
+    "langCode": "string"
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
 }
 ```
 
 ### Response codes
-200
+201
 
-Description: Success
+Description: Successfully created
 
-#### Failure details
+400	
+
+Description: Request body passed is null or invalid
+
+401	
+
+Description: Unauthorized
+
+403	
+
+Description: Forbidden
+
+404	
+
+Description: Not Found
+
+500	
+
+Description:  any error occured while creating
+
+## Failure details
 Error Code | Error Message | Error Description
 ------------|------------------------------|-------------
 KER-MSD-072 | Error occurred while inserting Template Type details into db | Insertion Issue

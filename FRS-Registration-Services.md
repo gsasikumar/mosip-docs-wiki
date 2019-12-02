@@ -226,7 +226,7 @@ When a registration officer starts a new registration by entering a pre-registra
 1. If data are not available in local database, checks if data for that ID are available on the server.
    * If available, downloads the pre-registration packet from the server and pre-populate on screen.
 1. Based on the availability of data, the system populates the demographic details of the individual and pre-populates the registration form.
-1. The demographic details can still be edited at this stage.
+1. The demographic details can still be edited at this stage. Additionally, the system validates for any blacklisted words entered (as configured by the Country)
 1. The registration officer can then view the documents, which were uploaded during pre-registration
 1. If no matching PRID available in local system and server, the system displays an error message.
 
@@ -238,11 +238,9 @@ When a registration officer starts a new registration by entering a pre-registra
 
 **(ii) Manual downloads of Pre-registration data**
 
-A registration officer can download the pre-registration data while being online. The system allows the registration officer to download the demographic data of an applicant but restricts the registration officer to download the documents that were uploaded by an applicant.
+A registration officer can download the pre-registration data while being online. The system allows the registration officer to download the demographic data of an applicant.
 
-The system also enables a registration officer to view the progress of download.
-
-The pre-registration data can be downloaded only for that particular registration center, where the pre-registration data download is initiated
+Bulk pre-registration data can be downloaded only for that specific registration center. However, by keying in a specific Pre-registration ID (PRID), pre-registration data associated to that specific PRID can be downloaded (for/from any center)
 
 It is possible to download the pre-registration data within the date range (Current date - End Date). This date range is  configurable.
 
@@ -418,9 +416,14 @@ When an individual approaches the registration officer for UIN update, the follo
 1. If none of the fields is set up to be update-able, then the system does not allow a registration officer to update any field\s 
 
 #### C. UIN Update
-1. The registration officer selects the fields to update for an individual seeking modification of UIN data. Select one or more of the following fields to update the corresponding data: Name, Age or Date of Birth, Gender, Foreigner/National, Address, Email ID, Phone Number, PIN/Residence Card Number, parent/guardian Details, Biometrics.
-1. Registration officer captures the mandatory demographic attributes (individual's name is captured) and other demographic fields selected for update. In case of update of parent/guardian details, the applicable fields that are updated will be ‘Parent/Guardian Name’ and ‘Parent/Guardian UIN’. The system at this stage also validates that the parent/guardian’s UIN is different from the individual’s UIN. If they are same, displays an error message 
-1. Registration officer then uploads documents. The applicable documents are determined by the system based on configuration
+1. The registration officer selects the fields to update for an individual seeking modification of UIN data. The Officer may select one or more of the following fields to update the corresponding data: Name, Age or Date of Birth, Gender, Foreigner/National, Address, Email ID, Phone Number, PIN/Residence Card Number, parent/guardian Details, Biometrics.
+Based on whether the field “Parent/Guardian Details” is checked for Update, system will identify if the update is initiated for an Adult/Child
+1. Registration officer further captures the mandatory demographic attributes (individual's name is captured) and other demographic fields selected for update. In case of update of parent/guardian details, the applicable fields that are updated will be ‘Parent/Guardian Name’ and ‘Parent/Guardian UIN’. At this stage, the system also validates that the parent/guardian’s UIN is different from the individual’s UIN. If they are identified to be the same, an error message would be rendered 
+1. Registration officer then uploads documents. The applicable documents are determined by the system based on the fields marked for update
+EG: PoI is mandatory if Name, Age/DoB, Gender is updated
+EG: PoA is mandatory if Address is updated
+EG: PoR is mandatory if Parent/Guardian Details is marked for update (It may be the only field or combined with other fields for a Child). If it is combined update with other fields for a Child/Adult, then the relevant categories will also be mandated.
+The System will render a standard set of mapped Doc Types for each Doc Category, irrespective of whether the individual is Adult or Child. The selection of applicable document type per Category is left to the discretion of the Operator.
 1. If biometrics were selected for update, the registration officer marks exceptions and scans all biometrics. Else scans any one biometric.
 1. Registration officer captures face photo and exception photo.
 1. After capturing all the biometric and demographic details the registration officer can see a preview of the data captured and performs registration officer authentication.

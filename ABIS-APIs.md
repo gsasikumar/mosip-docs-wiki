@@ -77,15 +77,23 @@ All the below operations send biometric data in CBEFF format. (Please refer to t
 	"requestId" : "01234567-89AB-CDEF-0123-456789ABCDEF",
 	"timestamp" : "1539777717",
 	"referenceId" : "987654321-89AB-CDEF-0123-456789ABCDEF",
-        "referenceURL" : "https://mosip.io/biometric/45678",
-	"maxResults" : "10",
-	"targetFPIR" : "30",
-	"gallery" : {		
-		"referenceIds" : [
-			"referenceId" : "",
-			"referenceId" : "",
+        "referenceUrl" : "https://mosip.io/registrationprocessor/v1/bio-dedupe/biometricfile/2cce7b7d-b58a-4466-a006-c79297281789",
+	"maxResults" : 10,
+	"targetFPIR" : 30,
+	"gallery" : {
+		"referenceIds" : [ {
+			  "referenceId" : "2cce7b7d-b58a-4466-a006-c79297281123"
+			}, {
+			  "referenceId" : "2cce7b7d-b58a-4466-a006-c79297281456"
+			}, {
+			  "referenceId" : "2cce7b7d-b58a-4466-a006-c79297281678"
+			}, {
+			  "referenceId" : "2cce7b7d-b58a-4466-a006-c79297281098"
+			}, {
+			  "referenceId" : "2cce7b7d-b58a-4466-a006-c79297281321"
+			} 
 		]
-	}	
+  }
 }
 
 //Success response

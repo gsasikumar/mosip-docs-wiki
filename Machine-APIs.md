@@ -677,6 +677,8 @@ Description: Not Found
 Error Code | Error Message | Error Description
 ------------|------------------------------|-------------
 KER-MSD-061 | Error occurred while inserting Machine Type details | Insertion Issue
+KER-MSD-062 | Error occurred while fetching Machine Type details | Fetch Issue
+KER-MSD-063 | Machine Type Not Found | Data Not Found
 
 # Machine Type search APIs
 
@@ -1128,12 +1130,12 @@ Description: Forbidden
 #### Failure details
 Error Code | Error Message | Error Description
 ------------|------------------------------|-------------
-KER-MSD-029 | Error occurred while fetching Machines | Fetch Issue
 KER-MSD-062 | Error occurred while inserting Machine Specification details | Insertion Issue
 KER-MSD-117 | Machine Specification not Found | Data Not Found
 KER-MSD-085 | Error occurred while updating Machine Specification details | Update Issue
 KER-MSD-086 | Error occurred while deleting Machine Specification details | Deletion Issue
 KER-MSD-122 | Cannot delete dependency found | Deletion Issue because of dependency
+KER-MSD-087 | Error occurred while fetching Machine Specification details | Fetch Issue
 
 
 # Machine Specifications Search APIs

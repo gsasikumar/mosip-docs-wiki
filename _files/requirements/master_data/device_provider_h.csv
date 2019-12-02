@@ -1,0 +1,4 @@
+﻿id,vendor_name,address,email,contact_number,certificate_alias,is_active,cr_by,cr_dtimes,eff_dtimes
+SYNCBYTE.TCI322,SYNCBYTE,Bangalore,dummy@dummy.com,9999999999,xyz,TRUE,now(),now(),now()
+11002,Logitech,Bangalore,dummy@dummy.com,9999999999,xyz,TRUE,now(),now(),now()
+SYNCBYTE.MC01A,SYNCBYTE,Bangalore,dummy@dummy.com,9999999999,xyz,TRUE,now(),now(),now()

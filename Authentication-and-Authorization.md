@@ -18,12 +18,9 @@ MOSIP system can handle Authorization across core services and restricts access 
 ### List of Configurable Parameters and Processes 
 1. Configurable Parameters
 
-   [**Link to Configurable Parameters of Kernel**](/mosip/mosip-config/blob/master/config/kernel.properties)
+   [**Link to Configurable Parameters of Kernel**](/mosip/mosip-config-mt/blob/master/config-templates/application-env.properties)
 
-   [**Link to Kernel Application Properties**](/mosip/mosip-config/blob/master/config/application.properties)
-
-2. Configurable Processes 
-* (Work in Progress) 
+   [**Link to Kernel Application Properties**](/mosip/mosip-config-mt/blob/master/config-templates/kernel-env.properties)
 
 ### Kernel API 
 [**Refer to Wiki for more details on Kernel API**](Kernel-APIs)

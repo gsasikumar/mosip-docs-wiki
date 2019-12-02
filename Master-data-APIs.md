@@ -52,7 +52,7 @@ This section details about the service APIs in the Master data modules
 
 * [Device Specifications Master API](#device-specifications)
 
-* [Template Master API](#template-api)
+* [TemplateFileFormat Master API](#templateFileFormat-api)
 
 * [Individual Types API](#individual-types-api)
 
@@ -60,86 +60,22 @@ This section details about the service APIs in the Master data modules
 
 * [Template Types Master API](#template-types-api)
 
-* [Valid documents API](#valid-documents-api)
+* [Applicant Valid documents API](#Applicant-valid-documents-api)
 
 # Holiday Master API
 
-* [POST /holidays](#post-holidays)
 * [GET /holidays](#get-holidays)
-* [GET /holidays/{languagecode}](#get-holidays-languagecode)
-
-## POST /holidays
-Master data is required across the platform. 
-
-This service will create the holiday in the Holiday Master module. 
-
-### Resource URL
-### `POST /holidays`
-
-### Resource details
-
-Resource Details | Description
------------- | -------------
-Response format | JSON
-Requires Authentication | Yes
-
-### Parameters
-Name | Required | Description | Default Value | Example
------|----------|-------------|---------------|--------
-holidayDate|Yes|Holiday date in UTC standard ISO8601 format| | 2028-10-04T05:57:20.929Z
-holidayName|Yes|Name of the holiday| | 
-
-### Example Request
-```JSON
-{
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "requesttime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-	"request" : { 
-		  "holiday":{ "holidayDate": "string", "holidayName": "string", "languagecode": "string" }
-	}
-}  
-```
-### Example Response
-```JSON
- {
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [
-    {
-      "errorCode": "string",
-      "message": "string"
-    }
-  ],
-  "response" : { "holidayID": "string" }
-}
-```
-### Response codes
-202
-
-Description: Accepted
-
-400
-
-Description: Bad request
-
-401
-
-Description: Unauthorized
-
-403
-
-Description: Forbidden
+* [POST /holidays](#post-holidays)
+* [PUT /holidays](#put-holidays)
+* [DELETE /holidays](#delete-holidays)
+* [GET /holidays/{holidayid}](#get-holidaysholidayid)
+* [GET /holidays/{holidayid}/{langcode}](#get-holidaysholidayidlangcode)
+* [GET /holidays/all](#get-holidaysall)
 
 
 ## GET /holidays
-Master data is required across the platform. 
 
-This service will provides the service for the List of holidays. 
-It will also ensure audit data stored is archived based on the defined archival policy.
+This service will get all the holidays. 
 
 ### Resource URL
 ### `GET /holidays`
@@ -154,59 +90,60 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
+--NA-- 
 
 
 ### Example Response
 ```JSON
 {
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [ {
-             "errorCode": "string",
-             "message": "string"
-             }
-           ],
- "response" : {
-             "holidays": [
-	                 "holiday" : {
-		                      "holidayID": "string",
-		                      "holidayDate": "string",
-		                      "holidayName": "string",
-		                      "holidayDay": "string",	
-		                      "holidayMonth": "string",
-		                      "holidayYear": "string",
-		                      "languagecode": "string"
-	                             }
-                          ]
-                 }
- }
+  "id": null,
+  "version": null,
+  "responsetime": "2019-11-15T09:41:14.274Z",
+  "metadata": null,
+  "response": {
+    "holidays": [
+      {
+        "id": 2000001,
+        "locationCode": "KTA",
+        "holidayDate": "2019-01-01",
+        "holidayDay": "2",
+        "holidayMonth": "1",
+        "holidayYear": "2019",
+        "holidayName": "New Year's Day",
+        "holidayDesc": "National Holiday",
+        "langCode": "eng",
+        "isActive": true
+      }
+	]
+  },
+  "errors": null
+}
 ```
+### Response codes
+
 200
 
 Description: Success
-
-400
-
-Description: Bad request
-
-401
-
-Description: Unauthorized
 
 404
 
 Description: Not Found
 
+401
 
-## GET /holidays/{languagecode}
+Description: Unauthorized
 
-This service will provides the service for the List of holidays based on the holiday ID
-It will also ensure audit data stored is archived based on the defined archival policy.
+403
+
+Description: Forbidden
+
+-----
+
+## POST /holidays
+This service will create a new holiday. 
 
 ### Resource URL
-### `GET /holidays/{languagecode}`
+### `POST /holidays`
 
 ### Resource details
 
@@ -218,64 +155,480 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-languagecode|Yes|Language code in ISO 639-2 Code of the holiday| | eng
+locationCode | Yes | location code ||
+holidayDate | Yes| date ||
+holidayMonth | Yes | month || 
+holidayYear |Yes | year ||
+holidayName |Yes | name ||
+holidayDesc |Yes | description ||
+langCode |Yes | language code ||
+isActive |Yes | is active? ||
 
-### Example Response
+### Example Request
 ```JSON
 {
   "id": "string",
-  "version": "string",
   "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [{ 
-               "errorCode": "string",
-               "message": "string"
-             }],
-  "response" : {
-           "holidays": [
-	              "holiday" : {
-		                   "holidayID": "string",
-		                   "holidayDate": "string",
-		                   "holidayName": "string",
-		                   "holidayDay": "string",	
-		                   "holidayMonth": "string",
-		                   "holidayYear": "string"		
-		                   "languagecode": "string"
-	                          }
-                         ]
-               }
+  "request": {
+    "holidayDate": "string",
+    "holidayDay": "string",
+    "holidayDesc": "string",
+    "holidayMonth": "string",
+    "holidayName": "string",
+    "holidayYear": "string",
+    "id": 0,
+    "isActive": true,
+    "langCode": "string",
+    "locationCode": "string"
+  },
+  "requesttime": "2018-12-10T06:12:52.994Z",
+  "version": "string"
 }
 ```
-200
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "holidayDate": "string",
+    "holidayName": "string",
+    "langCode": "string",
+    "locationCode": "string"
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
+### Response codes
 
-Description: Success
+201
 
-400
-
-Description: Bad request
+Description: Created
 
 401
 
 Description: Unauthorized
 
+403
+
+Description: Forbidden
+
+204 
+
+Description: Not Found
+
+
+-----
+## PUT /holidays
+
+This service will update a holiday. 
+
+### Resource URL
+### `PUT /holidays`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+locationCode | Yes | location code ||
+holidayDate | Yes| date ||
+newHolidayDate | Yes | new date || 
+newHolidayName | Yes | new name ||
+holidayName | Yes | name ||
+holidayDesc | Yes | description ||
+langCode | Yes | language code ||
+isActive | Yes | is active? ||
+newHolidayDesc | Yes | new description ||
+
+### Example Request
+```JSON
+{
+  "id": "string",
+  "metadata": {},
+  "request": {
+    "id": 0,
+    "locationCode": "string",
+    "holidayDate": "string",
+    "holidayName": "string",
+    "holidayDesc": "string",
+    "langCode": "string",
+    "isActive": true,
+    "newHolidayName": "string",
+    "newHolidayDate": "string",
+    "newHolidayDesc": "string"
+  },
+  "requesttime": "2018-12-10T06:12:52.994Z",
+  "version": "string"
+}
+```
+### Example Response
+```JSON
+{
+  "holidayDate": "string",
+  "holidayName": "string",
+  "langCode": "string",
+  "locationCode": "string"
+}
+```
+### Response codes
+
+200
+
+Description: Success
+
+201
+
+Description: Created
+
+401
+
+Description: Unauthorized
+
+403
+
+Description: Forbidden
+
 404
 
-Description: Not Found 
+Description: Not Found
+
+-----
+
+## DELETE /holidays
+
+This service will provides the service to delete a holiday. 
+
+
+### Resource URL
+### `DELETE /holidays`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+holidayDate | Yes | date to be deleted ||
+holidayName | Yes | name of the holiday to be deleted ||
+locationCode | Yes | location code ||
+
+### Example Request
+```JSON
+{
+  "id": "string",
+  "metadata": {},
+  "request": {
+    "holidayDate": "string",
+    "holidayName": "string",
+    "locationCode": "string"
+  },
+  "requesttime": "2018-12-10T06:12:52.994Z",
+  "version": "string"
+}
+```
+
+### Example Response
+```JSON
+{
+  "holidayDate": "string",
+  "holidayName": "string",
+  "locationCode": "string"
+}
+```
+### Response codes
+
+200
+
+Description: Success
+
+204
+
+Description: No Content
+
+401
+
+Description: Unauthorized
+
+403
+
+Description: Forbidden
+
+----
+
+## GET /holidays/{holidayid}
+
+This service will provides the service to get all holidays by Id. 
+
+
+### Resource URL
+### `GET /holidays/{holidayid}`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+holidayid | yes | holiday Id ||
+
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "holidays": [
+      {
+        "holidayDate": "string",
+        "holidayDay": "string",
+        "holidayDesc": "string",
+        "holidayMonth": "string",
+        "holidayName": "string",
+        "holidayYear": "string",
+        "id": 0,
+        "isActive": true,
+        "langCode": "string",
+        "locationCode": "string"
+      }
+    ]
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
+### Response codes
+
+200
+
+Description: Success
+
+401
+
+Description: Unauthorized
+
+403
+
+Description: Forbidden
+
+404
+
+Description: Not found
+
+------
+
+## GET /holidays/{holidayid}/{langcode}
+
+This service will get all the holidays by holidayid and language code. 
+
+
+### Resource URL
+### `GET /holidays/{holidayid}/{langcode}`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+holidayid | yes | holiday Id ||||
+langCode | Yes | language code ||
+
+
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "holidays": [
+      {
+        "holidayDate": "string",
+        "holidayDay": "string",
+        "holidayDesc": "string",
+        "holidayMonth": "string",
+        "holidayName": "string",
+        "holidayYear": "string",
+        "id": 0,
+        "isActive": true,
+        "langCode": "string",
+        "locationCode": "string"
+      }
+    ]
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
+### Response codes
+
+200
+
+Description: Success
+
+401
+
+Description: Unauthorized
+
+403
+
+Description: Forbidden
+
+404 
+
+Description: Not Found
+
+----
+
+## GET /holidays/all
+
+This service will retrieve all the holidays with additional metadata. 
+
+### Resource URL
+### `GET /holidays/all`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+orderBy | optional | response order	| desc	||
+pageNumber |optional | page no for the requested data | 0 ||	
+pageSize | optional	| page size for the requested data	| 10 ||
+sortBy | optional | sort the requested data based on param value | createdDateTime ||
+
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "data": [
+      {
+        "createdBy": "string",
+        "holidayDate": 0,
+        "holidayDay": "string",
+        "holidayDesc": "string",
+        "holidayId": 0,
+        "holidayMonth": "string",
+        "holidayName": "string",
+        "holidayYear": "string",
+        "isActive": true,
+        "isDeleted": true,
+        "langCode": "string",
+        "locationCode": "string",
+        "name": "string",
+        "updatedBy": "string"
+      }
+    ],
+    "pageNo": 0,
+    "totalItems": 0,
+    "totalPages": 0
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
+### Response Codes
+
+200
+
+Description: Success
+
+500
+
+Description: Error occured while retrieving holidays
+
+401
+
+Description: Unauthorized
+
+403
+
+Description: Forbidden
+
+404
+
+Description: Not found
+
+----
+
+## Failure details
+Error Code | Error Message | Error Description
+------------|------------------------------|-------------
+KER-MSD-019 | Error occured while fetching Holidays | Fetch Issue
+KER-MSD-020 | Holiday not found | Data Not Found
+KER-MSD-065 | Error occurred while inserting holiday | Insertion Issue
+KER-MSD-099 | Error occurred while updating holiday | Update Issue
+KER-MSD-100 | Error occurred while deleting holiday | Deletion Issue
+KER-MSD-025 | Error occured while fetching Location Hierarchy | fetch issue
+KER-MSD-026 | Location not found | Data Not Found
+----
+ 
 
  
 
 # Blacklisted words Master API
 
 * [POST /blacklistedwords](#post-blacklistedwords)
-* [GET /blacklistedwords](#get-blacklistedwords)
-* [GET /blacklistedwords/{id}/{languagecode}](#get-blacklistedwords-id-languagecode)
 * [PUT /blacklistedwords](#put-blacklistedwords)
-* [DELETE /blacklistedwords/{word}](#delete-blacklistedwords-word)
+* [GET /blacklistedwords/{langcode}](#get-blacklistedwordslangcode)
+* [DELETE /blacklistedwords/{word}](#delete-blacklistedwordsword)
+* [GET /blacklistedwords/all](#get-blacklistedwordsall)
+* [PUT /blacklistedwords/details](#put-blacklistedwordsdetails)
+* [POST /blacklistedwords/words](#post-blacklistedwordswords)
 
-## POST /blacklistedwords 
-Master data is required across the platform. 
 
-This service will the create the list of blacklisted words in the Blacklisted Master module. 
+## POST /blacklistedwords
+
+This service will create a blacklistedword which will be used in the MOSIP platform. 
 
 ### Resource URL
 ### `POST /blacklistedwords`
@@ -290,47 +643,54 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-blacklistedwords|Yes|List of black listed words| | 
-languagecode|Yes|Language code in ISO 639-2 Code of the holiday| | eng
-
+description | optional | blacklisted word description ||
+isActive | Yes | is active or not ||
+langCode | Yes | language code ||
+word | Yes | blacklisted word name || 
 
 ### Example Request
 ```JSON
 {
   "id": "string",
-  "version": "string",
   "metadata": {},
-  "requesttime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "request" : {
-		"blacklistedwords": ["asdf","lkjh","qwer"],
-		"languagecode": "string"
-	}
+  "request": {
+    "description": "string",
+    "isActive": true,
+    "langCode": "string",
+    "word": "string"
+  },
+  "requesttime": "2018-12-10T06:12:52.994Z",
+  "version": "string"
 }
 ```
 ### Example Response
 ```JSON
 {
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [{
+  "errors": [
+    {
       "errorCode": "string",
       "message": "string"
-    }],
-"response" : {
-  "successfully_created_words": ["asdf","lkjh","qwer"]
-            }
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "langCode": "string",
+    "word": "string"
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
 }
 ```
 ### Response codes
-202
 
-Description: Accepted
+201
 
-400
+Description: Created
 
-Description: Bad request
+404
+
+Description: Not Found
 
 401
 
@@ -340,147 +700,10 @@ Description: Unauthorized
 
 Description: Forbidden
 
-## GET /blacklistedwords
-Master data is required across the platform. 
+-----
 
-This service will provides the service for the List of blacklistedwords. 
-
-
-
-### Resource URL
-### `GET /blacklistedwords`
-
-### Resource details
-
-Resource Details | Description
------------- | -------------
-Response format | JSON
-Requires Authentication | Yes
-
-### Parameters
-Name | Required | Description | Default Value | Example
------|----------|-------------|---------------|--------
--NA-
-
-### Example Request
-```JSON
--NA-
-```
-### Example Response
-```JSON
-{
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [{
-      "errorCode": "string",
-      "message": "string"
-    }],
- "response" : {
-		"blacklistedwords":[
-			{
-				"id":"string",
-				"value":"asdf",
-				"languagecode":"string"
-			},
-	                {
-				"id":"string",
-				"value":"asdf",
-				"languagecode" :"string"
-			}
-		]
-	}
-}
-```
-200
-
-Description: Success
-
-400
-
-Description: Bad request
-
-401
-
-Description: Unauthorized
-
-404
-
-Description: Not Found
-
-
-## GET /blacklistedwords/{id}/{languagecode}
-
-This service will provides the service for the List of blacklistedwords based on the id. 
-
-### Resource URL
-### `GET /blacklistedwords/{id}/{languagecode}`
-
-### Resource details
-
-Resource Details | Description
------------- | -------------
-Response format | JSON
-Requires Authentication | Yes
-
-### Parameters
-Name | Required | Description | Default Value | Example
------|----------|-------------|---------------|--------
--NA-
-
-### Example Request
-```JSON
--NA-
-```
-### Example Response
-```JSON
-{
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [
-    {
-      "errorCode": "string",
-      "message": "string"
-    }
-  ],
-"response":{
-	"blacklistedwords":[
-		{
-			"id":"string",
-			"value":"asdf",
-			"languagecode":"string"
-		},
-		{
-			"id":"string",
-			"value":"asdf",
-			"languagecode":"string"
-		}
-	]
-     }
-}
-```
-200
-
-Description: Success
-
-400
-
-Description: Bad request
-
-401
-
-Description: Unauthorized
-
-404
-
-Description: Not Found
-
-# PUT /blacklistedwords
-
-This service will provides the service to update blacklistedwords. 
+## PUT /blacklistedwords
+This service will update the blacklisted word which is used in the MOSIP platform. 
 
 ### Resource URL
 ### `PUT /blacklistedwords`
@@ -495,64 +718,134 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-word |YES|Blacklisted word| |abc|
-description|YES|Description of the blacklisted word|||
-langCode|YES|Language Code of the blacklisted word|||
-isActive|YES|Blacklisted word is active|||
- 
+description | optional | blacklisted word description ||
+isActive | Yes| is active or not ||
+langCode | Yes | language code ||
+oldWord | Yes | old blacklisted word || 
+word |Yes |blacklisted word ||
 
 ### Example Request
 ```JSON
-"request":{
-          "id": "string",
-          "ver": "string",
-          "timestamp": "2018-12-31T10:01:24.578Z",
-          "request": {
-                      "description": "string",
-                      "isActive": true,
-                      "langCode": "string",
-                      "word": "string"
-                    }
-          }
+{
+  "id": "string",
+  "metadata": {},
+  "request": {
+    "description": "string",
+    "isActive": true,
+    "langCode": "string",
+    "oldWord": "string",
+    "word": "string"
+  },
+  "requesttime": "2018-12-10T06:12:52.994Z",
+  "version": "string"
+}
 ```
 ### Example Response
 ```JSON
 {
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
   "errors": [
     {
       "errorCode": "string",
       "message": "string"
     }
   ],
-"resonpse" : {
-              "langCode": "string",
-              "word": "string"
-             }
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "langCode": "string",
+    "word": "string"
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
 }
 ```
-200
+### Response codes
 
-Description: Success
+201
 
-400
-
-Description: Bad request
+Description: Created
 
 401
 
 Description: Unauthorized
 
+403
+
+Description: Forbidden
+
+404 
+
+Description: Not Found
+
+
+-----
+## GET /blacklistedwords/{langcode}
+
+This service will provides the service for the List of blacklisted words based on the passed language code. 
+
+### Resource URL
+### `GET /blacklistedwords/{langcode}`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+langcode|Yes| language code ||
+
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "blacklistedwords": [
+      {
+        "description": "string",
+        "isActive": true,
+        "langCode": "string",
+        "word": "string"
+      }
+    ]
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
+### Response codes
+
+200
+
+Description: Success
+
+401
+
+Description: Unauthorized
+
+403
+
+Description: Forbidden
+
 404
 
 Description: Not Found
 
-# DELETE /blacklistedwords/{word}
+-----
+## DELETE /blacklistedwords/{word}
 
-This service will provides the service to delete blacklistedwords. 
+This service will provides the service to delete the blacklisted word. 
+
 
 ### Resource URL
 ### `DELETE /blacklistedwords/{word}`
@@ -567,32 +860,285 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-word |YES|Blacklisted word| |abc||
- 
+word | Yes | blacklisted word to be deleted ||
 
-### Example Request
-```JSON
-NA
-```
 ### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "code": "string"
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
 ```
-word(String)
-```
+### Response codes
+
 200
 
 Description: Success
 
-400
+204
 
-Description: Bad request
+Description: No Content
 
 401
 
 Description: Unauthorized
 
+403
+
+Description: Forbidden
+
+----
+## GET /blacklistedwords/all 
+
+This service will provides the service for the List of blacklistedwords. 
+
+
+### Resource URL
+### `GET /blacklistedwords/all`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+orderBy | optional | response order | desc ||
+pageNumber | optional | page no for the requested data | 0 ||
+pageSize | optional | page size for the requested data | 10 ||
+sortBy | optional | sort the requested data based on param value | createdDateTime || 
+
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "data": [
+      {
+        "createdBy": "string",
+        "description": "string",
+        "isActive": true,
+        "isDeleted": true,
+        "langCode": "string",
+        "updatedBy": "string",
+        "word": "string"
+      }
+    ],
+    "pageNo": 0,
+    "totalItems": 0,
+    "totalPages": 0
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
+### Response codes
+
+200
+
+Description: Success
+
+401
+
+Description: Unauthorized
+
+403
+
+Description: Forbidden
+
 404
 
+Description: Not found
+
+500
+
+Description: Error occured while retrieving blacklisted words
+
+------
+
+## PUT /blacklistedwords/details
+
+This service will update the blacklisted word details except the word itself. 
+
+
+### Resource URL
+### `PUT /blacklistedwords/details`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+description | optional | blacklisted word description ||
+isActive | Yes | is active or not ||
+langCode | Yes | language code ||
+word | Yes | blacklisted word name || 
+
+### Example Request
+```JSON
+{
+  "id": "string",
+  "metadata": {},
+  "request": {
+    "description": "string",
+    "isActive": true,
+    "langCode": "string",
+    "word": "string"
+  },
+  "requesttime": "2018-12-10T06:12:52.994Z",
+  "version": "string"
+}
+```
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "langCode": "string",
+    "word": "string"
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
+### Response codes
+
+200
+
+Description: Success
+
+201
+
+Description: Created
+
+401
+
+Description: Unauthorized
+
+403
+
+Description: Forbidden
+
+404 
+
 Description: Not Found
+
+----
+
+## POST /blacklistedwords/words
+
+This service will validate list of words if they are blacklisted or not. 
+
+### Resource URL
+### `POST /blacklistedwords/words`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+blacklisted words | Yes | blacklisted words to be validated  ||
+
+### Example Request
+```JSON
+{
+  "id": "string",
+  "metadata": {},
+  "request": {
+    "blacklistedwords": [
+      "string"
+    ]
+  },
+  "requesttime": "2018-12-10T06:12:52.994Z",
+  "version": "string"
+}
+```
+
+### Example Response
+```JSON
+{
+  "id": "string",
+  "version": "string",
+  "responsetime": "2019-11-15T08:04:42.310Z",
+  "metadata": null,
+  "response": {
+    "code": "Valid"
+  },
+  "errors": null
+}
+```
+### Response Codes
+
+200
+
+Description: Success
+
+201
+
+Description: Created
+
+401
+
+Description: Unauthorized
+
+403
+
+Description: Forbidden
+
+404
+
+Description: Not found
+
+----
+
+## Failure details
+Error Code | Error Message | Error Description
+------------|------------------------------|-------------
+KER-MSD-007 | Error occurred while fetching Blacklisted words | Fetch Issue
+KER-MSD-008 | Blacklisted word not found | Data Not Found
+KER-MSD-070 | Error occurred while inserting Blacklisted words | Insertion Issue
+KER-MSD-105 | Error occurred while updating Blacklisted Word | Update Issue
+KER-MSD-106 | Error occurred while deleting Blacklisted Word | Deletion Issue
+
+----
 
 # Documents Category Master API
 
@@ -601,7 +1147,7 @@ Description: Not Found
 * [GET /documentcategories](#get-documentcategories)
 * [GET /documentcategories/{code}/{langcode}](#get-documentcategories-code-langcode)
 * [GET /documentcategories/{languagecode}](#get-documentcategories-languagecode)
-* [DELETE /documentcategories/{code}](#get-documentcategories-code)
+* [DELETE /documentcategories/{code}](#delete-documentcategories-code)
 
 # POST /documentcategories
 
@@ -976,6 +1522,16 @@ Description: Unauthorized
 404 
 
 Description: Not Found
+
+### Failure details
+Error Code | Error Message | Error Description 
+------------|------------------------------|-------------
+KER-MSD-013 | Error occured while fetching Document Category details | Fetch Issue
+KER-MSD-051 | Error occured while inserting Document Category details | Insertion Issue
+KER-MSD-014 | Document Category not found | Data Not Found
+KER-MSD-089 | Error occured while updating Document Category details | Update Issue
+KER-MSD-090 | Error occured while deleting Document Category details | Deletion Issue
+KER-MSD-123 | Cannot delete dependency found | Deletion Issue because of dependency
 
 # Document formats Master API
 
@@ -1601,11 +2157,22 @@ Description: When Machine is not found
 
 Description: While updating machine any error occurred
 
+### Failure details
+
+Error Code | Error Message | Error Description
+------------|------------------------------|-------------
+KER-MSD-029 | Error occured while fetching Machines | Fetch Issue
+KER-MSD-063 | Error occurred while inserting Machine details | Insertion Issue
+KER-MSD-030 | Machine not Found | Data Not Found
+KER-MSD-087 | Error occurred while updating Machine details | Update Issue
+KER-MSD-088 | Error occurred while deleting Machine details | Deletion Issue
+KER-MSD-148 | Cannot delete as dependency found	Deletion | Issue because of dependency
+
 
 # Devices Master API
 
 * [POST /devices](#post-devices)
-* [GET /devices]/{languagecode}(#get-devices)
+* [GET /devices]/{languagecode}](#get-devices)
 * [GET /devices/{languagecode}/{deviceType}](#get-deviceType-languagecode)
 * [PUT /devices](#put-devices)
 * [DELETE /devices/{id}](#delete-devices-id)
@@ -1959,6 +2526,17 @@ Description: When Device not found
 
 Description: Error occurred while deleting Device
 
+#### Failure details
+Error Code | Error Message | Error Description
+------------|------------------------------|-------------
+KER-MSD-009 | Error occured while fetching Devices | Fetch Issue
+KER-MSD-069 | Error occurred while inserting Device details | Insertion Issue
+KER-MSD-010 | Device not Found | Data Not Found
+KER-MSD-083 | Error while updating | Update Issue
+KER-MSD-084 | Error while deleting | Deletion Issue
+KER-MSD-147 | Cannot delete as dependency found | Deletion Issue because of dependency
+
+
 # Languages Master API
 
 * [POST /languages](#post-languages)
@@ -1983,8 +2561,8 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-languagecode|Yes|Code of the language| | 
-languagename|Yes|Name of the language| | 
+code|Yes|Code of the language| | 
+name|Yes|Name of the language| | 
 
 ### Example Request
 ```JSON
@@ -2051,8 +2629,8 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-languagecode|Yes|Code of the language| | 
-languagename|Yes|Name of the language| | 
+code|Yes|Code of the language| | 
+name|Yes|Name of the language| | 
 
 
 ### Example Request
@@ -2113,8 +2691,8 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-languagecode|Yes|Code of the language| | 
-languagename|Yes|Name of the language| | 
+code|Yes|Code of the language| | 
+name|Yes|Name of the language| | 
 
 ### Example Request
 ```JSON
@@ -2221,6 +2799,15 @@ Description: Unauthorized
 403
 
 Description: Forbidden
+
+## Failure details
+Error Code | Error Message | Error Description
+------------|------------------------------|-------------
+KER-MSD-24 | Language not found | Data Not Found
+KER-MSD-23 | Error occured while fetching Languages | Fetch Issue
+KER-MSD-049 | Error occurred while inserting Language details | Insertion Issue
+KER-MSD-XXX | Error occured while updating Language | Update Issue
+KER-MSD-XXX | Error occurred while deleting Language | Deletion Issue
 
 # Gender Master API
 
@@ -2590,6 +3177,14 @@ gendername|Yes|Name of the gender| |
 
 Description: Success
 
+## Failure details
+Error Code | Error Message | Error Description
+------------|------------------------------|-------------
+KER-MSD-017 | Error occured while fetching gender types | Fetch Issue
+KER-MSD-018 | Gender Type not found | Data Not Found
+KER-MSD-068 | Could not insert Gender Data | Insertion Issue
+KER-MSD-101 | Error occurred while updating Gender Type details | Update Issue
+KER-MSD-102 | Error occurred while deleting Gender Type details | Deletion Issue
 
 
 # Titles Master API
@@ -2890,7 +3485,14 @@ Description: Unauthorized
 
 Description: Not Found
 
-
+## Failure details
+Error Code | Error Message | Error Description
+------------|------------------------------|-------------
+KER-MSD-047 | Error occured while fetching Titles | Fetch Issue
+KER-MSD-048 | Title not found | Data Not Found
+KER-MSD-XXX | Error occurred while inserting Title details | Insertion Issue
+KER-MSD-103 | Error occurred while updating Title details | Update Issue
+KER-MSD-104 | Error occurred while deleting Title details | Deletion Issue
 
 
 # Biometric types Master API
@@ -3101,11 +3703,18 @@ Description: Unauthorized
 
 Description: Not Found
 
+## Failure details
+Error Code | Error Message | Error Description
+------------|------------------------------|-------------
+KER-MSD-005 | Error occurred while fetching Biometric Types | Fetch Issue
+KER-MSD-006 | Biometric Type not found | Data Not Found
+KER-MSD-105 | Error occurred while inserting biometric type details | Insertion Issue
+
+
 # ID Types Master API
 
 * [POST /idtypes](#post-idtypes)
-* [GET /idtypes](#get-idtypes)
-* [GET /idtypes/{languagecode}](#get-idtypes-languagecode)
+* [GET /idtypes/{langcode}](#get-idtypes-langcode)
 
 # POST /idtypes
 Master data is required across the platform. 
@@ -3125,8 +3734,11 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-idtype|Yes|Name of the id type| | 
+code|Yes|Name of the id type| | 
 languagecode|Yes|Language of the id type| | 
+isActive|Yes|is active?| |
+name |Yes|is active?| |
+descr | Yes | description ||
 
 ### Example Request
 ```JSON
@@ -3178,68 +3790,8 @@ Description: Unauthorized
 
 Description: Forbidden
 
-# GET /idtypes
-Master data is required across the platform. 
 
-This service will provides the service for the List of Id. 
-
-
-
-### Resource URL
-### `GET /idtypes`
-
-### Resource details
-
-Resource Details | Description
------------- | -------------
-Response format | JSON
-Requires Authentication | Yes
-
-### Parameters
-Name | Required | Description | Default Value | Example
------|----------|-------------|---------------|--------
-code|Yes|Code of the language| | 
-descr|Yes|Name of the language| | 
-
-
-### Example Response
-```JSON
-{
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [{
-               "errorCode": "string",
-               "message": "string"
-            }],
-  "response": {
-	"idtypes": [{
-			"code": "string",
-			"descr": "string",
-			"langCode": "string"
-		  }]
-              }
-}
-```
-200
-
-Description: Success
-
-400
-
-Description: Bad request
-
-401
-
-Description: Unauthorized
-
-404
-
-Description: Not Found
-
-
-# GET /idtypes/{languagecode}
+# GET /idtypes/{langcode}
 Master data is required across the platform. 
 
 This service will provides the service for the List of id types based on language. 
@@ -3247,7 +3799,7 @@ This service will provides the service for the List of id types based on languag
 
 
 ### Resource URL
-### `GET /idtypes/{languagecode}`
+### `GET /idtypes/{langcode}`
 
 ### Resource details
 
@@ -3259,28 +3811,33 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-code|Yes|Code of the language| | 
-descr|Yes|Name of the language| | 
+langcode|Yes|Code of the language| | 
 
 
 ### Example Response
 ```JSON
 {
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
   "id": "string",
-  "version": "string",
   "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [{
-             "errorCode": "string",
-             "message": "string"
-           }],
   "response": {
-	"idtypes": [{
-			"code": "string",
-			"descr": "string",
-			"langCode": "string"
-		}]
-             }
+    "idtypes": [
+      {
+        "code": "string",
+        "descr": "string",
+        "isActive": true,
+        "langCode": "string",
+        "name": "string"
+      }
+    ]
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
 }
 ```
 200
@@ -3299,11 +3856,19 @@ Description: Unauthorized
 
 Description: Not Found
 
+## Failure details
+Error Code | Error Message | Error Description
+------------|------------------------------|-------------
+KER-MSD-021 | Error occured while fetching ID Types | Fetch Issue
+KER-MSD-022 | ID Type not found | Data Not Found
+KER-MSD-059 | Error occurred while inserting ID Type details. | Insertion Issue
+
 # Application Types Master API
 
 * [POST /applicationtypes](#post-applicationtypes)
 * [GET /applicationtypes](#get-applicationtypes)
-* [GET /applicationtypes/{id}/{languagecode}](#get-applicationtypes-id-languagecode)
+* [GET /applicationtypes/{code}/{langcode}](#get-applicationtypes-code-languagecode)
+* [GET /applicationtypes/{langcode}](#get-applicationtypes-languagecode)
 
 # POST /applicationtypes
 Master data is required across the platform. 
@@ -3323,46 +3888,48 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-applicationtypetype|Yes|Array of applicationtype| | 
+code|Yes|code of applicationtype| |
+description|Yes | description of applicationtype| |
 
 ### Example Request
 ```JSON
 {
   "id": "string",
-  "version": "string",
   "metadata": {},
-  "requesttime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "request":  {
-	      "applicationtypes": [
-		                       {"applicationtypetype":"string"},
-		                       {"languagecode":"string"}
-	                          ]
-	      }
+  "request": {
+    "code": "string",
+    "description": "string",
+    "isActive": true,
+    "langCode": "string",
+    "name": "string"
+  },
+  "requesttime": "2018-12-10T06:12:52.994Z",
+  "version": "string"
 }
 ```
 ### Example Response
 ```JSON
 {
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [{
+  "errors": [
+    {
       "errorCode": "string",
       "message": "string"
-    }],
+    }
+  ],
+  "id": "string",
+  "metadata": {},
   "response": {
-  "successfully_created_applicationtypes": [
-	                	               {"applicationtypeid":"string"},
-		                               {"languagecode":"string"}
-                                           ]
-             }
+    "code": "string",
+    "langCode": "string"
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
 }
 ```
 ### Response codes
-202
+201
 
-Description: Accepted
+Description: Created
 
 400
 
@@ -3396,39 +3963,33 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-applicationtypeid|Yes|Code of the language| | 
-applicationtype|Yes|Name of the language| | 
+NA ||
 
 
 ### Example Response
 ```JSON
 {
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [{
+  "errors": [
+    {
       "errorCode": "string",
       "message": "string"
-    }],
+    }
+  ],
+  "id": "string",
+  "metadata": {},
   "response": {
-  "applicationtypes": [
-				{ 
-					"applicationtype": [
-						{"applicationtypeid":"string"},
-						{"applicationtypetype":"string"},
-						{"languagecode":"string"}
-					]
-				}, 
-				{ 
-					"applicationtype": [
-						{"applicationtypeid":"string"},
-						{"applicationtypetype":"string"}
-						{"languagecode":"string"}
-					]
-				}
-			] 
-              }
+    "applicationtypes": [
+      {
+        "code": "string",
+        "description": "string",
+        "isActive": true,
+        "langCode": "string",
+        "name": "string"
+      }
+    ]
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
 }
 ```
 200
@@ -3448,7 +4009,7 @@ Description: Unauthorized
 Description: Not Found
 
 
-# GET /applicationtypes/{id}/{languagecode}
+# GET /applicationtypes/{code}/{langcode}
 Master data is required across the platform. 
 
 This service will provides the service for the List of ApplicationTypes. 
@@ -3456,7 +4017,7 @@ This service will provides the service for the List of ApplicationTypes.
 
 
 ### Resource URL
-### `GET /applicationtypes/{id}/{languagecode}`
+### `GET /applicationtypes/{code}/{languagecode}`
 
 ### Resource details
 
@@ -3468,39 +4029,34 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-applicationtypeid|Yes|Code of the language| | 
-applicationtype|Yes|Name of the language| | 
+code |Yes|Code of the applicationtype| | 
+langcode|Yes|Name of the language| | 
 
 
 ### Example Response
 ```JSON
 {
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [{
+  "errors": [
+    {
       "errorCode": "string",
       "message": "string"
-    }],
+    }
+  ],
+  "id": "string",
+  "metadata": {},
   "response": {
-  "applicationtypes": [
-				{ 
-					"applicationtype": [
-						{"applicationtypeid":"string"},
-						{"applicationtypetype":"string"},
-						{"languagecode":"string"}
-					]
-				}, 
-				{ 
-					"applicationtype": [
-						{"applicationtypeid":"string"},
-						{"applicationtypetype":"string"}
-						{"languagecode":"string"}
-					]
-				}
-			]
-             }
+    "applicationtypes": [
+      {
+        "code": "string",
+        "description": "string",
+        "isActive": true,
+        "langCode": "string",
+        "name": "string"
+      }
+    ]
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
 }
 ```
 200
@@ -3519,6 +4075,74 @@ Description: Unauthorized
 
 Description: Not Found
 
+# GET /applicationtypes/{langcode}
+
+This service is used to fetch all Application details by language code
+
+### Resource URL
+### `GET /applicationtypes/{languagecode}`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+langcode|Yes|Name of the language| | 
+
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "applicationtypes": [
+      {
+        "code": "string",
+        "description": "string",
+        "isActive": true,
+        "langCode": "string",
+        "name": "string"
+      }
+    ]
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
+200
+
+Description: Success
+
+400
+
+Description: Bad request
+
+401
+
+Description: Unauthorized
+
+404
+
+Description: Not Found
+
+## Failure details
+Error Code | Error Message | Error Description
+------------|------------------------------|-------------
+KER-MSD-001 | Error occurred while fetching Applications | Fetch Issue
+KER-MSD-002 | Application not found | Data Not Found
+KER-MSD-101 | Error occurred while inserting application details | Insertion Issue
+KER-MSD-201 | Bad Request Found | Bad request
 
 # Registration Centers Master API
 
@@ -4332,10 +4956,9 @@ Description: Not Found
 
 
 
-# Biometric attributes Master API
+# Biometric Attributes Master API
 
 * [POST /biometricattributes](#post-biometricattributes)
-* [GET /biometricattributes/{biometricatributeid}/{languagecode}](#get-biometricattributes-biometricatributeid-languagecode)
 * [GET /getbiometricattributesbyauthtype/{languagecode}/{biometrictypeid}](#get-getbiometricattributesbyauthtype-languagecode-biometrictypeid)
 
 # POST /biometricattributes
@@ -4408,75 +5031,7 @@ Description: Unauthorized
 
 Description: Forbidden
 
-# GET /biometricattributes/{biometricatributeid}/{languagecode}
-Master data is required across the platform. 
 
-This service will provides the service for the List of Biometrics. 
-
-
-
-### Resource URL
-### `GET /biometricattributes/{biometricatributeid}/{languagecode}`
-
-### Resource details
-
-Resource Details | Description
------------- | -------------
-Response format | JSON
-Requires Authentication | Yes
-
-### Parameters
-Name | Required | Description | Default Value | Example
------|----------|-------------|---------------|--------
-biometricatributeid|Yes|Code of the language| | 
-biometricattribute|Yes|Name of the language| | 
-
-### Example Response
-```JSON
-{
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [{
-      "errorCode": "string",
-      "message": "string"
-    }],
-  "response":{
-              "biometricattributes": [
-				      { 
-					"biometricattribute": [
-					                  	{"biometricatributeid":"string"},
-						                {"biometricattribute":"string"},
-						                {"languagecode":"string"}
-					                     ]
-				       }, 
-				      { 
-					"biometricattribute": [
-					         	{"biometricatributeid":"string"},
-						        {"biometricattribute":"string"},
-						        {"languagecode":"string"}
-					                  ]
-				     }
-			     ]
-             }
-     }
-```
-200
-
-Description: Success
-
-400
-
-Description: Bad request
-
-401
-
-Description: Unauthorized
-
-404
-
-Description: Not Found
 
 # GET /getbiometricattributesbyauthtype/{languagecode}/{biometrictypeid}
 
@@ -4543,6 +5098,13 @@ Description: Unauthorized
 
 Description: Not Found
 
+## Failure details
+Error Code | Error Message | Error Description
+------------|------------------------------|-------------
+KER-MSD-003 | Error occured while fetching BiometricAttributes | Fetch Issue
+KER-MSD-004 | BiometricAttributes not found | Data Not Found
+KER-APP-103 | Error occurred while inserting BiometricAttributes | Insertion Issue
+
 
 # Locations Master API
 
@@ -4550,9 +5112,11 @@ Description: Not Found
 * [PUT /locations](#put-locations)
 * [DELETE /locations/{locationcode}](#delete-locations-locationcode)
 * [GET /locations/{langcode}](#get-locations-langcode)
-* [GET /locations/{locationcode}/{languagecode}](#get-locations-locationcode-languagecode)
-* [GET /locations/immediatechildren/{locationcode}/{languagecode}](#get-locations-immediatechildren-locationcode-languagecode)
+* [GET /locations/{locationcode}/{langcode}](#get-locations-locationcode-langcode)
+* [GET /locations/immediatechildren/{locationcode}/{langcode}](#get-locations-immediatechildren-locationcode-langcode)
 * [GET /locations/locationhierarchy/{hierarchyname}](#get-locations-locationhierarchy-hierarchyname)
+* [GET /locations/validate/{locationname}](#get-locations-validate-locationname)
+* [GET /locations/all](#get-locations-all)
 
 # `POST /locations`
 
@@ -5069,13 +5633,13 @@ Description: Not Found
 
 
 
-# GET /locations/locationhierarchy/{locationname}
+# GET /locations/validate/{locationname}
 
-This service will provides the service for the List of Locations based on the location name. 
+This service whether the given location name is valid or not. 
 
 
 ### Resource URL
-### `GET /locations/locationhierarchy/{locationname}`
+### `GET /locations/validate/{locationname}`
 
 ### Resource details
 
@@ -5092,43 +5656,115 @@ locationname|yes|This is the location name. | -NA- |
 ### Example Response
 ```JSON
 {
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [{
+  "errors": [
+    {
       "errorCode": "string",
       "message": "string"
-    }],
-  "response": { 
-        "locations": [
-		       {     
-			"code":"string",
-			"name":"string",
-			"hierarchyLevel":"number",
-			"hierarchyLevelName":"string",
-			"parentLocCode":"",
-			"langCode":"string",
-			"isActive":"boolean",
-			
-		      },
-		     {
-			"code":"string",
-			"name":"string",
-			"hierarchyLevel":"number",
-			"hierarchyLevelName":"string",
-			"parentLocCode":"",
-			"langCode":"string",
-			"isActive":"boolean",
-		     }
-	    ]
-     }
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "status": "string"
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
 }
 ```
 200
 
 Description: Success
 
+403
+
+Description: Forbidden
+
+401
+
+Description: Unauthorized
+
+404
+
+Description: Not Found
+
+# GET /locations/all
+
+This service will provide all locations
+
+### Resource URL
+### `GET /locations/all`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+pageNumber | optional | page no for the requested data | -NA- | 
+pageSize | optional | page size for the requested data | -NA- | 
+sortBy | optional | sort the requested data based on param value | -NA- | 
+orderBy | optional | order the requested data based on param | -NA- | 
+
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "pageNo":"number",
+	"totalPages":"number",
+	"totalItems":"number",
+	"data": [{
+		"code":"string",
+		"name":"string",
+		"hierarchyLevel":"number",
+		"hierarchyName":"string",
+		"parentLocCode":"string",
+		"langCode":"string"
+	}]
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
+200
+
+Description: Success
+
+403
+
+Description: Forbidden
+
+401
+
+Description: Unauthorized
+
+404
+
+Description: Not Found
+
+## Failure details
+Error Code | Error Message | Error Description
+------------|------------------------------|-------------
+KER-MSD-025 | Error occured while fetching Location Hierarchy | Fetch Issue
+KER-MSD-026 | Location not found | Data Not Found
+KER-MSD-064 | Error occured while inserting location hierarchy details | Insertion Issue
+KER-MSD-097 | Error occured wihile updating location hierarchy details | Update Issue
+KER-MSD-098 | Error occured wihile deleting location hierarchy details | Deletion Issue
+KER-MSD-028 | Location Hierarchy Level not found | Data Not Found
+KER-MSD-027 | Error occured while fetching Location Hierarchy Levels | Fetch Issue
+KER-MSD-389 | Parent location not found | Data Not Found
+KER-MSD-385 | Location already exist under the hierarchy | insertion issue
 
 # Packet Rejection Reasons Master API
 
@@ -5528,6 +6164,14 @@ Description: Unauthorized
 
 Description: Not Found
 
+## Failure details
+Error Code | Error Message | Error Description
+------------|------------------------------|-------------
+KER-MSD-035 | Error occured while fetching Reasons | Fetch Issue
+KER-MSD-036 | Reason not found | Data Not Found
+KER-MSD-057 | Error occurred while inserting Reason details | Insertion Issue
+KER-MSD-058 | Error occurred while inserting Reason details | Update Issue
+
 
 # Packet On-hold Reasons Master API
 
@@ -5752,9 +6396,10 @@ Description: Not Found
 
 * [POST /documenttype](#post-documenttype)
 * [PUT /documenttype](#put-documenttype)
+* [DELETE /documenttype](#delete-documenttype)
 * [GET /documenttypes/{documentcategorycode}/{langcode}](#get-documenttypes-documentcategorycode-langcode)
-* [GET /doccattypes](#get-doccattypes)
-* [GET /checkapptypedoccattypedoctype](#get-checkapptypedoccattypedoctype)
+* [GET /doccattypes/all](#get-doccattypes-all)
+* [GET /documenttypes/{langcode}](#get-documenttypes-langcode)
 
 
 # POST /documenttype
@@ -5866,6 +6511,45 @@ lang_code|Yes|Language code of the document type| |
 }
 ```
 
+# DELETE /documenttype
+
+This service will delete document type. 
+
+### Resource URL
+### `DELETE /documenttype`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+code|Yes|Code of document type| | 
+
+```
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "code": "string"
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
+
 # GET /documenttypes/{documentcategorycode}/{langcode}
 
 This service will provides the service for the valid doucment type avialbale for specific Document Category code
@@ -5925,12 +6609,12 @@ Description: Unauthorized
 Description: Not Found
 
 
-# GET /documentcategorytypes
+# GET /documenttypes/all
 
 This service will provides the service for the List of documents types. 
 
 ### Resource URL
-### `GET /documentcategorytypes`
+### `GET /documenttypes/all`
 
 ### Resource details
 
@@ -5942,7 +6626,10 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
--NA-
+pageNumber | optional | page no for the requested data | -NA- | 
+pageSize | optional | page size for the requested data | -NA- | 
+sortBy | optional | sort the requested data based on param value | -NA- | 
+orderBy | optional | order the requested data based on param | -NA- | 
 
 ### Example Request
 ```JSON
@@ -5971,12 +6658,12 @@ Name | Required | Description | Default Value | Example
 ```
 
 
-# GET /doccattypes
+# GET /documenttypes/{langcode}
 
 This service will give back the document category and it's corresponding category types based on Individal type code, Age group type code and Gender type code. 
 
 ### Resource URL
-### `GET /doccattypes`
+### `GET /documenttypes/{langcode}`
 
 ### Resource details
 
@@ -5988,94 +6675,49 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-individualtypecode |Yes| Code of Individual type | |
-agegrouptypecode |Yes| Code of Age group type | |
-gendertypecode |Yes| Code of Gender type | |
+langcode |Yes| Code of langcode | |
 
-### Example Request
+
+```
+### Example Response
 ```JSON
 {
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [{
+  "errors": [
+    {
       "errorCode": "string",
       "message": "string"
-    }],
-  "response":{
-    "individualtypecode": "string",
-    "agegrouptypecode": "string",
-    "gendertypecode": "string"
-  }
-}
-```
-### Example Response
-```JSON
-{
-	"documentcategories": [
-		{
-			"code": "string",
-			"description": "string",
-			"isActive": true,
-			"langCode": "string",
-			"name": "string",
-			"documenttype": [
-				{
-					"code": "code",
-					"name": "name",
-					"descr": "descr",
-					"lang_code": "lang_code",
-					"is_active": "is_active"
-				}
-			]
-		}
-	]
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "documenttypes": [
+      {
+        "code": "string",
+        "description": "string",
+        "isActive": true,
+        "langCode": "string",
+        "name": "string"
+      }
+    ]
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
 }
 ```
 
-
-
-# GET /checkapptypedoccattypedoctype
-
-This service checks the mapping between the Applicant type code, Document category and the Document type mapping. Result message will be success, if the mapping exists. 
-
-### Resource URL
-### `GET /checkapptypedoccattypedoctype`
-
-### Resource details
-
-Resource Details | Description
------------- | -------------
-Response format | JSON
-Requires Authentication | Yes
-
-### Parameters
-Name | Required | Description | Default Value | Example
------|----------|-------------|---------------|--------
-applicanttypecode |Yes| Code of Individual type | |
-documentcategorycode |Yes| Code of Age group type| |
-documenttypecode |Yes| Code of Document type | |
-
-### Example Request
-```JSON
-{
-  "id": "mosip.master.doccattypesonindtypagegndr",
-  "ver": "1.0",
-  "timestamp": "2018-12-24T05:27:49.183Z",
-  "request": {
-    "applicanttypecode": "string",
-    "documentcategorycode": "string",
-    "documenttypecode": "string"
-  }
-}
-```
-### Example Response
-```JSON
-{
-	"resultMessage":"Success"
-}
-```
+## Failure details
+Error Code | Error Message | Error Description
+------------|------------------------------|-------------
+KER-MSD-015 | Error occured while fetching Document Types | Fetch Issue
+KER-MSD-118 | Document Type not found | Data Not Found
+KER-MSD-052 | Error occured while inserting Document Type details | Insertion Issue
+KER-MSD-091 | Error occur while updating Document Type details | Update Issue
+KER-MSD-124 | Cannot delete dependency found | Deletion Issue
+KER-MSD-092 | Error occured while deleting Document Type details | Deletion Issue
+KER-MSD-093 | Can not reactivate the document type | Activation/Deactivation issue
+KER-MSD-094 | Can not deactivate the deactivated document type | Activation/Deactivation issue
+KER-MSD-095 | Mendatory Parameter is missing in document type details | parameter missing
 
 
 # Machine Types Master API
@@ -6292,12 +6934,19 @@ Description: Unauthorized
 
 Description: Not Found
 
+## Failure details
+Error Code | Error Message | Error Description
+------------|------------------------------|-------------
+KER-MSD-061 | Error occurred while inserting Machine Type details | Insertion Issue
+KER-MSD-062 | Error occurred while fetching Machine Type details | Fetch Issue
+KER-MSD-063 | Machine Type Not Found | Data Not Found
+
 # Machine Specifications
 
 * [POST /machinespecifications](#post-machinespecifications)
 * [PUT /machinespecifications](#put-machinespecifications)
 * [DELETE /machinespecifications/{id}](#delete-machinespecifications-id)
-* [GET /machinespecifications](#get-machinespecifications)
+* [GET /machinespecifications/all](#get-machinespecifications-all)
 * [GET /machinespecifications/{lang_code](#get-machinespecifications-lang_code)
 
 
@@ -6461,13 +7110,13 @@ id|Yes|ID of the Machine Specification| |
  }
 ```
 
-# GET /machinespecifications
+# GET /machinespecifications/all
 
 This service will provides the list of all Machine Specifications in all languages. 
 
 
 ### Resource URL
-### `GET /machinespecifications`
+### `GET /machinespecifications/all`
 
 ### Resource details
 
@@ -6479,7 +7128,10 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
--NA-
+orderBy | optional | order the requested data based on param ||
+pageNumber | optional | page no for the requested data ||
+pageSize | optional | page size for the requested data ||
+sortBy | optional | sort the requested data based on param value ||
 
 ### Example Request
 ```JSON
@@ -6489,25 +7141,38 @@ Name | Required | Description | Default Value | Example
 ### Example Response
 ```JSON
 {
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [{
+  "errors": [
+    {
       "errorCode": "string",
       "message": "string"
-    }],
-  "response":  {
-	"id":"KJDS9",
-	"name":"Laptop",
-	"brand":"Hewlett Packard",
-	"model":"L34-324",
-	"mtyp_code":"GEW8",
-	"min_driver_ver":"1.4",
-	"descr":"This is a medium configuration",
-	"lang_code":"eng",
-	"is_active":true
     }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "data": [
+      {
+        "brand": "string",
+        "createdBy": "string",
+        "description": "string",
+        "id": "string",
+        "isActive": true,
+        "isDeleted": true,
+        "langCode": "string",
+        "machineTypeCode": "string",
+        "machineTypeName": "string",
+        "minDriverversion": "string",
+        "model": "string",
+        "name": "string",
+        "updatedBy": "string"
+      }
+    ],
+    "pageNo": 0,
+    "totalItems": 0,
+    "totalPages": 0
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
 }
 ```
 
@@ -6578,6 +7243,17 @@ Description: Unauthorized
 403
 
 Description: Forbidden
+
+## Failure details
+Error Code | Error Message | Error Description
+------------|------------------------------|-------------
+KER-MSD-087 | Error occurred while fetching Machine Specification details | Fetch Issue
+KER-MSD-117 | Machine Specification not found | Data Not Found
+KER-MSD-062 | Error occurred while inserting Machine Specification details | Insertion Issue
+KER-MSD-085 | Error occurred while updating Machine Specification details | Update Issue
+KER-MSD-086 | Error occurred while deleteding Machine Specification details | Deletion Issue
+KER-MSD-122 | Cannot delete dependency found | Dependency Issue
+KER-MSD-349 | No Machine exist for Machine Type name | Data Not Found
 
 # Registration Center User Machine Mapping API
 
@@ -6812,6 +7488,8 @@ Description: Forbidden
 
 * [POST /registrationcentermachine](#post-registrationcentermachine)
 * [DELETE /registrationcentermachine/{regCenterId}/{machineId}](#delete-registrationcentermachine-regcenterid-machineid)
+* [GET /registrationcentermachine/unmap/{regCenterId}/{machineId}](#get-registrationcentermachine-regcenterid-machineid)
+* [GET /registrationcentermachine/map/{regCenterId}/{machineId}](#delete-registrationcentermachine-regcenterid-machineid)
 
 ## POST /registrationcentermachine
 Master data is required across the platform. 
@@ -6889,7 +7567,7 @@ Description: Forbidden
 
 Description: Internal Server Error 
 
-## DELETE/registrationcentermachine/{regCenterId}/{machineId}
+## DELETE /registrationcentermachine/{regCenterId}/{machineId}
 
 This service will provides the service for delete mapping of  Center-Machine. 
 
@@ -6943,6 +7621,191 @@ Description: Unauthorized
 404
 
 Description: Not Found
+
+## GET /registrationcentermachine/unmap/{regCenterId}/{machineId}
+
+This service will provides the service for delete mapping of  Center-Machine. 
+
+
+### Resource URL
+### `GET /registrationcentermachine/unmap/{regCenterId}/{machineId}`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+regCenterId|Yes|Registration Center Id|
+machineId|Yes|Machine Id |
+
+
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "message": "string",
+    "status": "string"
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
+200
+
+Description: Success
+
+400
+
+Description: Bad request
+
+401
+
+Description: Unauthorized
+
+404
+
+Description: Not Found
+
+## GET /registrationcentermachine/unmap/{regCenterId}/{machineId}
+
+This service will unmap the mapping of  Center-Machine. 
+
+
+### Resource URL
+### `GET /registrationcentermachine/unmap/{regCenterId}/{machineId}`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+regCenterId|Yes|Registration Center Id|
+machineId|Yes|Machine Id |
+
+
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "message": "string",
+    "status": "string"
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
+200
+
+Description: Success
+
+400
+
+Description: Bad request
+
+401
+
+Description: Unauthorized
+
+404
+
+Description: Not Found
+
+## GET /registrationcentermachine/map/{regCenterId}/{machineId}
+
+This service will map the mapping of  Center-Machine. 
+
+
+### Resource URL
+### `GET /registrationcentermachine/map/{regCenterId}/{machineId}`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+regCenterId|Yes|Registration Center Id|
+machineId|Yes|Machine Id |
+
+
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "message": "string",
+    "status": "string"
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
+200
+
+Description: Success
+
+400
+
+Description: Bad request
+
+401
+
+Description: Unauthorized
+
+404
+
+Description: Not Found
+
+## Failure details
+Error Code | Error Message | Error Description
+------------|------------------------------|-------------
+KER-MSD-074 | Error occurred while inserting a mapping of Machine and Center | Insertion Issue
+KER-MSD-114 | Mapping for Machine and Center not found | Data Not Found
+KER-MSD-106 | Error occurred while deleting a mapping of Machine and Center | Deletion Issue
+KER-MSD-xx | Error occurred while fetching Center Machine details | Fetch Issue
+KER-MSD-411 | Admin not authorized to map/un-map this Registration Center or Machine | Authorization Issue
+KER-MSD-XXX | Already is in inactive status | -NA-
+KER-MSD-XXX | Registration center mapped to machine is decommisioned | -NA-
+KER-MSD-XXX | Registration center already mapped to machine and is active | -NA-
+KER-MSD-XXX | Registration center and machine is not in same hierarchy | -NA-
+KER-MSD-030 | Machine not Found | Data Not found
 
 # Registration Center Device API
 
@@ -7228,6 +8091,7 @@ Description: Internal Server Error
 # Device Types Master API
 
 * [POST /devicetypes](#post-devicetypes)
+* [GET /devicetypes/all](#get-devicetypes-all)
 
 ## POST /devicetypes
 
@@ -7246,49 +8110,56 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-devicetypecode|Yes|Code of the device type| | 
-devicename|Yes|Name of the device type| | 
+code|Yes|Code of the device type| | 
+name|Yes|Name of the device type| | 
 description|Yes|Description of the device type| | 
-languagecode|Yes|Language code of the device type| | 
+langCode|Yes|Language code of the device type| | 
 isactive|Yes|Is the device type active?| | 
-
+createdBy|Yes|created by?| |
+isDeleted|Yes|Is the device type deleted?| |
+updatedBy|Yes|updated by?| |
 ### Example Request
 ```JSON
 {
   "id": "string",
-  "version": "string",
   "metadata": {},
-  "requesttime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "request":  {
+  "request": {
     "code": "string",
+    "createdBy": "string",
     "description": "string",
     "isActive": true,
+    "isDeleted": true,
     "langCode": "string",
-    "name": "string"
-  }
+    "name": "string",
+    "updatedBy": "string"
+  },
+  "requesttime": "2018-12-10T06:12:52.994Z",
+  "version": "string"
 }
 ```
 ### Example Response
 ```JSON
 {
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [{
+  "errors": [
+    {
       "errorCode": "string",
       "message": "string"
-    }],
-  "response":{
-      "code": "string",
-      "langCode": "string"
-  }
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "code": "string",
+    "langCode": "string"
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
 }
 ```
 ### Response codes
-202
+201
 
-Description: Accepted
+Description: Created
 
 400
 
@@ -7302,13 +8173,106 @@ Description: Unauthorized
 
 Description: Forbidden
 
+404
+
+Description: Not found
+
+500
+
+Description: Internal Error
+
+## GET /devicetypes/all
+
+This service will get all the devicetypes. 
+
+### Resource URL
+### `GET /devicetypes/all`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+orderBy|optional|order the requested data based on param| | 
+pageNumber|optional|page no for the requested data| | 
+pageSize|optional|page size for the requested data| | 
+sortBy|optional|sort the requested data based on param value| | 
+
+
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "data": [
+      {
+        "code": "string",
+        "createdBy": "string",
+        "description": "string",
+        "isActive": true,
+        "isDeleted": true,
+        "langCode": "string",
+        "name": "string",
+        "updatedBy": "string"
+      }
+    ],
+    "pageNo": 0,
+    "totalItems": 0,
+    "totalPages": 0
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
+### Response codes
+200
+
+Description: Success
+
+401
+
+Description: Unauthorized
+
+403
+
+Description: Forbidden
+
+404
+
+Description: Not found
+
+500
+
+Description: Internal Error
+
+## Failure details
+Error Code | Error Message | Error Description
+------------|------------------------------|-------------
+KER-MSD-054 | Error occurred while fetching Device Type details | Fetch Issue
+KER-MSD-003 | Required Device Type detail Not Found | Data Not Found
+KER-MSD-053 | Error occurred while inserting Device Type details | Insertion Issue
+KER-MSD-002 | Error occured while mapping Device Type details | Data Mapping Issue
+
+
 # Device Specifications
 
 * [POST /devicespecifications](#post-devicespecifications)
 * [PUT /devicespecifications](#put-devicespecifications)
 * [DELETE /devicespecifications/{id}](#delete-devicespecifications-id)
 * [GET /devicespecifications/{langcode}/{devicetypecode}](#get-devicespecifications-langcode-devicetypecode)
-* [GET /devicespecifications/{lang_code}](#get-devicespecifications-lang_code)
+* [GET /devicespecifications/{langcode}](#get-devicespecifications-langcode)
 
 # POST /devicespecifications
 
@@ -7506,13 +8470,13 @@ dtyp_code|Yes|device type code of the Device specification| |
 ```
 
 
-# GET /devicespecifications/{lang_code}
+# GET /devicespecifications/{langcode}
 
 This service will provides the list of all Device Specifications in a specific language. 
 
 
 ### Resource URL
-### `GET /devicespecifications/{lang_code}`
+### `GET /devicespecifications/{langcode}`
 
 ### Resource details
 
@@ -7524,7 +8488,7 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-lang_code|Yes|Language code of the Device Specification| |
+langcode|Yes|Language code of the Device Specification| |
 
 ### Example Request
 ```JSON
@@ -7577,18 +8541,12 @@ Description: Unauthorized
 
 Description: Forbidden
 
-# Template API
+## GET /devicespecifications/all
 
-* [POST /templates](#post-templates)
-* [PUT /templates](#put-templates)
-* [DELETE /templates/{id}](#delete-templates-id)
-
-# POST /templates
-
-This service will create the list of Template  which are used in the MOSIP platform. 
+This service will get all the devicespecifications. 
 
 ### Resource URL
-### `POST /templates`
+### `GET /devicespecifications/all`
 
 ### Resource details
 
@@ -7600,59 +8558,93 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-id|Yes|id of temlate | | 
-descr|Yes|Description of the temlate | | 
-lang_code|Yes|Language code of the temlate | | 
-isActive |Yes|is active or not| |
-moduleId |Yes| Id of modul | |
-templateTypeCode |Yes| Id of template type | |
-fileFormatCode | Yes | Code of file formate| |
+orderBy|optional|order the requested data based on param| | 
+pageNumber|optional|page no for the requested data| | 
+pageSize|optional|page size for the requested data| | 
+sortBy|optional|sort the requested data based on param value| | 
 
-### Example Request
-```JSON
-{
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "requesttime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "request":  {
-    "description": "string",
-    "fileFormatCode": "string",
-    "fileText": "string",
-    "id": "string",
-    "isActive": true,
-    "langCode": "string",
-    "model": "string",
-    "moduleId": "string",
-    "moduleName": "string",
-    "name": "string",
-    "templateTypeCode": "string"
-  }
-}
-}
-```
+
 ### Example Response
 ```JSON
 {
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [{
+  "errors": [
+    {
       "errorCode": "string",
       "message": "string"
-    }],
-  "response":  {
-     "id": "string"
-  }
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "data": [
+      {
+        "brand": "string",
+        "createdBy": "string",
+        "description": "string",
+        "deviceTypeCode": "string",
+        "deviceTypeName": "string",
+        "id": "string",
+        "isActive": true,
+        "isDeleted": true,
+        "langCode": "string",
+        "minDriverversion": "string",
+        "model": "string",
+        "name": "string",
+        "updatedBy": "string"
+      }
+    ],
+    "pageNo": 0,
+    "totalItems": 0,
+    "totalPages": 0
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
 }
 ```
-# PUT /templates
+### Response codes
+200
 
-This service will update the list of Template  which are used in the MOSIP platform. 
+Description: Success
+
+401
+
+Description: Unauthorized
+
+403
+
+Description: Forbidden
+
+404
+
+Description: Not found
+
+500
+
+Description: Internal Error
+
+## Failure details
+Error Code | Error Message | Error Description
+------------|------------------------------|-------------
+KER-MSD-011 | Error occured while fetching Device Specifications | Fetch Issue
+KER-MSD-012 | Device Specification not found | Data Not Found
+KER-MSD-054 | Error occurred while inserting Device Specification details | Insertion Issue
+KER-MSD-081 | Error occurred while updating Device Specification | Update Issue
+KER-MSD-082 | Error occurred while deleting Device Specification | Deletion Issue
+KER-MSD-121 | Cannot delete dependency found | Dependency issue
+KER-MSD-347 | No Devices found for the received Device Type | Data Not Found
+
+# TemplateFileFormat API
+
+* [POST /templatefileformats](#post-templatefileformats)
+* [PUT /templatefileformats](#put-templatefileformats)
+* [DELETE /templatefileformats/{code}](#delete-templatefileformats-code)
+
+# POST /templatefileformats
+
+This service will create the list of templatefileformats  which are used in the MOSIP platform. 
 
 ### Resource URL
-### `PUT /templates`
+### `POST /templatefileformats`
 
 ### Resource details
 
@@ -7664,56 +8656,106 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-id|Yes|id of temlate | | 
-lang_code|Yes|Language code of the temlate | | 
+code|Yes|code of templatefileformat | | 
+description|Yes|Description of the templatefileformat | | 
+langcode|Yes|Language code of the temlate | | 
 isActive |Yes|is active or not| |
-moduleId |Yes| Id of modul | |
-templateTypeCode |Yes| Id of template type | |
-fileFormatCode | Yes | Code of file formate| |
 
 ### Example Request
 ```JSON
 {
   "id": "string",
-  "version": "string",
   "metadata": {},
-  "requesttime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "request":  {
+  "request": {
+    "code": "string",
     "description": "string",
-    "fileFormatCode": "string",
-    "fileText": "string",
-    "id": "string",
     "isActive": true,
-    "langCode": "string",
-    "model": "string",
-    "moduleId": "string",
-    "moduleName": "string",
-    "name": "string",
-    "templateTypeCode": "string"
-  }
+    "langCode": "string"
+  },
+  "requesttime": "2018-12-10T06:12:52.994Z",
+  "version": "string"
 }
 ```
 ### Example Response
 ```JSON
 {
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [{
+  "errors": [
+    {
       "errorCode": "string",
       "message": "string"
-    }],
-  "response":  {
-      "id": "string"
-   }
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "code": "string",
+    "langCode": "string"
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
+# PUT /templatefileformats
+
+This service will update the list of templatefileformats  which are used in the MOSIP platform. 
+
+### Resource URL
+### `PUT /templatefileformats`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+code|Yes|code of templatefileformat | | 
+description|Yes|Description of the templatefileformat | | 
+langcode|Yes|Language code of the temlate | | 
+isActive |Yes|is active or not| |
+
+### Example Request
+```JSON
+{
+  "id": "string",
+  "metadata": {},
+  "request": {
+    "code": "string",
+    "description": "string",
+    "isActive": true,
+    "langCode": "string"
+  },
+  "requesttime": "2018-12-10T06:12:52.994Z",
+  "version": "string"
+}
+```
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "code": "string",
+    "langCode": "string"
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
 }
 ```
 
-# DELETE /templates/{id}
+# DELETE /templatefileformats/{code}
 Master data is required across the platform. 
 
-This service will deletes a list of Template from the Template master module. 
+This service will deletes a list of templatefileformats from the Template master module. 
 
 ### Resource URL
 ### `DELETE /templates/{id}`
@@ -7728,34 +8770,45 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-id|Yes|id of the Template| 
+code|Yes|id of the Template| 
 
 
 
 ### Example Response
 ```JSON
 {
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [{
+  "errors": [
+    {
       "errorCode": "string",
       "message": "string"
-    }],
-  "response"  : {
-      "id": "string"
-  }
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "code": "string"
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
 }
 ```
+## Failure details
+Error Code | Error Message | Error Description
+------------|------------------------------|-------------
+KER-MSD-125 | Cannot delete dependency found. | Dependency Issue
+KER-MSD-046 | Template not found | Data Not Found
+KER-MSD-055 | Error occurred while inserting Template File Format details | Insertion Issue
+KER-MSD-093 | Error occurred while updating Template | Update Issue
+KER-MSD-094 | Error occurred while deleting Template | Deletion Issue
 
 # Individual Types API
 
 * [GET /individualtypes](#get-individualtypes)
+* [GET /individualtypes/all](#get-individualtypes-all)
 
 # GET /individualtypes
 
-This service will provides the complete list of all individual types in the MOSIP platform
+This service will provides the complete list of all individual types active in the MOSIP platform
 
 
 ### Resource URL
@@ -7807,6 +8860,87 @@ Name | Required | Description | Default Value | Example
 200
 
 Description: Success
+
+## GET /individualtypes/all
+
+This service will get all the individualtypes. 
+
+### Resource URL
+### `GET /individualtypes/all`
+
+### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+orderBy|optional|order the requested data based on param| | 
+pageNumber|optional|page no for the requested data| | 
+pageSize|optional|page size for the requested data| | 
+sortBy|optional|sort the requested data based on param value| | 
+
+
+### Example Response
+```JSON
+{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "data": [
+      {
+        "code": "string",
+        "createdBy": "string",
+        "isActive": true,
+        "isDeleted": true,
+        "langCode": "string",
+        "name": "string",
+        "updatedBy": "string"
+      }
+    ],
+    "pageNo": 0,
+    "totalItems": 0,
+    "totalPages": 0
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
+}
+```
+### Response codes
+200
+
+Description: Success
+
+401
+
+Description: Unauthorized
+
+403
+
+Description: Forbidden
+
+404
+
+Description: Not found
+
+500
+
+Description: Internal Error
+
+## Failure details
+Error Code | Error Message | Error Description
+------------|------------------------------|-------------
+KER-MSD-152 | Error occured while fetching Individual Type | Fetch Issue
+KER-MSD-151 | Individual Type not found | Data Not Found
 
 
 # Age group Types API
@@ -7871,15 +9005,15 @@ Description: Success
 
 # Template Types API
 
-* [GET /templatetype/{code}](#get-templatetype-code)
+* [POST /templatetypes](#post-templatetypes)
 
-# GET /templatetype/{code}
+# POST /templatetypes
 
-This service fetches the template types irrespective of the language. The service returns the results in all the languages. 
+This service creates template type based on provided. 
 
 
 ### Resource URL
-### `GET /templatetype/{code}`
+### `POST /templatetypes`
 
 ### Resource details
 
@@ -7891,41 +9025,83 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-code|Yes|This is the template code field|-NA-|auth-email-content
+code|Yes|This is the template code field||
+description|Yes| Description of the template type ||
+isActive|Yes| is active? ||
+langCode|Yes| language code ||
 
 ### Example Request
 ```JSON
--NA-
+{
+  "id": "string",
+  "metadata": {},
+  "request": {
+    "code": "string",
+    "description": "string",
+    "isActive": true,
+    "langCode": "string"
+  },
+  "requesttime": "2018-12-10T06:12:52.994Z",
+  "version": "string"
+}
 ```
 
 ### Example Response
 ```JSON
 {
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [{
+  "errors": [
+    {
       "errorCode": "string",
       "message": "string"
-    }],
-  "response":   {
-		"code": "string",
-		"descr": "string",
-		"langCode": "string",
-		"isactive": boolean
-	} 
+    }
+  ],
+  "id": "string",
+  "metadata": {},
+  "response": {
+    "code": "string",
+    "langCode": "string"
+  },
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "version": "string"
 }
 ```
 
 ### Response codes
-200
+201
 
-Description: Success
+Description: Successfully created
 
-# Valid documents API
+400	
 
-* [GET /validdocuments](#get-validdocuments)
+Description: Request body passed is null or invalid
+
+401	
+
+Description: Unauthorized
+
+403	
+
+Description: Forbidden
+
+404	
+
+Description: Not Found
+
+500	
+
+Description:  any error occured while creating
+
+## Failure details
+Error Code | Error Message | Error Description
+------------|------------------------------|-------------
+KER-MSD-072 | Error occurred while inserting Template Type details into db | Insertion Issue
+
+
+# Applicant Valid documents API
+
+* [GET /applicanttype/{applicantId}/languages](#get-applicanttypeapplicantIdlanguages)
+
+# GET /applicanttype/{applicantId}/languages
 
 ### Resource URL
 ### `GET /validdocuments/{languagecode}`
@@ -7940,7 +9116,8 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-languagecode|Yes|Language code in ISO 639-2|-NA-|fra
+applicantId|Yes|applicant id|-NA-|11105
+languages|Yes| list of languages ||
 
 ### Example Request
 ```JSON
@@ -7949,32 +9126,40 @@ languagecode|Yes|Language code in ISO 639-2|-NA-|fra
 
 ### Example Success Response
 ```JSON
-{
+{{
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
   "id": "string",
-  "version": "string",
   "metadata": {},
+  "response": {
+    "appTypeCode": "string",
+    "documentCategories": [
+      {
+        "code": "string",
+        "description": "string",
+        "documentTypes": [
+          {
+            "code": "string",
+            "description": "string",
+            "isActive": true,
+            "langCode": "string",
+            "name": "string"
+          }
+        ],
+        "isActive": true,
+        "langCode": "string",
+        "name": "string"
+      }
+    ],
+    "isActive": true,
+    "langCode": "string"
+  },
   "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [],
-  "response":   {
-	  "documentcategories": [
-		{
-			"code": "string",
-			"description": "string",
-			"isActive": true,
-			"langCode": "string",
-			"name": "string", 
-			"documenttypes": [
-					{
-						"code": "string",
-						"description": "string",
-						"isActive": true,
-						"langCode": "string",
-						"name": "string"
-					}
-			]
-		}
-	  ]
-	}
+  "version": "string"
 }
 ```
 
@@ -7982,17 +9167,17 @@ languagecode|Yes|Language code in ISO 639-2|-NA-|fra
 ### Example Failure Response
 ```JSON
 {
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "id": null,
+  "version": null,
+  "responsetime": "2019-11-21T06:37:34.237Z",
+  "metadata": null,
+  "response": null,
   "errors": [
-	{
-		"errorCode": "KER-VLDDOC-001",
-		"message": "Mandatory fields are missing"
-	}  
-  ],
-  "response": null
+    {
+      "errorCode": "KER-ATH-401",
+      "message": "Authentication Failed"
+    }
+  ]
 }
 ```
 
@@ -8001,3 +9186,9 @@ languagecode|Yes|Language code in ISO 639-2|-NA-|fra
 200
 
 Description: Success
+
+## Failure details
+Error Code | Error Message | Error Description
+------------|------------------------------|-------------
+KER-MSD-149 | Error occurred while fetching Applicant Type-Document Category-Document Type Mapping details | Fetch Issue
+KER-MSD-150 | Document Category- Document Type mapping not found | Data Not Found

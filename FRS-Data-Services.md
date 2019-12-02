@@ -192,16 +192,13 @@ Refer below for the process:
 Upon receiving a request to generate Token ID (with input para meters (TSP ID, UIN), the system generates token ID as per default Token ID generation logic
 
 Refer below for the process:
-1. The numbers is not be generated sequentially
-1. Token ID generated is of the length of 36 digits
-1. The length of Token ID is configurable by the ADMIN
-1. Token ID is generated as per the defined logic mentioned below:
-   * The number does not contain any alphanumeric characters and contains only numeric characters
-   * The last digit in the number is reserved for a checksum
-   * ID is unique for a combination of TSP ID and UIN received
-   * ID is untraceable to both TSP ID and UIN received
-5. Responds with the Token ID to the source
-1. Raises an alert in case of exceptions.
+1. Token ID should be generated based on the below logic using received UIN and Partner ID
+2. Token ID = SHA256( SHA256(UIN + SALT) + Partner ID + SALT
+3. Validate if all mandatory input parameters have been received as listed below for each specific request
+   * UIN - Mandatory
+   * Partner ID - Mandatory
+4. Raise an exception if input parameter is missing. Refer messages section
+5. Token ID length should be of 36 digits
 
 [**Link to design**](/mosip/mosip-platform/blob/master/design/kernel/kernel-idgenerator-tokenid.md)
 

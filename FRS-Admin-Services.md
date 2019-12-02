@@ -1,6 +1,6 @@
 ## Table Of Contents
 
-  * [1. Master Data Management](#1-master-data-management) 
+  * [1. Master Data Management](#1-master-data-management-) 
     * [1.1 Location Hierarchy - Create/Read/Update/Delete](#11-location-hierarchy---createreadupdatedelete-) _(ADM_FR_1.1)_
     * [1.2 List of Holidays - Create/Read/Update/Delete](#12-list-of-holidays---createreadupdatedelete-) _(ADM_FR_1.2)_
     * [1.3 Biometric Authentication Type - Create/Read](#13-biometric-authentication-type---createread-) _(ADM_FR_1.3)_
@@ -20,26 +20,28 @@
     * [1.17 List of Applications - Create/Read](#117-list-of-applications---createread-) _(ADM_FR_1.17)_
     * [1.18 List of ID Types - Create/Read](#118-list-of-id-types---createread-) _(ADM_FR_1.18)_
     * [1.19 User History](#119-user-history-) _(ADM_FR_1.19)_
-  * [2. Registration Management](#2-registration-management) 
-    * [2.1 Registration Center Type - Create/Update/Delete](#21-registration-center-type---createupdatedelete-) _(ADM_FR_2.1)_
-    * [2.2 Registration Center - Create/Read/Update/Delete](#22-registration-center---createreadupdatedelete-) _(ADM_FR_2.2)_
+    * [1.20 Document Type - Category Mapping](#120-document-type-to-category-mapping---mapunmap-) _(ADM_FR_1.20)_
+  * [2. Registration Management](#2-registration-management-) 
+    * [2.1 Registration Center Type - Create/Update/Decommission](#21-registration-center-type---createreadupdatedecommission-) _(ADM_FR_2.1)_
+    * [2.2 Registration Center - Create/Read/Update/Delete](#22-registration-center---createreadupdatedecommission-) _(ADM_FR_2.2)_
     * [2.3 List of Machine Types - Create](#23-list-of-machine-types---create-) _(ADM_FR_2.3)_
     * [2.4 List of Machine Specifications - Create/Update/Delete](#24-list-of-machine-specifications---createupdatedelete-) _(ADM_FR_2.4)_
-    * [2.5 List of Machines - Create/Read/Update/Delete](#25-list-of-machines---createreadupdatedelete-) _(ADM_FR_2.5)_
+    * [2.5 List of Machines - Create/Read/Update/Decommission](#25-list-of-machines---createreadupdatedecommission-) _(ADM_FR_2.5)_
     * [2.6 Mappings of Registration Center, Machine and User Mappings - Create/Read/Delete](#26-mappings-of-registration-center-machine-and-user-mappings---createreaddelete-) _(ADM_FR_2.6)_
-    * [2.7 List of Devices - Create/Read/Update/Delete](#27-list-of-devices---createreadupdatedelete-) _(ADM_FR_2.7)_
+    * [2.7 List of Devices - Create/Read/Update/Decommission](#27-list-of-devices---createreadupdatedecommission-) _(ADM_FR_2.7)_
     * [2.8 List of Device Specifications - Create/Read/Update/Delete](#28-list-of-device-specifications---createreadupdatedelete-) _(ADM_FR_2.8)_
     * [2.9 List of Device Types - Create](#29-list-of-device-types---create-) _(ADM_FR_2.9)_
-    * [2.10 Mappings of Registration Center and Machine - Create/Delete](#210-mappings-of-registration-center-and-machine---createdelete-) _(ADM_FR_2.10)_
-    * [2.11 Mappings of Registration Center and Device - Create/Read/Delete](#211-mappings-of-registration-center-and-device---createreaddelete-) _(ADM_FR_2.11)_
+    * [2.10 Mappings of Registration Center and Machine - Create/Delete](#210-mappings-of-registration-center-and-machine---mapunmap-) _(ADM_FR_2.10)_
+    * [2.11 Mappings of Registration Center and Device - Create/Read/Delete](#211-mappings-of-registration-center-and-device---mapunmapread-) _(ADM_FR_2.11)_
     * [2.12 Mappings of Registration Center, Machine and Device - Create/Delete](#212-mappings-of-registration-center-machine-and-device---createdelete-) _(ADM_FR_2.12)_
-  * [3. MISP Management](#3-MISP-management) 
-    * [3.1 MISP - Create/Read/Update/Delete](#31-misp---createreadupdatedelete) _(ADM_FR_3.1)_
-      * [3.1.1 License Key Allocation- Create/Read/Update/Delete](#311-license-key-allocation--createreadupdatedelete-) _(ADM_FR_3.2)_ 
+    * [2.13 Mappings of Registration Center and User- Create/Delete](#213-mappings-of-registration-center-and-user---mapunmap-) _(ADM_FR_2.13)_
+  * [3. MISP Management](#3-MISP-management--) 
+    * [3.1 MISP - Create/Read/Update/Delete](#31-misp---createreadupdatedelete-) _(ADM_FR_3.1)_
+      * [3.1.1 License Key Allocation- Create/Read/Update/Delete](#311-license-key-allocation--createreadupdatedelete) _(ADM_FR_3.2)_ 
   *  [Kernel API](#kernel-api-)
   
 # Admin Services
-## 1. Master Data Management
+## 1. Master Data Management [**[↑]**](#table-of-contents)
 ### 1.1 Location Hierarchy - Create/Read/Update/Delete [**[↑]**](#table-of-contents)
 
 #### A. Create Location Hierarchy in the Master database 
@@ -54,11 +56,48 @@ While storing the location hierarchy in the database, the system performs the fo
     * parent_loc_code - character (32) - Optional
     * lang_code - character (3) - Mandatory
     * is_active - boolean - Mandatory
-2. Responds with the Location Hierarchy created successfully
-1. The component restricts the bulk creation of Master Data through API. However it could be done through a script as need be depending on the requirement of the country.
-1. In case of exceptions, system triggers error messages as received from the Database
+2. Validate if the Location name received does not already exist in the hierarchy for which the location is getting created
+    * If Location name already exist under the hierarchy level, throw an appropriate error
+3. The API should not allow creation of the Location if the data is not received in default language
+4. If the data for the Location is not received in all the configured languages, the API should allow the Location to be created given the Point 3 is satisfied.
+5. The API should activate the Location while creation provided the data for all the configured languages is received during the initial creation
+    * If the data for all the configured languages is not received, deactivate the Location while creation
+6. While storing the location, 
+    * cr_by should be the Username of the user who is accessing this API
+    * cr_dtimes should be the date-time at which the user is creating the Location 
+7. Responds with the Location Hierarchy created successfully
+8. The component restricts the bulk creation of Master Data through API. However it could be done through a script as need be depending on the requirement of the country.
+9. In case of exceptions, system triggers error messages as received from the Database
 
-#### B. Check the existence of a Location in Master Database
+#### B. Update a Location in Location Master Database
+On receiving a  request to update a Location with the input parameters (code, name, hierarchy_level, hierarchy_level_name, parent_loc_code, lang_code and is_active), the system updates the Location in the Location Database
+for the code received.
+
+The system performs the following steps to update the location in the Master Database:
+ 
+1. Validates if all required input parameters have been received as listed below for each specific request
+   * code character (36) - Mandatory
+   * name character (128) - Mandatory
+   * hierarchy_level smallint - Mandatory
+   * hierarchy_level_name character (64) - Mandatory
+   * parent_loc_code character (32) - Mandatory
+   * lang_code character (3) - Mandatory
+   * is_active boolean - Mandatory
+2. Validate if the Location name received does not already exist in the hierarchy of the Location
+   * If Location name already exist under the hierarchy level, throw an appropriate error
+3. The API should not allow activation of Location if the data for the Location is not present in all the languages which are configured for a country
+4. For the code received in the request, replaces all the data received in the request against the data existing in the Location database against the same code.
+5. While receiving the request for activation, If the Location is already Active, the API should throw an error message. Refer messages section.
+6. While receiving the request for deactivation, If the Location is already Inactive, the API should throw an error message. Refer messages section
+7. If for a Location data, is_active flag is being sent as “False” and there are active child Locations (also the subsequent child locations) being mapped to received location, do not deactivate the location. Respond with appropriate message. Refer messages section
+8. Deleted record are not be updated
+9. upd_by should be the Username of the user who is accessing this API
+10. upd_dtimes should be the date-time when the Location is being updated
+11. Responds with data not found error if deleted record is received in the request
+12. Responds with appropriate message if the Location is updated successfully
+13. In case of Exceptions, system triggers relevant error messages
+
+#### C. Check the existence of a Location in Master Database
 Upon receiving a request to validate the Location Name with input parameters (Location Name), the system checks the Location Name in the Master Database
 
 While checking the location in the Database, the system performs the following steps:
@@ -67,7 +106,8 @@ While checking the location in the Database, the system performs the following s
    * Location Name - Mandatory
 2. If the mandatory input parameters are missing, throw the appropriate message
 1. In case of Exceptions, system triggers relevant error messages
-#### C. Fetch Location Hierarchy Levels based on a Language Code
+
+#### D. Fetch Location Hierarchy Levels based on a Language Code
 Upon receiving a request to fetch the Location Hierarchy Levels with input parameters (Language Code), the system fetches the Location Hierarchy Levels in the requested language. The following steps are performed by the system: 
 
 1. Validates if the request contains following input parameters (Language Code)
@@ -77,7 +117,8 @@ Upon receiving a request to fetch the Location Hierarchy Levels with input param
    * Hierarchy Name
    * IsActive
 3. In case of Exceptions, system triggers relevant error messages
-#### D. Fetch the Location Hierarchy Data based on a Location Code and a Language Code
+
+#### E. Fetch the Location Hierarchy Data based on a Location Code and a Language Code
 
 Upon receiving a  request to fetch all the Location Hierarchy Data with input parameters (Location Code and Language Code), the system fetches the Location Hierarchy Data based on requested Location code and language code. The following steps are performed by the system:
 
@@ -118,7 +159,7 @@ Upon receiving a  request to fetch all the Location Hierarchy Data with input pa
 4. Responds to the source with all the Location Hierarchy Data based on the Location Code
 1. In case of Exceptions, system triggers relevant error messages. 
 
-#### E. Fetch the Location Hierarchy Data for the bottom next hierarchy based on a Location Code and a Language Code
+#### F. Fetch the Location Hierarchy Data for the bottom next hierarchy based on a Location Code and a Language Code
 Upon receiving a request to fetch all the Location Hierarchy Data with input parameters (Location Code and Language Code), the system fetches the Location Hierarchy Data for the next hierarchy level. The following steps are performed by the system:
 1. Validates if the request contains the following input parameters
    * Location Code - Mandatory
@@ -128,30 +169,10 @@ Upon receiving a request to fetch all the Location Hierarchy Data with input par
 1. Responds to the source with the data fetched
 1. In case of Exceptions, system should trigger an error message. 
 
-#### F. Update and Delete a Location in Location Master Database
-#### (i) Update
-On receiving a  request to update a Location with the input parameters (code, name, hierarchy_level, hierarchy_level_name, parent_loc_code, lang_code and is_active), the system updates the Location in the Location Database
-for the code received.
+#### G. Delete a Location in Location Master Database
+On receiving a request to delete a Location with the input parameters (code), the system updates the is_deleted flag to true in the Location Database against the code received. 
 
-The system performs the following steps to update the location in the Master Database:
- 
-1. Validates if all required input parameters have been received as listed below for each specific request
-   * code character (36) - Mandatory
-   * name character (128) - Mandatory
-   * hierarchy_level smallint - Mandatory
-   * hierarchy_level_name character (64) - Mandatory
-   * parent_loc_code character (32) - Mandatory
-   * lang_code character (3) - Mandatory
-   * is_active boolean - Mandatory
-2. For the code received in the request, replaces all the data received in the request against the data existing in the Location database against the same code.
-1. Deleted record are not be updated
-1. Responds with data not found error if deleted record is received in the request
-1. Responds with the Code and Language Code for the Location Hierarchy updated successfully
-1. In case of Exceptions, system triggers relevant error messages
-#### (ii) Delete
-On receiving a  request to delete a Location with the input parameters (code), the system updates the is_deleted flag to true in the Location Database against the code received. 
-
-The system performs the following steps in order to delete the loaction\s received in the code:
+The system performs the following steps in order to delete the loaction received in the code:
 1. Validates if all required input parameters have been received as listed below for each specific request
 1. Delete all records for the code received
 1. Deleted record are not be deleted again
@@ -422,15 +443,16 @@ Refer below for the process:
    * descr - character (128) - Optional
    * lang_code - character (3) - Mandatory
    * is_active - boolean - Mandatory
-2. Validates if the response contains the following attributes for a Document Type added
-   * Code
-   * Language Code
-3. Responds with the Document Type Code and Language Code for the Document Type created successfully
-1. In case of Exceptions, system triggers relevant error messages
+2. The API should not allow creation of the Document Type if the data is not received in default language
+3. If the data for the Document Type is not received in all the configured languages, the API should allow the Document Type to be created given the Point 2 is satisfied.
+4. The API should activate the Document Type while creation provided data for all the configured languages is received during the initial creation
+5. cr_by should be the Username of the user who is accessing this API
+6. cr_dtimes should be the date-time when the user is creating the Document Type
+7. If the data for all the configured languages is not received, deactivate the Document Type while creation
+8. Responds with an appropriate message for the Document Type created successfully
+9. In case of Exceptions, system triggers relevant error messages
 
-#### B. Update and Delete a Document Type in the Document Type Master Database
-
-#### (i) Update
+#### B. Update a Document Type in the Document Type Master Database
 
 On receiving a request to update a Document Type with the input parameters (code, name, descr, lang_code and is_active), the system updates the Document Type in the Document Type Database for the Code received
 
@@ -442,12 +464,17 @@ Refer below for the process:
    * lang_code - character (3) - Mandatory
    * is_active - boolean - Mandatory
 2. For the code received in the request, replaces all the data received in the request against the data existing in the Document Type database against the same code
-1. Deleted record are not be updated
-1. Responds with data not found error if deleted record is received in the request
-1. Responds with the Document Category Code and Language Code for the Document Category updated successfully
-1. In case of Exceptions, system triggers relevant error messages
+3. upd_by should be the Username of the user who is accessing this API
+upd_dtimes should be the date-time when the user updates the Document Type Details
+4. The API should not allow activation of Document Type if the data for the Document Type is not present in all the languages which are configured for a country
+5. While receiving the request for activation, If the Document Type is already Active, the API should throw an error message. Refer messages section.
+6. While receiving the request for deactivation, If the Document Type is already Inactive, the API should throw an error message. Refer messages section.
+7. Deleted record are not be updated
+8. Responds with data not found error if deleted record is received in the request
+9. Responds with the appropriate message for the Document Category updated successfully
+10. In case of Exceptions, system triggers relevant error messages
 
-#### (ii) Delete
+#### C. Delete a Document Type in the Document Type Master Database
 
 On receiving a request to delete a Document Type with the input parameters (code), the system updates the is_deleted flag to true in the Document Type Database against the code received
 
@@ -866,15 +893,14 @@ Upon receiving a request to add a Blacklisted Word with the input parameters (co
    * descr - character (256) - Optional
    * lang_code - character (3) - Mandatory
    * is_active - boolean - Mandatory
-2. Responds with the Device ID and Language Code for the Device created successfully
-1. The component  restricts the bulk creation of Master Database
-1. In case of Exceptions, system triggers error messages as received from the Database. 
+2. cr_by should be the Username of the user who is accessing this API
+3. cr_dtimes should be the date-time when the user is creating the Blacklisted Word 
+2. Responds with the appropriate message for the Device created successfully
+3. The component should restricts the bulk creation of Master Database
+4. In case of Exceptions, system triggers error messages as received from the Database. 
 
 
-#### B. Update and Delete a Blacklisted Word in Blacklisted Word Master Database
-
-
-#### (i) Update
+#### B. Update a Blacklisted Word in Blacklisted Word Master Database
 
 Upon receiving request to update a Blacklisted Word with the input parameters (code, name, descr, lang_code and is_active), the system updates the Blacklisted Word in the Blacklisted Word Database for the code received and performs the following steps:
 1. Validates if all required input parameters have been received as listed below for each specific request
@@ -883,13 +909,14 @@ Upon receiving request to update a Blacklisted Word with the input parameters (c
    * lang_code - character (3) - Mandatory
    * is_active - boolean - Mandatory
 2. For the code received in the request, replaces all the data received in the request against the data existing in the Blacklisted Word database against the same code
-3. Deleted record are not updated
-1. Responds with data not found error if deleted record is received in the request
-1. Responds with the Word and Language Code for the Blacklisted word updated successfully
-1. In case of Exceptions, system triggers relevant error messages as listed below
+3. upd_by should be the Username of the user who is accessing this API
+4. upd_dtimes should be the date-time when the user updates the Blacklisted Word Details
+5. Deleted record are not updated
+6. Responds with data not found error if deleted record is received in the request
+7. Responds with the appropriate message for the Blacklisted word updated successfully
+8. In case of Exceptions, system triggers relevant error messages as listed below
 
-
-#### (ii) Delete
+#### C. Delete a Blacklisted Word in Blacklisted Word Master Database
 
 Upon receiving a request to delete a Blacklisted Word with the input parameters (code), the system updates the is_deleted flag to true in the Blacklisted Word Database against the code received and performs the following steps:
 1. Validates if all required input parameters have been received as listed below for each specific request
@@ -1047,6 +1074,55 @@ fetches all the attributes of the user from the history table and performs the f
 1. Response will contain all the attributes for the user including the Active/Inactive status.
 1. In case of exceptions, system triggers relevant error messages.
 
+### 1.20 Document Type to Category Mapping - Map/Unmap [**[↑]**](#table-of-contents)
+#### A. Create a mapping record of Document Type and Document Category in Valid Document Mapping Master Database
+Upon receiving a request to add a mapping of Document Type and Document Category with the input parameters (doctyp_code, doccat_code) the system stores the Mapping of Document type and Document category in the Database
+
+Refer below for the process:
+1. Validates if all required input parameters have been received as listed below for each specific request
+   * doctyp_code - character - 36 - mandatory
+   * doccat_code - character - 36 - mandatory
+
+2. If the mapping does not exist
+   * is_active flag should be stored as true when the mapping is created
+   * Store the default language code against the mapping
+   * cr_by should be the User ID of the user who is accessing this API
+   * cr_dtimes should be the date-time at which the user is creating the Document Category - Document Type Mapping
+
+3. if the mapping already exist but is in inactive state
+   * Update the is_acitve flag as “True”
+   *. Updated the upd_by and upd_dtimes values against the mapping
+
+4. If the mapping already exist in active state, throw appropriate error message
+
+5. Responds with the appropriate message for the mapping being created successfully
+
+6. The API restricts the bulk creation of Master Data
+
+7. In case of Exceptions, system triggers error messages as received from the Database. 
+
+#### B. Remove a mapping record of Document Type and Document Category in Valid Document Mapping Master Database
+Upon receiving a request to add a mapping of Document Type and Document Category with the input parameters (doctyp_code, doccat_code) the system stores the Mapping of Document type and Document category in the Database
+
+Refer below for the process:
+1. Validates if all required input parameters have been received as listed below for each specific request
+   * doctyp_code - character - 36 - mandatory
+   * doccat_code - character - 36 - mandatory
+
+2.  If the Document Type is already un-mapped from Document Category, throw an appropriate error message
+
+3.  upd_by should be the User ID of the user who is accessing this API
+
+4.  upd_dtimes should be the date-time when the Document Category - Document Type Mapping is being updated
+
+5.  Change the Is_active flag to “False” for removing the mapping
+
+6. Responds with the appropriate message for the mapping being created successfully
+
+7. The API restricts the bulk creation of Master Data
+
+8. In case of Exceptions, system triggers error messages as received from the Database.
+
 ## 2. Registration Management
 ### 2.1 Registration Center Type - Create/Update/Delete [**[↑]**](#table-of-contents)
 
@@ -1077,7 +1153,6 @@ On receiving a request to update a Registration Center Type with the input param
 
 Refer below for the process:
 
-
 1. Validates if all required input parameters have been received as listed below for each specific request
 1. code - character (36) - Mandatory
    * name - character (64) - Mandatory
@@ -1096,7 +1171,6 @@ On receiving a request to delete a Registration Center Type with the input param
 
 Refer below for the process:
 
-
 1. Validates if all required input parameters have been received as listed below for each specific request
    * code - character (36) - Mandatory
 2. Delete all records for the code received
@@ -1106,94 +1180,118 @@ Refer below for the process:
 1. Responds with the Registration Center Type code for the Registration Center Type successfully deleted
 1. In case of Exceptions, system triggers relevant error messages. 
 
-### 2.2 Registration Center - Create/Read/Update/Delete [**[↑]**](#table-of-contents)
-
+### 2.2 Registration Center - Create/Read/Update/Decommission [**[↑]**](#table-of-contents)
 
 #### A. Create a Registration Center record in Master Database
 
-Upon receiving a request to add Registration Center with the input parameters (center_id, name, cntrtyp_code, addr_line1, addr_line2, addr_line3, latitude, longitude, location_code, contact_phone, contact_person, number_of_kiosks, working_hours
-per_kiosk_process_time, start_time, end_time, lunch_start_time. lunch_end_time, holiday_loc_code, timezone, lang_code and is_active), the system Stores the Registration Center in the Database
+Upon receiving a request to add Registration Center with the input parameters, the system Stores the Registration Center in the Database
 
 Refer below for the process:
 
 1. The system validates if all required input parameters have been received as listed below for each specific request
-   * center_id - character (36) - mandatory
    * name - character (128) - mandatory
-   * cntrtyp_code - character (36) - optional
-   * addr_line1 - character (256) - optional
+   * cntrtyp_code - character (36) - mandatory
+   * addr_line1 - character (256) - mandatory
    * addr_line2 - character (256) - optional
    * addr_line3 - character (256) - optional
-   * latitude - character (32) - optional
-   * longitude - character (32) - optional
+   * latitude - character (32) - mandatory
+   * longitude - character (32) - mandatory
    * location_code - character (36) - mandatory
    * contact_phone - character (16) - optional
    * contact_person - character (256) - optional
-   * number_of_kiosks - smallint - optional
-   * working_hours - character (32) - optional
-   * per_kiosk_process_time - time - optional
-   * center_start_time - time - optional
-   * center_end_time - time - optional
+   * working_hours - character (32) - mandatory
+   * per_kiosk_process_time - time - mandatory
+   * center_start_time - time - mandatory
+   * center_end_time - time - mandatory
    * lunch_start_time - time - optional
    * lunch_end_time - time - optional
-   * holiday_loc_code - character (36) - optional
+   * holiday_loc_code - character (36) - mandatory
    * timezone - string (128) - optional
    * lang_code - character (3) - mandatory
-   * is_active - boolean - mandatory
-2. Responds with the Registration Center Code and Language Code for the Registration Center created successfully
-1. The component restricts the bulk creation of Master Data
-1. In case of Exceptions, system triggers error messages as received from the Database. 
+   * zone_code - character (36) - mandatory
+2. is_active should be set as “False”
+3. number_of_kiosks should be kept as zero for creation of a Registration Center
+4. center_end_time should not be before the center_start_time
+5. Latitude and Longitude should be in format of “(-)XX.XXXX”
+   * Latitude and Longitude should contain at-least 4 digits after decimal
+6. If lunch_end_time and lunch_start_time is sent in the request,
+   * lunch_end_time should not be before the lunch_start_time
+7. The Zone received should be either same as the Zone mapped of the Administrator or a child zone of the Administrator’s Zone
+8. cr_by should be the Username of the user who is accessing this API
+9. cr_dtimes should be the date-time at which the user is creating the Registration Center
+10. Center ID should be generated by calling the Registration Center ID Generator and stored against every new Center Created
+11. The API should not allow creation of the Center if the data is not received in first primary language
+12. Responds with the appropriate message for the Registration Center created successfully
+13. History record should be stores for every creation of a new Registration Center
+14. The API should restricts the bulk creation of Master Data
+15. In case of Exceptions, system triggers error messages as received from the Database. 
 
-#### B. Update and Delete a Registration Center in the List of Registration Center Master Database
-#### (i) Update
+#### B. Update a Registration Center in the List of Registration Center Master Database
 
-
-On receiving a request to update a Registration Center with the input parameters (center_id, name, cntrtyp_code, addr_line1, addr_line2, addr_line3, latitude, longitude, location_code, contact_phone, contact_person, number_of_kiosks, working_hours, per_kiosk_process_time, start_time, end_time, lunch_start_time. lunch_end_time, holiday_loc_code, timezone, lang_code and is_active), the system updates the Registration Center Details in the List of Registration Center Database for the center_id received
+On receiving a request to update a Registration Center with the input parameters, the system updates the Registration Center Details in the List of Registration Center Database for the center_id received
 
 Refer below for the process:
 
 1. The system validates if all required input parameters have been received as listed below for each specific request
    * center_id - character (36) - mandatory
    * name - character (128) - mandatory
-   * cntrtyp_code - character (36) - optional
-   * addr_line1 - character (256) - optional
+   * cntrtyp_code - character (36) - mandatory
+   * addr_line1 - character (256) - mandatory
    * addr_line2 - character (256) - optional
    * addr_line3 - character (256) - optional
-   * latitude - character (32) - optional
-   * longitude - character (32) - optional
+   * latitude - character (32) - mandatory
+   * longitude - character (32) - mandatory
    * location_code - character (36) - mandatory
    * contact_phone - character (16) - optional
    * contact_person - character (256) - optional
-   * number_of_kiosks - smallint - optional
-   * working_hours - character (32) - optional
-   * per_kiosk_process_time - time - optional
-   * center_start_time - time - optional
-   * center_end_time - time - optional
+   * working_hours - character (32) - mandatory
+   * per_kiosk_process_time - time - mandatory
+   * center_start_time - time - mandatory
+   * center_end_time - time - mandatory
    * lunch_start_time - time - optional
    * lunch_end_time - time - optional
-   * holiday_loc_code - character (36) - optional
-   * timezone - character (64) - optional
+   * holiday_loc_code - character (36) - mandatory
+   * timezone - string (128) - optional
    * lang_code - character (3) - mandatory
+   * zone_code - character (36) - mandatory
    * is_active - boolean - mandatory
 2. For the center_id received in the request, replaces all the data received in the request against the data existing in the List of Registration Center database against the same center_id.
-1. Responds with the Registration Center Code and Language Code for the Registration Center updated successfully
-1. In case of Exceptions, system triggers relevant error messages
+3. All the mandatory input parameters should be present 
+4. center_end_time should not be before the center_start_time
+5. Latitude and Longitude should be in format of “(-)XX.XXXX”
+   * Latitude and Longitude should contain at-least 4 digits after decimal
+6. If lunch_end_time and lunch_start_time is sent in the request,
+   * lunch_end_time should not be before the lunch_start_time
+7. The Zone received should be either same as the Zone mapped of the Administrator or a child zone of the Administrator’s Zone
+8. The API should not allow activation of Center if the data for the Center is not present in all the languages which are configured for a country
+9. While receiving the request for activation, If the Center is already Active, the API should throw an error message. Refer messages section.
+10. While receiving the request for de-activation, If the Center is already In-active, the API should throw an error message. Refer messages section.
+11. upd_by should be the Username of the user who is accessing this API
+12. upd_dtimes should be the date-time at which the user is creating the Registration Center
+13. History record should be stores for every modification of a Registration Center
+14. Responds with the Registration Center Code and Language Code for the Registration Center updated successfully
+15. In case of Exceptions, system triggers relevant error messages
 
-#### (ii) Delete
+#### C. Decommission a Registration Center in the List of Registration Center Master Database
 
-
-Upon receiving a request to delete a Registration Center with the input parameters (center_id), the system updates the is_deleted flag to true in the List of Registration Center Database against the center_id received
+Upon receiving a request to Decommission a Registration Center with the input parameters (center_id), the system updates the is_deleted flag to true in the List of Registration Center Database against the center_id received
 
 Refer below for the process:
 
 
-1. The system validates if all required input parameters have been received as listed below for each specific request
+1. Validate if all required input parameters have been received as listed below for each specific request
    * center_id - character (36) - Mandatory 
-2. Responds with the Registration Center Code and Language Code for the Registration Center deleted successfully
-1. In case of Exceptions, system triggers relevant error messages
+2. Change the “is_Deleted” flag against Registration Center ID to “True”
+3. Change the “is_Active” flag to “False” against the Registration Center.
+4. upd_by should be the Username of the user who is accessing this API
+5. del_dtimes should be the date-time when the Registration Center is being decommissioned
+6. Validate if any Machine, Devices or Users are mapped to the Registration Center
+   * If any Machine, Device or User is assigned to the Registration Center, do no decommission the Registration Center, throw an appropriate error message. Refer “Messages Section”.
+7. The User accessing the API should only be able to decommission a Center under its administrative zone only
+8. Responds with the appropriate message for the Registration Center decommissioned successfully
+9. In case of Exceptions, system triggers relevant error messages
 
-
-#### C. Fetch Registration Center details based on a Registration Center ID and Language Code.
-
+#### D. Fetch Registration Center details based on a Registration Center ID and Language Code.
 
 On receiving a request to fetch Registration Center Details with the input parameters (Registration Center ID and Language Code), the system fetches all the Registration Center attributes for the Registration Center ID and Language Code received. The system only fetches active Registration Centers.
 
@@ -1221,7 +1319,7 @@ Refer below for the process:
 
 4. In case of Exceptions, system triggers relevant error messages. 
 
-#### D. Fetch Registration Center record based on a Registration center ID, Date and Language Code from the Registration Center Updation/Creation History table
+#### E. Fetch Registration Center record based on a Registration center ID, Date and Language Code from the Registration Center Updation/Creation History table
 
 On receiving a request to fetch Registration Center Creation/Updation History Detail with the input parameters (Registration Center ID, Date and Language Code), the system fetches all the attributes of Registration Center from the history table for the Registration Center ID, Date and Language Code received
 
@@ -1251,7 +1349,7 @@ Refer below for the process:
    * IsActive
 5. In case of Exceptions, system triggers relevant error messages.
 
-#### E. Fetch Registration Center details based on a Location Code and a Language Code
+#### F. Fetch Registration Center details based on a Location Code and a Language Code
 
 Upon receiving a  request to fetch the List of Registration Centers with the input parameter (Location Code and Language Code), the system fetches the list of all the Registration Centers against the Location Code and Language Code received with all the attributes for each Registration Center. The system only fetches active Registration Centers.
 
@@ -1278,7 +1376,7 @@ Refer below for the process:
    * IsActive
 4. In case of Exceptions, system triggers relevant error messages
 
-#### F. Fetch Registration Center details based on a Longitude and a Latitude, Proximity Distance and Language Code
+#### G. Fetch Registration Center details based on a Longitude and a Latitude, Proximity Distance and Language Code
 
 
 On receiving a request  to fetch the List of Registration Centers with the input parameter (Longitude and Latitude, Proximity distance and Language Code), the system fetches the  List of Registration Centers against the input parameters received. The system only fetches active Registration Centers.
@@ -1310,7 +1408,7 @@ Refer below for the process:
    * IsActive
 6. In case of Exceptions, system triggers relevant error messages
 
-#### G. Fetch the List of Registration Centers based on Location Hierarchy Level, text input and a Language Code
+#### H. Fetch the List of Registration Centers based on Location Hierarchy Level, text input and a Language Code
 
 
 Upon receiving a request to fetch the List of Registration centers with input parameters (Location Hierarchy Level, Text Input and a Language Code), the system fetches the List of Registration centers. The system only fetches active Registration Centers.
@@ -1342,7 +1440,7 @@ Refer below for the process:
    * IsActive
 6. In case of Exceptions, system triggers relevant error messages. 
 
-#### H. Validates whether a Registration Center is under working hours based on a timestamp received
+#### I. Validates whether a Registration Center is under working hours based on a timestamp received
 
 
 On receiving a request to fetch Registration Center Details with the input parameters (Registration Center ID and Date-Timestamp), the system determines the status of the Registration center as per the logic defined. 
@@ -1454,11 +1552,11 @@ Refer below for the process:
 1. In case of Exceptions, system triggers relevant error messages
 
 
-### 2.5 List of Machines - Create/Read/Update/Delete [**[↑]**](#table-of-contents)
+### 2.5 List of Machines - Create/Read/Update/Decommission [**[↑]**](#table-of-contents)
 
 #### A. Create a Machine in Master Database
 
-On receiving a request to add Machine with the input parameters (machine_id, name, mac_address, serial_num, ip_address, validity_end_dtimes, mspec_id, lang_code and is_active), the system Stores the Machine Details in the Database
+On receiving a request to add Machine with the input parameters, the system Stores the Machine Details in the Database
 
 Refer below for the process:
 
@@ -1471,23 +1569,23 @@ Refer below for the process:
    * validity_end_dtimes - timestamp
    * mspec_id - character (36) - mandatory
    * lang_code - character (3) - mandatory
+   * zone_code - character (36) - mandatory
    * is_active - boolean - mandatory
+2. The Zone received should be either same as the Zone mapped of the Administrator or a child zone of the Administrator’s Zone
+3. cr_by should be the Username of the user who is accessing this API
+4. cr_dtimes should be the date-time at which the user is creating the Machine
+5. Machine ID should be generated by calling the Machine ID Generator and stored against every new Machine Created
+6. The API should not allow creation of the Machine if the data is not received in first primary language
+7. Responds with the appropriate message for the Machine created successfully
+8. History record should be stores for every creation of a new Machine
+9. The API should restricts the bulk creation of Master Data
+10. In case of Exceptions, system triggers error messages as received from the Database. 
 
+#### B. Update a Machine in the List of Machines Master Database
 
-2. Responds with the Machine ID and Language Code for the Machine created successfully
-1. The component restricts the bulk creation of Master Data
-1. In case of Exceptions, system triggers error messages as received from the Database. 
-
-
-#### B. Update and Delete a Machine in the List of Machines Master Database
-
-#### (i) Update
-
-
-On receiving a request to update a Machine with the input parameters (machine_id, name, mac_address, serial_num, ip_address, validity_end_dtimes, mspec_id, lang_code and is_active), the system Updates the Machine Details in the List of Machines Database for the machine_id received
+On receiving a request to update a Machine with the input parameters, the system Updates the Machine Details in the List of Machines Database for the machine_id received
 
 Refer below for the process:
-
 
 1. While updating the machine ID the system Validates if all required input parameters have been received as listed below for each specific request
    * machine_id - character (36) - mandatory
@@ -1498,31 +1596,41 @@ Refer below for the process:
    * validity_end_dtimes - timestamp
    * mspec_id - character (36) - mandatory
    * lang_code - character (3) - mandatory
+   * zone_code - character (36) - mandatory
    * is_active - boolean - mandatory
-2. For the machine_id received in the request, replaces all the data received in the request against the data existing in the List of Machines database against the same machine_id.
-1. Deleted record are not updated
-1. Responds with data not found error if deleted record is received in the request
-1. Responds with the Machine ID and Language Code for the Machine updated successfully
-1. In case of Exceptions, system triggers relevant error messages. 
+2. For the machine_id received in the request, replaces all the data received in the request against the data existing in the List of Registration Center database against the same machine_id.
+3. All the mandatory input parameters should be present 
+4. The Zone received should be either same as the Zone mapped of the Administrator or a child zone of the Administrator’s Zone
+5. The API should not allow activation of Machine if the data for the Machine is not present in all the languages which are configured for a country
+6. While receiving the request for activation, If the Machine is already Active, the API should throw an error message. Refer messages section.
+7. While receiving the request for de-activation, If the Machine is already In-active, the API should throw an error message. Refer messages section.
+8. If the request has been received for Deactivating an active machine, and the machine is mapped to a Registration Center, reduce the number of kiosk by 1 for that Registration Center in the Registration Center Master DB.
+9. If the request has been received for Activating an Inactive machine, and the machine is mapped to a Registration Center, increase the number of kiosk by 1 for that Registration Center in the Registration Center Master DB.
+10. upd_by should be the Username of the user who is accessing this API
+11. upd_dtimes should be the date-time at which the user is creating the Machine
+12. History record should be stores for every modification of a Machine
+13. Responds with the Registration Center Code and Language Code for the Machine updated successfully
+14. In case of Exceptions, system triggers relevant error messages
 
-#### (ii) Delete
+#### C. Decommission a Machine in the List of Machines Master Database
 
-On receiving a request to delete a Machine with the input parameters (machine_id), the system Updates the is_deleted flag to true in the List of Machines Database against the machine_id received
+On receiving a request to decommission a Machine with the input parameters (machine_id), the system Updates the is_deleted flag to true in the List of Machines Database against the machine_id received
 
 Refer below for the process:
 
-
 1. While deleting the machine IDs the system Validates if all required input parameters have been received as listed below for each specific request
    * machine_id - character (36) - Mandatory
-2. Delete all records for the id received
-1. Deleted record are not deleted again
-1. Responds with data not found error  if deleted record is received in the request
-1. Responds with the Machine ID for the Machine deleted successfully
-1. In case of Exceptions, system triggers relevant error messages. 
+2. Change the “is_Deleted” flag against Machine ID to “True”
+3. Change the “is_Active” flag to “False” against the Machine.
+4. upd_by should be the Username of the user who is accessing this API
+5. del_dtimes should be the date-time when the Machine is being decommissioned
+6. Validate if the Machine is mapped to the Registration Center
+   * If yes, do no decommission the Machine, throw an appropriate error message. Refer “Messages Section”.
+7. The User accessing the API should only be able to decommission a Machine under its administrative zone only
+8. Responds with the appropriate message for the Machine decommissioned successfully
+9. In case of Exceptions, system triggers relevant error messages
 
-
-#### C. Fetch Machine Registration/Updation History detail based on a Machine ID and Language Code
-
+#### D. Fetch Machine Registration/Updation History detail based on a Machine ID and Language Code
 
 Upon receiving a request to fetch Machine History Registration/Updation Detail with the input parameters (Machine ID, Date and Language Code), the system Fetches all the attributes of Machine from the history table for the Machine ID, Date and Language Code received
 
@@ -1546,7 +1654,7 @@ Refer below for the process:
    * IsActive
 4. In case of Exceptions, system triggers relevant error messages
 
-#### D. Fetch Machine Details based on a Machine ID and a Language Code
+#### E. Fetch Machine Details based on a Machine ID and a Language Code
 
 
 On receiving a request to Fetch Machine Details with the input parameters (Machine ID and Language Code), the system Fetches all the Machine attributes for the Machine ID and the Language Code Received
@@ -1567,7 +1675,6 @@ Refer below for the process:
    * Machine Spec ID
    * IsActive
 5. In case of Exceptions, system triggers relevant error messages. 
-
 
 ### 2.6 Mappings of Registration Center, Machine and User Mappings - Create/Read/Delete [**[↑]**](#table-of-contents)
 
@@ -1626,11 +1733,11 @@ Refer below for the process:
 4. In case of Exceptions, system triggers relevant error messages. 
 
 
-### 2.7 List of Devices - Create/Read/Update/Delete [**[↑]**](#table-of-contents)
+### 2.7 List of Devices - Create/Read/Update/Decommission [**[↑]**](#table-of-contents)
 
 #### A. Create a Device in Master Database
 
-On receiving request to add a device with the input parameters (name, mac_address, serial_num, ip_address, dspec_id, validity_end_date, lang_code and is_active), the system Stores the device in the Database
+On receiving request to add a device with the input parameters, the system Stores the device in the Database
 
 Refer below for the process:
 
@@ -1643,14 +1750,63 @@ Refer below for the process:
    * validity_end_date - date - Optional
    * lang_code - character (3) - Mandatory
    * is_active - boolean - Mandatory
-2. Responds with the Device ID and Language Code for the Device created successfully
-1. The component restricts the bulk creation of Master Data
-1. In case of Exceptions, system triggers error messages as received from the Database.
+2. The Zone received should be either same as the Zone mapped of the Administrator or a child zone of the Administrator’s Zone
+3. cr_by should be the Username of the user who is accessing this API
+4. cr_dtimes should be the date-time at which the user is creating the Device
+5. Device ID should be generated by calling the Device ID Generator and stored against every new Device Created
+6. The API should not allow creation of the Device if the data is not received in first primary language
+7. Responds with the appropriate message for the Device created successfully
+8. History record should be stores for every creation of a new Device
+9. The API should restricts the bulk creation of Master Data
+10. In case of Exceptions, system triggers error messages as received from the Database. 
 
- 
-#### B. Fetch all the List of Devices based on Device Type and Language Code
+#### B. Update a Device in the List of Devices Master Database
 
+Upon receiving a request update a Device with the input parameters, the system Updates the Device Details in the List of Devices Database for the id received
 
+Refer below for the process:
+
+1. While updating the device in device type list the system Validates if all required input parameters have been received as listed below for each specific request
+   * id - character (36) - Mandatory
+   * name - character (64) - Mandatory
+   * mac_address - character (64) - Mandatory
+   * serial_num - character (64) - Mandatory
+   * ip_address - character (17) - Optional
+   * dspec_id - character (36) - Mandatory
+   * validity_end_date - date - Optional
+   * lang_code - character (3) - Mandatory
+   * is_active - boolean - Mandatory
+2. For the device_id received in the request, replaces all the data received in the request against the data existing in the List of Registration Center database against the same device_id.
+3. All the mandatory input parameters should be present 
+4. The Zone received should be either same as the Zone mapped of the Administrator or a child zone of the Administrator’s Zone
+5. The API should not allow activation of Device if the data for the Device is not present in all the languages which are configured for a country
+6. While receiving the request for activation, If the Device is already Active, the API should throw an error message. Refer messages section.
+7. While receiving the request for de-activation, If the Device is already In-active, the API should throw an error message. Refer messages section.
+8. upd_by should be the Username of the user who is accessing this API
+9. upd_dtimes should be the date-time at which the user is creating the Device
+10. History record should be stores for every modification of a Device
+11. Responds with the Registration Center Code and Language Code for the Device updated successfully
+12. In case of Exceptions, system triggers relevant error messages 
+
+#### C. Decommission a Device in the List of Devices Master Database
+
+Upon receiving a request to decommission a Device with the input parameters (id) and Update the is_deleted flag to true in the List of Devices Database against the id received
+
+Refer below for the process:
+
+1. While deleting the device in the device list the system validates if all required input parameters have been received as listed below for each specific request
+   * id - character (36) - Mandatory
+2. Change the “is_Deleted” flag against Device ID to “True”
+3. Change the “is_Active” flag to “False” against the Device.
+4. upd_by should be the Username of the user who is accessing this API
+5. del_dtimes should be the date-time when the Device is being decommissioned
+6. Validate if the Device is mapped to the Registration Center
+   * If yes, do no decommission the Device, throw an appropriate error message. Refer “Messages Section”.
+7. The User accessing the API should only be able to decommission a Device under its administrative zone only
+8. Responds with the appropriate message for the Machine decommissioned successfully
+9. In case of Exceptions, system triggers relevant error messages
+
+#### D. Fetch all the List of Devices based on Device Type and Language Code
 On receiving request to Fetch list of all Device with the requirement input parameter (Language Code and/or Device Type), the system Fetches all the Devices against the Language Code and/or Device Type as requested
 
 Refer below for the process:
@@ -1684,8 +1840,7 @@ Refer below for the process:
    * IsActive - Mandatory
 8. In case of Exceptions, system triggers relevant error messages. 
 
-
-#### C. Fetch Device Registration/Update History detail based on a Device ID and Language Code
+#### E. Fetch Device Registration/Update History detail based on a Device ID and Language Code
 
 On receiving request to fetch Device History Registration/Update Detail with the input parameters (Device ID, Date and Language Code), the system fetches all the attributes of Device from the history table for the Device ID, Date and Language Code received
 
@@ -1712,44 +1867,7 @@ Refer below for the process:
    * IsActive - Mandatory
 4. In case of Exceptions, system triggers relevant error messages. 
 
-#### D. Update and Delete a Device in the List of Devices Master Database
 
-#### (i) Update
-
-Upon receiving a request update a Device with the input parameters (id, name, mac_address, serial_num, ip_address, dspec_id, validity_end_date, lang_code and is_active), the system Updates the Device Details in the List of Devices Database for the id received
-
-Refer below for the process:
-
-1. While updating the device in device type list the system Validates if all required input parameters have been received as listed below for each specific request
-   * id - character (36) - Mandatory
-   * name - character (64) - Mandatory
-   * mac_address - character (64) - Mandatory
-   * serial_num - character (64) - Mandatory
-   * ip_address - character (17) - Optional
-   * dspec_id - character (36) - Mandatory
-   * validity_end_date - date - Optional
-   * lang_code - character (3) - Mandatory
-   * is_active - boolean - Mandatory
-2. For the id received in the request, replaces all the data received in the request against the data existing in the List of Devices database against the same id.
-1. Deleted record are not updated
-1. Responds with data not found error if deleted record is received in the request
-1. Responds with the Device ID and Language Code for the Device updated successfully
-1. In case of Exceptions, system triggers relevant error messages. 
-
-#### (ii) Delete
-
-Upon receiving a request to delete a Device with the input parameters (id) and Update the is_deleted flag to true in the List of Devices Database against the id received
-
-Refer below for the process:
-
-
-1. While deleting the device in the device list the system validates if all required input parameters have been received as listed below for each specific request
-   * id - character (36) - Mandatory
-2. Delete all records for the id received
-1. Deleted record are not  deleted again
-1. Responds with data not found error if deleted record is received in the request
-1. Responds with the Device ID for the Device deleted successfully
-1. In case of Exceptions, system triggers relevant error messages
 	
 
 ### 2.8 List of Device Specifications - Create/Read/Update/Delete [**[↑]**](#table-of-contents)
@@ -1869,7 +1987,7 @@ Refer below for the process:
 3. Responds with the Device Type Code and Language Code for the Device Type created successfully
 1. In case of Exceptions, system triggers relevant error messages
 
-### 2.10 Mappings of Registration Center and Machine - Create/Delete [**[↑]**](#table-of-contents)
+### 2.10 Mappings of Registration Center and Machine - Map/Unmap [**[↑]**](#table-of-contents)
 #### A. Create a mapping record of Machine and Center in Machine-Center Mapping Master Database
 Upon receiving a request to add a mapping of Machine and Center with the input parameters (regcntr_id, machine_id, and is_active), the system stores the Mapping of Machine and Center in the Database
 
@@ -1879,50 +1997,63 @@ Refer below for the process:
    * regcntr_id - character (10) – Mandatory (refers to a Registration Center stored in Registration Center)
    * machine_id - character (10) – Mandatory (refers to a Machine stored in Machine Masterdata)
    * is_active - boolean - Mandatory
-2. Responds with the Machine Id and Center ID for the mapping of Machine and Center created successfully
-1. The component restricts the bulk creation of Master Data
-1. In case of Exceptions, system triggers error messages as received from the Database. 
+2. Validate if the Registration Center belongs to the Zone of Admin or belongs to a child Zone of the Admin’s Zone
+3. Validate if the Registration Center belongs to the Zone of Machine or belongs to a child Zone of the Machine’s Zone
+4. Validate if the Machine belongs to the Zone of Admin or belongs to a child Zone of the Admin’s Zone
+5. Validate if the Registration Center and Machine received are not in decommissioned state
+6. If the above conditions in point 2, 3, 4 and 5 are not met, throw respective error messages. Refer messages section
+7. If the Machine ID is already mapped to another Registration Center ID and the mapping is Active, throw an appropriate error
+8. If the mapping is Inactive, create the new mapping
+9. Store the default language code against the mapping
+10. If the Registration Center ID - Machine ID mapping already exist but is in Inactive state, re-activate the mapping
+11. In case of Exceptions/Success, system should trigger relevant messages. Refer “Messages” sectione. 
 
 
 #### B. Delete a Center-Machine mapping in the Center-Machine mapping Master Database
 
-Upon receiving a request to delete a Center-Machine mapping with the input parameters (regcntr_id, machine_id), the system updates the is_deleted flag to true in the Center-Machine mapping Database against the input received
+Upon receiving a request to delete a Center-Machine mapping with the input parameters (regcntr_id, machine_id), the system updates the is_active flag to false in the Center-Machine mapping Database against the input received
 
 Refer below for the process:
 1. Validates if all required input parameters have been received as listed below for each specific request
    * regcntr_id - character (36) - Mandatory
    * machine_id - character (36) - Mandatory
-2. Deleted record are not be deleted again
-1. Responds with data not found error if deleted record is received in the request.
-1. Responds with the Machine Id and Center ID for the mapping of Machine and Center deleted successfully
-1. In case of Exceptions, system triggers relevant error messages .
+2. Validate if the Registration Center belongs to the Zone of Admin or belongs to a child Zone of the Admin’s Zone
+3. Validate if the Machine belongs to the Zone of Admin or belongs to a child Zone of the Admin’s Zone
+4. If the above conditions in point 3 and 4 are not met, throw respective error messages. Refer messages section
+5. If the mapping does not exist or is in inactive state, throw an appropriate error
+6. In case of Exceptions/Success, system should trigger relevant messages. Refer “Messages” section
 
-
-### 2.11 Mappings of Registration Center and Device - Create/Read/Delete [**[↑]**](#table-of-contents)
+### 2.11 Mappings of Registration Center and Device - Map/Unmap/Read [**[↑]**](#table-of-contents)
 #### A. Create a mapping record of Device and Center in Device-Center Mapping Master Database
-Upon receiving a request to add a mapping of Device and Center with the input parameters (regcntr_id, device_id, and is_active), the system stores the Mapping of Device and Center in the Database
+Upon receiving a request to add a mapping of Device and Center with the input parameters (regcntr_id, device_id), the system stores the Mapping of Device and Center in the Database
 
 Refer below for the process:
 1. Validates if all required input parameters have been received as listed below for each specific request
    * regcntr_id - character (10) – Mandatory (refers to a Registration Center stored in Registration Center)
    * device_id - character (36) – Mandatory (refers to a Device stored in Device Masterdata)
-   * is_active - boolean - Mandatory
-2. Responds with the Device Id and Center ID for the mapping of Device and Center created successfully
-1. The component restricts the bulk creation of Master Data
-1. In case of Exceptions, system triggers error messages as received from the Database. 
+2. Validate if the Registration Center belongs to the Zone of Admin or belongs to a child Zone of the Admin’s Zone
+3. Validate if the Registration Center belongs to the Zone of Device or belongs to a child Zone of the Device’s Zone
+4. Validate if the Device belongs to the Zone of Admin or belongs to a child Zone of the Admin’s Zone
+5. Validate if the Registration Center and Device received are not in decommissioned state
+6. If the above conditions in point 2, 3, 4 and 5 are not met, throw respective error messages. Refer messages section
+7. If the Device ID is already mapped to another Registration Center ID and the mapping is Active, throw an appropriate error
+8. If the mapping is Inactive, create the new mapping
+9. Store the default language code against the mapping
+10. If the Registration Center ID - Device ID mapping already exist but is in Inactive state, re-activate the mapping
+11. In case of Exceptions/Success, system should trigger relevant messages. Refer “Messages” section
 
-
-#### B. Delete a Center-Device mapping in the Center-Device mapping Master Database
-Upon receiving a request to delete a Center-Device mapping with the input parameters (regcntr_id, device_id), the system updates the is_deleted flag to true in the Center-Device mapping Database against the input received
+#### B. Unmap a Center-Device mapping in the Center-Device mapping Master Database
+Upon receiving a request to delete a Center-Device mapping with the input parameters (regcntr_id, device_id), the system updates the is_active flag to false in the Center-Device mapping Database against the input received
 
 Refer below for the process:
 1. Validates if all required input parameters have been received as listed below for each specific request
    * regcntr_id - character (36) - Mandatory
    * device_id - character (36) - Mandatory
-2. Deleted record should not be deleted again
-1. Responds with data not found error if deleted record is received in the request
-1. Responds with the Device Id and Center ID for the mapping of Device and Center deleted successfully
-1. In case of Exceptions, system triggers relevant error messages.
+2. Validate if the Registration Center belongs to the Zone of Admin or belongs to a child Zone of the Admin’s Zone
+3. Validate if the Device belongs to the Zone of Admin or belongs to a child Zone of the Admin’s Zone
+4. If the above conditions in point 3 and 4 are not met, throw respective error messages. Refer messages section
+5 If the mapping does not exist or is in inactive state, throw an appropriate error
+6. In case of Exceptions/Success, system should trigger relevant messages. Refer “Messages” section
 
 
 #### C. Fetch Device-Center History record based on the timestamp received
@@ -1978,9 +2109,43 @@ Refer below for the process:
 
 [**Link to design**](/mosip/mosip-platform/blob/master/design/kernel/kernel-masterdata.md)
 
-## 3. MISP Management 
-### 3.1 MISP - Create/Read/Update/Delete
-#### 3.1.1 License Key Allocation- Create/Read/Update/Delete [**[↑]**](#table-of-contents)
+### 2.13 Mappings of Registration Center and User - Map/Unmap [**[↑]**](#table-of-contents)
+#### A. Create a mapping record of User and Center in User-Center Mapping Master Database
+Upon receiving a request to add a mapping of User and Center with the input parameters (regcntr_id, usr_id, and is_active), the system stores the Mapping of User and Center in the Database
+
+Refer below for the process:
+1. Validates if all required input parameters have been received as listed below for each specific request
+   * regcntr_id - character (10) – Mandatory (refers to a Registration Center stored in Registration Center)
+   * usr_id - character (36) – Mandatory (refers to a User stored in User Masterdata)
+   * is_active - boolean - Mandatory
+2. Validate if the Registration Center belongs to the Zone of Admin or belongs to a child Zone of the Admin’s Zone
+3. Validate if the Registration Center belongs to the Zone of User or belongs to a child Zone of the User’s Zone
+4. Validate if the User belongs to the Zone of Admin or belongs to a child Zone of the Admin’s Zone
+5. Validate if the Registration Center and User received are not in decommissioned state
+6. If the above conditions in point 2, 3, 4 and 5 are not met, throw respective error messages. Refer messages section
+7. If the User ID is already mapped to another Registration Center ID and the mapping is Active, throw an appropriate error
+8. If the mapping is Inactive, create the new mapping
+9. Store the default language code against the mapping
+10. If the Registration Center ID - User ID mapping already exist but is in Inactive state, re-activate the mapping
+11. In case of Exceptions/Success, system should trigger relevant messages. Refer “Messages” section
+
+
+#### B. Delete a Center-User mapping in the Center-User mapping Master Database
+Upon receiving a request to delete a Center-User mapping with the input parameters (regcntr_id, usr_id), the system updates the is_active flag to false in the Center-User mapping Database against the input received
+
+Refer below for the process:
+1. Validates if all required input parameters have been received as listed below for each specific request
+   * regcntr_id - character (36) - Mandatory
+   * usr_id - character (36) - Mandatory
+2. Validate if the Registration Center belongs to the Zone of Admin or belongs to a child Zone of the Admin’s Zone
+3. Validate if the User belongs to the Zone of Admin or belongs to a child Zone of the Admin’s Zone
+4. If the above conditions in point 3 and 4 are not met, throw respective error messages. Refer messages section
+5. If the mapping does not exist or is in inactive state, throw an appropriate error
+6. In case of Exceptions/Success, system should trigger relevant messages. Refer “Messages” section
+
+## 3. MISP Management  [**[↑]**](#table-of-contents)
+### 3.1 MISP - Create/Read/Update/Delete [**[↑]**](#table-of-contents)
+#### 3.1.1 License Key Allocation- Create/Read/Update/Delete 
 
 #### A. Create MISP
 1. The system receives a request to create a MISP with input parameters (MISP ID, MISP Organization Name, MISP Contact Number, MISP Email ID, MISP Address, MISP User name, MISP Password, MISP License Key, MISP License Key Status, IsActive)
@@ -2016,7 +2181,7 @@ Refer below for the process:
 [**Link to design**](/mosip/mosip-platform/blob/master/design/kernel/kernel-licensekeymanager.md)
 
 ### Kernel API [**[↑]**](#table-of-contents)
-[**Refer to Wiki for more details on Kernel API**](Kernel-APIs)
+[**Refer to Wiki (Masterdata APIs) for more details on Kernel API**](/mosip/mosip-docs/wiki/Platform-Documentation#6-mosip-apis)
 
 
 

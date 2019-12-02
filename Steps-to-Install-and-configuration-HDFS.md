@@ -19,12 +19,15 @@ update-alternatives --display java
 For example on RHEL 7, the link is /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64/jre/bin/java, <br/>
 so JAVA_HOME should be /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64/jre.
 
-#### Edit ~/bashrc.sh or ~/hadoop/etc/hadoop/hadoop-env.sh :
+#### Edit ~/bashrc.sh:
 export JAVA_HOME={path-tojava} <br/>
 with your actual java installation path. For example on a Debian with open-jdk-8:
 ```
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-1.el7_6.x86_64/jre
 ```
+
+Note: in the further steps when u login to the hadoop account set the java path in ~/hadoop/etc/hadoop/hadoop-env.sh also.
+
 3. Get the IP of master and slave nodes using:
 ```
 ifconfig
@@ -130,21 +133,22 @@ tar -xzf hadoop-2.8.1.tar.gz
 mv hadoop-2.8.1 hadoop
 ```
 ### Set Environment Variables in each machine in the cluster
-Add Hadoop binaries to your PATH. Edit ``/home/hadoop/.bashrc`` or ``/home/hadoop/.bash_profiles`` and add the following line:
+Add Hadoop binaries to your PATH. Edit ``/home/hadoop/.bashrc`` or ``/home/hadoop/.bash_profile`` and add the following line:
 ```
-export HADOOP_HOME=$HOME/hadoop [hadoop installation directory]
+export HADOOP_HOME=$HOME/hadoop
 export HADOOP_CONF_DIR=$HOME/hadoop/etc/hadoop
 export HADOOP_MAPRED_HOME=$HOME/hadoop
 export HADOOP_COMMON_HOME=$HOME/hadoop
 export HADOOP_HDFS_HOME=$HOME/hadoop
 export YARN_HOME=$HOME/hadoop
 export PATH=$PATH:$HOME/hadoop/bin
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.191.b12-0.el7_5.x86_64/jre
 ```
 run following command to apply environment variable changes, using source command
 ```
 source /home/hadoop/.bashrc
 or
-source /home/hadoop/.bash_profiles
+source /home/hadoop/.bash_profile
 ```
 ### Configure the Master Node
 Configuration will be done on node-master and replicated to other slave nodes.
@@ -517,7 +521,7 @@ $sudo kadmin
 
 ##### to view the principals in keytab
 ```
- Klist -k -e -t mosip.keytab
+ klist -k -e -t mosip.keytab
 ```
 and so on add all the users to keytab. if you want create the separate keytab file for each application and distribute them
 

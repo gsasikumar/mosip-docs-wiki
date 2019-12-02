@@ -175,7 +175,7 @@ Refer the **Global configuration** maintained in [QA](https://github.com/mosip/m
 
 **TPM [Trusted Platform Module]:**  
 
-   To enable or disable the TPM functionality, modify the mentioned key in 'registrtaion-services/src/main/spring.properties' file.    
+   To enable or disable the TPM functionality, modify the mentioned key in 'registrtaion-services/src/main/resources/spring.properties' file.    
     - mosip.client.tpm.registration = { Y - to enable the TPM, N - to disable the TPM}.
 
 **MDM [Mosip Device Manager] Service:**  
@@ -185,6 +185,10 @@ Refer the **Global configuration** maintained in [QA](https://github.com/mosip/m
 |:------:|-----|-----|
 |1.|	mosip.mdm.enabled=N        | Y - Enable , N - Disable |  
 |2.|	mosip.reg.mdm.server.port=8080        | To run the MDM service in local machine's port.  |
+
+
+## Real biometric service installation to windows.
+Please refer to the detailed [**Real-bio-metric-service-integration**](Registration-client---Real-bio-metric-service-integration)
 
 **Network Connectivity Check:**  
    Registration client verifies the below-configured URL to check whether the system is in online or not. The application uses this URL to perform the health check before communicating with the external services.
@@ -208,8 +212,21 @@ Refer the **Global configuration** maintained in [QA](https://github.com/mosip/m
      - mosip.reg.xml.file.url={Secure JFrog repository[Https --> Hostname] url with maven-metadata.xml file.}  
      - mosip.reg.dbpath=db/reg
      - mosip.reg.app.key={contains the key to be used to decrypt the application binaries during run time}.  
+     - mosip.reg.client.tpm.availability={ Y - to enable the TPM, N - to disable the TPM, default N}.
+
+**File Location:** /registration-libs/src/main/resources/props/mosip-application.properties 
+     - mosip.reg.client.url={Reg client download url from JFrog }
+     - mosip.reg.logpath=../logs  
+     - mosip.reg.packetstorepath={where the registration packet should be stored}. 
+     - mosip.reg.healthcheck.url={Application uses this url to perform the health check before communicating with the external services. Default value: https://${environment}/v1/authmanager/actuator/health }  
+     - mosip.reg.rollback.path={where the application backup should be taken during software update} [Default: ../BackUp]  
+     - mosip.reg.db.key={contains the key to be used to connect to the derby database and decrypt the data}. 
+     - mosip.reg.cerpath=/cer//mosip_cer.cer
+     - mosip.reg.xml.file.url={Secure JFrog repository[Https --> Hostname] url with maven-metadata.xml file.}  
+     - mosip.reg.dbpath=db/reg
+     - mosip.reg.app.key={contains the key to be used to decrypt the application binaries during run time}.  
      - mosip.reg.client.tpm.availability={ Y - to enable the TPM, N - to disable the TPM, default N}.   
-     	
+     	    	
      	
 ## Dependent Services :    
 

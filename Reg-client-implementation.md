@@ -26,8 +26,8 @@ It doesn't detail about each methods level information since that are covered in
 |**External Connectivity**| DB, File system |  
 |**New Registration - Adult**| As part of New registration, individual's Demographic, documents[POI and POA] and bio-metric [fingerprint, iris and face] will be captured. If an exception of the bio-metrics is marked, then exception photo will be captured.| 
 |**New Registration - Child**| As part of New registration, individual's Demographic, documents [POI, POA and POR] and anyone of parent's bio-metric [fingerprint/iris/face(if all fingerprint and iris are marked as exception)] along with that Parent's/Guardian's RID/UIN will be captured. If an exception is marked for the parent bio-metrics, an exception photo will be captured for the parent| 
-|**UIN Update - Adult**| As part of UIN Update, individual's will have the option to select the field that would like to update. For Demographic update --> UIN number, Name, Document[only if Name/Address is selected], and anyone of the bio-metric will be captured as a mandatory values. For Bio-metric update --> UIN number, Name and Bio-metrics [fingerprint, iris and face] will be captured, if an exception marked then exception photo will be captured|
-|**UIN Update-Child**| As part of UIN Update, individual's will have the option to select which one they are going to be update. For Demographic update --> UIN Number, Name along with that Parent/Guardian Name and UIN along with anyone parent bio-metric should be captured; if any exception marked then the exception photo of the Parent/Guardian will be captured.|
+|**UIN Update - Adult**| As part of UIN Update, individual's will have the option to select the field that would like to update. For Demographic update --> UIN number, Name, Document[only if Name/Address is selected then POI for name and POA for address is mandate], and anyone of the bio-metric will be captured as a mandatory values. For Bio-metric update --> UIN number, Name and Bio-metrics [fingerprint, iris and face] will be captured, if an exception marked then exception photo will be captured|
+|**UIN Update-Child**| As part of UIN Update, individual's will have the option to select which one they are going to be update. For Demographic update --> UIN Number, Name,POR document along with that Parent/Guardian Name and UIN along with anyone parent bio-metric should be captured; if any exception marked then the exception photo of the Parent/Guardian will be captured.|
 |**Lost UIN-Adult**| As part of Lost UIN, an individual's all Bio-metrics[fingerprints, iris, and face] will be mandatory to find the lost UIN.| 
 |**Lost UIN-Child**| As part of Lost UIN, Parent/Guardian  Bio-metric will be mandatory to find the lost UIN of the child. if an exception marked then the exception photo of the parent/Guardian will be captured.| 
 
@@ -286,4 +286,6 @@ Below find the list of error code and description which are thrown from applicat
 |RestClientAuthAdvice			|REG-SDU-004	|Response header received from the web-service is not as expected					|	
 |DemographicDetailController            |KER-IDV-102    |PRID should not contain any sequential and repeated block of number for 2 or more than two digits 
 |UpdateUINController                    |KER-IDV-203    |UIN length should be as per configured digit.
-|RegistrationController                 |KER-TRL-002    |Language code not supported                 
+|RegistrationController                 |KER-TRL-002    |Language code not supported 
+|DemographicDetailController            |KER-IDV-103    | PRID length should be as configured digit  
+|RestClientUtil            |RPR-PKR-009    | Packet HashSequence did not match             

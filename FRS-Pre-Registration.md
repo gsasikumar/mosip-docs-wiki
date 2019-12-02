@@ -66,7 +66,7 @@ If the user is inactive for X minutes (X is configurable), the system notifies t
 ## 2.2 Creating an Application
 ### 2.2.1 Provide Demographic Data [**[↑]**](#table-of-contents)
 
-The Individual is provided with Demographic form based on the [**ID Object Definition**](MOSIP-ID-Object-definition) for new pre-registration application, Individual Fills Demographic Details (e.g., Full Name, Age/DOB, Gender, Residential status, Address, Mobile Number, Email Id, etc.). The system validates the fields entered, the system also checks for the Mandatory fields. 
+The Individual is provided with Demographic form based on the [**ID Object Definition**](MOSIP-ID-Object-definition) for new pre-registration application, Individual Fills Demographic Details (e.g., Full Name, Age/DOB, Gender, Residential status, Address, Mobile Number, Email Id, etc.). The system validates the fields entered, the system also checks for the Mandatory fields. Additionally, the system validates for any blacklisted words entered (as configured by the Country)
 Once validated the **Pre-Registration Id is generated** (Pre-registration Request Id) and the Demographic details provided gets mapped to that PRID.
 
 Note: Consent is sought from the user for every new application created in the system
@@ -187,15 +187,15 @@ The user opts to view the available slots for a selected registration center.
 1. Calendar day\s which are  Holidays or non-working days for the selected Registration Center are greyed out or not shown to the user
 1. For a Selected Registration Center 8 hours (configurable) are considered as working hours
 1. An Individual can view time slots of 15 minutes (configurable) each for the selected calendar day and view Available slots for every time slot shown in the selected calendar day
-1. The system auto-suggest the closest available timeslot(s) to the chosen applicant(s) and assigns it 
-1. An applicant however can further update the preference and choose the preferred timeslot
-1. An individual can book the appointment for the preferred/chosen time slot – Subsequently the timeslots are locked
+1. An applicant can further choose the preferred timeslot
+1. An individual can confirm the appointment selection of the preferred/chosen time slot – Subsequently the timeslot(s) are locked
 
 
 ### 2.4.4 Cancel Appointment [**[↑]**](#table-of-contents)
 1. An Individual can opt to cancel selected Appointment\s against application which is\are in Booked Status.
 1. In such case the system notifies the user about the successful cancellation 
 1. Following a successful Appointment Cancellation the system unlocks the time slot of the Registration Center
+1. In case a working day is changed to a non-working day by the administrator for any reason, the affected appointments will be automatically cancelled and a notification will be sent to the mobile number or email id of the resident.
 
 [**Link to design**](/mosip/mosip-platform/blob/master/design/pre-registration/pre-registration-booking-service.md)
 
@@ -203,10 +203,10 @@ Additionally, in case of any change made by the administrator in terms of updati
 [**Link to design**](/mosip/mosip-platform-mt/blob/0.9.1/design/pre-registration/pre-registration-batch-job.md)
 
 ### 2.4.5 Re-book Appointment [**[↑]**](#table-of-contents)
-1. The system provides the user with a default appointment selection: Select Consecutively available Appointment Slots.
+1. The system provides the user with the list of available Appointment Slots
 1. An Individual can select any of the Appointment Date available and any of the Appointment Slot available
 1. The Individual has to select against which Pre-Registration Id the Appointment slot is being booked
-1. The system maps appointment slot with all the Pre-Registration Ids, which are selected for Appointment Booking. 
+1. The system maps appointment slot with all the Pre-Registration Ids, which are selected for Appointment Booking
 1. If any Pre-Registration Id does not have Booking mapped, the user is notified if he wants to continue without booking
 1. An Individual at this stage may opt to search Registration Center. In this case the appointment-booking (Time Slot selected) done is removed
 1. An Individual cannot  Re-book the Appointment if the appointment Booking is less than 48 hours (configurable) from time of booking

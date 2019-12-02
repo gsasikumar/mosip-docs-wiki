@@ -1,0 +1,129 @@
+﻿code,dtype_code,dstype_code,status_code,device_id,device_sub_id,serial_number,provider_id,provider_name,purpose,firmware,make,model,expiry_date,certification_level,foundational_trust_provider_id,foundational_trust_signature,foundational_trust_certificate,dprovioder_signature,is_active,cr_by,cr_dtimes,eff_dtimes
+3000048,Iris,DoubleIris,Registered,3ec6e5ba-d96e-46c8-b147-7a3fd3f089ee,"[1,2,3]","{
+    “serialNo”: ""Serial number"",
+
+    “make”: ""EYECOOL"",
+
+    “model” : ""TCI322"",
+
+    “type”:  ""Iris Binocular""
+
+    “dp”: ""SYNCBYTE"",
+
+    “dpId”: ""SYNCBYTE.TCI322"",
+
+    “dateTime”: ""2025-01-01T00:00:00.000+05:30""
+
+}",9149779,SYNCBYTE.TCI322,SYNCBYTE,Registration,TCI322L1.0,EYECOOL,TCI322,2025-01-01T00:00:00.000+05:30,L0,,,,xyz,TRUE,superadmin,now()
+3000028,Finger,Slab,Registered,2a80d6ad-1dc8-496f-8b4a-dd78c36bdc55,"[1,2,3]","{
+    “serialNo”: ""Serial number"",
+
+    “make”: ""Greenbit"",
+
+    “model” : ""DactyScan84c"",
+
+    “type”: “Slab Fingerprint”
+
+    “dp”: ""SYNCBYTE"",
+
+    “dpId”: ""SYNCBYTE.TCI322"",
+
+    “dateTime”: ""2025-01-01T00:00:00.000+05:30""
+
+}",C8R1CP11441,SYNCBYTE.TCI322,SYNCBYTE,Registration,FSM84C1.0,Greenbit,DactyScan84c,2025-01-01T00:00:00.000+05:30,L0,,,,xyz,TRUE,superadmin,now()
+3000088,Finger,Single,Registered,35f7aaea-d30b-4186-80be-cb6f30265745,[0],"{
+    “serialNo”: ""Serial number"",
+
+    “make”: ""MC01A"",
+
+    “model” : ""SMIDCL"",
+
+    “type”: “Fingerprint”
+
+    “dp”: ""SYNCBYTE"",
+
+    “dpId”: ""SYNCBYTE.MC01A"",
+
+    “dateTime”: ""2025-01-01T00:00:00.000+05:30""
+
+}",1801230726,SYNCBYTE.MC01A,SYNCBYTE,Registration,2600,MC01A,SMIDCL,2025-01-01T00:00:00.000+05:30,L0,,,,xyz,TRUE,superadmin,now()
+3000068,Face,Full face,Registered,3dd63886-4be7-49e3-880e-57af67afcb7e,[0],"{
+    “serialNo”: ""Serial number"",
+
+    “make”: ""Microsoft"",
+
+    “model” : ""ca3e7ab9-b4c3-4ae6-8251-579ef933890f"",
+
+    “type”: “Face""
+
+    “dp”: ""SYNCBYTE"",
+
+    “dpId”: ""SYNCBYTE.TCI322"",
+
+    “dateTime”: ""2025-01-01T00:00:00.000+05:30""
+
+}",PB7EFRW,SYNCBYTE.TCI322,SYNCBYTE,Registration,TCI322L1.0,Microsoft,ca3e7ab9-b4c3-4ae6-8251-579ef933890f,2025-01-01T00:00:00.000+05:30,L0,,,,xyz,TRUE,superadmin,now()
+3000012,Iris,DoubleIris,Registered,3ec6e5ba-d96e-46c8-b147-7a3fd3f089ee,"[1,2,3]","{
+    “serialNo”: ""Serial number"",
+
+    “make”: ""EYECOOL"",
+
+    “model” : ""TCI322"",
+
+    “type”:  ""Iris Binocular""
+
+    “dp”: ""SYNCBYTE"",
+
+    “dpId”: ""SYNCBYTE.TCI322"",
+
+    “dateTime”: ""2025-01-01T00:00:00.000+05:30""
+
+}",9149772,SYNCBYTE.TCI322,SYNCBYTE,Registration,TCI322L1.0,EYECOOL,TCI322,2025-01-01T00:00:00.000+05:30,L0,,,,xyz,TRUE,superadmin,now()
+3000011,Finger,Slab,Registered,2a80d6ad-1dc8-496f-8b4a-dd78c36bdc55,"[1,2,3]","{
+    “serialNo”: ""Serial number"",
+
+    “make”: ""Greenbit"",
+
+    “model” : ""DactyScan84c"",
+
+    “type”: “Slab Fingerprint”
+
+    “dp”: ""SYNCBYTE"",
+
+    “dpId”: ""SYNCBYTE.TCI322"",
+
+    “dateTime”: ""2025-01-01T00:00:00.000+05:30""
+
+}",C8R1DP06395,SYNCBYTE.TCI322,SYNCBYTE,Registration,FSM84C1.0,Greenbit,DactyScan84c,2025-01-01T00:00:00.000+05:30,L0,,,,xyz,TRUE,superadmin,now()
+3000014,Finger,Single,Registered,35f7aaea-d30b-4186-80be-cb6f30265745,[0],"{
+    “serialNo”: ""Serial number"",
+
+    “make”: ""MC01A"",
+
+    “model” : ""SMIDCL"",
+
+    “type”: “Fingerprint”
+
+    “dp”: ""SYNCBYTE"",
+
+    “dpId”: ""SYNCBYTE.MC01A"",
+
+    “dateTime”: ""2025-01-01T00:00:00.000+05:30""
+
+}",1801160266,SYNCBYTE.MC01A,SYNCBYTE,Registration,2600,MC01A,SMIDCL,2025-01-01T00:00:00.000+05:30,L0,,,,xyz,TRUE,superadmin,now()
+3000013,Face,Full face,Registered,3dd63886-4be7-49e3-880e-57af67afcb7e,[0],"{
+    “serialNo”: ""Serial number"",
+
+    “make”: ""Microsoft"",
+
+    “model” : ""ca3e7ab9-b4c3-4ae6-8251-579ef933890f"",
+
+    “type”: “Face""
+
+    “dp”: ""SYNCBYTE"",
+
+    “dpId”: ""SYNCBYTE.TCI322"",
+
+    “dateTime”: ""2025-01-01T00:00:00.000+05:30""
+
+}",1915LZ50WLV9,SYNCBYTE.TCI322,SYNCBYTE,Registration,TCI322L1.0,Microsoft,ca3e7ab9-b4c3-4ae6-8251-579ef933890f,2025-01-01T00:00:00.000+05:30,L0,,,,xyz,TRUE,superadmin,now()

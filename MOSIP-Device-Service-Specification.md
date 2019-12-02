@@ -1,4 +1,4 @@
-#### Aug 2019 | Version: 0.9 
+#### Aug 2019 | Version: 0.9.2 
 #### Status: Draft 
 
 ## Table of Contents 
@@ -57,10 +57,15 @@ All devices that collect biometric data for MOSIP should operate within the spec
 * FPS - Frames Per Second
 * Management Server - A server run by the device provider to manage the life cycle of the biometric devices.
 * Device Registration - The process of registering the device with MOSIP servers.
+* Signature - All signature are formated as per RFC 7515.
+* header in signature - Header in signature means the attribute with "type" set to "MDSSign" "alg" set to RS256 and x5c set to base64encoded certificate.
+* payload is the byte array of the actual data, always represented as base64urlencoded.
+* signature - base64urlencoded signature bytes
 ---
 ## 3. Device Specification
 
 The MOSIP device specification provides compliance guidelines to devices for them to work with MOSIP. The compliance is based on device capability, trust and communication protocols. A MOSIP compliant device would follow the standards established in this document. It is expected that the devices are compliant to this specification and tested and validated. The details of each of these are outlined in the subsequent sections.
+
 **Device Capability:**
 The MOSIP compliant device is expected to perform the following:
 *   Should have the ability to collect one or more biometric
@@ -406,9 +411,9 @@ We recommend that countries look at ergonomics, accessibility, ease of usage, an
 
 MOSIP compliant devices provide a trust environment for the devices to be used in registration, KYC and auth scenarios. The trust level is established based on the device support for trusted execution.
 
-### Foundational Device Trust Module:
+### Foundational Trust Module (FTM):
 
-The foundational device trust module would be created using a secure microprocessor capable of performing all required biometric processing and secure storage of keys. The foundational device trust would satisfy the below requirements.
+The foundational trust module would be created using a secure microprocessor capable of performing all required biometric processing and secure storage of keys. The foundational device trust would satisfy the below requirements.
 1. The module has the ability to securely generate, store and process cryptographic keys.
 2. Generation of asymmetric keys and symmetric keys in random.
 3. The module has the ability to protect keys from extraction.
@@ -445,17 +450,31 @@ As MOSIP deals with biometrics it is imperative that all devices that connect to
 
     “model” : "Model of the device",
 
-    “type”: [“Fingerprint”, “Slab Fingerprint”, “Iris Monocular”, "Iris Binocular" , “Face"], //More types will be added.
+    “type”: [“Fingerprint”, “Iris”, “Face"], //More types will be added.
 
-    “dp”: "Device provider name",
+    “subType”: "subtypes of the biometric device",
 
-    “dpId”: "Device provider Id",
+    “deviceProvider”: "Device provider name",
+
+    “deviceProviderId”: "Device provider Id",
 
     “dateTime”: "Datetime in ISO format with timezone.  Identity request time"
 
 }
 ```
-Signed with the JSON Web Signature (RFC 7515) using the “Foundational Trust Module” Identity key, this data is the fundamental identity of the device.  Every MOSIP compliant device will need the foundational trust module.
+Signed with the JSON Web Signature (RFC 7515) using the “Foundational Trust Module” Identity key, this data is the fundamental identity of the device.  Every MOSIP compliant device will need the foundational trust module. 
+
+The only exception to this rule is for the devices that have the purpose (explained below during device registration)  as "Registration". Those devices are called as L0 where there is not FTM. These devices would sign the request with device key.
+
+Signed Digital Id would look as follows.
+```
+"digitalId": "base64urlencoded(header).base64urlencoded(payload).base64urlencoded(signature)"
+```
+Unsigned digital Id would look as follows.
+```
+"digitalId": "base64urlencoded(payload)"
+```
+payload is the Digital ID json object.
 
 **Accepted Values**:
 ```
@@ -465,11 +484,19 @@ Signed with the JSON Web Signature (RFC 7515) using the “Foundational Trust Mo
 
     model - Model of the device
 
-    type - [“Fingerprint”, “Slab Fingerprint”, “Iris”, “Face’’], //More types will be added.
+    type - [“Fingerprint”, “Iris”, “Face’’], //More types will be added.
+    
+    subType - subtype is based on the type.
 
-    dp - Device provider name, This would be a legal entity in the country,
+	Finger - “Slab”, “Single”, “Touchless”
 
-    dpId: Device provider Id issued by MOSIP
+                Iris - “Single”, “Double”,
+
+               Face - Full face
+
+    deviceProvider - Device provider name, This would be a legal entity in the country,
+
+    deviceProviderId: Device provider Id issued by MOSIP
     
     dateTime:  ISO format with timezone.  Identity request time 
 ```
@@ -505,18 +532,17 @@ Note: “Biometric Device” - is a special type and used in case if you are loo
 **Response:**
 ```
 [
-    {
-    “type”: "exact type",
+    {    
     “deviceId”: "internal Id",
-    “subType”: "subtypes of the biometric device",
     “deviceStatus”: "device status",
     “certification”: "certification level",
     “serviceVersion”: "device service version",
     “deviceSubId”: "device sub Id’s",
     “callbackId”: "baseurl to reach to the device“,
-    "digitalId": "unsigned digital id object of the device",
+    "digitalId": "unsigned digital id of the device",
+    "deviceCode": "A unique code given by MOSIP after successful registration",
     "specVersion": ["Array of supported MDS specification version"],
-    "purpose": "Auth  or Registration",
+    "purpose": "Auth  or Registration or empty if not registered",
     "error": {
         "errorcode": "101",
         "errorinfo": "Invalid JSON Value Type For Discovery.. 
@@ -527,17 +553,8 @@ Note: “Biometric Device” - is a special type and used in case if you are loo
 ```
 **Accepted values:**
 ```
-type - “Finger”, “Face”, ”Iris”
 
-subType - subtype is based on the type.
-
-	Finger - “Slab”, “Single”, “Touchless”
-
-                Iris - “Single”, “Double”,
-
-               Face - Full face
-
-deviceStatus - “Active”, “Inactive”
+deviceStatus - “Active”, “Inactive or Not Registered”
 
 certification - “L0”, “L1” - Level of certification
 
@@ -547,26 +564,23 @@ deviceId - Internal Id to identify the actual biometric device within the device
 
 deviceSubId - is the internal Id of the device. For example in case of iris capture, the device can have two modules in a single device, it is possible to address each device with a sub Id so we can identify or command each of it in isolation. Sub Id is a simple index which always starts with 1 and increases sequentially for each sub device present.
 
-callbackId - this differs as per the OS. In case of linux and windows operating systems it is a http url. In the case of android, it is the intent name. In IOS it is the url scheme. The call back url takes precedence over future request as a base url.
+callbackId - this differs as per the OS. In case of Linux and windows operating systems it is a http URL. In the case of android, it is the intent name. In IOS it is the URL scheme. The call back url takes precedence over future request as a base URL.
 
-digitalId - As per the Digital Id definition. No signature is attached. 
+digitalId - unsigned digital id as per the Digital Id definition.  
+
+deviceCode: A unique code given by MOSIP after successful registration,
 
 specVersion - Array of supported MDS specification version",
 
-purpose - Purpose of the device in the mosip ecosystem.
+purpose - Purpose of the device in the MOSIP ecosystem.
 
-errorCode - standaridized error code.
+errorCode - standardized error code.
 errorInfo - description of the error that can be displayed to end user. Multi lingual support. 
 
 ```
 Note: The response is an array that we could have a single device enumerating with multiple biometric options.
 
 Note: The service should ensure to respond only if the type parameter matches the type of device or the type parameter is a “Biometric Device”.
-
-
-
-The final JSON is Signed with the JSON Web Signature using the “Foundational Trust Module” Identity key, this data is the fundamental identity of the device.  Every MOSIP compliant device will need the foundational trust module.
-
 
 
 #### Windows/Linux:
@@ -628,8 +642,7 @@ NONE
 ```
 [
     {
-        “type”: "exact type",
-        “subType”: "subtypes of the biometric device",
+        deviceInfo: { 
         “status”: "current status",
         “deviceId”: "internal Id",
         “deviceStatus”: "device status",
@@ -638,9 +651,11 @@ NONE
         “serviceVersion”: "device service version",
         “deviceSubId”: "device sub Id’s",
         “callbackId”: "baseurl to reach to the device“,
-        "digitalId": "unsigned digital id object of the device",
+        "digitalId": "signed digital id as described in the digital id section of this document",
+        "deviceCode": "A unique code given by MOSIP after successful registration",
         "purpose": "Auth  or Registration",
         "specVersion": ["Array of supported MDS specification version"],
+         },
         "error": {
             "errorcode": "101",
             "errorinfo": "Invalid JSON Value "
@@ -652,28 +667,35 @@ NONE
 
 The final JSON is Signed with the JSON Web Signature using the “Foundational Trust Module” Identity key, this data is the fundamental identity of the device.  Every MOSIP compliant device will need the foundational trust module.
 
+So the API would respond in the following format.
+```
+[
+ {
+  "deviceInfo": "base64urlencode(header).base64urlencode(payload).base64urlencode(signature)"
+  "error": {
+     "errorcode": "100",
+      "errorinfo": "Device not registered. In this case the device info will be only base64urlencode(payload)"
+   }
+ }
+]
+```
 
 **Allowed values:**
 
 ```
-type - “Finger” “Face”, ”Iris”
-subType - subtype is based on the type.
-	Finger - “Slab”, “Single”, “Touchless”
-                Iris - “Single”, “Double”
-               Face - Full face
-status - “Ready”, “Busy”, “Not Ready”
-deviceId - Internal Id to identify the actual biometric device within the device service.
-deviceStatus - "Active" or "InActive"
-firmware - Exact version of the firmware
-certification - “L0”, “L1” - Level of certification
-timestamp - ISO format timestamp
-serviceVersion - Version of the current document.
-biometric device within the device service.
-deviceSubId - is the internal id of the device. In case of iris when we have two iris capture modules in a single device, it is possible to address each device with a sub Id so we can identify or command each of it in isolation. This in an index that always starts with 1 and increments sequentially.
-callbackId - base url to communicate
-digitalId - as defined under the digital id section.
-purpose - "Auth" or "Registration"
-specVersion: "Array of MDS specification version",
+
+deviceInfo.status - “Ready”, “Busy”, “Not Ready”, "Not Registered" 
+deviceInfo.deviceId - Internal Id to identify the actual biometric device within the device service.
+deviceInfo.deviceStatus - "Active" or "InActive"
+deviceInfo.firmware - Exact version of the firmware
+deviceInfo.certification - “L0”, “L1” - Level of certification
+deviceInfo.serviceVersion - Version of the current document.
+deviceInfo.biometric device within the device service.
+deviceInfo.deviceSubId - is the internal id of the device. In case of iris when we have two iris capture modules in a single device, it is possible to address each device with a sub Id so we can identify or command each of it in isolation. This in an index that always starts with 1 and increments sequentially.
+deviceInfo.callbackId - base URL to communicate
+deviceInfo.digitalId - as defined under the digital id section for unsigned digital id.
+deviceInfo.purpose - "Auth" or "Registration" or empty in case the status is "Not Registered"
+deviceInfo.specVersion: "Array of MDS specification version",
 error - relevant errors as defined under the "Error section" of this document
 
 ```
@@ -760,7 +782,7 @@ purpose - Allowed values are Auth| Registration
 
 version - version of the biometric block as specified in the authentication or customer registration specification.
 
-timeout - Max time the app will wait for the capture. Its expected that the api will respond back before timeout with the best frame. 
+timeout - Max time the app will wait for the capture. Its expected that the api will respond back before timeout with the best frame. All timeouts are in milliseconds
 
 captureTime - time of capture in ISO format with timezone.
 
@@ -778,7 +800,7 @@ bio.deviceId - a unique Id per device service. In case a single device handles b
 
 bio.deviceSubId  - a specific device sub Id.  Should be set to 0 if we don't know any specific device sub Id.
 
-bio.previousHash - For the first capture the previousHash is hash of empty utf8 string. From the second capture the first captures hash is used as input. This is used to chain all the captures across modalities so all captures have happened for the same transaction and during the same time period. 
+bio.previousHash - For the first capture the previousHash is hash of empty utf8 string. From the second capture the previous captures hash (as hex encoded) is used as input. This is used to chain all the captures across modalities so all captures have happened for the same transaction and during the same time period. 
 
 customOpts - If in case the device vendor has additional parameters that they can take and act accordingly then those values can be sent by the application developers to the device service.
 ```
@@ -788,102 +810,110 @@ customOpts - If in case the device vendor has additional parameters that they ca
 ```
 [
 
-        {
+        {
           "specVersion" : "MDS spec version",
-          "data": {	//The entire block is base64
+          "data": {	
 
-            "digitalId" : "Digital Id object as described in this document",
+            "digitalId" : "unsigned digital Id as described in this document",
 
-            "deviceServiceVersion": "Service version",
+            "deviceCode": "A unique code given by MOSIP after successfull registration",
 
-            "bioType": "FIR",
+            "deviceServiceVersion": "Service version",
 
-            "bioSubType": "UNKNOWN",
+            "bioType": "FIR",
 
-            “purpose”: “Auth  or Registration”,
+            "bioSubType": "UNKNOWN",
+            
+            "purpose": "Auth  or Registration",
 
-            “env”:  "target environment",
+            "env":  "target environment",
 
             "domainUri": "uri of the auth server",
 
-            "bioValue": "encrypted with session key and base64 encoded biometric data",
+            "bioValue": "encrypted with session key and base64urlencoded biometric data",
 
-            "transactionId": "unique transaction id",
+            "transactionId": "unique transaction id",
 
-            "timestamp": "ISO format datetime with time zone",
+            "timestamp": "ISO format datetime with time zone",
 
-            "requestedScore": "floating point number to represent the minimum required score for the capture",
+            "requestedScore": "floating point number to represent the minimum required score for the capture",
 
-            "qualityScore": "floating point number representing the score for the current capture"
+            "qualityScore": "floating point number representing the score for the current capture"
 
-          },
+          },
 
-          "hash": "sha256(sha256 hash of the previous data block + sha256 of the current data block before encryption)",
+          "hash": "sha256(sha256 hash in hex format of the previous data block + sha256 hash in hex format of the current data block before encryption)",
 
-          "sessionKey": "encrypted with MOSIP public key (dynamically selected based on the uri) and encoded session key biometric",
+          "sessionKey": "encrypted with MOSIP public key (dynamically selected based on the uri) and encoded session key biometric",
 
           "error": {
 
         "errorcode": "101",
 
-        "errorinfo": "Invalid JSON Value“
+        "errorinfo": "Invalid JSON Value"
+
+    }
 
     },
 
-          "signature": "base64 signature of the data block"
-
-        },
-
-        {
+        {
           "specVersion" : "MDS spec version",
-          "data": {
+          "data": {
 
-            "digitalId": "Digital Id object as described in this document",
+            "digitalId": "unsigned digital Id as described in this document",
+ 
+            "deviceCode": "A unique code given by MOSIP after successfull registration",
 
-            "deviceServiceVersion": "Service version",
+            "deviceServiceVersion": "Service version",
 
-            "bioType": "FIR",
+            "bioType": "FIR",
 
-            "bioSubType": "LEFT",
+            "bioSubType": "LEFT",
 
-            “purpose”: “Auth  or Registration”,
-            
-            “env”:  "target environment", 
+            "purpose": "Auth  or Registration",
             
-            "domainUri": "uri of the auth server"          
+            "env":  "target environment", 
+            
+            "domainUri": "uri of the auth server",          
 
-            "bioValue": "encrypted with session key and base64 encoded biometric data",
+            "bioValue": "encrypted with session key and base64urlencoded biometric data",
 
-            "transactionId": "unique transaction id",
+            "transactionId": "unique transaction id",
 
-            "timestamp": "ISO Format date time with timezone"
+            "timestamp": "ISO Format date time with timezone"
 
-          },
+          },
 
-          "hash": "sha256(sha256 hash of the previous data block + sha256 of the current data block before encryption)",
+          "hash": "sha256(sha256 hash in hex format of the previous data block + sha256 hash in hex format of the current data block before encryption)",
 
-          "sessionKey": "encrypted with MOSIP public key and encoded session key biometric",
+          "sessionKey": "encrypted with MOSIP public key and encoded session key biometric",
 
           "error": {
 
-        "errorcode": "101",
+             "errorcode": "101",
 
-        "errorinfo": "Invalid JSON Value“
+              "errorinfo": "Invalid JSON Value"
 
-    },
+         }
 
-          "signature": "base64 signature of the data block. base64 signature of the hash element"
-
-        }
+    }
 
 ]
 ```
 
 **Accepted values:**
 
-data.bioValue - Encrypted and Encoded to base64 biometric value. AES GCM encryption with a random key. The IV for the encryption is set to last 16 digits of the timestamp. ISO formated bioValue. Look at the Authentication document to understand more about the encryption.  
+data.bioValue - Encrypted and Encoded to base64urlencode biometric value. AES GCM encryption with a random key. The IV for the encryption is set to last 16 digits of the timestamp. ISO formated bioValue. Look at the Authentication document to understand more about the encryption.  
 
-data.sessionKey - Random AES key used for the encryption of the bioValue. The encryption key is encrypted using the public key with RSA OAEP. Sent as bas64
+data - The entire data object is stored as follows. 
+```
+"data" : "base64urlencode(header).base64urlencode(payload).base64urlencode(signature)
+
+payload is defined as the entire byte array of data block. The data block
+```
+
+hash - the value of the previousHash atribute in the request object or the value of hash atribute of the previous data block (used to chain every single data block) concatenated with the hex encode sha256 hash of the current data block before encryption.  
+sessionKey - Random AES key used for the encryption of the bioValue. The encryption key is encrypted using the public key with RSA OAEP. Sent as base64urlencoded
 
 #### Windows/Linux:
 
@@ -948,7 +978,8 @@ Used only for the registration module compatible devices. This api is visible on
 **Accepted Values **
 
 ```
-bio.exception: “LF_INDEX”, “LF_MIDDLE”, “LF_RING”, “LF_LITTLE”,  “LF_THUMB” “RF_INDEX”, “RF_MIDDLE”, “RF_RING”, “RF_LITTLE”,  “RF_THUMB”, “L_IRIS”, “R_IRIS”. This is an array and all the exceptions are marked. In case of an empty element assume there is no exception.
+deviceId - Internal Id
+deviceSubId - The sub id of the device thats responsoible to stream the data.
 ```
 
 **Response:**
@@ -1070,41 +1101,39 @@ bio.previousHash - The previous hash for the image captured by this device per r
 **Response:**
 
 ```
-"biometrics": [
+{"biometrics": [
 
-        {
+        {
           "specVersion" : "MDS Spec version",
-          "data": {	//The entire block is base64. One data block for each index or segment
+          
+          "data": {	
 
-            "deviceCode": "",
+            "digitalId": "Unsigned digital id of the device as per the Digital Id definition..",
 
-            "deviceProviderId": "",
+            "deviceCode": "A unique code given by MOSIP after successfull registration",
 
-            "deviceServiceId": "",
+            "deviceServiceVersion": "",
 
-            "deviceServiceVersion": "",
+            "bioSubType": "Middle Finger",
 
-            "bioSubType": "Middle Finger",
+            "purpose": "Auth  or Registration",
+            "env":  "target environment",
 
-            “purpose”: "Auth  or Registration",
-            “env”:  "target environment",
+            "bioValue": "<base64urlencoded biometric data (raw image)>",
 
-            "bioValue": "<base64 encoded biometric data (raw image)>",
+            "bioExtract": "<base64urlencoded extracted biometric (ISO format)",
 
-            “bioExtract”: <base64 encoded extracted biometric (ISO format)",
-
-            “transactionId”: <transaction Id for the current capture>,
             "registrationId": "1234567890",
 
-            "timestamp": "2019-02-15T10:01:57.086+05:30",
+            "timestamp": "2019-02-15T10:01:57.086+05:30",
 
-            "requestedScore": "<floating point number to represent the minimum required score for the capture. This ranges from 0-100>",
+            "requestedScore": "<floating point number to represent the minimum required score for the capture. This ranges from 0-100>",
 
-            "qualityScore": "<floating point number representing the score for the current capture. This ranges from 0-100>"
+            "qualityScore": "<floating point number representing the score for the current capture. This ranges from 0-100>"
 
-          },
+          },
 
-          "hash": "sha256(sha256 hash of the previous data block + sha256 of the current data block)",         
+          "hash": "sha256(sha256 hash in hex format of the previous data block + sha256 hash in hex format of the current data block)",         
 
          "error": {
 
@@ -1112,57 +1141,53 @@ bio.previousHash - The previous hash for the image captured by this device per r
 
         "errorinfo": "Invalid JSON Value Type For Discovery.. ex: {type: “Biometric Device” or “Fingerprint” or “Face” or “Iris” or “Vein”} "
 
-    },
+    }
 
-          "signature": "base64 signature of the data block. base64 signature of the hash element"
+        },
 
-        },
-
-        {
+        {
           "specVersion" : "MDS Spec version",
-          "data": {
+          "data": {
 
-            "deviceCode": "",
+            "deviceCode": "",
 
-            "deviceProviderId": "",
+            "digitalId": "Unsigned digital id of the device as per the Digital Id definition.", 
 
-            "deviceServiceId": "",
+            "deviceServiceVersion": "",
 
-            "deviceServiceVersion": "",
+            "bioSubType": "LEFT",
 
-            "bioSubType": "LEFT",
+            "purpose": "Auth  or Registration",
+            "env":  "<target environment>",             
 
-            “purpose”: "Auth  or Registration",
-            “env”:  <target environment>,             
+            "bioValue": "<base64urlencoded biometric data (raw image)>",
 
-            "bioValue": "<base64 encoded biometric data (raw image)>",
+            "bioExtract": "<base64urlencoded extracted biometric (ISO format)",
 
-            “bioExtract”: <base64 encoded extracted biometric (ISO format)",
+            "registrationId": "1234567890",
 
-            "registrationId": "1234567890",
+            "timestamp": "2019-02-15T10:01:57.086+05:30"
 
-            "timestamp": "2019-02-15T10:01:57.086+05:30"
+          },
 
-          },
-
-          "hash": "sha256(sha256 hash of the previous data block + sha256 of the current data block before encryption)",
+          "hash": "sha256(sha256 hash in hex format of the previous data block + sha256 hash in hex format of the current data block before encryption)",
 
     "error": {
 
             "errorcode": "101",
 
-            "errorinfo": "Invalid JSON Value Type For Discovery.. ex: {type: “Biometric Device” or “Fingerprint” or “Face” or “Iris” or “Vein”} “
+            "errorinfo": "Invalid JSON Value Type For Discovery.. ex: {type: “Biometric Device” or “Fingerprint” or “Face” or “Iris” or “Vein”} "
 
-        },
+        }
 
-          "signature": "base64 signature of the data block. base64 signature of the hash element"
+        }
 
-        }
-
-      ]
+      ]
+}
 ```
 
 **Accepted values:**
+data - base64urlencode(header).base64urlencode(payload).base64urlencode(signature)
 
 #### Windows/Linux: 
 
@@ -1204,51 +1229,37 @@ Type: POST
 ```
 {
 
-“deviceData”:
-
-{
-
-“type”:  "exact type".
-
-“subType”: "sub type",
-
-“status”: "current status",
+“deviceData”: { 
 
 “deviceId”: "unique Id to identify a biometric capture device",
 
-“deviceProviderName”: "device provider name",
-“deviceProviderId”: "device provider Id",
-"purpose": "Auth  or Registration",
+"purpose": "Auth  or Registration. Can not be empty",
 
-“deviceInfo”:
+“deviceInfo”: {
+    “deviceSubId”: "an array of sub Ids that are available",
+    
+    “certification”:  "certification level",
 
-{
+    "digitalId": "signed digital id of the device",
 
-    “deviceSubId”: "an array of sub Ids that are available"
+    “firmware”: "firmware version",
 
-        “firmware”: "firmware version",
+    “deviceExpiry”: "device expiry date",
 
-        “deviceModel”: "device model",
-
-        “deviceMake”: "device make",
-
-        “deviceExpiry”: "device expiry date",
-
-        “certification”:  "certification level",
-
-        “timestamp”:  "ISO format datetime with timezone",
-
+    “timestamp”:  "ISO format datetime with timezone"
     },
-“foundationalTrustProviderId” : <foundation trust provider Id>
-“foundationalTrustSignature”: <signature of the device info element>,
-“foundationTrustCertificate”: <foundation trust certificate>,
+“foundationalTrustProviderId” : "foundation trust provider Id, in case of L0 this is empty"
 
 }
-
-dpSignature:  <device provider signature>
 
 }
 ```
+Accepted Values:
+device data is sent in the following format.
+
+"deviceData" : base64urlencode(header).base64urlencode(payload).base64urlencode(signature)
+
+payload is the object in deviceData.
 
 Response:
 
@@ -1275,11 +1286,12 @@ Response:
 
     }
 
-"signature": <signed response from MOSIP>
-
 }
 
 ```
+The response is of the following format
+
+"response" : base64urlencode(header).base64urlencode(payload).base64urlencode(signature)
 
 The response should be sent to the device. The device is expected to store the deviceCode within its storage in a safe manner. This device code is used during the capture stage.
 

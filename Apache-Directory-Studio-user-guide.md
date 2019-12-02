@@ -191,3 +191,16 @@ Steps to create user role mapping
 
 2. Please select checkbox Update Existing entries and import the ldif entries.
 ![updateexistingentries.png](_images/auth/updateexistingentries.png)
+
+3. In case of Connection lookup issues, when Ldap is not able to fetch the data.
+
+       Please follow the steps 
+
+       *) Login to the machine where ldap is installed.
+
+       *) Navigate to the path where partitions are installed "/var/lib/apacheds-2.0.0.AM25/mosip/partitions".
+
+       *) Delete the folder and it contents.
+
+       *) Follow the above steps from "Create a partition" again.
+

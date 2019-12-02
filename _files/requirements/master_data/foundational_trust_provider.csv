@@ -1,0 +1,3 @@
+﻿id,vendor_name,address,email,contact_number,certificate_alias,is_active,cr_by,cr_dtimes
+21001,Dummy Provider 1,Bangalore,dummy1@dummy.com,9999999999,xyz,TRUE,now(),now()
+21002,Dummy Provider 2,Bangalore,dummy2@dummy.com,9999999999,xyz,TRUE,now(),now()

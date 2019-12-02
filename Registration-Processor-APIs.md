@@ -1,29 +1,34 @@
 This section details about the service APIs in the Registration-Processor modules
 
-[1. Packet receiver Service](#1-packet-receiver-service)
+[1. Packet receiver API](#1-packet-receiver-api)
 
-[2. Registration status Service](#2-registration-status-service)
+[2. Registration status API](#2-registration-status-api)
 
-[3. Sync Registration Service](#3-sync-registration-service)
+[3. Sync Registration API](#3-sync-registration-api)
 
-[4. Manual Adjudication Service](#4-manual-adjudication-service)
+[4. Manual Verification APIs](#4-manual-verification-apis)
 
-[5. Bio Dedupe Service](#5-bio-dedupe-service)
+[5. Bio Dedupe API](#5-bio-dedupe-api)
 
-[6. Packet Generator Service](#6-packet-generator-service)
+[6. Packet Generator API](#6-packet-generator-api)
 
-[7. Packet Uploader Service](#7-packet-uploader-service)
+[7. Packet Uploader API](#7-packet-uploader-api)
 
-[8. Registration Process Request Handler Service](#8-registration-process-request-handler-service)
+[8. Request Handler API](#8-request-handler-api)
 
-[9. Registration Transaction Service](#9-registration-transaction-service)
+[9. Registration Transaction API](#9-registration-transaction-api)
 
-# 1 Packet Receiver Service
-## 1.1 Packet-receiver service
+[10. Uincard API](#10-uincard-api)
+
+[11. Lost UIN Or RID API](#11-lost-uin-or-rid-api)
+
+[12. Update UIN API](#12-update-uin-api)
+
+# 1 Packet Receiver API
 
 - #### `POST /registrationprocessor/v1/packetreceiver/registrationpackets`
 
-This service receives registration packet from client. Before moving packet to landing zone it is sent for virus scan and then trustworthiness of the packet is validated using hash value and size.
+This API receives registration packet from reg-client. Before moving packet to landing zone virus scan is performed and then trustworthiness of the packet is validated using hash value and size.
 
 
 #### Resource URL
@@ -46,7 +51,8 @@ MultipartFile|Yes|The encrypted zip file|
 ![Request](_images/reg_processor/packet_receiver_sample_input.PNG)
 
 #### Response
-
+#### Response Header
+##### Response-Signature = `<the response signature>`
 ##### Success response
 ###### Status Code: 200
 ###### Description: Packet is in PACKET_RECEIVED status
@@ -80,11 +86,11 @@ MultipartFile|Yes|The encrypted zip file|
 }
 ```
 
-# 2 Registration Status Service
+# 2 Registration Status API
 
 - ### `POST /registrationprocessor/v1/registrationstatus/search`
 
-This service return the registration current status for list of input registration ids.
+This API return the registration current status for list of registration ids.
 
 #### Resource URL
 https://mosip.io/registrationprocessor/v1/registrationstatus/search
@@ -157,8 +163,8 @@ Record not found :
 ```
 
 
-# 3 Sync registration Service
-The registration ids has to be synced with server before uploading packet to landing zone. This service is used to syncs registration ids.
+# 3 Sync registration API
+The registration ids has to be synced with server before uploading packet to landing zone. This API is used to sync registration ids.
 
 - #### `POST /registrationprocessor/v1/registrationstatus/sync`
 
@@ -231,7 +237,8 @@ langCode|Yes|language code used |eng or ara
 }
 ```
 #### Response
-
+#### Response Header
+##### Response-Signature = `<the response signature>`
 ###### Response Code: 200
 ###### Description: Successfully synced
 
@@ -305,11 +312,11 @@ Failure response
 }
 ```
 
-# 4 Manual Adjudication Service
-## 4.1 manual-adjudication-assignment service
+# 4 Manual Verification APIs
+## 4.1 Manual Verification Assignment API
 
 - #### `POST /registrationprocessor/v1/manualverification/assignment`
-This service is used to assign one single unassigned applicant record to the input user.
+This API is used to assign one single unassigned applicant record to the input user.
 
 #### Resource URL
 https://mosip.io/registrationprocessor/v1/manualverification/assignment
@@ -375,11 +382,11 @@ Failure response
 ```
 
 
-## 4.2 manual-adjudication-decision service
+## 4.2 Manual Verification Decision API
 
 - #### `POST /registrationprocessor/v1/manualverification/decision`
 
-This service is used to get the decision from manual adjudicator for an applicant and update the decision in table.
+This API is used to get the decision from manual verifier for an applicant and update the decision in table. The packet is sent for further processing based on decision.
 
 #### Resource URL
 https://mosip.io/registrationprocessor/v1/manualverification/decision
@@ -448,11 +455,11 @@ Failure response
 }
 ```
 
-## 4.3 manual-adjudication-applicant-biometric service
+## 4.3 Manual Verification Applicant Biometric API
 
 - #### `POST /registrationprocessor/v1/manualverification/applicantBiometric`
 
-The manual adjudicator would need to verify the applicant biometric and demographic records. This service is used to get the applicant biometric from packet store by registration id.
+The manual verifier would need to verify the applicant biometric and demographic records. This API is used to get the applicant biometric file from packet.
 
 #### Resource URL
 
@@ -493,7 +500,7 @@ Success :
   "version" : "1.0",
   "responsetime": "2019-02-14T12:40:59.768Z",
   "response" : {
-	  "file": "B@629f0666"
+	  "file": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<BIR xmlns=\"http://standards.iso.org/iso-iec/19785/-3/ed-2/\">\n    <BIRInfo>\n        <Integrity>false</Integrity>\n    </BIRInfo>\n    <BIR>\n        <Version>\n            <Major>1</Major>\n            <Minor>1</Minor>\n        </Version>\n        <CBEFFVersion>\n            <Major>1</Major>\n            <Minor>1</Minor>\n        </CBEFFVersion>\n        <ns2:TestFinger xmlns:ns2=\"testschema\">Duplicate</ns2:TestFinger>\n        <BIRInfo>\n            <Integrity>false</Integrity>\n        </BIRInfo>\n        <BDBInfo>\n            <Index>9317b2fd-d022-4bdf-8edb-24078e63a673</Index>\n            <Format>\n                <Organization>Mosip</Organization>\n                <Type>7</Type>\n            </Format>\n            <CreationDate>2019-09-05T05:45:26.385Z</CreationDate>\n            <Type>Finger</Type>\n            <Subtype>Left IndexFinger</Subtype>\n            <Level>Raw</Level>\n            <Purpose>Enroll</Purpose>\n            <Quality>\n                <Algorithm>\n                    <Organization>HMAC</Organization>\n                    <Type>SHA-256</Type>\n                </Algorithm>\n                <Score>90</Score>\n            </Quality>\n        </BDBInfo>\n        <BDB>Rk1SACAyMAAAAAEaAAABPAFiAMUAxQEAAAAoKoCKAMcjUIB3ANAuZEB9AOkiZICKAIEOZIDNAIvjZIBsARIVZECMAST8ZEBGAQ8jIUA7ARCUIUBBAGkcXUDlAFfuZICvAVx3FEC+ACr2ZIBfACATXYCYAK6tUICaAJz/V0C/APhXZICuAH6LZEB9ARcMZEDKAHfsZIDrAHxsZIEOANlZZICBAFKcZIDPAUH6ZEDYATx7ZEA4AToIV0AxAUjfQ0DzACnuZICDAK4hXYC3AKLeXYBkAOUvZEDXAPBUZIC2ARl1ZEBeAQ4dZECDATXzZEBNAR0SXUBbATb8XUEiAM3XQ0D1ATdpZIDjADp0ZICkABsGZIDFABaDZAAA</BDB>\n    </BIR>\n    <BIR>\n        <Version>\n            <Major>1</Major>\n            <Minor>1</Minor>\n        </Version>\n        <CBEFFVersion>\n            <Major>1</Major>\n            <Minor>1</Minor>\n        </CBEFFVersion>\n        <ns2:TestFinger xmlns:ns2=\"testschema\">Duplicate</ns2:TestFinger>\n        <BIRInfo>\n            <Integrity>false</Integrity>\n        </BIRInfo>\n        <BDBInfo>\n            <Index>8272d67e-879b-4e5b-8993-6919c1f4ec53</Index>\n            <Format>\n                <Organization>Mosip</Organization>\n                <Type>7</Type>\n            </Format>\n            <CreationDate>2019-09-05T05:45:26.386Z</CreationDate>\n            <Type>Finger</Type>\n            <Subtype>Left LittleFinger</Subtype>\n            <Level>Raw</Level>\n            <Purpose>Enroll</Purpose>\n            <Quality>\n                <Algorithm>\n                    <Organization>HMAC</Organization>\n                    <Type>SHA-256</Type>\n                </Algorithm>\n                <Score>90</Score>\n            </Quality>\n        </BDBInfo>\n        <BDB>Rk1SACAyMAAAAAD8AAABPAFiAMUAxQEAAAAoJUB5ANY3ZICRALXPZICNARUmZICSAJ7tZICyAJ5pZIC5AJbZZEC7ATsYKIBlAH4ZZIAhAQ8kXUCuAGjpZEBeAV8EUIAsAU4VNYCtAE7tZICoAOGzZECeALnNZEB4AR6cZICnAR4pZIDJAK1ZXUA+AL+zZIBGASscZECxAUUASYCGAVcAUIBdAVYSUEDhAVL0DYBYAFiiXUCVAMC4ZEB2AQ0nZEBMAOYyZIDUAOK9ZEDhANDKUEBjATkcXUCVAUsNUEDlAKHRZEDMAUp/B0DPAHBqZEBLAGMgV4B+AE0CZAAA</BDB>\n    </BIR>\n    <BIR>\n        <Version>\n            <Major>1</Major>\n            <Minor>1</Minor>\n        </Version>\n        <CBEFFVersion>\n            <Major>1</Major>\n            <Minor>1</Minor>\n        </CBEFFVersion>\n        <ns2:TestFinger xmlns:ns2=\"testschema\">Unique</ns2:TestFinger>\n        <BIRInfo>\n            <Integrity>false</Integrity>\n        </BIRInfo>\n        <BDBInfo>\n            <Index>82dba636-f294-47d0-b3d6-88a02069c189</Index>\n            <Format>\n                <Organization>Mosip</Organization>\n                <Type>7</Type>\n            </Format>\n            <CreationDate>2019-09-05T05:45:26.386Z</CreationDate>\n            <Type>Finger</Type>\n            <Subtype>Left MiddleFinger</Subtype>\n            <Level>Raw</Level>\n            <Purpose>Enroll</Purpose>\n            <Quality>\n                <Algorithm>\n                    <Organization>HMAC</Organization>\n                    <Type>SHA-256</Type>\n                </Algorithm>\n                <Score>90</Score>\n            </Quality>\n        </BDBInfo>\n        <BDB>Rk1SACAyMAAAAAD8AAABPAFiAMUAxQEAAAAoJYCKALVpV4B8AHv1ZEC/AI1PZEBhAGsWZEDPAPJQZEBEAPslZICpASeHXYBOARoXZIC3ADl8Q0CKATwHZICWABb8ZEB4AVD+SUA+AVIFQ4BsAKn3Q4BdAJUXZEA+AJgoZIC+APVYZEDOAGPSZEDJAEdoXYB5AScPZEB5ADQGZEAQAMMnZEDeADvQQ4BGACAbXYBYABObXUCzANNKZIB4AOiSQ0CqAPxjZICIAQWSZECcAReFXUCoADz1ZIDEAR5pXUDaAEtLXYDmARBbSUDrADtASYC2ABZ7L0AdAS4YZAAA</BDB>\n    </BIR>\n    <BIR>\n        <Version>\n            <Major>1</Major>\n            <Minor>1</Minor>\n        </Version>\n        <CBEFFVersion>\n            <Major>1</Major>\n            <Minor>1</Minor>\n        </CBEFFVersion>\n        <ns2:TestFinger xmlns:ns2=\"testschema\">Duplicate</ns2:TestFinger>\n        <BIRInfo>\n            <Integrity>false</Integrity>\n        </BIRInfo>\n        <BDBInfo>\n            <Index>a4fe79e2-11f8-4a09-b5e4-8519bd7e098f</Index>\n            <Format>\n                <Organization>Mosip</Organization>\n                <Type>7</Type>\n            </Format>\n            <CreationDate>2019-09-05T05:45:26.386Z</CreationDate>\n            <Type>Finger</Type>\n            <Subtype>Left RingFinger</Subtype>\n            <Level>Raw</Level>\n            <Purpose>Enroll</Purpose>\n            <Quality>\n                <Algorithm>\n                    <Organization>HMAC</Organization>\n                    <Type>SHA-256</Type>\n                </Algorithm>\n                <Score>90</Score>\n            </Quality>\n        </BDBInfo>\n        <BDB>Rk1SACAyMAAAAAFcAAABPAFiAMUAxQEAAAAoNYCJAMS4Q4B7ALUBQ4BnAMK2ZICmAKrLZIBvAPAwXUBUAOa2ZIBbAPg5XYDOAOzCZEDSAJnOXYBfARghZICWAF31ZEBbAFIfZIDuARrEXUBCAE0eZEBsADygZICDAVkNG4DXAU+4L4AcAUEtB0B/AMmzPEB4AN4zXYCQAO+tXYC4ALVTXYBiAKQnZIBoAPguXYCUAQ6kZEB4AQ8oZEA8AOe0ZIBGAQszZIBPASEhZID3AIPVZIDkASq6ZEDKAEhpZEDtAFzdZEC1AVUlSUD0AFJgZEB0AAwHZICBAL/GQ4CoANBHZICJAJ7sZIB9APWmXUCGAIj7ZIDJAKzHXYBeAI+sZICLAHX9ZIDlANDKZEC1AGl0ZIDHAGNoZEA2ASQqUEB/AD8QZICHADeXZECfAVYQPEAxAT4cQ0A+AVIOQwAA</BDB>\n    </BIR>\n    <BIR>\n        <Ve........................................................................."
   },
   "errors": null
 }
@@ -512,11 +519,11 @@ Failure :
 }
 ```
 
-## 4.4 manual-adjudication-applicant-demographic service
+## 4.4 Manual Verification Applicant Demographic API
 
 - #### `POST /registrationprocessor/v1/manualverification/applicantDemographic`
 
-The manual adjudicator would need to verify the applicant biometric and demographic records. This service is used to get the applicant demographic from packet store by registration id.
+The manual verifier has to verify the applicant demographic information. This API is used to get the applicant demographic information from packet.
 
 #### Resource URL
 https://mosip.io/registrationprocessor/v1/manualverification/applicantDemographic
@@ -556,7 +563,7 @@ FileRequestDto|Yes|Dto containing registration id and file name|
   "version" : "1.0",
   "responsetime": "2019-02-14T12:40:59.768Z",
   "response" : {
-	  "file": "B@629f0666"
+	  "file": "{\r\n  \"identity\" : {\r\n    \"fullName\" : [ {\r\n      \"language\" : \"eng\",\r\n      \"value\" : \"Rounak Adult\"\r\n    }, {\r\n      \"language\" : \"ara\",\r\n      \"value\" : \"قخعىشن شيعمف\"\r\n    } ],\r\n    \"dateOfBirth\" : \"1991/04/29\",\r\n    \"age\" : 28,\r\n    \"gender\" : [ {\r\n      \"language\" : \"eng\",\r\n      \"value\" : \"Male\"\r\n    }, {\r\n      \"language\" : \"ara\",\r\n      \"value\" : \"الذكر\"\r\n    } ],\r\n    \"residenceStatus\" : [ {\r\n      \"language\" : \"eng\",\r\n      \"value\" : \"Non-Foreigner\"\r\n    }, {\r\n      \"language\" : \"ara\",\r\n      \"value\" : \"غير أجنبي\"\r\n    } ],\r\n    \"addressLine1\" : [ {\r\n      \"language\" : \"eng\",\r\n      \"value\" : \"Address 1\"\r\n    }, {\r\n      \"language\" : \"ara\",\r\n      \"value\" : \"شييقثسس ١\"\r\n    } ],\r\n    \"addressLine2\" : [ {\r\n      \"language\" : \"eng\",\r\n      \"value\" : \"Address 2\"\r\n    }, {\r\n      \"language\" : \"ara\",\r\n      \"value\" : \"شييقثسس ٢\"\r\n    } ],\r\n    \"region\" : [ {\r\n      \"language\" : \"eng\",\r\n      \"value\" : \"Rabat Sale Kenitra\"\r\n    }, {\r\n      \"language\" : \"ara\",\r\n      \"value\" : \"جهة الرباط سلا القنيطرة\"\r\n    } ],\r\n    \"province\" : [ {\r\n      \"language\" : \"eng\",\r\n      \"value\" : \"Kenitra\"\r\n    }, {\r\n      \"language\" : \"ara\",\r\n      \"value\" : \"القنيطرة\"\r\n    } ],\r\n    \"city\" : [ {\r\n      \"language\" : \"eng\",\r\n      \"value\" : \"Kenitra\"\r\n    }, {\r\n      \"language\" : \"ara\",\r\n      \"value\" : \"القنيطرة\"\r\n    } ],\r\n    \"postalCode\" : \"14080\",\r\n    \"phone\" : \"8763740607\",\r\n    \"email\" : \"rounak.nayak@mindtree.com\",\r\n    \"referenceIdentityNumber\" : \"8763740607\",\r\n    \"zone\" : [ {\r\n      \"language\" : \"eng\",\r\n      \"value\" : \"Ouled Oujih\"\r\n    }, {\r\n      \"language\" : \"ara\",\r\n      \"value\" : \"اولاد اوجيه\"\r\n    } ],\r\n    \"proofOfAddress\" : {\r\n      \"value\" : \"POA_Rental contract\",\r\n      \"type\" : \"RNC\",\r\n      \"format\" : \"jpg\"\r\n    },\r\n    \"proofOfIdentity\" : {\r\n      \"value\" : \"POI_Voter Identification card\",\r\n      \"type\" : \"DOC004\",\r\n      \"format\" : \"jpg\"\r\n    },\r\n    \"individualBiometrics\" : {\r\n      \"format\" : \"cbeff\",\r\n      \"version\" : 1.0,\r\n      \"value\" : \"applicant_bio_CBEFF\"\r\n    },\r\n    \"IDSchemaVersion\" : 1.0\r\n  }\r\n}"
   },
   "errors": null
 }
@@ -574,11 +581,11 @@ Failure :
   }]
 }
 ```
-## 4.5 manual-adjudication-packet-metainfo service
+## 4.5 Manual Verification Packet Info API
 
 - #### `POST /registrationprocessor/v1/manualverification/packetInfo`
 
-The manual adjudicator would need to verify the operator/supervisor/introducer information present inside packet meta info file. This service fetches the file from inside the packet by registration id.
+The manual adjudicator has to verify the operator/supervisor/introducer etc information. This API fetches the additional information from packet.
 
 #### Resource URL
 https://mosip.io/registrationprocessor/v1/manualverification/packetInfo
@@ -618,7 +625,7 @@ FileRequestDto|Yes|Dto containing registration id and file name|
   "version" : "1.0",
   "responsetime": "2019-02-14T12:40:59.768Z",
   "response" : {
-	  "file": "B@629f0666"
+	  "file": "{\r\n    \"response\": {\r\n        \"identity\": {\r\n            \"biometric\": {\r\n                \"applicant\": {\r\n                    \"leftEye\": {\r\n                        \"language\": null,\r\n                        \"label\": null,\r\n                        \"imageName\": null,\r\n                        \"type\": null,\r\n                        \"qualityScore\": 0,\r\n                        \"numRetry\": 1,\r\n                        \"forceCaptured\": false\r\n                    },\r\n                    \"rightEye\": {\r\n                        \"language\": null,\r\n                        \"label\": null,\r\n                        \"imageName\": null,\r\n                        \"type\": null,\r\n                        \"qualityScore\": 0,\r\n                        \"numRetry\": 1,\r\n                        \"forceCaptured\": false\r\n                    },\r\n                    \"leftThumb\": {\r\n                        \"language\": null,\r\n                        \"label\": null,\r\n                        \"imageName\": null,\r\n                        \"type\": null,\r\n                        \"qualityScore\": 0,\r\n                        \"numRetry\": 1,\r\n                        \"forceCaptured\": false\r\n                    },\r\n                    \"rightThumb\": {\r\n                        \"language\": null,\r\n                        \"label\": null,\r\n                        \"imageName\": null,\r\n                        \"type\": null,\r\n                        \"qualityScore\": 0,\r\n                        \"numRetry\": 1,\r\n                        \"forceCaptured\": false\r\n                    },\r\n                    \"leftIndex\": {\r\n                        \"language\": null,\r\n                        \"label\": null,\r\n                        \"imageName\": null,\r\n                        \"type\": null,\r\n                        \"qualityScore\": 0,\r\n                        \"numRetry\": 1,\r\n                        \"forceCaptured\": false\r\n                    },\r\n                    \"leftMiddle\": {\r\n                        \"language\": null,\r\n                        \"label\": null,\r\n                        \"imageName\": null,\r\n                        \"type\": null,\r\n                        \"qualityScore\": 0,\r\n                        \"numRetry\": 1,\r\n                        \"forceCaptured\": false\r\n                    },\r\n                    \"leftRing\": {\r\n                        \"language\": null,\r\n                        \"label\": null,\r\n                        \"imageName\": null,\r\n                        \"type\": null,\r\n                        \"qualityScore\": 0,\r\n                        \"numRetry\": 1,\r\n                        \"forceCaptured\": false\r\n                    },\r\n                    \"leftLittle\": {\r\n                        \"language\": null,\r\n                        \"label\": null,\r\n                        \"imageName\": null,\r\n                        \"type\": null,\r\n                        \"qualityScore\": 0,\r\n                        \"numRetry\": 1,\r\n                        \"forceCaptured\": false\r\n                    },\r\n                    \"rightIndex\": {\r\n                        \"language\": null,\r\n                        \"label\": null,\r\n                        \"imageName\": null,\r\n                        \"type\": null,\r\n                        \"qualityScore\": 0,\r\n                        \"numRetry\": 1,\r\n                        \"forceCaptured\": false\r\n                    },\r\n                    \"rightMiddle\": {\r\n                        \"language\": null,\r\n                        \"label\": null,\r\n                        \"imageName\": null,\r\n                        \"type\": null,\r\n                        \"qualityScore\": 0,\r\n                        \"numRetry\": 1,\r\n                        \"forceCaptured\": false\r\n                    },\r\n                    \"rightRing\": {\r\n                        \"language\": null,\r\n                        \"label\": null,\r\n                        \"imageName\": null,\r\n                        \"type\": null,\r\n                        \"qualityScore\": 0,\r\n                        \"numRetry\": 1,\r\n                        \"forceCaptured\": false\r\n                    },\r\n                    \"rightLittle\": {\r\n                        \"language\": null,\r\n                        \"label\": null,\r\n                        \"imageName\": null,\r\n                        \"type\": null,\r\n                        \"qualityScore\": 0,\r\n                        \"numRetry\": 1,\r\n                        \"forceCaptured\": false\r\n                    }\r\n                },\r\n                \"introducer\": null\r\n            },\r\n            \"exceptionBiometrics\": [],\r\n            \"applicantPhotograph\": {\r\n                \"language\": null,\r\n                \"label\": null,\r\n                \"photographName\": null,\r\n                \"numRetry\": 0,\r\n                \"qualityScore\": 0\r\n            },\r\n            \"exceptionPhotograph\": null,\r\n            \"documents\": [],\r\n            \"metaData\": null,\r\n            \"osiData\": null,\r\n            \"hashSequence1\": null,\r\n            \"hashSequence2\": [\r\n                {\r\n                    \"label\": \"otherFiles\",\r\n                    \"value\": [\r\n                        \"audit\"\r\n                    ]\r\n                }\r\n            ],\r\n            \"capturedRegisteredDevices\": [\r\n                {\r\n                    \"label\": \"Finger Print Scanner\",\r\n                    \"value\": \"3000026\"\r\n                },\r\n                {\r\n                    \"label\": \"Iris Scanner\",\r\n                    \"value\": \"3000046\"\r\n                },\r\n                {\r\n                    \"label\": \"Camera\",\r\n                    \"value\": \"3000066\"\r\n                },\r\n                {\r\n                    \"label\": \"Document Scanner\",\r\n                    \"value\": \"3000086\"\r\n                },\r\n                {\r\n                    \"label\": \"Printer\",\r\n                    \"value\": \"3000106\"\r\n                },\r\n                {\r\n                    \"label\": \"Finger Print Scanner\",\r\n                    \"value\": \"3000125\"\r\n                },\r\n                {\r\n                    \"label\": \"Iris Scanner\",\r\n                    \"value\": \"3000134\"\r\n                },\r\n                {\r\n                    \"label\": \"Camera\",\r\n                    \"value\": \"3000143\"\r\n                },\r\n                {\r\n                    \"label\": \"Document Scanner\",\r\n                    \"value\": \"3000152\"\r\n                },\r\n                {\r\n                    \"label\": \"Printer\",\r\n                    \"value\": \"3000161\"\r\n                },\r\n                {\r\n                    \"label\": \"Finger Print Scanner\",\r\n                    \"value\": \"3000181\"\r\n                },\r\n                {\r\n                    \"label\": \"Iris Scanner\",\r\n                    \"value\": \"3000182\"\r\n                },\r\n                {\r\n                    \"label\": \"Camera\",\r\n                    \"value\": \"3000183\"\r\n                },\r\n                {\r\n                    \"label\": \"Document Scanner\",\r\n                    \"value\": \"3000184\"\r\n                },\r\n                {\r\n                    \"label\": \"Printer\",\r\n                    \"value\": \"3000185\"\r\n                },\r\n                {\r\n                    \"label\": \"Finger Print Scanner\",\r\n                    \"value\": \"3000186\"\r\n                },\r\n                {\r\n                    \"label\": \"Iris Scanner\",\r\n                    \"value\": \"3000187\"\r\n                },\r\n                {\r\n                    \"label\": \"Camera\",\r\n                    \"value\": \"3000188\"\r\n                },\r\n                {\r\n                    \"label\": \"Document Scanner\",\r\n                    \"value\": \"3000189\"\r\n                },\r\n                {\r\n                    \"label\": \"Printer\",\r\n                    \"value\": \"3000190\"\r\n                },\r\n                {\r\n                    \"label\": \"Finger Print Scanner\",\r\n                    \"value\": \"3000191\"\r\n                },\r\n                {\r\n                    \"label\": \"Iris Scanner\",\r\n                    \"value\": \"3000192\"\r\n                },\r\n                {\r\n                    \"label\": \"Camera\",\r\n                    \"value\": \"3000193\"\r\n                },\r\n                {\r\n                    \"label\": \"Document Scanner\",\r\n                    \"value\": \"3000194\"\r\n                },\r\n                {\r\n                    \"label\": \"Printer\",\r\n                    \"value\": \"3000195\"\r\n                },\r\n                {\r\n                    \"label\": \"Finger Print Scanner\",\r\n                    \"value\": \"3000196\"\r\n                },\r\n                {\r\n                    \"label\": \"Iris Scanner\",\r\n                    \"value\": \"3000197\"\r\n                },\r\n                {\r\n                    \"label\": \"Camera\",\r\n                    \"value\": \"3000198\"\r\n                },\r\n                {\r\n                    \"label\": \"Document Scanner\",\r\n                    \"value\": \"3000199\"\r\n                },\r\n                {\r\n                    \"label\": \"Printer\",\r\n                    \"value\": \"3000200\"\r\n                },\r\n                {\r\n                    \"label\": \"Finger Print Scanner\",\r\n                    \"value\": \"3000201\"\r\n                },\r\n                {\r\n                    \"label\": \"Iris Scanner\",\r\n                    \"value\": \"3000202\"\r\n                },\r\n                {\r\n                    \"label\": \"Camera\",\r\n                    \"value\": \"3000203\"\r\n                },\r\n                {\r\n                    \"label\": \"Document Scanner\",\r\n                    \"value\": \"3000204\"\r\n                },\r\n                {\r\n                    \"label\": \"Printer\",\r\n                    \"value\": \"3000205\"\r\n                },\r\n                {\r\n                    \"label\": \"Finger Print Scanner\",\r\n                    \"value\": \"3000206\"\r\n                },\r\n                {\r\n                    \"label\": \"Iris Scanner\",\r\n                    \"value\": \"3000207\"\r\n                },\r\n                {\r\n                    \"label\": \"Camera\",\r\n                    \"value\": \"3000208\"\r\n                },\r\n                {\r\n                    \"label\": \"Document Scanner\",\r\n                    \"value\": \"3000209\"\r\n                },\r\n                {\r\n                    \"label\": \"Printer\",\r\n                    \"value\": \"3000210\"\r\n                },\r\n                {\r\n                    \"label\": \"Finger Print Scanner\",\r\n                    \"value\": \"3000211\"\r\n                },\r\n                {\r\n                    \"label\": \"Iris Scanner\",\r\n                    \"value\": \"3000212\"\r\n                },\r\n                {\r\n                    \"label\": \"Camera\",\r\n                    \"value\": \"3000213\"\r\n                },\r\n                {\r\n                    \"label\": \"Document Scanner\",\r\n                    \"value\": \"3000214\"\r\n                },\r\n                {\r\n                    \"label\": \"Printer\",\r\n                    \"value\": \"3000215\"\r\n                },\r\n                {\r\n                    \"label\": \"Finger Print Scanner\",\r\n                    \"value\": \"3000216\"\r\n                },\r\n                {\r\n                    \"label\": \"Iris Scanner\",\r\n                    \"value\": \"3000217\"\r\n                },\r\n                {\r\n                    \"label\": \"Camera\",\r\n                    \"value\": \"3000218\"\r\n                },\r\n                {\r\n                    \"label\": \"Document Scanner\",\r\n                    \"value\": \"3000219\"\r\n                },\r\n                {\r\n                    \"label\": \"Printer\",\r\n                    \"value\": \"3000220\"\r\n                },\r\n                {\r\n                    \"label\": \"Finger Print Scanner\",\r\n                    \"value\": \"3000221\"\r\n                },\r\n                {\r\n                    \"label\": \"Iris Scanner\",\r\n                    \"value\": \"3000222\"\r\n                },\r\n                {\r\n                    \"label\": \"Camera\",\r\n                    \"value\": \"3000223\"\r\n                },\r\n                {\r\n                    \"label\": \"Document Scanner\",\r\n                    \"value\": \"3000224\"\r\n                },\r\n                {\r\n                    \"label\": \"Printer\",\r\n                    \"value\": \"3000225\"\r\n                },\r\n                {\r\n                    \"label\": \"Finger Print Scanner\",\r\n                    \"value\": \"3000226\"\r\n                },\r\n                {\r\n                    \"label\": \"Iris Scanner\",\r\n                    \"value\": \"3000227\"\r\n                },\r\n                {\r\n                    \"label\": \"Camera\",\r\n                    \"value\": \"3000228\"\r\n                },\r\n                {\r\n                    \"label\": \"Document Scanner\",\r\n                    \"value\": \"3000229\"\r\n                },\r\n                {\r\n                    \"label\": \"Printer\",\r\n                    \"value\": \"3000230\"\r\n                },\r\n                {\r\n                    \"label\": \"Finger Print Scanner\",\r\n                    \"value\": \"3000231\"\r\n                },\r\n                {\r\n                    \"label\": \"Iris Scanner\",\r\n                    \"value\": \"3000232\"\r\n                },\r\n                {\r\n                    \"label\": \"Camera\",\r\n                    \"value\": \"3000233\"\r\n                },\r\n                {\r\n                    \"label\": \"Document Scanner\",\r\n                    \"value\": \"3000234\"\r\n                },\r\n                {\r\n                    \"label\": \"Printer\",\r\n                    \"value\": \"3000235\"\r\n                },\r\n                {\r\n                    \"label\": \"Finger Print Scanner\",\r\n                    \"value\": \"3000236\"\r\n                },\r\n                {\r\n                    \"label\": \"Iris Scanner\",\r\n                    \"value\": \"3000237\"\r\n                },\r\n                {\r\n                    \"label\": \"Camera\",\r\n                    \"value\": \"3000238\"\r\n                },\r\n                {\r\n                    \"label\": \"Document Scanner\",\r\n                    \"value\": \"3000239\"\r\n                },\r\n                {\r\n                    \"label\": \"Printer\",\r\n                    \"value\": \"3000240\"\r\n                },\r\n                {\r\n                    \"label\": \"Finger Print Scanner\",\r\n                    \"value\": \"3000241\"\r\n                },\r\n                {\r\n                    \"label\": \"Iris Scanner\",\r\n                    \"value\": \"3000242\"\r\n                },\r\n                {\r\n                    \"label\": \"Camera\",\r\n                    \"value\": \"3000243\"\r\n                },\r\n                {\r\n                    \"label\": \"Document Scanner\",\r\n                    \"value\": \"3000244\"\r\n                },\r\n                {\r\n                    \"label\": \"Printer\",\r\n                    \"value\": \"3000245\"\r\n                },\r\n                {\r\n                    \"label\": \"Finger Print Scanner\",\r\n                    \"value\": \"3000246\"\r\n                },\r\n                {\r\n                    \"label\": \"Iris Scanner\",\r\n                    \"value\": \"3000247\"\r\n                },\r\n                {\r\n                    \"label\": \"Camera\",\r\n                    \"value\": \"3000248\"\r\n                },\r\n                {\r\n                    \"label\": \"Document Scanner\",\r\n                    \"value\": \"3000249\"\r\n                },\r\n                {\r\n                    \"label\": \"Printer\",\r\n                    \"value\": \"3000250\"\r\n                },\r\n                {\r\n                    \"label\": \"Finger Print Scanner\",\r\n                    \"value\": \"3000251\"\r\n                },\r\n                {\r\n                    \"label\": \"Iris Scanner\",\r\n                    \"value\": \"3000252\"\r\n                },\r\n                {\r\n                    \"label\": \"Camera\",\r\n                    \"value\": \"3000253\"\r\n                },\r\n                {\r\n                    \"label\": \"Document Scanner\",\r\n                    \"value\": \"3000254\"\r\n                },\r\n                {\r\n                    \"label\": \"Printer\",\r\n                    \"value\": \"3000255\"\r\n                },\r\n                {\r\n                    \"label\": \"Finger Print Scanner\",\r\n                    \"value\": \"3000256\"\r\n                },\r\n                {\r\n                    \"label\": \"Iris Scanner\",\r\n                    \"value\": \"3000257\"\r\n                },\r\n                {\r\n                    \"label\": \"Camera\",\r\n                    \"value\": \"3000258\"\r\n                },\r\n                {\r\n                    \"label\": \"Document Scanner\",\r\n                    \"value\": \"3000259\"\r\n                },\r\n                {\r\n                    \"label\": \"Printer\",\r\n                    \"value\": \"3000260\"\r\n                },\r\n                {\r\n                    \"label\": \"Finger Print Scanner\",\r\n                    \"value\": \"3000261\"\r\n                },\r\n                {\r\n                    \"label\": \"Iris Scanner\",\r\n                    \"value\": \"3000262\"\r\n                },\r\n                {\r\n                    \"label\": \"Camera\",\r\n                    \"value\": \"3000263\"\r\n                },\r\n                {\r\n                    \"label\": \"Document Scanner\",\r\n                    \"value\": \"3000264\"\r\n                },\r\n                {\r\n                    \"label\": \"Printer\",\r\n                    \"value\": \"3000265\"\r\n                },\r\n                {\r\n                    \"label\": \"Finger Print Scanner\",\r\n                    \"value\": \"3000266\"\r\n                },\r\n                {\r\n                    \"label\": \"Iris Scanner\",\r\n                    \"value\": \"3000267\"\r\n                },\r\n                {\r\n                    \"label\": \"Camera\",\r\n                    \"value\": \"3000268\"\r\n                },\r\n                {\r\n                    \"label\": \"Document Scanner\",\r\n                    \"value\": \"3000269\"\r\n                },\r\n                {\r\n                    \"label\": \"Printer\",\r\n                    \"value\": \"3000270\"\r\n                },\r\n                {\r\n                    \"label\": \"Finger Print Scanner\",\r\n                    \"value\": \"3000271\"\r\n                },\r\n                {\r\n                    \"label\": \"Iris Scanner\",\r\n                    \"value\": \"3000272\"\r\n                },\r\n                {\r\n                    \"label\": \"Camera\",\r\n                    \"value\": \"3000273\"\r\n                },\r\n                {\r\n                    \"label\": \"Document Scanner\",\r\n                    \"value\": \"3000274\"\r\n                },\r\n                {\r\n                    \"label\": \"Printer\",\r\n                    \"value\": \"3000275\"\r\n                },\r\n                {\r\n                    \"label\": \"Finger Print Scanner\",\r\n                    \"value\": \"3000276\"\r\n                },\r\n                {\r\n                    \"label\": \"Iris Scanner\",\r\n                    \"value\": \"3000277\"\r\n                },\r\n                {\r\n                    \"label\": \"Camera\",\r\n                    \"value\": \"3000278\"\r\n                },\r\n                {\r\n                    \"label\": \"Document Scanner\",\r\n                    \"value\": \"3000279\"\r\n                },\r\n                {\r\n                    \"label\": \"Printer\",\r\n                    \"value\": \"3000280\"\r\n                },\r\n                {\r\n                    \"label\": \"Finger Print Scanner\",\r\n                    \"value\": \"3000281\"\r\n                },\r\n                {\r\n                    \"label\": \"Iris Scanner\",\r\n                    \"value\": \"3000282\"\r\n                },\r\n                {\r\n                    \"label\": \"Camera\",\r\n                    \"value\": \"3000283\"\r\n                },\r\n                {\r\n                    \"label\": \"Document Scanner\",\r\n                    \"value\": \"3000284\"\r\n                },\r\n                {\r\n                    \"label\": \"Printer\",\r\n                    \"value\": \"3000285\"\r\n                },\r\n                {\r\n                    \"label\": \"Finger Print Scanner\",\r\n                    \"value\": \"3000286\"\r\n                },\r\n                {\r\n                    \"label\": \"Iris Scanner\",\r\n                    \"value\": \"3000287\"\r\n                },\r\n                {\r\n                    \"label\": \"Camera\",\r\n                    \"value\": \"3000288\"\r\n                },\r\n                {\r\n                    \"label\": \"Document Scanner\",\r\n                    \"value\": \"3000289\"\r\n                },\r\n                {\r\n                    \"label\": \"Printer\",\r\n                    \"value\": \"3000290\"\r\n                }\r\n            ],\r\n            \"capturedNonRegisteredDevices\": null,\r\n            \"checkSum\": null,\r\n            \"uinUpdatedFields\": null\r\n        }\r\n    },\r\n    \"errors\": null,\r\n    \"id\": \"mosip.manual.verification.packetinfo\",\r\n    \"version\": \"1.0\",\r\n    \"responsetime\": \"2019-09-27T06:57:57.882Z\"\r\n}"
   },
   "errors": null
 }
@@ -638,14 +645,14 @@ Failure :
 ```
 
 
-# 5 Bio Dedupe Service
+# 5 Bio Dedupe API
 
-- #### `GET /registrationprocessor/v1/bio-dedupe/{referenceid}`
+- #### `GET /registrationprocessor/v1/bio-dedupe/biometricfile/{referenceid}`
 
-The abis would call bio-dedupe service to get the biometric cbeff file.
+The abis would call bio-dedupe callback API to get the biometric cbeff file.
 
 #### Resource URL
-https://mosip.io/registrationprocessor/v1/bio-dedupe/{referenceid}
+https://mosip.io/registrationprocessor/v1/bio-dedupe/biometricfile/{referenceid}
 
 #### Resource details
 
@@ -668,9 +675,9 @@ byte[]|Yes|byte array of CBEFF file|
 // byte array of CBEFF xml file
 ```
 
-# 6 Packet Generator Service
+# 6 Packet Generator API
 - #### `POST /registrationprocessor/v1/requesthandler/packetgenerator`
-The residence service portal would call packet generator service to activate or deactivate uin.
+The residence service portal would call packet generator API to activate or deactivate uin.
 
 #### Resource URL
 https://mosip.io/registrationprocessor/v1/requesthandler/packetgenerator
@@ -680,7 +687,7 @@ https://mosip.io/registrationprocessor/v1/requesthandler/packetgenerator
 Resource Details | Description
 ------------ | -------------
 Request format | JSON
-Response format | byte[]
+Response format | JSON
 Requires Authentication | Yes
 
 #### Parameters
@@ -721,9 +728,9 @@ PacketGeneratorRequestDto|Yes|Dto containing information required for activate o
 }
 ```
 
-# 7 Packet Uploader Service
+# 7 Packet Uploader API
 - #### `POST /registrationprocessor/v1/uploader/securezone`
-The dmz stage will call packet uploader service to upload the packet in file system(Hdfs, ceph etc). This service is a bridge between dmz and secure network. It accepts json request and connects to dmz VM to get the packet and move it to archive location.
+The dmz camel-bridge calls packet uploader API to upload the packet in file system(Hdfs, ceph etc). This service is a bridge between dmz and secure network. It accepts json request and connects to dmz VM to get the packet and move it to archive location.
 
 #### Resource URL
 https://mosip.io/registrationprocessor/v1/uploader/securezone
@@ -764,12 +771,14 @@ Packet with registrationId 10003100030000420190625111842 has not been uploaded t
 ###### Status Code:200
 ###### Description : response code is always 200 if server receives the request.
 
-# 8 Registration Process Request Handler Service
+# 8 Request Handler API
+- #### `POST /registrationprocessor/v1/requesthandler/reprint`
+The residence service portal would call this api to reprint uin card upon receiving request from the applicant.
 
-### Resource URL
-### `POST /registrationprocessor/v1/requesthandler/reprint`
+#### Resource URL
+https://mosip.io/registrationprocessor/v1/requesthandler/reprint
 
-### Resource details
+#### Resource details
 
 Resource Details | Description
 ------------ | -------------
@@ -778,100 +787,81 @@ Response format | JSON
 Requires Authentication | Yes
 
 ### Parameters
-Name | Required | Description | Default Value | Example
------|----------|-------------|---------------|--------
-PacketGeneratorRequestDto|Yes|Mandatory information required for reprint to be send: UID/VID| |
+Name | Required | Description | Comment
+-----|----------|-------------|---------------|
+id|Yes|reprint id|mosip.uincard.reprint
+version|Yes|the version for sync|1.0
+requesttime|Yes|the requesttime for sync|2019-02-14T12:40:59.768Z
+request|Yes|the request object|1.0
+cardType|Yes|the type of the card|'UIN' OR 'MASKED_UIN' 
+idType|Yes|type of id provided|'UIN' OR 'VID' 
+id|Yes|the id provided|5647294083
+registrationType|Yes|This indicates the registration type in registration processor. The camel route is decided based on this|RES_REPRINT
+centerId|Yes|center id required to create packet|10003
+machineId|Yes|machine id required to create packet|10003
+reason|No|The reason for reprint| Any string
 
-### Example Request
-Reprint request by UIN:
+#### Request
 ```JSON
 {
   "id": "mosip.uincard.reprint",
-  "version": "1.0",
-  "requesttime": "2019-08-21T04:46:21.662Z",
   "request": {
-    "centerId": "10002",
-    "machineId": "10021",
-    "reason": "Id Type and Card Type is UIN",
-    "registrationType": "RES_REPRINT",
-    "id": "7982160142",
+    "cardType": "UIN",
+    "centerId": "10003",
+    "id": "5647294083",
     "idType": "UIN",
-    "cardType": "UIN"
-  }
-}
-
-```
-
-Reprint request by VID:
-```JSON
-{
-  "id": "mosip.packet.generator",
-  "version": "1.0",
-  "requesttime": "2019-07-07T06:12:25.288Z",
-  "request": {
-    "centerId": "10031",
-    "machineId": "10011",
-    "reason": "something",
-    "registrationType": "REPRINT",
-    "id": "4215839851",
-    "idType": "VID",
-    "cardType": "MASKED_UIN"
-  }
+    "machineId": "10003",
+    "reason": "testing",
+    "registrationType": "RES_REPRINT"
+  },
+  "requesttime": "2019-09-13T11:34:13.827Z",
+  "version": "1.0"
 }
 ```
-### Example Response
+#### Response
+###### Status Code:200
+###### Description : response code is always 200 if server receives the request.
 
-Success Response:
 ```JSON
 {
     "id": "mosip.uincard.reprint",
     "version": "1.0",
-    "responsetime": "2019-08-21T04:59:39.859Z",
+    "responsetime": "2019-09-13T11:54:55.313Z",
     "response": {
-        "registrationId": "10002100210004820190821045937",
+        "registrationId": "10003100030000120190913115453",
         "status": "Packet has reached Packet Receiver",
         "message": "Packet created and uploaded"
     },
     "errors": null
 }
 ```
-Error Response:
 
-```JSON
-{ 
-	"id":"mosip.registration.reprint",			
-	"version":"1.0",	
-	"responsetime":"2007-12-03T10:15:30Z",
-	"metadata" : {
-	},
-	"response" : {
-		"status":"Re Print Error"
-	},
-	"errors":[
-		{
-		"errorCode": "<ERROR_CODE>",
-		"message": "Invalid UIN number"
-		},
-		  {
-		"errorCode" : "<ERROR_CODE>",
-		"message": "Invalid VID number"
-		}
-	]
+Error response
+
+```
+{
+  "id": "mosip.uincard.reprint",
+  "version": "1.0",
+  "responsetime": "2019-09-13T11:49:56.180Z",
+  "response": null,
+  "errors": [
+    {
+      "errorCode": "RPR-PGS-011",
+      "message": "Invalid Input Parameter - requesttime"
+    },
+    {
+      "errorCode": "RPR-RGS-015",
+      "message": "Invalid Request Value - Input Data is Incorrect"
+    }
+  ]
 }
 ```
 
-### Response codes
-200
-
-Description : response code is always 200 if server receives the request.
-
-
-
-# 9 Registration Transaction Service
-This service is used to find all the transactions for a registration id. This service accepts a registration id and returns all transactions associated with it.
+# 9 Registration Transaction API
+This API is used to find all the transactions for a registration id. This service accepts a registration id and returns all transactions associated with it.
 
 ### Resource URL
-### `POST /registrationprocessor/v1/registrationtransaction/search/{rid}`
+### `GET /registrationprocessor/v1/registrationtransaction/search/{langcode}/{rid}`
 
 
 #### Resource details
@@ -884,6 +874,7 @@ Requires Authentication | Yes
 #### Parameters
 Name | Required | Description | Comment |
 -----|----------|-------------|---------------|
+langcode|Yes|The language code|
 registrationId|Yes|The registration id|
 
 #### Request
@@ -1066,4 +1057,250 @@ Record not found :
 }
 
 ```
+# 10 Uincard API
+- #### `POST /registrationprocessor/v1/print/uincard`
+The residence service portal would call this API to get uin card upon receiving request from the applicant.
 
+#### Resource URL
+https://mosip.io/registrationprocessor/v1/print/uincard
+
+#### Resource details
+
+Resource Details | Description
+------------ | -------------
+Request format | JSON
+Response format | application/pdf
+Error Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Comment
+-----|----------|-------------|---------------|
+id|Yes|reprint id|mosip.print
+version|Yes|the version |1.0
+requesttime|Yes|the requesttime |2019-02-14T12:40:59.768Z
+request|Yes|the request object|1.0
+cardType|Yes|the type of the card|'UIN' OR 'MASKED_UIN'
+idType|Yes|type of id provided|'UIN' OR 'VID' OR 'RID'
+idValue|Yes|the id provided|5647294083
+
+#### Request
+```JSON
+{
+  "id": "mosip.registration.print",
+  "request": {
+    "cardType": "UIN",
+    "idValue": "5647294083",
+    "idType": "UIN"
+  },
+  "requesttime": "2019-09-13T11:34:13.827Z",
+  "version": "1.0"
+}
+```
+#### Response
+###### Status Code:200
+###### Description : response code is always 200 if server receives the request.
+
+Success response :
+```JSON
+// PDF bytes
+```
+
+Error response :
+
+```
+{
+  "id": "mosip.registration.print",
+  "version": "1.0",
+  "responsetime": "2019-09-18T06:28:55.676Z",
+  "errors": [
+    {
+      "errorCode": "RPR-PRT-011",
+      "message": "UIN length should be as per configured digit."
+    }
+  ],
+  "response": null
+}
+```
+
+
+# 11 Lost UIN Or RID API
+- #### `POST /registrationprocessor/v1/requesthandler/lost`
+The residence service portal would call this api to search lost uin OR rid. The request type is post since request json is expected in request body.
+
+#### Resource URL
+https://mosip.io/registrationprocessor/v1/requesthandler/lost
+
+#### Resource details
+
+Resource Details | Description
+------------ | -------------
+Request format | JSON
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Comment
+-----|----------|-------------|---------------|
+id|Yes|the id |mosip.registration.lost
+version|Yes|the version |1.0
+requesttime|Yes|the requesttime |2019-02-14T12:40:59.768Z
+request|Yes|the request object|1.0
+idType|Yes|the type of id|'UIN' OR 'RID'
+name|Yes|Fullname of the resident|resident name
+postalCode|Yes|the pincode or postalcode|postalcode of resident address
+contactType|Yes|contact type of applicant|"EMAIL" or "PHONE"
+contactValue|Yes|contact value|the email id or phone number
+langCode|Yes|Language Code|Primary or secondary language as configured by country
+
+#### Request
+```JSON
+{
+  "id": "mosip.registration.lost",
+  "requesttime": "2019-09-13T11:34:13.827Z",
+  "version": "1.0",
+  "request": {
+    "idType": "UIN",
+    "name": "Monobikash Das",
+    "postalCode": "14022",
+    "contactType": "EMAIL",
+    "contactValue": "monobikash.das@mindtree.com"
+  }
+}
+```
+#### Response
+###### Status Code:200
+###### Description : response code is always 200 if server receives the request.
+
+
+Success response :
+```JSON
+{
+    "id": "mosip.registration.lost",
+    "version": "1.0",
+    "responsetime": "2019-09-13T11:54:55.313Z",
+    "response": {
+       "idValue": "8787567820"
+    },
+    "errors": null
+}
+```
+
+Error response :
+
+```
+{
+  "id": "mosip.registration.lost",
+  "version": "1.0",
+  "responsetime": "2019-09-18T06:28:55.676Z",
+  "errors": [
+    {
+      "errorCode": "RPR-SER-001",
+      "message": "No Records Found."
+    }
+  ],
+  "response": null
+}
+```
+
+#### Failure details
+Error Code | Error Message | Error Description
+-----|----------|-------------
+RPR-SER-001 |	No Records Found	|   No Records Found
+RPR-SER-002 |   Multiple Records Found | Multiple UIN is found
+RPR-SER-003 | Invalid Input Value - ID Type | Invalid ID Type
+RPR-SER-004 | Invalid Input Value - Name cannot be NULL or Empty| Name is Empty or NULL
+RPR-SER-005 | Invalid Input Value - Contact Type | Invalid Contact Type
+
+# 12 Update UIN API
+- #### `POST /registrationprocessor/v1/requesthandler/update`
+The residence service portal would call this api to update demographic information along with documents.
+
+#### Resource URL
+https://mosip.io/registrationprocessor/v1/requesthandler/update
+
+#### Resource details
+
+Resource Details | Description
+------------ | -------------
+Request format | JSON
+Response format | JSON
+Requires Authentication | Yes
+
+### Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+id | Y | API Id | | mosip.resident.uin
+version | Y | API version | | v1
+requestTime| Y |Time when Request was captured| | 2018-12-09T06:39:04.683Z
+request: idValue| Y | UIN | | 9830872690593682
+request: idType| Y | Allowed Type of Individual ID - VID, UIN | UIN 
+request: identityJson|Y| Demographic data of an Individual| |
+request: proofOfAddress|Y| address document of an Individual| |
+request: proofOfIdentity|Y| Identity document of an Individual| |
+request: proofOfRelationship|Y| Relationship proof document of an Individual| |
+request: proofOfDateOfBirth|Y| DOB proof document of an Individual| |
+request: centerId|Y| Constant center Id of resident service portal to generate rid| |
+request: machineId|Y| Constant machine id of resident service portal to generate rid| |
+
+#### Request
+```JSON
+{
+  "id": "mosip.registration.update",
+  "version": "v1",
+  "requestTime": "2018-12-09T06:39:04.683Z",
+  "request": {
+      "idValue": "9830872690593682",
+      "idType": "UIN",
+      "centerId": "1234",
+      "machineId": "12345678",
+      "identityJson": "<base 64 encoded string>",
+      "proofOfAddress": "<base 64 encoded string>",
+      "proofOfIdentity": "<base 64 encoded string>",
+      "proofOfRelationship": "<base 64 encoded string>",
+      "proofOfDateOfBirth": "<base 64 encoded string>"
+  }
+}
+```
+#### Response
+###### Status Code:200
+###### Description : response code is always 200 if server receives the request.
+
+
+Success response :
+```JSON
+{
+  "id": "mosip.registration.update",
+  "version": "v1",
+  "responseTime": "2018-12-09T06:39:04.683Z",
+  "response": {
+    "registrationId": "10031100110005020190313110030",
+    "status": "SUCCESS",
+    "message": "Update request received"
+  },
+  "errors": null
+}
+```
+
+Error response :
+
+```
+{
+  "id": "mosip.registration.update",
+  "version": "v1",
+  "responseTime": "2018-12-09T06:39:04.683Z",
+  "response": null,
+  "errors": [
+    {
+      "errorCode": "XXX-XXX-002",
+      "errorMessage": "Invalid UIN"
+    }
+  ]
+}
+```
+
+#### Failure details
+Error Code | Error Message | Error Description
+-----|----------|-------------
+ |	Invalid UIN	|   Invalid UIN
+  |	Invalid Request type	|   Invalid Request type

@@ -20,7 +20,7 @@ Once Forked, start the process of setting up your CI/CD tools to build and run M
 In this step, we will setup jenkins and configure it. Configuration contains steps like creating credentials, creating pipelines using xml files present in MOSIP source code, connecting Jenkins to recently forked repository and creating webhooks. Lets look at these steps one by one - 
 
 ### A. Installing Jenkins version 2.150.1
-Jenkins installation is standard(see [How to install Jenkins](//jenkins.io/doc/book/installing/)), but to use MOSIP supported build pipelines you have to install Jenkins in an Redhat 7.5 environment. The prerequisite for installing Jenkins is you should have java already installed and path for JAVA_HOME is also set. Also the following plugins have to be installed
+Jenkins installation is standard(see [How to install Jenkins](//jenkins.io/doc/book/installing/)), but to use MOSIP supported build pipelines you have to install Jenkins in an Redhat 7.6 environment. The prerequisite for installing Jenkins is you should have java already installed and path for JAVA_HOME is also set. Also the following plugins have to be installed
  list of plugins - 
 * [Github Plugin](//wiki.jenkins.io/display/JENKINS/GitHub+Plugin)
 * [Artifactory Plugin](//wiki.jenkins.io/display/JENKINS/Artifactory+Plugin)
@@ -274,7 +274,7 @@ To check if the service is running, run:
 ***
 ## 5. Setup and Configure Docker Registry [**[↑]**](#table-of-content)
 In this step we will setup and configure a private docker registry, which will be basic authenticated, SSL secured. In our setup we are using azure blobs as storage for our docker images. More options for configuring registry can be found [here](//docs.docker.com/registry/configuration/)
-We are deploying Docker registry as Containerized services. For setting up the registry, [Docker](//docs.docker.com/install/) and [Docker Compose](//docs.docker.com/compose/install/) need to be installed. We have setted up the registry in a machine with Redhat 7.5 installed.<br/>
+We are deploying Docker registry as Containerized services. For setting up the registry, [Docker](//docs.docker.com/install/) and [Docker Compose](//docs.docker.com/compose/install/) need to be installed. We have setted up the registry in a machine with Redhat 7.6 installed.<br/>
 Once installation is done, the yaml files which we will be using to setup the registry can be found in this [link](https://github.com/mosip/mosip-infra/tree/master/deployment/cloud/docker-registry)
 We are using Registry image : registry:2.5.1, registry with any other version can be deployed from [here](//hub.docker.com/_/registry). <br/>For routing purpose, we are using HAproxy image dockercloud/haproxy:1.6.2, other options such as ngnix etc. can also be used for the same purpose.<br/>
 We have the following docker-compose files, under this [link](https://github.com/mosip/mosip-infra/tree/master/deployment/cloud/docker-registry)
@@ -600,6 +600,10 @@ You can read more about it https://fedoraproject.org/wiki/EPEL.
     ```
     sudo certbot --nginx certonly
     ```
+To renew ssl certificate -
+    ```
+    sudo certbot renew
+    ```
 
 **Troubleshooting:** If you facing getting this issue in nginx <br/> (13: Permission denied) while connecting to upstream:[nginx] <br/>
 Please  run below command - 
@@ -618,7 +622,7 @@ ClamAV is a free, cross-platform and open-source antivirus software toolkit able
 #### Steps to install ClamAV in RHEL-7.5
 To install clamAV first we need to install EPEL Repository:
 ```
-$ yum install epel-release
+$ sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 ```
 After that we need to install ClamAV and its related tools. 
 ```
@@ -657,8 +661,10 @@ ClamAV update process started at Thu May 23 07:25:44 2019
 .
 .
 main.cvd is up to date (version: 58, sigs: 4566249, f-level: 60, builder: sigmgr)
-daily.cld is up to date (version: 25457, sigs: 1578165, f-level: 63, builder: raynman)
-bytecode.cvd is up to date (version: 328, sigs: 94, f-level: 63, builder: neo)
+Downloading daily-25584.cdiff [100%]
+daily.cld updated (version: 25584, sigs: 1779512, f-level: 63, builder: raynman)
+bytecode.cld is up to date (version: 331, sigs: 94, f-level: 63, builder: anvilleg)
+Database updated (6345855 signatures) from database.clamav.net (IP: 104.16.218.84)
 ```
 We will create a service of freshclam so that freshclam will run in the daemon mode and periodically check for updates throughout the day. To do that we will create a service file for freshclam - 
 ```
@@ -709,7 +715,7 @@ Add following lines at the end of clamd.service file.
 [Install]
 WantedBy=multi-user.target
 ```
-And also remove `%i` symbol from various locations. Note that at the end of the editing the service file should look something like this - 
+And also remove `%i` symbol from various locations (ex: Description and ExecStart options). Note that at the end of the editing the service file should look something like this - 
 ```
 [Unit]
 Description = clamd scanner daemon
@@ -753,8 +759,7 @@ $ sudo firewall-cmd --zone=public --add-port=3310/tcp --permanent
 $ sudo firewall-cmd --reload
 ```
 
-##### Reference link:
-https://www.golinuxcloud.com/steps-install-configure-clamav-antivirus-centos-linux</div>
+##### Reference link: [link](https://www.golinuxcloud.com/steps-install-configure-clamav-antivirus-centos-linux</div>)
 
 
 ### 6.4 Steps to Install and configuration CEPH 
@@ -941,8 +946,23 @@ Kernel Keymanager Service is setup outside of Kubernetes cluster on a standalone
 
 To deploy keymanager service, follow below steps -
 1.  Prerequiste:<br/>
-       *  A machine with RHEL 7.5 installed.
+       *  A machine with RHEL 7.6 installed.
        * Docker installed and Docker service enabled.
+
+Steps to install Docker ce.
+
+     $ sudo yum install http://mirror.centos.org/centos/7/extras/x86_64/Packages/container-selinux-2.107-3.el7.noarch.rpm
+
+     $ sudo yum -y install lvm2 device-mapper device-mapper-persistent-data device-mapper-event device-mapper-libs    device-mapper-event-libs
+
+    $ sudo wget https://download.docker.com/linux/centos/docker-ce.repo -O /etc/yum.repos.d/docker-ce.repo
+
+    $ sudo yum -y install docker-ce
+
+    $ sudo systemctl start docker
+
+    $ sudo systemctl status docker
+
 
 2. Open port 8088 on the VM:
 
@@ -954,6 +974,8 @@ sudo firewall-cmd --reload
 **Note:** if firewall is not installed in VM, install with “sudo yum install firewall”
 
 And also open the port.
+
+3. ensure that config server is already deployed.
 
 **Process to deploy Services in VM through JenkinsFile:**
 
@@ -987,7 +1009,7 @@ ActiveMQ is the message broker used for MOSIP Registartion processor module.
 #### Installation steps
 * ``` <version> ``` : please check http://www.apache.org/dist/activemq/ to find out the latest version. Tested ActiveMQ version - 5.4.1. 
 * Prerequiste:<br/>
-        A machine with RHEL 7.5 installed, Docker installed and Docker service enabled.
+        A machine with RHEL 7.6 installed, Docker installed and Docker service enabled.
 * Download activemq using command - <br/>
 ``` wget https://archive.apache.org/dist/activemq/5.14.3/apache-activemq-5.14.3-bin.tar.gz ```
 * Extract the archive <br/>
@@ -1045,7 +1067,52 @@ registration.processor.queue.printpostaladdress={postal_queue_address}
 ```
 ## 7. Configuring MOSIP [**[↑]**](#table-of-content)
 
-We are using Spring cloud configuration server in MOSIP for storing and serving distributed configurations across all the applications and environments.
+### MOSIP database object deployment / configuration
+
+Database deployment consists of the following 4 categories of objects to be deployed on postgresql database.
+
+1. **User / Roles:** In MOSIP, the following user / roles are defined to perform various activities
+
+	* **sysadmin:** sysadmin user/role is a super administrator role, who will have all the privileges to performa any task within the database.
+	
+	* **dbadmin:** dbadmin user / role is created to handle all the database administration activities db monitoring, performance tuning, backups, restore, replication setup, etc.
+	
+	* **appadmin:** appadmin user / role is used to perform all the DDL (Data Definition Language) tasks. All the db objects that are created in these databases will be owned by appadmin user.
+	
+	* **Application User:** Each application will have a user / role created to perform DML (Data Manipulation Language) tasks like CRUD operations (select, insert, update, delete). The user prereguser, is created to connect from the application to perform all the DML activities. Similarly, we will have masteruser, prereguser, reguser, idauser, idrepouser, kerneluser, audituser, regprcuser to perform DML tasks for master, pre-registration, registration, ida, ID repository, kernel, audit and registration processor modules respectively.
+
+	**Note:** From the above set of roles only application user / role is specific to a application / module. The other user / roles are common which needs to be  created per postresql db instance / server.
+	
+2. **Database and Schema:** Each application / module of MOSIP platform will have a database and schema defined. All the objects (tables) related to an application / module would be created under the respective database / schema. In MOSIP the following database and scehmas are defined
+
+|application / module name|Database tool|database Name|schema name|
+|---------------------------|-----------------|-----------------|-------------------|
+|Master / Administration module|postgresql|mosip_master|master|
+|Kernel|postgresql|mosip_kernel|kernel|
+|Pre-registration |postgresql|mosip_prereg|prereg|
+|Registration|Apache Derby|mosip_reg|reg|
+|Registration Processor|postgresql|mosip_regprc|regprc|
+|ID Authentication|postgresql|mosip_ida|ida|
+|ID Repository|postgresql|mosip_idrepo|idrepo|
+|Audit|postgresql|mosip_audit|audit|
+|IAM|postgresql|mosip_iam|iam|
+|idmap|postgresql|mosip_idmap|idmap|
+
+**Note:** These databases can be deployed on single or separate database servers / instances.
+
+3. **DB Objects (Tables):** All the tables of each application / module will be created in their respective database and schema. appadmin user / role will own these objects and the respective application user / role will have access to perform DML operations on these objects.
+
+4. **Seed Data:** MOSIP platform is designed to provide most of its features to be configured in the system. These configuration are deployed with default setup on config server and few in database. Few of these configuration can be modified / updated by the MOSIP administrator. These configuration include, system configurations, master datasetup, etc. The steps to add new center, machine / device is detailed in [**Guidelines for Adding Centers, Machine, Users and Devices**](https://github.com/mosip/mosip-docs/wiki/Guidelines-for-Adding-Centers,-Machine,-User-and-Devices) 
+
+The system configuration and master data is available under the respective application / database related folder. for example, the master data configuration is available in csv file format under [**folder**](https://github.com/mosip/mosip-platform/tree/master/db_scripts/mosip_master/dml).
+
+The scripts to create the above objects are available under [db_scripts](https://github.com/mosip/mosip-platform/tree/master/db_scripts). To deploy the database objects of each application / module **except registration client**, please refer to [README.MD](https://github.com/mosip/mosip-platform/blob/master/db_scripts/README.MD) file. These scripts will contain the deployment of all the DB object categories. 
+
+**Note: Please skip Registration client related deployment scripts (Apache derby DB specific) as this will be executed as part of registration client software installation.**
+
+### Setup and configure MOSIP
+
+We are using kubernetes configuration server in MOSIP for storing and serving distributed configurations across all the applications and environments.
 
 We are storing all applications' configuration in config-templates folder inside our Github Repository [here](https://github.com/mosip/mosip-config.git).
 
@@ -1143,53 +1210,6 @@ ldap_1_DS.datastore.port
 **_database_username
 ```
 
-
-
-
-
-### MOSIP database object deployment / configuration
-
-Database deployment consists of the following 4 categories of objects to be deployed on postgresql database.
-
-1. **User / Roles:** In MOSIP, the following user / roles are defined to perform various activities
-
-	* **sysadmin:** sysadmin user/role is a super administrator role, who will have all the privileges to performa any task within the database.
-	
-	* **dbadmin:** dbadmin user / role is created to handle all the database administration activities db monitoring, performance tuning, backups, restore, replication setup, etc.
-	
-	* **appadmin:** appadmin user / role is used to perform all the DDL (Data Definition Language) tasks. All the db objects that are created in these databases will be owned by appadmin user.
-	
-	* **Application User:** Each application will have a user / role created to perform DML (Data Manipulation Language) tasks like CRUD operations (select, insert, update, delete). The user prereguser, is created to connect from the application to perform all the DML activities. Similarly, we will have masteruser, prereguser, reguser, idauser, idrepouser, kerneluser, audituser, regprcuser to perform DML tasks for master, pre-registration, registration, ida, ID repository, kernel, audit and registration processor modules respectively.
-
-	**Note:** From the above set of roles only application user / role is specific to a application / module. The other user / roles are common which needs to be  created per postresql db instance / server.
-	
-2. **Database and Schema:** Each application / module of MOSIP platform will have a database and schema defined. All the objects (tables) related to an application / module would be created under the respective database / schema. In MOSIP the following database and scehmas are defined
-
-|application / module name|Database tool|database Name|schema name|
-|---------------------------|-----------------|-----------------|-------------------|
-|Master / Administration module|postgresql|mosip_master|master|
-|Kernel|postgresql|mosip_kernel|kernel|
-|Pre-registration |postgresql|mosip_prereg|prereg|
-|Registration|Apache Derby|mosip_reg|reg|
-|Registration Processor|postgresql|mosip_regprc|regprc|
-|ID Authentication|postgresql|mosip_ida|ida|
-|ID Repository|postgresql|mosip_idrepo|idrepo|
-|Audit|postgresql|mosip_audit|audit|
-|IAM|postgresql|mosip_iam|iam|
-|idmap|postgresql|mosip_idmap|idmap|
-
-**Note:** These databases can be deployed on single or separate database servers / instances.
-
-3. **DB Objects (Tables):** All the tables of each application / module will be created in their respective database and schema. appadmin user / role will own these objects and the respective application user / role will have access to perform DML operations on these objects.
-
-4. **Seed Data:** MOSIP platform is designed to provide most of its features to be configured in the system. These configuration are deployed with default setup on config server and few in database. Few of these configuration can be modified / updated by the MOSIP administrator. These configuration include, system configurations, master datasetup, etc. The steps to add new center, machine / device is detailed in [**Guidelines-for-Adding-Centers,-Machine-Devices**](https://github.com/mosip/mosip-docs/wiki/Guidelines-for-Adding-Centers,-Machine-Devices) 
-
-The system configuration and master data is available under the respective application / database related folder. for example, the master data configuration is available in csv file format under [**folder**](https://github.com/mosip/mosip-platform/tree/master/db_scripts/mosip_master/dml).
-
-The scripts to create the above objects are available under [db_scripts](https://github.com/mosip/mosip-platform/tree/master/db_scripts). To deploy the database objects of each application / module **except registration client**, please refer to [README.MD](https://github.com/mosip/mosip-platform/blob/master/db_scripts/README.MD) file. These scripts will contain the deployment of all the DB object categories. 
-
-**Note: Please skip Registration client related deployment scripts (Apache derby DB specific) as this will be executed as part of registration client software installation.**
-
 ***
 ## 8. MOSIP Deployment [**[↑]**](#table-of-content)
 
@@ -1272,10 +1292,10 @@ For more information look [here](//cloud.spring.io/spring-cloud-config/single/sp
 `kubectl create secret generic config-server-keystore --from-file=server.keystore=< location-of-your-server.keystore-file-generated-above >`
 <br/>
 <br/>
-7. Change `git_url_env` environment variable in kernel-auditmanager-service-deployment-and-service.yml to your git ssh url of configuration repository
+7. Change `git_url_env` environment variable in kernel-config-server-deployment-and-service.yml to your git ssh url of configuration repository
 <br/>
 <br/>
-8. Change `git_config_folder_env` environment variable in kernel-auditmanager-service-deployment-and-service.yml  to your configuration folder in git repository.
+8. Change `git_config_folder_env` environment variable in kernel-config-server-deployment-and-service.yml  to your configuration folder in git repository.
 <br/>
 <br/>
 9. Change `spec->template->spec->containers->image` from `docker-registry.mosip.io:5000/kernel-config-server` to `< Your Docker Registry >/kernel-config-server` <br/>
@@ -1326,9 +1346,23 @@ Firstly, update below files present in config folder in configuration repository
  6.  `registration-processor-camel-routes-res_update-dmz-<env-name>.xml` 
 
 We are deploying DMZ services into another VM having docker installed. The steps to setup DMZ environment and services deployment:
-1. Need to set Up VM with RHEL 7.5
-2. Installing the Docker:
-sudo yum install docker
+1. Need to set Up VM with RHEL 7.6
+2. Installing the Docker ce:
+
+          $ sudo yum install http://mirror.centos.org/centos/7/extras/x86_64/Packages/container-selinux-2.107- 
+            3.el7.noarch.rpm
+
+         $ sudo yum -y install lvm2 device-mapper device-mapper-persistent-data device-mapper-event device-mapper-libs 
+           device-mapper-event-libs
+
+         $ sudo wget https://download.docker.com/linux/centos/docker-ce.repo -O /etc/yum.repos.d/docker-ce.repo
+
+         $ sudo yum -y install docker-ce
+
+         $ sudo systemctl start docker
+
+         $ sudo systemctl status docker
+
 3. Need to copy the Jenkins server public key(id_rsa.pub) inside this newly created VM's authorized_keys(because through jenkins job, we will ssh into new VM and deploy)
 
 After installing Docker Start the Docker Service
@@ -1395,9 +1429,9 @@ docker run --restart always -it -d --network host --privileged=true -e active_pr
    otherwise it will login using ppk file available in config with property name registration.processor.vm.ppk.
    PPK generation command ssh-keygen -t rsa -b 4096 -f mykey.
 
-### 8.2 ID Repository Salt Generator
+### 8.2 Kernel Salt Generator
  
-ID Repository Salt Generator Job is a one-time job which is run to populate salts to be used to hash and encrypt UIN in ID Repo and ID Map DB. This generic job takes schema and table name as input, and generates and populates salts in the given schema and table.
+Kernel Salt Generator Job is a one-time job which is run to populate salts to be used to hash and encrypt data. This generic job takes schema and table name as input, and generates and populates salts in the given schema and table.
 
 **Salt Generator Deployment steps**
 
@@ -1417,56 +1451,32 @@ And also open the port from AZURE OR AWS or any cloud where the VM is launched.
      
 
       1.  docker run -it -p 8092:8092 -e active_profile_env="${profile_env}" -e spring_config_label_env="${label_env}"  
-         -e spring_config_url_env="${config_url}" -e schema_name=idrepo -e table_name=uin_hash_salt 
+         -e spring_config_url_env="${config_url}" -e spring_config_name_env=id-repository -e db_url=mosip.idrepo.identity.db.shard.url -e schema_name=idrepo -e table_name=uin_hash_salt 
          "${registryAddress}"/id-repository-salt-generator
 
       2.  docker run -it -p 8092:8092 -e active_profile_env="${profile_env}" -e spring_config_label_env="${label_env}"  
-         -e spring_config_url_env="${config_url}" -e schema_name=idrepo -e table_name=uin_encrypt_salt 
+         -e spring_config_url_env="${config_url}" -e spring_config_name_env=id-repository -e db_url=mosip.idrepo.identity.db.shard.url -e schema_name=idrepo -e table_name=uin_encrypt_salt 
          "${registryAddress}"/id-repository-salt-generator
 
       3.  docker run -it -p 8092:8092 -e active_profile_env="${profile_env}" -e spring_config_label_env="${label_env}"  
-         -e spring_config_url_env="${config_url}" -e schema_name=idmap -e table_name=uin_hash_salt 
+         -e spring_config_url_env="${config_url}" -e spring_config_name_env=id-repository -e db_url=mosip.idrepo.vid.db.url -e schema_name=idmap -e table_name=uin_hash_salt 
          "${registryAddress}"/id-repository-salt-generator
 
       4.  docker run -it -p 8092:8092 -e active_profile_env="${profile_env}" -e spring_config_label_env="${label_env}"       
-         -e spring_config_url_env="${config_url}" -e schema_name=idmap -e table_name=uin_encrypt_salt 
+         -e spring_config_url_env="${config_url}" -e spring_config_name_env=id-repository -e db_url=mosip.idrepo.vid.db.url -e schema_name=idmap -e table_name=uin_encrypt_salt 
          "${registryAddress}"/id-repository-salt-generator
 
-**Note** - Please change the value for variables active_profile_env, spring_config_label_env, spring_config_url_env and registryAddress in the above four commands accordingly
-
-### 8.3 ID Authentication Salt Generator
- 
-ID Authentication Salt Generator Job is a one-time job which is run to populate salts to be used to hash and encrypt UIN in IDA DB. This generic job takes schema and table name as input, and generates and populates salts in the given schema and table.
-
-**Salt Generator Deployment steps**
-
-  a. Login into the VM.
-     Open the port 8092 from the VM:
-
-sudo firewall-cmd --zone=public --add-port=8092/tcp --permanent
-
-sudo firewall-cmd --reload
-
-And also open the port from AZURE OR AWS or any cloud where the VM is launched.
-
-  b. Perform docker hub login
-
-  c. Execute the following commands sequentially one after the other. Wait for the completion of previous command before 
-     executing next commands.
-     
-
-      1.  docker run -it -d -p 8092:8092 -e active_profile_env="${profile_env}" -e spring_config_label_env="${label_env}" 
-          -e spring_config_url_env="${config_url}" -e schema_name=ida -e table_name=uin_hash_salt 
+      5.  docker run -it -d -p 8092:8092 -e active_profile_env="${profile_env}" -e spring_config_label_env="${label_env}" 
+          -e spring_config_url_env="${config_url}" -e spring_config_name_env=id-authentication -e schema_name=ida -e table_name=uin_hash_salt 
           "${registryAddress}"/authentication-salt-generator
 
-      2. docker run -it -d -p 8092:8092 -e active_profile_env="${profile_env}" -e spring_config_label_env="${label_env}" 
-         -e spring_config_url_env="${config_url}" -e schema_name=ida -e table_name=uin_encrypt_salt 
+      6. docker run -it -d -p 8092:8092 -e active_profile_env="${profile_env}" -e spring_config_label_env="${label_env}" 
+         -e spring_config_url_env="${config_url}" -e spring_config_name_env=id-authentication -e schema_name=ida -e table_name=uin_encrypt_salt 
          "${registryAddress}"/authentication-salt-generator
-
 
 **Note** - Please change the value for variables active_profile_env, spring_config_label_env, spring_config_url_env and registryAddress in the above four commands accordingly
 
-### 8.4 First User Registration and Onboarding
+### 8.3 First User Registration and Onboarding
 [Refer to wiki for detailed procedure on First User Registration and Onboarding](First-User-Registration-and-Onboarding)
 
 

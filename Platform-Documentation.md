@@ -7,6 +7,7 @@
   * [3.3 Technology Stack](#33-technology-stack)
   * [3.4 Data Architecture](#34-data-architecture)
   * [3.5 High Level Design](#35-high-level-design)
+  * [3.6 Deployment Architecture](#36-deployment-architecture)
 - [4. FEATURES](#4-requirement-specifications)
 - [5. ARCHITECTURALLY SIGNIFICANT COMPONENTS](#5-architecturally-significant-components)
   * [5.1 ID Object Definition](#51-id-object-definition)
@@ -28,6 +29,8 @@
 - [10. INFRASTRUCTURE RECOMMENDATIONS](#10--infrastructure-recommendations)
   * [10.1 Data Center Architecture (WIP)](#101-data-center-architecture-wip)
 - [11. List Of Acronyms](#11-list-of-acronyms)
+- [12. Hardware Sizing and Software Requirements](https://github.com/mosip/mosip-docs/wiki/Hardware-Software-requirements)
+
 
 ## 1. INTRODUCTION
 This document describes the objectives and explicit functional requirements of MOSIP. It also gives an overview of architecturally significant features, APIs and standards followed in MOSIP. Lastly, it provides necessary information on implementation, customization and set up.
@@ -93,21 +96,21 @@ Kernel is a platform to build higher-level services as well as a secure sandbox.
 * [UIN Generation](UIN-Generation)
 * [Configuration Server](Configuration-Server)
 * [Audit Manager](Audit-Manager)
-  * [Log manager](log-manager)
+  * [Log manager](Audit-Manager#log-manager)
 * [Authentication and Authorization](Authentication-and-Authorization)
 * [Common Services](FRS-Common-Services)
 * [Data Services](FRS-Data-Services)
 * [Admin Services](FRS-Admin-Services)
 
-### 2.6 Administrator Services (WIP)
-MOSIP Admin manages the functional and non-functional activities of MOSIP on Admin Portal through either the backend process or the UI screens. 
+### 2.6 Admin Portal and Administrator Services (WIP)
+Admin Portal allows an MOSIP Administrator to manages administrative activities of MOSIP through either the back-end process with the help of available APIs or the UI screens. 
 
-Admin will be able to:
+These administrative activities are:
 
- * Set up Platform Data, Process Flows, ID Definition, Configuration, and Security Policy (Through backend process).
- * Manage (Create, Update, View, Activate/Deactivate, Map/Un-map/Re-map/Decommission) the resources.
- * Map the resources (Users, Machines, and Devices) to a registration center.
- * Manage the master data (Create/Update/Activate/Deactivate).
+ * Set up Platform Data, Process Flows, ID Definition, Configuration, and Security Policy (Through back-end process).
+ * Manage (Create, Update, View, Activate/Deactivate, Map/Un-map/Re-map/Decommission) the resources. (Through API and UI Screens)
+ * Map the resources (Users, Machines, and Devices) to a registration center.(Through APIs)
+ * Manage the master data (Create/Update/Activate/Deactivate).(Through APIs)
  * Manage approval requests for creation and updation of resources and master data.
  * Manage personal account details (Reset Password, Forgot User Name, Change Password, Unlock Account, and Edit Personal 
    Details.
@@ -166,6 +169,7 @@ Further Certificates are used by Partners for signing the authentication request
 <!---  #### 3.5.6 [Resident Services](Resident-services) --->
 #### 3.5.7 [Administrator Services](Admin)
 #### 3.5.8 [ID Repository](ID-Repository)
+### 3.6 [Deployment Architecture](Deployment-Architecture)
 
 ## 4. REQUIREMENT SPECIFICATIONS[**[↑]**](#table-of-contents)
 ### 4.1 Functional Requirement Specifications

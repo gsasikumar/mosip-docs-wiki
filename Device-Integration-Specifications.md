@@ -9,8 +9,7 @@ The device vendor's specific implementation class should extend the Abstract cla
 ## Devices:
 1. Scanner
 2. Printer
-3. Web Camera
-4. GPS
+3. GPS
 
 ### Scanner: 
 ***
@@ -33,21 +32,6 @@ The device vendor's specific implementation class should extend the Abstract cla
 ***
  Use the JavaFx provided print functionality to interact with printer directly from UI layer. No additional interface is required. 
  javafx.scene.web.WebView.getEngine().print(PrinterJob)
-
-### Web Camera: 
-***
- 
-**Interface:IMosipWebcamService**   
-1. public boolean connect(int width, int height)  
-   It is used to open the connection with web camera with the specified resolution provided in the input.  
-
-2. public BufferedImage captureImage()  
-   It captures the image from webcam and returns it. If the web camera is closed or has been already disposed by JVM, it returns null.  
-
-3. public void close()
-   It close the connection opened with Web camera device.
-
-**Abstract Class:**  MosipWebcamServiceImpl
 
 ### GPS:  
 ***
