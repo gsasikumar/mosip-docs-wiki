@@ -213,8 +213,8 @@ Please refer to the detailed [**Real-bio-metric-service-integration**](Registrat
      - mosip.reg.dbpath=db/reg
      - mosip.reg.app.key={contains the key to be used to decrypt the application binaries during run time}.  
      - mosip.reg.client.tpm.availability={ Y - to enable the TPM, N - to disable the TPM, default N}.
-   
-    **File Location:** /registration-libs/src/main/resources/props/mosip-application.properties 
+
+**File Location:** /registration-libs/src/main/resources/props/mosip-application.properties 
      - mosip.reg.client.url={Reg client download url from JFrog }
      - mosip.reg.logpath=../logs  
      - mosip.reg.packetstorepath={where the registration packet should be stored}. 
