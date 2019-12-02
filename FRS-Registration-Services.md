@@ -22,7 +22,7 @@
   * [4.5 Biometric Capture (SDK Integration, Extract and Match) (WIP)](#45-biometric-capture-sdk-integration-extract-and-match-wip-) _(REG_FR_4.5)_
   * [4.6 Biometric Exceptions](#46-biometric-exceptions-) _(REG_FR_4.6)_
   * [4.7 Registration Officer and Supervisor Approval](#47-registration-officer-and-supervisor-approval-) _(REG_FR_4.7)_
-  * [4.8 End of Day Process](#48-end-of-day-process-) _(REG_FR_4.8)_
+  * [4.8 End of Day Approval Process & Re-registration](#48-end-of-day-process-) _(REG_FR_4.8)_
 - [5. Geo-location](#5-geo-location-) _(REG_FR_5)_
 - [6. Language Support](#6-language-support-)
   * [6.1 Translation](#61-translation-) _(REG_FR_6.1)_
@@ -563,7 +563,7 @@ When a registration officer captures biometric exceptions of an individual, then
 
 [**Link to design**](/mosip/mosip-platform/blob/master/design/registration/registration-New.md)
 
-### 4.8 End of Day Process [**[↑]**](#table-of-contents)
+### 4.8 End of Day Approval Process & Re-registration [**[↑]**](#table-of-contents)
 
 #### A. Approval of registrations through an end of day process.
 
