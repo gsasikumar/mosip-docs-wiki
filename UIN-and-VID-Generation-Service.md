@@ -25,9 +25,10 @@ Note:
 The number of UINs to be generated in a pool depends on a configuration to be done by the country depending on the peak registration requirements. UIN generation service will receive a request by Registration Processor to get a UIN. The service responds with an un-allocated UIN from the generated pool. 
 When the pool reaches a configured number of minimum UINs, MOSIP generates another pool of UIN.
 
-* **UIN Generation** _(DAT_FR_4.6)_
+* **VID Generation** _(DAT_FR_4.6)_
 
 MOSIP will generate a pool of VIDs through a Batch Job. The no. of VIDs generated will be configurable by the country. All the VIDs generated will be assigned a status “Available” which means that the VID is available for allocation to a UIN. Any request for VID allocation will pick up VIDs which have this status. The Batch Job to generate the pool will run every time the no. of VIDs in the pool reduces to a configured number.
+
 VID generation will happen according to the below logic.
 1.  VID generated should contain the number of digits as configured.
 2.  A generated VID should follow the below logic
@@ -39,8 +40,11 @@ VID generation will happen according to the below logic.
     f.	The number should not contain the restricted numbers defined by the ADMIN
     g.	The last digit in the number should be reserved for a checksum
     h.	The number should not contain '0' or '1' as the first digit.
-MOSIP has a VID Generator service which will receive a call to generate a VID. The Service will also support receiving an expiry period (optional Parameter). This service when called will pick up a VID from the pre-generated pool and respond it to the source. The Service will also mark that VID in the pool as “Assigned” and attach the expiry period to the VID if received. The Service will also make an asynchronous call to the batch job to check the remaining VIDs and generate the pool if needed.
-MOSIP also has a VID revoke Service which will receive a VID and expire it. When received a request along with the VID, the service will change the status of the VID as “Expired”.
+
+MOSIP has a **VID Generator service** which will receive a call to generate a VID. The Service will also support receiving an expiry period (optional Parameter). This service when called will pick up a VID from the pre-generated pool and respond it to the source. The Service will also mark that VID in the pool as “Assigned” and attach the expiry period to the VID if received. The Service will also make an asynchronous call to the batch job to check the remaining VIDs and generate the pool if needed.
+
+MOSIP also has a **VID revoke Service** which will receive a VID and expire it. When received a request along with the VID, the service will change the status of the VID as “Expired”.
+
 MOSIP also has a batch Job to auto-expire VIDs and mark expired VIDs as to be available to be allocated again.
 1.	All the VIDs will be marked as ‘Expired’ through the batch job based on the expiry period assigned to them
 2.	All the VIDs which are in expired state for a configured amount of days should be marked as ‘Available’ through a daily batch job thus enabling re-usability of them
