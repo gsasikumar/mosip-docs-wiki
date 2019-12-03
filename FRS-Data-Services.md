@@ -10,10 +10,9 @@
       * [4.1.3 RID Generator](#413-rid-generator-) _(DAT_FR_4.3)_
       * [4.1.4 MISP ID Generator](#414-misp-id-generator-) _(DAT_FR_4.4)_
       * [4.1.5 PRID Generator](#415-prid-generator-) _(DAT_FR_4.5)_
-      * [4.1.6 VID Generator](#416-vid-generator-) _(DAT_FR_4.6)_
-      * [4.1.7 Token ID Generator](#417-token-id-generator-) _(DAT_FR_4.7)_
-      * [4.1.8 Partner ID Generator](#418-partner-id-generator-) _(DAT_FR_4.8)_
-      * [4.1.9 MISP License Key Generator](#419-misp-license-key-generator-) _(DAT_FR_4.9)_
+      * [4.1.6 Token ID Generator](#417-token-id-generator-) _(DAT_FR_4.7)_
+      * [4.1.7 Partner ID Generator](#418-partner-id-generator-) _(DAT_FR_4.8)_
+      * [4.1.8 MISP License Key Generator](#419-misp-license-key-generator-) _(DAT_FR_4.9)_
     * [4.2 ID Validator](#42-id-validator-) 
       * [4.2.1 UIN Validator](#421--uin-validator-) _(DAT_FR_4.10)_
       * [4.2.2 PRID Validator](#422-prid-validator-) _(DAT_FR_4.11)_
