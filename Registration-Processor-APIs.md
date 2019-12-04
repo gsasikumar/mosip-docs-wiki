@@ -1206,11 +1206,11 @@ Error response :
 #### Failure details
 Error Code | Error Message | Error Description
 -----|----------|-------------
-RPR-SER-001 |	No Records Found	|   No Records Found
-RPR-SER-002 |   Multiple Records Found | Multiple UIN is found
-RPR-SER-003 | Invalid Input Value - ID Type | Invalid ID Type
-RPR-SER-004 | Invalid Input Value - Name cannot be NULL or Empty| Name is Empty or NULL
-RPR-SER-005 | Invalid Input Value - Contact Type | Invalid Contact Type
+RPR-PGS-021 |	No Records Found	|   No Records Found
+RPR-PGS-022 |   Multiple Records Found | Multiple UIN is found
+RPR-PGS-016 | Invalid Input Value - ID Type | Invalid ID Type
+RPR-PGS-018 | Invalid Input Value - Name cannot be NULL or Empty| Name is Empty or NULL
+RPR-PGS-017 | Invalid Input Value - Contact Type | Invalid Contact Type
 
 # 12 Update UIN API
 - #### `POST /registrationprocessor/v1/requesthandler/update`
