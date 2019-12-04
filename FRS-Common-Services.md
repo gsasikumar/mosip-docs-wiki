@@ -28,6 +28,7 @@
     * [6.9 String Utility](#69-string-utility-) _(CMN_FR_6.9)_
     * [6.10 UUID Utility](#610-uuid-utility-) _(CMN_FR_6.10)_
     * [6.11 Zip-Unzip Utility](#611-zip-unzip-utility-) _(CMN_FR_6.11)_
+    * [6.12 Log Utility](#612-log-utility-) _(CM_FR_6.12)_
    * [7. Virus Scaner](#7-virus-scanner-) _(CMN_FR_5)_
 - [List of Configurable Parameters and Processes](#list-of-configurable-parameters-and-processes-)
 - [Kernel API](#kernel-api-)
@@ -234,6 +235,13 @@ MOSIP system provides base exception framework.
 ### 6.11 Zip-Unzip Utility [**[↑]**](#table-of-contents)
 1. Identifies Zip-Unzip util methods
 1. Creates wrapper class for methods defined in apache-commons Zip-Unzip util
+1. Raises an alert in case of listed exceptions
+
+[**Link to design for Utilities**](/mosip/mosip/blob/master/docs/design/kernel/kernel-utils.md)
+
+### 6.12 Log Utility [**[↑]**](#table-of-contents)
+1. Generate logs across the application
+1. Store generated logs in configured location
 1. Raises an alert in case of listed exceptions
 
 [**Link to design for Utilities**](/mosip/mosip/blob/master/docs/design/kernel/kernel-utils.md)
