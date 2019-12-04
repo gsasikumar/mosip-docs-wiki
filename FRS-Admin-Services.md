@@ -21,8 +21,8 @@
     * [1.18 List of ID Types - Create/Read (WIP)](#118-list-of-id-types---createread-) _(ADM_FR_1.18)_
     * [1.19 User History](#119-user-history-) _(ADM_FR_1.19)_
     * [1.20 Document Type - Category Mapping](#120-document-type-to-category-mapping---mapunmap-) _(ADM_FR_1.20)_
-    * [1.21 Working and Non-Working Days](#121-working-and-non---working-days-) _(ADM_FR_1.21)_
-    * [1.22 Exceptional Holidays for a Center](#122-exceptional-holidays-for-a-center-) _(ADM_FR_1.22)
+    * [1.21 Working and Non-Working Days](#121-working-and-non-working-days-) _(ADM_FR_1.21)_
+    * [1.22 Exceptional Holidays for a Center](#122-exceptional-holidays-for-a-center-) _(ADM_FR_1.22)_
   * [2. Registration Management](#2-registration-management-) 
     * [2.1 Registration Center Type - Create/Update/Decommission (WIP)](#21-registration-center-type---createreadupdatedecommission-) _(ADM_FR_2.1)_
     * [2.2 Registration Center - Create/Read/Update/Delete](#22-registration-center---createreadupdatedecommission-) _(ADM_FR_2.2)_
