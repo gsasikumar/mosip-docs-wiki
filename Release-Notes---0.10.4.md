@@ -40,6 +40,7 @@ Includes Functional requirements, Process flows, Architecture and High level des
 |Scanner|	Canon lide 120|
 |GPS|	GlobalSat BU-353-S4|
 |Biometrics standard|	CBEFF format (Version - 0.9.0)|
+|MOSIP Device Service (MDS)|	[Version - 0.9.2](https://github.com/mosip/mosip-docs/wiki/MOSIP-Device-Service-Specification/5495eff4efe79718b4bb57cd95178e917d517671)|
 |SMS gateway|	MSG91, Infobip|
 |Registration Client – face capture |	OpenImaj - This is licensed for demo purpose only|
 |Keystore|	SoftHSM|
