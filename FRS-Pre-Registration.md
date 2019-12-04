@@ -35,6 +35,7 @@
   * [2.6 Registration Client Services](#26-registration-client-services) _(PRE_FR_6)_
     * [2.6.1 Retrieve Application Data by PRID](#261-retrieve-application-data-by-prid-) _(PRE_FR_6.1)_
   * [2.7 List of Configurable Parameters and Processes](#27-list-of-configurable-parameters-and-processes-) _(PRE_FR_7)_
+  * [2.8 Audit]_(PRE_FR_8)_
 * [Pre Registration API](#pre-registration-api-)
 * [Process View](#process-view-)
 # 1. Overview [**[↑]**](#table-of-contents)
@@ -260,13 +261,14 @@ Upon receiving the Registration Center Id, Date Range (Start Date, End Date) for
 
 
 ## 2.7 List of Configurable Parameters and Processes [**[↑]**](#table-of-contents)
-
-1. Configurable Parameters
+1. Configurable Parameters [**[↑]**](#table-of-contents)
 
    [**Link to Configurable Parameters of Pre-registration**](/mosip/mosip-config/blob/master/config/pre-registration.properties)
 
 2. Configurable Processes 
 * (Work in Progress)
+## 2.8 Audit
+When any transaction is performed, then the same is captured as part of MOSIP Audit Trails, which can be further used for Reporting/Analytics as required.
 
 ## Pre Registration API [**[↑]**](#table-of-contents)
 [**Refer to Wiki for more details on Pre-registration API**](Pre-Registration-Services)
