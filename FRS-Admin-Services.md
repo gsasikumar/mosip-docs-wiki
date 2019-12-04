@@ -21,6 +21,8 @@
     * [1.18 List of ID Types - Create/Read (WIP)](#118-list-of-id-types---createread-) _(ADM_FR_1.18)_
     * [1.19 User History](#119-user-history-) _(ADM_FR_1.19)_
     * [1.20 Document Type - Category Mapping](#120-document-type-to-category-mapping---mapunmap-) _(ADM_FR_1.20)_
+    * [1.21 Working and Non-Working Days](#121-working-and-non---working-days-) _(ADM_FR_1.21)_
+    * [1.22 Exceptional Holidays for a Center](#122-exceptional-holidays-for-a-center-) _(ADM_FR_1.22)
   * [2. Registration Management](#2-registration-management-) 
     * [2.1 Registration Center Type - Create/Update/Decommission (WIP)](#21-registration-center-type---createreadupdatedecommission-) _(ADM_FR_2.1)_
     * [2.2 Registration Center - Create/Read/Update/Delete](#22-registration-center---createreadupdatedecommission-) _(ADM_FR_2.2)_
@@ -1122,6 +1124,30 @@ Refer below for the process:
 7. The API restricts the bulk creation of Master Data
 
 8. In case of Exceptions, system triggers error messages as received from the Database.
+
+### 1.21 Working and Non-Working Days [**[↑]**](#table-of-contents)
+#### A. APi should be able to fetch working days for a Center based on a Center ID
+
+Refer below for the process:
+1. Validates if all required input parameters have been received as listed below for each specific request
+   * Center ID - character - 10 - mandatory
+   * Language Code - character - 36 - mandatory
+
+2. API should respond to the source with the Working days for the Center in the language received
+
+3. API should throw proper error messages in case of any error 
+
+### 1.22 Exceptional Holidays for a Center [**[↑]**](#table-of-contents)
+
+#### A. API should be able to fetch any defined exceptional holiday dates for a Center based on a Center ID
+
+Refer below for the process:
+1. Validates if all required input parameters have been received as listed below for each specific request
+   * Center ID - character - 10 - mandatory
+
+2.  API should respond to the source with all the exceptional holiday dates for the Center ID received
+
+3.  API should throw relevant error messages in any error scenarios
 
 ## 2. Registration Management
 ### 2.1 Registration Center Type - Create/Update/Delete [**[↑]**](#table-of-contents)
