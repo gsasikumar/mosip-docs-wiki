@@ -2,38 +2,38 @@
 
   * [1. Master Data Management](#1-master-data-management-) 
     * [1.1 Location Hierarchy - Create/Read/Update/Delete](#11-location-hierarchy---createreadupdatedelete-) _(ADM_FR_1.1)_
-    * [1.2 List of Holidays - Create/Read/Update/Delete(WIP)](#12-list-of-holidays---createreadupdatedelete-) _(ADM_FR_1.2)_
-    * [1.3 Biometric Authentication Type - Create/Read(WIP)](#13-biometric-authentication-type---createread-) _(ADM_FR_1.3)_
-    * [1.4 Biometric Attribute Type - Create/Read(WIP)](#14-biometric-attribute-type---createread-) _(ADM_FR_1.4)_
-    * [1.5 Gender - Create/Read/Update/Delete(WIP)](#15-gender---createreadupdatedelete-) _(ADM_FR_1.5)_
-    * [1.6 Document Category - Create/Read/Update/Delete(WIP)](#16-document-category---createreadupdatedelete-) _(ADM_FR_1.6)_
+    * [1.2 List of Holidays - Create/Read/Update/Delete (WIP)](#12-list-of-holidays---createreadupdatedelete-) _(ADM_FR_1.2)_
+    * [1.3 Biometric Authentication Type - Create/Read (WIP)](#13-biometric-authentication-type---createread-) _(ADM_FR_1.3)_
+    * [1.4 Biometric Attribute Type - Create/Read (WIP)](#14-biometric-attribute-type---createread-) _(ADM_FR_1.4)_
+    * [1.5 Gender - Create/Read/Update/Delete (WIP)](#15-gender---createreadupdatedelete-) _(ADM_FR_1.5)_
+    * [1.6 Document Category - Create/Read/Update/Delete (WIP)](#16-document-category---createreadupdatedelete-) _(ADM_FR_1.6)_
     * [1.7 Document Type - Create/Update/Delete](#17-document-type---createupdatedelete-) _(ADM_FR_1.7)_
-    * [1.8 Applicant Type - Document Category - Document Type Mapping - Read(WIP)](#18-applicant-type---document-category---document-type-mapping---read-) _(ADM_FR_1.8)_
-    * [1.9 List of Rejection Reasons - Create/Read(WIP)](#19-list-of-rejection-reasons---createread-) _(ADM_FR_1.9)_
-    * [1.10 List of Languages - Create/Read/Update/Delete(WIP)](#110-list-of-languages---createreadupdatedelete-) _(ADM_FR_1.10)_
-    * [1.11 List of Titles - Create/Read/Update/Delete(WIP)](#111-list-of-titles---createreadupdatedelete-) _(ADM_FR_1.11)_
-    * [1.12 Template File Format - Create/Update/Delete(WIP)](#112-template-file-format---createupdatedelete-) _(ADM_FR_1.12)_
-    * [1.13 List of Template Types - Create(WIP)](#113-list-of-template-types---create-) _(ADM_FR_1.13)_
+    * [1.8 Applicant Type - Document Category - Document Type Mapping - Read (WIP)](#18-applicant-type---document-category---document-type-mapping---read-) _(ADM_FR_1.8)_
+    * [1.9 List of Rejection Reasons - Create/Read (WIP)](#19-list-of-rejection-reasons---createread-) _(ADM_FR_1.9)_
+    * [1.10 List of Languages - Create/Read/Update/Delete (WIP)](#110-list-of-languages---createreadupdatedelete-) _(ADM_FR_1.10)_
+    * [1.11 List of Titles - Create/Read/Update/Delete (WIP)](#111-list-of-titles---createreadupdatedelete-) _(ADM_FR_1.11)_
+    * [1.12 Template File Format - Create/Update/Delete (WIP)](#112-template-file-format---createupdatedelete-) _(ADM_FR_1.12)_
+    * [1.13 List of Template Types - Create (WIP)](#113-list-of-template-types---create-) _(ADM_FR_1.13)_
     * [1.14 List of Templates - Create/Read/Update/Delete](#114-list-of-templates---createreadupdatedelete-) _(ADM_FR_1.14)_
     * [1.15 List of Blacklisted Words - Create/Read/Update/Delete](#115-list-of-blacklisted-words---createreadupdatedelete-) _(ADM_FR_1.15)_
-    * [1.16 List of Reason Categories - Create(WIP)](#116-list-of-reason-categories---create-) _(ADM_FR_1.16)_
-    * [1.17 List of Applications - Create/Read(WIP)](#117-list-of-applications---createread-) _(ADM_FR_1.17)_
-    * [1.18 List of ID Types - Create/Read(WIP)](#118-list-of-id-types---createread-) _(ADM_FR_1.18)_
+    * [1.16 List of Reason Categories - Create (WIP)](#116-list-of-reason-categories---create-) _(ADM_FR_1.16)_
+    * [1.17 List of Applications - Create/Read (WIP)](#117-list-of-applications---createread-) _(ADM_FR_1.17)_
+    * [1.18 List of ID Types - Create/Read (WIP)](#118-list-of-id-types---createread-) _(ADM_FR_1.18)_
     * [1.19 User History](#119-user-history-) _(ADM_FR_1.19)_
     * [1.20 Document Type - Category Mapping](#120-document-type-to-category-mapping---mapunmap-) _(ADM_FR_1.20)_
   * [2. Registration Management](#2-registration-management-) 
-    * [2.1 Registration Center Type - Create/Update/Decommission(WIP)](#21-registration-center-type---createreadupdatedecommission-) _(ADM_FR_2.1)_
+    * [2.1 Registration Center Type - Create/Update/Decommission (WIP)](#21-registration-center-type---createreadupdatedecommission-) _(ADM_FR_2.1)_
     * [2.2 Registration Center - Create/Read/Update/Delete](#22-registration-center---createreadupdatedecommission-) _(ADM_FR_2.2)_
-    * [2.3 List of Machine Types - Create(WIP)](#23-list-of-machine-types---create-) _(ADM_FR_2.3)_
-    * [2.4 List of Machine Specifications - Create/Update/Delete(WIP)](#24-list-of-machine-specifications---createupdatedelete-) _(ADM_FR_2.4)_
+    * [2.3 List of Machine Types - Create (WIP)](#23-list-of-machine-types---create-) _(ADM_FR_2.3)_
+    * [2.4 List of Machine Specifications - Create/Update/Delete (WIP)](#24-list-of-machine-specifications---createupdatedelete-) _(ADM_FR_2.4)_
     * [2.5 List of Machines - Create/Read/Update/Decommission](#25-list-of-machines---createreadupdatedecommission-) _(ADM_FR_2.5)_
-    * [2.6 Mappings of Registration Center, Machine and User Mappings - Create/Read/Delete(WIP)](#26-mappings-of-registration-center-machine-and-user-mappings---createreaddelete-) _(ADM_FR_2.6)_
+    * [2.6 Mappings of Registration Center, Machine and User Mappings - Create/Read/Delete (WIP)](#26-mappings-of-registration-center-machine-and-user-mappings---createreaddelete-) _(ADM_FR_2.6)_
     * [2.7 List of Devices - Create/Read/Update/Decommission](#27-list-of-devices---createreadupdatedecommission-) _(ADM_FR_2.7)_
-    * [2.8 List of Device Specifications - Create/Read/Update/Delete(WIP)](#28-list-of-device-specifications---createreadupdatedelete-) _(ADM_FR_2.8)_
-    * [2.9 List of Device Types - Create(WIP)](#29-list-of-device-types---create-) _(ADM_FR_2.9)_
+    * [2.8 List of Device Specifications - Create/Read/Update/Delete (WIP)](#28-list-of-device-specifications---createreadupdatedelete-) _(ADM_FR_2.8)_
+    * [2.9 List of Device Types - Create (WIP)](#29-list-of-device-types---create-) _(ADM_FR_2.9)_
     * [2.10 Mappings of Registration Center and Machine - Create/Delete](#210-mappings-of-registration-center-and-machine---mapunmap-) _(ADM_FR_2.10)_
     * [2.11 Mappings of Registration Center and Device - Create/Read/Delete](#211-mappings-of-registration-center-and-device---mapunmapread-) _(ADM_FR_2.11)_
-    * [2.12 Mappings of Registration Center, Machine and Device - Create/Delete(WIP)](#212-mappings-of-registration-center-machine-and-device---createdelete-) _(ADM_FR_2.12)_
+    * [2.12 Mappings of Registration Center, Machine and Device - Create/Delete (WIP)](#212-mappings-of-registration-center-machine-and-device---createdelete-) _(ADM_FR_2.12)_
     * [2.13 Mappings of Registration Center and User- Create/Delete](#213-mappings-of-registration-center-and-user---mapunmap-) _(ADM_FR_2.13)_
   * [3. MISP Management](#3-MISP-management--) 
     * [3.1 MISP - Create/Read/Update/Delete](#31-misp---createreadupdatedelete-) _(ADM_FR_3.1)_
