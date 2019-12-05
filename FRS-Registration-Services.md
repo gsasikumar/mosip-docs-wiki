@@ -34,7 +34,7 @@
     * [7.2.2 Upload Packets from External Device to Server (To be Developed)] _(REG_FR_7.2.2)_
 - [8. Analytics and Audit Logs](#8-analytics-and-audit-logs-) _(REG_FR_8)_
 - [9. Data Security](#9-data-security-)
-- [10. Software Version Upgrade](#10-software-version-upgrade-) _(REG_FR_10)_
+- [10. Installation and Software Version Upgrade](#10-software-version-upgrade-) _(REG_FR_10)_
 - [11. Clean up](#11-clean-up-)
   * [11.1 Data retention policies](#111-data-retention-policies-) _(REG_FR_11.1)_
   * [11.2 Machine Retirement & Re-mapping](#112-machine-retirement-) _(REG_FR_11.2)_
@@ -747,11 +747,11 @@ The system uses a machine and centre specific public key to encrypt. Only the se
 
 [**Link to design**](/mosip/mosip-platform/blob/master/design/registration/registration-key-management.md)
 
-## 10. Software Version Upgrade [**[↑]**](#table-of-contents)
+## 10. Installation and Software Version Upgrade [**[↑]**](#table-of-contents)
 
 #### A. Registration Officer or Supervisor can download and unzip the client application set up kit
 
-Initial installation of the client software on a particular machine, supervisor or registration officer will download an installable software (setup kit) from an admin portal. Then unzip the setup kit and install it in the client machine.
+For initial installation of the client software on a particular machine, supervisor or registration officer will download an installable software (setup kit). Then unzip the setup kit and install it in the client machine.
 
 When a registration officer or supervisor opts to download setup kit and selects the OS-specific setup kit to download, the system allows the registration officer to download the setup kit to the storage location chosen by the registration officer. 
 1. Registration officer then unzips the setup kit.
