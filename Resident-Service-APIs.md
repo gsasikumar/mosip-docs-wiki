@@ -201,9 +201,7 @@ request: individualIdType| Y | Allowed Type of Individual ID - RID | RID
   "version": "v1",
   "responseTime": "2018-12-09T06:39:04.683Z",
   "response": {
-    "ridStatus": "PROCESSING",
-    "status": "success",
-    "message": "Notification has been sent to abXXXXXXXXXcd@xyz.com"
+    "ridStatus": "PROCESSING"
   },
   "errors": null
 }
@@ -294,7 +292,7 @@ request: otp| Y | OTP | |
 ```
 
 ##### Failed Response:
-###### Status Code : 200 (OK)    
+###### Status Code : 200 (OK)
 
 ```JSON
 {

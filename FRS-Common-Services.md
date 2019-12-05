@@ -28,7 +28,9 @@
     * [6.9 String Utility](#69-string-utility-) _(CMN_FR_6.9)_
     * [6.10 UUID Utility](#610-uuid-utility-) _(CMN_FR_6.10)_
     * [6.11 Zip-Unzip Utility](#611-zip-unzip-utility-) _(CMN_FR_6.11)_
-   * [7. Virus Scaner](#7-virus-scanner-) _(CMN_FR_5)_
+    * [6.12 Log Utility](#612-log-utility-) _(CM_FR_6.12)_
+    * [6.13 ID Object Validator Utility](#613-id-object-validator-utility-) _(CM_FR_6.13)_
+   * [7. Virus Scaner](#7-virus-scanner-) _(CMN_FR_7)_
 - [List of Configurable Parameters and Processes](#list-of-configurable-parameters-and-processes-)
 - [Kernel API](#kernel-api-)
 # Common Services
@@ -237,6 +239,29 @@ MOSIP system provides base exception framework.
 1. Raises an alert in case of listed exceptions
 
 [**Link to design for Utilities**](/mosip/mosip/blob/master/docs/design/kernel/kernel-utils.md)
+
+### 6.12 Log Utility [**[↑]**](#table-of-contents)
+1. Generate logs across the application
+1. Store generated logs in configured location
+1. Raises an alert in case of listed exceptions
+
+[**Link to design for Utilities**](/mosip/mosip/blob/master/docs/design/kernel/kernel-utils.md)
+
+### 6.13 ID Object Validator Utility [**[↑]**](#table-of-contents)
+1. Validate the Attributes in ID object against the Pre-Defined pattern and Master data values
+   * Validate Gender Types against country defined Masterdata
+   * Validate Document Categories against country defined Masterdata
+   * Validate Document Types country against defined Masterdata
+   * Validate Location and Location hierarchy against country defined Masterdata
+   * Validate Date of Birth against country configured pattern
+   * Validate Phone Number against country configured pattern
+   * Validate Email ID against country configured pattern
+   * Validate Age against country configured pattern
+   * Validate Full Name against country configured pattern
+   * Validate Address line 1,2 and 3 against country configured pattern
+   * Validate Reference Identity Number against country configured pattern
+   * Validate Country Code against country configured pattern
+2. Respond with proper error messages in case of any validation faliure
 
 ## 7 Virus Scanner [**[↑]**](#table-of-contents)
 Virus Scanner utility allows for virus scanning across MOSIP at various places. This includes:
