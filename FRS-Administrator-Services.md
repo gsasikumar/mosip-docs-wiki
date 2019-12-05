@@ -496,7 +496,7 @@ The Device is needed to be registered with the following attributes.
 
 [**Note 1**: L0 devices (encryption is done on the host machine device driver or the MOSIP device service) and L1 (capable of performing encryption in device’s trusted module]
 
-[**Note 2**: Digital ID will be a signed base64 encoded Json Object. It will be decoded and stored in the Registered Device Table once the signature is validated with the root certificate issued to each Device Provider (for L0 devices) or Foundational Trust Provider (for L1 devices).]
+Digital ID will be a signed base64 encoded Json Object. It will be decoded and stored in the Registered Device Table once the signature is validated with the root certificate issued to each Device Provider (for L0 devices) or Foundational Trust Provider (for L1 devices). Digital ID Json object will contain Serial Number, Make, Model, Device Type, Device Sub Type, Device Provider Name and Device Provider ID.
 
 Registration Device can only be registered if they exist in the list of white-listed devices. For white-listed devices, [Refer section 5.3](#53-device-management-). Once a device is registered, a unique device code is generated for each device. For Registration devices, the code comes from the white-list table.
 
