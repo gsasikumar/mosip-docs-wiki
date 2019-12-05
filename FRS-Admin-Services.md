@@ -1133,7 +1133,7 @@ Refer below for the process:
 8. In case of Exceptions, system triggers error messages as received from the Database.
 
 ### 1.21 Working and Non-Working Days [**[↑]**](#table-of-contents)
-#### A. APi should be able to fetch working days for a Center based on a Center ID
+#### A. API should be able to fetch working days for a Center based on a Center ID
 
 Refer below for the process:
 1. The API should support taking Center ID and Language Code as an mandatory input parameter
