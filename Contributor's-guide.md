@@ -1,5 +1,3 @@
-# Contributor's guide
-
 - [Welcome note](#welcome-note)
 - [How to begin your contribution?](#how-to-begin-your-contribution)
 	- [Register yourself](#register-yourself)
