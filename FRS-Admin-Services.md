@@ -19,7 +19,7 @@
     * [1.16 List of Reason Categories - Create (WIP)](#116-list-of-reason-categories---create-) _(ADM_FR_1.16)_
     * [1.17 List of Applications - Create/Read (WIP)](#117-list-of-applications---createread-) _(ADM_FR_1.17)_
     * [1.18 List of ID Types - Create/Read (WIP)](#118-list-of-id-types---createread-) _(ADM_FR_1.18)_
-    * [1.19 User History](#119-user-history-) _(ADM_FR_1.19)_
+    * [1.19 User Details](#119-user-details-) _(ADM_FR_1.19)_
     * [1.20 Document Type - Category Mapping](#120-document-type-to-category-mapping---mapunmap-) _(ADM_FR_1.20)_
     * [1.21 Working and Non-Working Days](#121-working-and-non-working-days-) _(ADM_FR_1.21)_
     * [1.22 Exceptional Holidays for a Center](#122-exceptional-holidays-for-a-center-) _(ADM_FR_1.22)_
@@ -1063,8 +1063,8 @@ Refer below for the process:
    * IsActive
 4. In case of Exceptions, system triggers relevant error messages. 
 
-### 1.19 User History [**[↑]**](#table-of-contents)
-
+### 1.19 User Details [**[↑]**](#table-of-contents)
+#### A. User Details
 Upon receiving a request to fetch the user history record with input parameters (User ID and Date Timestamp), the system
 fetches all the attributes of the user from the history table and performs the following steps:
 
@@ -1075,6 +1075,13 @@ fetches all the attributes of the user from the history table and performs the f
 1. If the mandatory input parameters are missing, then the system triggers the appropriate message.
 1. Response will contain all the attributes for the user including the Active/Inactive status.
 1. In case of exceptions, system triggers relevant error messages.
+
+#### B. Fetch RID based on a User ID
+1. Receive request to retrieve RID based on input parameter (User ID, App ID)
+   * User ID and App ID both will be mandatory
+2. Fetch the RID
+3. Respond to the source with the fetched data
+4. Respond with error 'User doesn't exist' if no user is found for User ID received
 
 ### 1.20 Document Type to Category Mapping - Map/Unmap [**[↑]**](#table-of-contents)
 #### A. Create a mapping record of Document Type and Document Category in Valid Document Mapping Master Database
