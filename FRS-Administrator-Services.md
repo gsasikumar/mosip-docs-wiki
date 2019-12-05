@@ -483,23 +483,18 @@ For API design, [refer here.](https://github.com/mosip/mosip-docs/wiki/Device-Ma
 Devices are categorized in two types based on the usage. Registration Devices (used during registrations in Registration Client) and Auth Devices (used during authentication through Partners). Before being used, these devices are needed to be registered in MOSIP using the Register/De-Register API.
 
 The Device is needed to be registered with the following attributes.
-   1.	Device Type - Mandatory
-   2.	Device Sub Type - Mandatory
-   3.	Status – [Registered, Retired, Revoked]
    4.	Device ID – Mandatory
    7.	Purpose – [Registration or Auth]
    8.	Device Sub Ids - (optional)
-   4.	Digital ID – [Refer here](https://github.com/mosip/mosip-docs/wiki/MOSIP-Device-Service-Specification#4-device-trust). Refer Digital ID section
+   4.	Signed Digital ID – [Refer here](https://github.com/mosip/mosip-docs/wiki/MOSIP-Device-Service-Specification#4-device-trust). Refer Digital ID section
    9.	Firmware
    12.	Device Expiry - (optional)
    13.	Certification Level – [L0 or L1]
    14.	Timestamp - ISO format date time with time-zone
    15.	Foundational Trust provider ID - Required only if certification level received is L1
-   16.	Foundational Trust Signature - Required only if certification level received is L1
-   17.	Foundational Trust Certificate - Required only if certification level received is L1
-   18.	Device provider signature
 
-[Note: L0 devices (encryption is done on the host machine device driver or the MOSIP device service) and L1 (capable of performing encryption in device’s trusted module]
+[Note 1: L0 devices (encryption is done on the host machine device driver or the MOSIP device service) and L1 (capable of performing encryption in device’s trusted module]
+[Note 2: Digital ID will be a signed base64 encoded Json Object. It will be decoded and stored in the Registered Device Table once the signature is validated with the root certificate issued to each Device Provider (for L0 devices) or Foundational Trust Provider (for L1 devices).
 
 Registration Device can only be registered if they exist in the list of white-listed devices. For white-listed devices, [Refer section 5.3](#53-device-management-). Once a device is registered, a unique device code is generated for each device. For Registration devices, the code comes from the white-list table.
 
@@ -516,7 +511,7 @@ The API receives Device Code, Digital ID, and MDS Service Version and validates 
     3.	The Device Provider exist and is 'Active’
     4.	The MDS service against he software version is in the list and is marked ‘Active’
     5.	The MDS Software version matches against the Device Type, Device Sub Type, Make, Model and Provider ID of the device as received in input as part of Digital ID
-    6.	The Device Code received matches against the Make, Model, Serial Number, Provider Name and Provider ID of the device which received as part of Digital ID
+    6.	The Device Code received matches against the Make, Model, Device Type, Device Sub Type, Serial Number, Provider Name and Provider ID of the device which received as part of Digital ID
 
 For validation in IDA, the API checks the current status of the details, But for validation in Registration processor, API checks the status of details as on the packet generation date and time. For this, the API additionally receives packet generation timestamp.
 
