@@ -1136,13 +1136,17 @@ Refer below for the process:
 #### A. APi should be able to fetch working days for a Center based on a Center ID
 
 Refer below for the process:
-1. Validates if all required input parameters have been received as listed below for each specific request
-   * Center ID - character - 10 - mandatory
-   * Language Code - character - 36 - mandatory
+1. The API should support taking Center ID and Language Code as an mandatory input parameter
 
-2. API should respond to the source with the Working days for the Center in the language received
+2. The API should respond to the source with all the days of the week for the Center in the language received
 
-3. API should throw proper error messages in case of any error 
+3. Each day should have an attribute marking whether the day is a working day or off-work day
+
+4. Each day should have an attribute defing the calenday order of days of the week
+
+If the working days are not defined against the Center, the API should fetch the globally defined working and non-working days.
+
+The API should throw error messages in scenarios mentioned in error messages section
 
 ### 1.22 Exceptional Holidays for a Center [**[↑]**](#table-of-contents)
 
