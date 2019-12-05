@@ -7,8 +7,10 @@ a.	Enable Biometric Auth
 b.	Enable Local de-duplication     
 c.	Adding SDK in classpath    
 d. Adding MDS URLs    
-2.	Register Device for registrations    
-
+2.	Register Device for Registration     
+   a. `Register Device Provider` - Device Provider should be registered with MOSIP using [Register Device Provider API](https://github.com/mosip/mosip-docs/wiki/Device-Management#post-deviceprovider)    
+   b. `Register Device` - Biometric device should be registered using MOSIP using [Register Device API](https://github.com/mosip/mosip-docs/wiki/Device-Management#post-registereddevices)    
+   c. `Register MDS` - MDS should be registered with MOSIP using [Register MDS API](https://github.com/mosip/mosip-docs/wiki/Device-Management#post-mds)    
 
 #### 2. Registration Processor    
 1.	Configure ABIS queue       
@@ -21,4 +23,7 @@ d. Adding MDS URLs
 `ida.iris.provider=<fully qualified classname of Biometric SDK>`    
 `ida.composite.biometric.provider=<fully qualified classname of Biometric SDK>`    
 
-2.	Register Biometric Devices for authentication    
+2.	Register Biometric Devices for Authentication   
+   a. `Register Device Provider` - Device Provider should be registered with MOSIP using [Register Device Provider API](https://github.com/mosip/mosip-docs/wiki/Device-Management#post-deviceprovider)    
+   b. `Register Device` - Biometric device should be registered using MOSIP using [Register Device API](https://github.com/mosip/mosip-docs/wiki/Device-Management#post-registereddevices)    
+   c. `Register MDS` - MDS should be registered with MOSIP using [Register MDS API](https://github.com/mosip/mosip-docs/wiki/Device-Management#post-mds)  
