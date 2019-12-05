@@ -29,7 +29,7 @@
     * [6.10 UUID Utility](#610-uuid-utility-) _(CMN_FR_6.10)_
     * [6.11 Zip-Unzip Utility](#611-zip-unzip-utility-) _(CMN_FR_6.11)_
     * [6.12 Log Utility](#612-log-utility-) _(CM_FR_6.12)_
-    * [6.13 ID Object Validator Utility)(#613-id-object-validator-utility-) _(CM_FR_6.13)_
+    * [6.13 ID Object Validator Utility](#613-id-object-validator-utility-) _(CM_FR_6.13)_
    * [7. Virus Scaner](#7-virus-scanner-) _(CMN_FR_5)_
 - [List of Configurable Parameters and Processes](#list-of-configurable-parameters-and-processes-)
 - [Kernel API](#kernel-api-)
