@@ -213,7 +213,7 @@ MOSIP system provides base exception framework.
 1. Creates wrapper class for methods defined in apache-commons File util
 1. Raises an alert in case of listed exceptions 
 ### 6.7 Json Utility [**[↑]**](#table-of-contents)
-1. Identifies jason util methods
+1. Identifies Json util methods
 1. Creates wrapper class for methods defined in apache-commons jason util
 1. Raises an alert in case of listed exceptions 
 ### 6.8 Math Utility [**[↑]**](#table-of-contents)
@@ -270,7 +270,7 @@ Virus Scanner utility allows for virus scanning across MOSIP at various places. 
 3. Scanning of Registration packet in Registration Processor
 
 Currently for Virus Scanner, MOSIP has integrated with Clam Antivirus which allows for 290 concurrent users.
-A Country may integrate their own Licensed version of anti virus as per their requirement.
+A Country may integrate their own Licensed version of antivirus as per their requirement.
 
 ### List of Configurable Parameters and Processes [**[↑]**](#table-of-contents)
 
