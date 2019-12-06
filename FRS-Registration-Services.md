@@ -397,7 +397,20 @@ When the registration officer scans the individual’s irises either individuall
 1. Validates all available irises that have been captured, the irises, which are above threshold quality and the maximum retries attempted.
 1. Retains only the capture, which has the highest quality score.
 1. System captures and stores the transaction details for audit purpose (except PII data).
-#### L. Restrict registration if the duration since the last export or upload is more than the configured limit
+
+#### L. MOSIP Device Manager (MDM)
+All devices that collect biometric data for MOSIP should operate within the defined specification. The MOSIP device specification provides compliance guidelines to devices for them to work with MOSIP. The compliance is based on device capability, trust and communication protocols. A MOSIP compliant device would follow the standards established in this document. It is expected that the devices are compliant to this specification and tested and validated. The details of each of these are outlined [**here**](/mosip/mosip-docs/wiki/MOSIP-Device-Service-Specification)
+
+#### M. Device Validation
+- All devices connected to Registration Client should be registered devices. 
+- On having logged in to Registration Client, when the Operator attempts to capture any modality of biometrics, system will validate if the connected Finger print scanning device/Iris device/Photo Capture device is registered, based on the Device ID. 
+- If the system is online, then the validation is executed against the master data in the server (Master data relevant to the registered devices)
+- If the system is offline, then the validation will be executed against the master data synced locally in the machine from which devices are being connected (Master data relevant to the registered devices)
+- If the device is identified to be registered as part of the Master data, then the device can be used & Operator is allowed to proceed with biometrics capture. Subsequently, the connected device(s) are then mapped to the machine from which the devices are connected - [Backend mapping of Machine with connected device(s)]
+- If the device is identified to be un-registered as part of the Master data of registered devices, then the Operator cannot proceed with biometrics capture
+For details on the specifications of the API and validation, refer [**here**](/mosip/mosip-docs/wiki/FRS-Administrator-Services#105-device-detail-validation-)
+
+#### N. Restrict registration if the duration since the last export or upload is more than the configured limit
 When the registration officer opts to start a new registration or UIN update. The system determines the time of the most recent export or upload (automatic uploads and manual uploads) of registration packets.
 If the duration since the last export or upload is not more than the configured limit, then system displays the demographic details page or UIN update page. If the configured limit is exceeded, then system displays an error message.
 
