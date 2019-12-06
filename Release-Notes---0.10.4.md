@@ -10,7 +10,6 @@
   * [3. Executive Summary – Consolidated Quality Status](#3-executive-summary--consolidated-quality-status-)
   * [4. Types of Testing](#4-types-of-testing-)
   * [5. Test Execution Summary](#5-test-execution-summary-)
-  * [6. Automation Test Reports](#6-automation-test-reports-)
 - [Known Issues](#known-issues-)
 - [Support Process (To Be Determined)](#support-process-to-be-determined-)
 - [List Of Acronyms](#list-of-acronyms-)
@@ -109,8 +108,6 @@ The [code](https://github.com/mosip/mosip-platform/releases/tag/0.10.3) and [aut
 #### 5. Test Execution Summary [**[↑]**](#table-of-contents)
 ![Image](_images/test_rig_automation/Capture.JPG)  
 
-#### 6. Automation Test Reports [**[↑]**](#table-of-contents)
-[**Automation report run on 1.0.0 on QA env**](/mosip/mosip/tree/master/docs/testing/Automation%20Test%20Reports)
 ## Known Issues [**[↑]**](#table-of-contents)
 ![Image](_images/test_rig_automation/image4.jpg) 
 To Be updated
