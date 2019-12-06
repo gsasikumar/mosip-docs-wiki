@@ -60,13 +60,13 @@ The [code](https://github.com/mosip/mosip-platform/releases/tag/0.10.3) and [aut
 
 |Title	|Description|
 |------|------|
-|Modules Tested|<li> Pre-registration (UI & Server) <li> Registration Client (UI & APIs) <li> Kernel (APIs) <li> Registration Processor (Server) <li> ID Authentication (APIs) <li> ID Repo (APIs)|
-| Version Tag Tested|	0.9.0|
+|Modules Tested|<li> Pre-registration (UI & Server) <li> Registration Client (UI & APIs) <li> Kernel (APIs) <li> Registration Processor (Server) <li> ID Authentication (APIs) <li> ID Repo (APIs) <li> Administration (UI & APIs)|
+| Version Tag Tested|	1.0.0|
 |Test Methodology| <li>  Manual <li>  Test Automation|
 |Types of testing|<li>	 Smoke <li> Functional <li>  Integration <li> 	Regression|
 |Testing Levels|![Image](_images/test_rig_automation/image1.jpg) |
 |Configuration Parameters tested for| Refer to QA env properties file with suffix ‘qa’ in the filename, at [**Link**](https://github.com/mosip/mosip-config)|
-|Browser Support|**Pre-Registration**    <li> Chrome – 74.0.3729.169|
+|Browser Support|**Pre-Registration**    <li> Chrome – 78.0.3904.108|
 |OS Support|**Registration Client**    <li> Windows 10|
 |Language Support|French, Arabic, English|
 
@@ -110,7 +110,7 @@ The [code](https://github.com/mosip/mosip-platform/releases/tag/0.10.3) and [aut
 ![Image](_images/test_rig_automation/Capture.JPG)  
 
 #### 6. Automation Test Reports [**[↑]**](#table-of-contents)
-[**Automation report run on 0.9.0 on QA env**](/mosip/mosip/tree/master/docs/testing/Automation%20Test%20Reports)
+[**Automation report run on 1.0.0 on QA env**](/mosip/mosip/tree/master/docs/testing/Automation%20Test%20Reports)
 ## Known Issues [**[↑]**](#table-of-contents)
 ![Image](_images/test_rig_automation/image4.jpg) 
 To Be updated

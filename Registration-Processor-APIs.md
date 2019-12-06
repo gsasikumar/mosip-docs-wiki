@@ -153,11 +153,22 @@ Record not found :
 
 ```JSON
 {
-  "id" : "mosip.registration.status",
-  "version" : "1.0",
-  "responsetime": "2019-02-14T12:40:59.768Z",
-  "response" : [],
-  "errors": null
+    "id": "mosip.registration.status",
+    "version": "1.0",
+    "responsetime": "2019-12-06T04:16:07.070Z",
+    "response": [],
+    "errors": [
+        {
+            "registrationId": "10014100180046820190619064012",
+            "errorCode": "RPR-RGS-031",
+            "errorMessage": "RID Not Found"
+        },
+        {
+            "registrationId": "10006100420001120190613130943",
+            "errorCode": "RPR-RGS-031",
+            "errorMessage": "RID Not Found"
+        }
+    ]
 }
 
 ```
