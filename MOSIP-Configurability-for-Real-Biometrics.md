@@ -15,34 +15,7 @@ With Real Biometrics Release (RBR), MOSIP can be configured to work with multipl
    b. `Register Device` - Biometric device should be registered using MOSIP using [Register Device API](https://github.com/mosip/mosip-docs/wiki/Device-Management#post-registereddevices)    
    c. `Register MDS` - MDS should be registered with MOSIP using [Register MDS API](https://github.com/mosip/mosip-docs/wiki/Device-Management#post-mds)    
 #### 2. Registration Processor    
-1.	Configure ABIS queue
--	** Configure RegistrationProcessorAbis-env.json file ** - registration-processor-abis-middleware-stage communicates to abis through queue. It sends request to inbound queue address and receives response from outbound queue address. The json file will look like below example with one abis. If there are multiple abis then it can be added in same way mentioned in below steps.
-
-```json
-{
-	"abis": [{
-			"name": "{{ ABIS-NAME }}",
-			"host": "",
-			"port": "",
-			"brokerUrl": "tcp://{{ activemq_address }}:{{ activemq_port }}",
-			"inboundQueueName": "MOSIP-to-{{ ABIS-NAME }}",
-			"outboundQueueName": "{{ ABIS-NAME }}-TO-MOSIP",
-			"pingInboundQueueName": "",
-			"pingOutboundQueueName": "",
-			"userName": "admin",
-			"password": "admin",
-		        "typeOfQueue": "ACTIVEMQ"
-		}
-	]
-}
-```
-
-	1. Add activemq ip/port in brokerUrl. Provide username/password for activemq.
-	2. inboundQueueName : Mosip sends request in this address. Change name to mosip-to-{{ abis_name }}
-	3. outboundQueueName : Mosip receives response in this address. Change to {{ abis_name }}-to-mosip
-	4. Rest of the fields are optional. Keep as it is if you are using activemq.
-
-2.	Configure Biometric Dedupe stage       
+-	**Configure ABIS queue : Configure RegistrationProcessorAbis-env.json file ** - registration-processor-abis-middleware-stage communicates to abis through queue. It sends request to inbound queue address and receives response from outbound queue address. [Click on this ink](https://github.com/mosip/mosip-config/blob/master/config-templates/RegistrationProcessorAbis-env.json) to see the json file. If there are multiple abis then it can be added in same file.
 
 #### 3. ID Authentication
 - **Add SDK details in classpath** - Below properties should be set in id-authentication-{env}.properties
