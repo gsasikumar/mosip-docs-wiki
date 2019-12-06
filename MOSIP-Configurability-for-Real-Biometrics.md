@@ -4,9 +4,14 @@ With Real Biometrics Release (RBR), MOSIP can be configured to work with multipl
 #### 1. Registration Client - 
 1.	Configuration change      
 a.	Enable Biometric Auth    
-b.	Enable Local de-duplication     
+b.	Enable Local de-duplication - Below properties should be enabled for de-duplication. These properties are present in config file config/registration-{env}.properties
+-	mosip.registration.mds.fingerprint.dedup.enable.flag=Y
+-	mosip.registration.mds.iris.dedup.enable.flag=Y
+-	mosip.registration.mds.face.dedup.enable.flag=Y      
 c.	Adding SDK in classpath    
-d. Adding MDS URLs    
+d. Enable MDS - Below property should enabled to enable MDS integration. This property is present in config file config/registration-{env}.properties
+-	       mosip.mdm.enabled=Y
+   
 2.	Register Device for Registration     
    a. `Register Device Provider` - Device Provider should be registered with MOSIP using [Register Device Provider API](https://github.com/mosip/mosip-docs/wiki/Device-Management#post-deviceprovider)    
    b. `Register Device` - Biometric device should be registered using MOSIP using [Register Device API](https://github.com/mosip/mosip-docs/wiki/Device-Management#post-registereddevices)    
