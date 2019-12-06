@@ -20,6 +20,8 @@ This section details about the service APIs in the Registration center modules
 
 * [Create API - Primary/Secondary](#createupdate-api)
 
+* [Search API](#search-api)
+
 # Registration Centers API
 
 * [POST /registrationcenters](#post-registrationcenters)
@@ -37,6 +39,10 @@ This section details about the service APIs in the Registration center modules
 Master data is required across the platform. 
 
 This service will create the list of Registration Centers which are used in the MOSIP platform. 
+
+Please find the steps to create primary/secondary languages 
+
+https://github.com/mosip/mosip-docs/wiki/Registration-Center-APIs#createupdate-api
 
 ### Resource URL
 ### `POST /registrationcenters`
@@ -1486,7 +1492,7 @@ sort|No|This is an array of the sort field and type| |
 sortfield| The field on which the sort is applied | | modifiedDate
 sorttype| This should be either of ['ASC','DESC']| | ASC
 pagination|The pagination parameter object| |
-pageStart|This is the start index | 0 | 10
+pageStart|This is the start index | 0 | 0
 pageFetch| This is the amount of records to be fetched | 10 | 10
 
 
@@ -1680,7 +1686,7 @@ sort|No|This is an array of the sort field and type| |
 sortfield| The field on which the sort is applied | | modifiedDate
 sorttype| This should be either of ['ASC','DESC']| | ASC
 pagination|The pagination parameter object| |
-pageStart|This is the start index | 0 | 10
+pageStart|This is the start index | 0 | 0
 pageFetch| This is the amount of records to be fetched | 10 | 10
 
 ### Filter Values
@@ -1829,3 +1835,4 @@ Create :
 Update :
 
 *) Activation and deactivation will be done , If we only pass the primary language with active/deactivate in the request.
+

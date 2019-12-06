@@ -481,7 +481,7 @@ sort|No|This is an array of the sort field and type| |
 sortfield| The field on which the sort is applied | | modifiedDate
 sorttype| This should be either of ['ASC','DESC']| | ASC
 pagination|The pagination parameter object| |
-pageStart|This is the start index | 0 | 10
+pageStart|This is the start index | 0 | 0
 pageFetch| This is the amount of records to be fetched | 10 | 10
 
 ### Filter Values
@@ -1083,7 +1083,7 @@ sort|No|This is an array of the sort field and type| |
 sortfield| The field on which the sort is applied | | modifiedDate
 sorttype| This should be either of ['ASC','DESC']| | ASC
 pagination|The pagination parameter object| |
-pageStart|This is the start index | 0 | 10
+pageStart|This is the start index | 0 | 0
 pageFetch| This is the amount of records to be fetched | 10 | 10
 
 
@@ -2125,7 +2125,7 @@ sort|No|This is an array of the sort field and type| |
 sortfield| The field on which the sort is applied | | modifiedDate
 sorttype| This should be either of ['ASC','DESC']| | ASC
 pagination|The pagination parameter object| |
-pageStart|This is the start index | 0 | 10
+pageStart|This is the start index | 0 | 0
 pageFetch| This is the amount of records to be fetched | 10 | 10
 
 ### Filter Values
@@ -2868,7 +2868,7 @@ sort|No|This is an array of the sort field and type| |
 sortfield| The field on which the sort is applied | | modifiedDate
 sorttype| This should be either of ['ASC','DESC']| | ASC
 pagination|The pagination parameter object| |
-pageStart|This is the start index | 0 | 10
+pageStart|This is the start index | 0 | 0
 pageFetch| This is the amount of records to be fetched | 10 | 10
 
 ### Filter Values
@@ -3467,7 +3467,7 @@ sort|No|This is an array of the sort field and type| |
 sortfield| The field on which the sort is applied | | modifiedDate
 sorttype| This should be either of ['ASC','DESC']| | ASC
 pagination|The pagination parameter object| |
-pageStart|This is the start index | 0 | 10
+pageStart|This is the start index | 0 | 0
 pageFetch| This is the amount of records to be fetched | 10 | 10
 
 
@@ -4438,7 +4438,7 @@ sort|No|This is an array of the sort field and type| |
 sortfield| The field on which the sort is applied | | modifiedDate
 sorttype| This should be either of ['ASC','DESC']| | ASC
 pagination|The pagination parameter object| |
-pageStart|This is the start index | 0 | 10
+pageStart|This is the start index | 0 | 0
 pageFetch| This is the amount of records to be fetched | 10 | 10
 
 
