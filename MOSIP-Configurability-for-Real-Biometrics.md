@@ -15,7 +15,7 @@ With Real Biometrics Release (RBR), MOSIP can be configured to work with multipl
    b. `Register Device` - Biometric device should be registered using MOSIP using [Register Device API](https://github.com/mosip/mosip-docs/wiki/Device-Management#post-registereddevices)    
    c. `Register MDS` - MDS should be registered with MOSIP using [Register MDS API](https://github.com/mosip/mosip-docs/wiki/Device-Management#post-mds)    
 #### 2. Registration Processor    
--**Configure ABIS queue : Configure RegistrationProcessorAbis-env.json file ** - registration-processor-abis-middleware-stage communicates to abis through queue. It sends request to inbound queue address and receives response from outbound queue address. [Click on this ink](https://github.com/mosip/mosip-config/blob/master/config-templates/RegistrationProcessorAbis-env.json) to see the json file. If there are multiple abis then it can be added in same file.
+- **Configure ABIS queue : Configure RegistrationProcessorAbis-env.json file** - registration-processor-abis-middleware-stage communicates to abis through queue. It sends request to inbound queue address and receives response from outbound queue address. [Click on this ink](https://github.com/mosip/mosip-config/blob/master/config-templates/RegistrationProcessorAbis-env.json) to see the json file. If there are multiple abis then it can be added in same file.
 
 #### 3. ID Authentication
 - **Add SDK details in classpath** - Below properties should be set in id-authentication-{env}.properties
