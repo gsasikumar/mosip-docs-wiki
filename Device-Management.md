@@ -444,7 +444,6 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-deviceCode|yes|This is the code of the device|-NA|-NA-
 deviceId|yes|This is the id of the device|-NA|-NA-
 deviceProviderSignature|yes|This is the signature about the device provider|-NA|-NA-
 certificationLevel|yes|This is the certification level of the device|-NA|-NA-
@@ -809,7 +808,7 @@ ADM-DPM-007 |Software version does not match against the Service ID|If the Softw
 ADM-DPM-008 |Device Provider ID does not match against the Service ID|If the Device provider ID does not match the Service ID received
 ADM-DPM-009 |Error occurred while checking a Device Details| If there an error from DB while checking device details
 
-### POST/deviceprovidermanagement/validate/history
+### POST /deviceprovidermanagement/validate/history
 
 This service will validate the device history details from the list of registered devices.
 
@@ -871,7 +870,7 @@ https://mosip.io/masterdata/deviceprovidermanagement/validate/history
   "errors": null,
   "response":  [
     {
-      "status": "valid"
+      "status": "Valid",
       "message": "Device details history validated successfully"
     }
   ],
