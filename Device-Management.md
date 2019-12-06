@@ -916,8 +916,8 @@ ADM-DPM-009 |Error occurred while checking a Device Details| If there an error f
 
 # MDS API
 
-* [POST /mosipdeviceservice](#post-mds)
-* [PUT /mosipdeviceservice](#put-mds)
+* [POST /mosipdeviceservice](#post-mosipdeviceservice)
+* [PUT /mosipdeviceservice](#put-mosipdeviceservice)
 
 # POST /mds
 Master data is required across the platform. 
@@ -939,12 +939,14 @@ Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
 id|Yes|id of the mds| | 
 deviceProviderId|Yes|Deviceproviderid of the mds| | 
-deviceTypeCode|Yes|Devicetypecode of the mds| | 
-deviceSubTypeCode|Yes|Devicesubtypecode of the mds| | 
+regDeviceSubCode|Yes|Devicetypecode of the mds| | 
+regDeviceTypeCode|Yes|Devicesubtypecode of the mds| | 
 swversion|Yes|sofware version of the mds| | 
-swbinaryhash|Yes|sofware version of the mds| | 
+swBinaryHash|Yes|binary hash of the mds| | 
 make|Yes|make of the mds| | 
 model|Yes|model of the mds| | 
+swCreateDateTime|Yes|Created date time of MDS| | 
+swExpiryDateTime|Yes|Expiry date time of MDS| | 
 
 ### Example Request
 ```JSON
@@ -976,14 +978,28 @@ model|Yes|model of the mds| |
 {
   "id": "string",
   "version": "string",
-  "metadata": {},
-  "responsetime": "2018-12-10T06:12:52.994Z",
-  "errors": null,
-  "response":  [
-    {
-      "id": "mdsid"
-    }
-  ],
+  "responsetime": "2019-11-19T07:07:55.709Z",
+  "metadata": null,
+  "response": {
+    "isActive": true,
+    "createdBy": "110005",
+    "createdDateTime": "2019-11-19T07:07:55.731Z",
+    "updatedBy": null,
+    "updatedDateTime": null,
+    "isDeleted": null,
+    "deletedDateTime": null,
+    "id": "77777",
+    "swVersion": "v1",
+    "deviceProviderId": "11123",
+    "regDeviceTypeCode": "Finger",
+    "regDeviceSubCode": "Slab",
+    "make": "make1",
+    "model": "model1",
+    "swCreateDateTime": "2019-11-19T07:00:13.375Z",
+    "swExpiryDateTime": "2019-11-30T07:00:13.375Z",
+    "swBinaryHash": "test"
+  },
+  "errors": null
 }
 
 ```
@@ -1017,89 +1033,13 @@ ADM-DPM-039|Device Provider ID not found in the list of Device Providers|Device 
 ADM-DPM-040|Device Type Code not found in the list of Device Types|Device Type Code received does not exist in the Device Type Table
 ADM-DPM-041|Device Sub Type Code not found in the list of Device Sub Types|Device Sub Type Code received does not exist in the Device Sub Type Table
 
-# GET /mds/{id}
-Master data is required across the platform. 
-
-This service will provides the service to get the mds. 
-
-### Resource URL
-### `GET /mds/{id}`
-
-### Resource details
-
-Resource Details | Description
------------- | -------------
-Response format | JSON
-Requires Authentication | Yes
-
-### Parameters
-Name | Required | Description | Default Value | Example
------|----------|-------------|---------------|--------
--NA-
-
-
-### Example Response
-```JSON
-{
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": null,
-  "response": {
-		"id": "mdsid",
-    "deviceProviderId": "deviceProviderId",
-    "deviceTypeCode": "Finger",
-    "deviceSubTypeCode": "Slab",
-    "swversion": "v1",
-    "swbinaryhash": "10B4ABB32EDF42C2862D857C0FD26B8FD810CE973B5FF34CEF4D4128C3F5C510",
-    "make": "make",
-    "model": "model",
-    "isActive": true,
-    "swCreatedBy": "superadmin",
-    "swCreatedDateTime": "2019-07-26T12:18:40.718Z",
-    "createdBy": "superadmin",
-    "createdDateTime": "2019-07-26T12:18:40.718Z",
-    "updatedBy": null,
-    "updatedDateTime": null,
-    "isDeleted": null,
-    "deletedDateTime": null
-  }
-}
-```
-##### Error Response:
-
-```JSON
-{
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [
-    {
-      "errorCode": "string",
-      "message": "string"
-    }
-  ],
- "response": null
-}
-
-```
-
-#### Failure details
-Error Code  | Error Message | Error Description
------|----------|-------------
-KER-MSD-500 |Internal Server Error|If system error occurs
-KER-ATH-403 |Forbidden|If unauthorized role detected
-KER-ATH-401 |Authentication Failed|If no role/invalid token is detected
-
-# PUT /mds
+# PUT /mosipdeviceservice
 Master data is required across the platform. 
 
 This service will update the MDS which are used in the MOSIP platform. 
 
 ### Resource URL
-### `PUT /mds`
+### `PUT /mosipdeviceservice`
 
 ### Resource details
 
@@ -1113,27 +1053,32 @@ Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
 id|Yes|id of the mds| | 
 deviceProviderId|Yes|Deviceproviderid of the mds| | 
-deviceTypeCode|Yes|Devicetypecode of the mds| | 
-deviceSubTypeCode|Yes|Devicesubtypecode of the mds| | 
+regDeviceSubCode|Yes|Devicetypecode of the mds| | 
+regDeviceTypeCode|Yes|Devicesubtypecode of the mds| | 
 swversion|Yes|sofware version of the mds| | 
-swbinaryhash|Yes|sofware version of the mds| | 
+swBinaryHash|Yes|binary hash of the mds| | 
 make|Yes|make of the mds| | 
 model|Yes|model of the mds| | 
+swCreateDateTime|Yes|Created date time of MDS| | 
+swExpiryDateTime|Yes|Expiry date time of MDS| | 
 
 ### Example Request
 ```JSON
 {
   "id": "string",
   "metadata": {},
-  "request":  {
-    "id": "mdsid",
-    "deviceProviderId": "deviceProviderId",
-    "deviceTypeCode": "Finger",
-    "deviceSubTypeCode": "Slab",
-    "swversion": "v1",
-    "swbinaryhash": "10B4ABB32EDF42C2862D857C0FD26B8FD810CE973B5FF34CEF4D4128C3F5C510",
-    "make": "make",
-    "model": "model"
+  "request": {
+    "active": true,
+    "deviceProviderId": "11123",
+    "id": "77777",
+    "make": "make1",
+    "model": "model1",
+    "regDeviceSubCode": "Slab",
+    "regDeviceTypeCode": "Finger",
+    "swBinaryHash": "test",
+    "swCreateDateTime": "2019-11-19T07:00:13.375Z",
+    "swExpiryDateTime": "2019-11-30T07:00:13.375Z",
+    "swVersion": "v2"
   },
   "requesttime": "2018-12-10T06:12:52.994Z",
   "version": "string"
@@ -1147,14 +1092,30 @@ model|Yes|model of the mds| |
 {
   "id": "string",
   "version": "string",
-  "metadata": {},
-  "responsetime": "2018-12-10T06:12:52.994Z",
-  "errors": null,
-  "response":  [
-    {
-      "id": "mdsid"
-    }
-  ],
+  "responsetime": "2019-11-19T07:07:55.709Z",
+  "metadata": null,
+  "response": {
+    "isActive": true,
+    "createdBy": "110005",
+    "createdDateTime": "2019-11-19T07:07:55.731Z",
+	"updatedBy": "110005",
+    "updatedDateTime": "2019-11-19T07:07:55.731Z",
+    "updatedBy": null,
+    "updatedDateTime": null,
+    "isDeleted": null,
+    "deletedDateTime": null,
+    "id": "77777",
+    "swVersion": "v2",
+    "deviceProviderId": "11123",
+    "regDeviceTypeCode": "Finger",
+    "regDeviceSubCode": "Slab",
+    "make": "make1",
+    "model": "model1",
+    "swCreateDateTime": "2019-11-19T07:00:13.375Z",
+    "swExpiryDateTime": "2019-11-30T07:00:13.375Z",
+    "swBinaryHash": "test"
+  },
+  "errors": null
 }
 
 ```
@@ -1188,65 +1149,3 @@ ADM-DPM-039|Device Provider ID not found in the list of Device Providers|Device 
 ADM-DPM-040|Device Type Code not found in the list of Device Types|Device Type Code received does not exist in the Device Type Table
 ADM-DPM-041|Device Sub Type Code not found in the list of Device Sub Types|Device Sub Type Code received does not exist in the Device Sub Type Table
 
-# DELETE /mds/{id}
-Master data is required across the platform. 
-
-This service will provides the service to delete the mds. 
-
-### Resource URL
-### `DELETE /mds/{id}`
-
-### Resource details
-
-Resource Details | Description
------------- | -------------
-Response format | JSON
-Requires Authentication | Yes
-
-### Parameters
-Name | Required | Description | Default Value | Example
------|----------|-------------|---------------|--------
--NA-
-
-
-### Example Response
-
-200 Ok
-
-```JSON
-{
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": null,
-  "response": {
-		 "id": "mdsid"
-  }
-}
-```
-##### Error Response:
-
-```JSON
-{
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [
-    {
-      "errorCode": "string",
-      "message": "string"
-    }
-  ],
- "response": null
-}
-
-```
-
-#### Failure details
-Error Code  | Error Message | Error Description
------|----------|-------------
-KER-MSD-500 |Internal Server Error|If system error occurs
-KER-ATH-403 |Forbidden|If unauthorized role detected
-KER-ATH-401 |Authentication Failed|If no role/invalid token is detected
