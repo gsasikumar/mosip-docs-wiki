@@ -280,7 +280,7 @@ Deduplication is the process to find a duplicate by comparing the individual’s
 #### 3.2.3.1 Data Verification (Pluggable by SI – Not part of MOSIP) [**[↑]**](#table-of-contents)
 
 Data verification is a process in which the system can verify the data captured during a registration with the data received from an external system to ensure accuracy and consistency. It helps to determine whether data was accurately translated, is complete and supports the interoperability standards.
--
+
 The System Integrator can plug-in a stage in the workflow, where the stage can communicate with any external system to receive some information and validate it with the information captured at the Registration Center.
 
 [**Link to design for External System Integration Stage**](/mosip/mosip-platform/blob/master/design/registration-processor/Approach_for_external_system_integration.md)
