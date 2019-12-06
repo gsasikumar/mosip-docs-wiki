@@ -438,7 +438,7 @@ Failure response
 	}]
 }
 ```
-
+#### Failure details
 Error Code | Error Message | Error Description
 -----|----------|-------------
 RPR-MVS-005 | fields can not be empty  | fields can not be empty
@@ -526,7 +526,7 @@ Failure response
 	}]
 }
 ```
-
+#### Failure details
 Error Code | Error Message | Error Description
 -----|----------|-------------
 RPR-MVS-003 | Invalid status update  |  Invalid status update
@@ -608,7 +608,7 @@ Failure :
   }]
 }
 ```
-
+#### Failure details
 Error Code | Error Message | Error Description
 -----|----------|-------------
 RPR-MVS-001 | Invalid file requested | Invalid file requested
@@ -686,7 +686,7 @@ Failure :
   }]
 }
 ```
-
+#### Failure details
 Error Code | Error Message | Error Description
 -----|----------|-------------
 RPR-MVS-002 | Requested file is not present  | Requested file is not present
@@ -763,7 +763,7 @@ Failure :
   }]
 }
 ```
-
+#### Failure details
 Error Code | Error Message | Error Description
 -----|----------|-------------
 RPR-MVS-002 | Requested file is not present  | Requested file is not present
@@ -821,7 +821,7 @@ Failure :
   }]
 }
 ```
-
+#### Failure details
 Error Code | Error Message | Error Description
 -----|----------|-------------
 RPR-MVS-001 |	Access Denied	| Access Denied for the role
@@ -896,7 +896,7 @@ Failure :
   ]
 }
 ```
-
+#### Failure details
 Error Code | Error Message | Error Description
 -----|----------|-------------
 RPR-MVS-001 |	Access Denied	| Access Denied for the role
@@ -1041,7 +1041,7 @@ Error response
   ]
 }
 ```
-
+#### Failure details
 Error Code | Error Message | Error Description
 -----|----------|-------------
 RPR-MVS-001 |	Access Denied	| Access Denied for the role
@@ -1258,6 +1258,7 @@ Record not found :
 }
 
 ```
+#### Failure details
 Error Code | Error Message | Error Description
 -----|----------|-------------
 RPR-MVS-001 |	Access Denied	| Access Denied for the role
@@ -1333,7 +1334,7 @@ Error response :
   "response": null
 }
 ```
-
+#### Failure details
 Error Code | Error Message | Error Description
 -----|----------|-------------
 RPR-MVS-001 |	Access Denied	| Access Denied for the role
