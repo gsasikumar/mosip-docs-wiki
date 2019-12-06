@@ -546,7 +546,7 @@ When an individual’s particular authentication type is locked and wants to unl
 # 7. Authentication Device Support 
 ## 7.1 Registered Devices and Open Devices [**[↑]**](#table-of-contents)
 
-The authentication services can be utilized only by a trusted partner and a registered set of devices. A device can be registered in the MOSIP ecosystem by the device provider through the device register API exposed by MOSIP. For details related to Device Registration and De-Registration features please to refer this [**link**](/mosip/mosip-docs/wiki/FRS-Administrator-Services#10-device-provider-management-).
+The authentication services can be utilized only by a trusted partner and a registered set of devices. A device can be registered in the MOSIP ecosystem by the device provider through the device register API exposed by MOSIP. For details related to Device Registration and De-Registration features please refer this [**link**](/mosip/mosip-docs/wiki/FRS-Administrator-Services#10-device-provider-management-).
 
 ### List of Configurable Parameters and Processes [**[↑]**](#table-of-contents)
 
