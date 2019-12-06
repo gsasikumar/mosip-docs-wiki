@@ -18,14 +18,14 @@ With Real Biometrics Release (RBR), MOSIP can be configured to work with multipl
 1.	Configure ABIS queue       
 2.	Configure Biometric Dedupe stage       
 
+
 #### 3. ID Authentication
-1.	Add SDK details in classpath    
+- **Add SDK details in classpath** - Below properties should be set in id-authentication-{env}.properties
 `ida.fingerprint.provider=<fully qualified classname of Biometric SDK>`    
 `ida.face.provider=<fully qualified classname of Biometric SDK>`    
 `ida.iris.provider=<fully qualified classname of Biometric SDK>`    
 `ida.composite.biometric.provider=<fully qualified classname of Biometric SDK>`    
-
-2.	Register Biometric Devices for Authentication   
+- **Register Biometric Devices for Authentication**   
    a. `Register Device Provider` - Device Provider should be registered with MOSIP using [Register Device Provider API](https://github.com/mosip/mosip-docs/wiki/Device-Management#post-deviceprovider)    
    b. `Register Device` - Biometric device should be registered using MOSIP using [Register Device API](https://github.com/mosip/mosip-docs/wiki/Device-Management#post-registereddevices)    
    c. `Register MDS` - MDS should be registered with MOSIP using [Register MDS API](https://github.com/mosip/mosip-docs/wiki/Device-Management#post-mds)  
