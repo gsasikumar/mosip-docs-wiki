@@ -21,11 +21,15 @@ With Real Biometrics Release (RBR), MOSIP can be configured to work with multipl
 
 #### 3. ID Authentication
 - **Add SDK details in classpath** - Below properties should be set in id-authentication-{env}.properties
-`ida.fingerprint.provider=<fully qualified classname of Biometric SDK>`    
-`ida.face.provider=<fully qualified classname of Biometric SDK>`    
-`ida.iris.provider=<fully qualified classname of Biometric SDK>`    
-`ida.composite.biometric.provider=<fully qualified classname of Biometric SDK>`    
+
+````
+ida.fingerprint.provider=<fully qualified classname of Biometric SDK>
+ida.face.provider=<fully qualified classname of Biometric SDK>  
+ida.iris.provider=<fully qualified classname of Biometric SDK>
+ida.composite.biometric.provider=<fully qualified classname of Biometric SDK>
+````   
 - **Register Biometric Devices for Authentication**   
    a. `Register Device Provider` - Device Provider should be registered with MOSIP using [Register Device Provider API](https://github.com/mosip/mosip-docs/wiki/Device-Management#post-deviceprovider)    
    b. `Register Device` - Biometric device should be registered using MOSIP using [Register Device API](https://github.com/mosip/mosip-docs/wiki/Device-Management#post-registereddevices)    
    c. `Register MDS` - MDS should be registered with MOSIP using [Register MDS API](https://github.com/mosip/mosip-docs/wiki/Device-Management#post-mds)  
+- **Encryption of biometric data** - For biometric Capture, MDS service should use Mosip Public Key to encrypt the biometrics. For decryption of the biometrics in ID-Authentication, "IDA-FIR" is the reference-ID used in MOSIP Crypto Manager service.
