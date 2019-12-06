@@ -86,6 +86,29 @@ MultipartFile|Yes|The encrypted zip file|
 }
 ```
 
+#### Failure details
+Error Code | Error Message | Error Description
+-----|----------|-------------
+RPR-PKR-005 |	Duplicate Request Received	| Duplicate Packet
+RPR-PKR-006 |	Packet Not Available in Request	|   Packet missing
+RPR-PKR-003 |	Invalid Packet Format	|   Format doesnot match configuration
+RPR-PKR-002 |	Invalid Packet Size	|  Size more then configured
+RPR-RGS-001 |	Unable to Access Registration Table	|  Database error
+RPR-SYS-005 |	Timeout Error	|   Timeout Error
+RPR-SYS-001 |	Unexpected exception	|   Unexpected exception
+RPR-PKR-004 |	Packet Validation Failed	|   Packet Validation Failed
+RPR-AUT-01 |	Invalid Token Present	|   Invalid Token Present
+RPR-AUT-02 |	Access Denied 	|   Access Denied 
+RPR-DBE-001 |	Data integrity violation exception	|   Data integrity violation exception
+RPR-PKR-001 |	Packet Not Found in Sync Table	|   Packet Not Found in Sync Table
+RPR-PKR-007 |	Unknown Exception Found	|  Unknown Exception Found
+RPR-PKR-013 |	Packet Size is Not Matching	|  Packet Size is Not Matching
+RPR-PKR-010 |	Virus was Found in Packet	|  Virus was Found in Packet
+RPR-PKR-008 |	Virus Scan Service is Not Responding	| Virus Scan Service is Not Responding
+RPR-PKR-009 |	Packet HashSequence did not match	| Packet HashSequence did not match
+
+
+
 # 2 Registration Status API
 
 - ### `POST /registrationprocessor/v1/registrationstatus/search`
@@ -172,6 +195,18 @@ Record not found :
 }
 
 ```
+
+#### Failure details
+Error Code | Error Message | Error Description
+-----|----------|-------------
+RPR-AUT-002 |	Access Denied	| Access Denied for the role
+RPR-RGS-001 |	Unable to Access Registration Table	| Unable to Access Registration Table
+RPR-RGS-016 |	JSON Mapping Failed	| JSON Mapping Failed
+RPR-RGS-017 |	JSON Parsing Failed	| JSON Parsing Failed
+RPR-SYS-002 |	Bad Gateway	| Bad Gateway
+RPR-DBE-001 |	Data integrity violation exception	| Data integrity violation exception
+RPR-AUT-01 |	Invalid Token Present	| Invalid Token Present
+RPR-RGS-015 |	Invalid Request Value - Input Data is Incorrect	| Invalid Request Value - Input Data is Incorrect
 
 
 # 3 Sync registration API
@@ -323,6 +358,18 @@ Failure response
 }
 ```
 
+#### Failure details
+Error Code | Error Message | Error Description
+-----|----------|-------------
+RPR-AUT-002 |	Access Denied	| Access Denied for the role
+RPR-RGS-001 |	Unable to Access Registration Table	| Unable to Access Registration Table
+RPR-RGS-016 |	JSON Mapping Failed	| JSON Mapping Failed
+RPR-RGS-017 |	JSON Parsing Failed	| JSON Parsing Failed
+RPR-SYS-002 |	Bad Gateway	| Bad Gateway
+RPR-DBE-001 |	Data integrity violation exception	| Data integrity violation exception
+RPR-AUT-01 |	Invalid Token Present	| Invalid Token Present
+RPR-RGS-015 |	Invalid Request Value - Input Data is Incorrect	| Invalid Request Value - Input Data is Incorrect
+
 # 4 Manual Verification APIs
 ## 4.1 Manual Verification Assignment API
 
@@ -392,6 +439,20 @@ Failure response
 }
 ```
 
+Error Code | Error Message | Error Description
+-----|----------|-------------
+RPR-MVS-005 | fields can not be empty  | fields can not be empty
+RPR-MVS-004 | No Assigned Record Found  | No Assigned Record Found 
+RPR-MVS-006 | Missing Input Parameter - requesttime  | Missing Input Parameter - requesttime 
+RPR-MVS-007 | Missing Input Parameter - id  | Missing Input Parameter - id 
+RPR-MVS-008 | Invalid Input Parameter - version  | Invalid Input Parameter - version 
+RPR-MVS-011 | Invalid Argument Exception  | Invalid Argument Exception 
+RPR-MVS-012 | Unknown Exception  | Unknown Exception 
+RPR-MVS-013 | Request Decoding Exception  |  Request Decoding Exception
+RPR-MVS-017 | User Id should not empty or null  | User Id should not empty or null
+RPR-MVS-015 | User is not in ACTIVE status  | User is not in ACTIVE status
+RPR-MVS-020 | Match Type is Invalid  | Match Type is Invalid
+RPR-MVS-022 | TablenotAccessibleException in Manual verification  | TablenotAccessibleException in Manual verification
 
 ## 4.2 Manual Verification Decision API
 
@@ -466,6 +527,24 @@ Failure response
 }
 ```
 
+Error Code | Error Message | Error Description
+-----|----------|-------------
+RPR-MVS-003 | Invalid status update  |  Invalid status update
+RPR-MVS-005 | fields can not be empty  | fields can not be empty
+RPR-MVS-004 | No Assigned Record Found  | No Assigned Record Found 
+RPR-MVS-018 | Packet Not Found in Packet Store  | Packet Not Found in Packet Store 
+RPR-MVS-006 | Missing Input Parameter - requesttime  | Missing Input Parameter - requesttime 
+RPR-MVS-007 | Missing Input Parameter - id  | Missing Input Parameter - id 
+RPR-MVS-008 | Invalid Input Parameter - version  | Invalid Input Parameter - version 
+RPR-MVS-011 | Invalid Argument Exception  | Invalid Argument Exception 
+RPR-MVS-012 | Unknown Exception  | Unknown Exception 
+RPR-MVS-013 | Request Decoding Exception  |  Request Decoding Exception
+RPR-MVS-017 | User Id should not empty or null  | User Id should not empty or null
+RPR-MVS-015 | User is not in ACTIVE status  | User is not in ACTIVE status
+RPR-MVS-016 | Reg Id should not be null or empty  | Reg Id should not be null or empty
+RPR-MVS-021 | Manual verification rejected  | Manual verification rejected
+RPR-MVS-022 | TablenotAccessibleException in Manual verification  | TablenotAccessibleException in Manual verification
+
 ## 4.3 Manual Verification Applicant Biometric API
 
 - #### `POST /registrationprocessor/v1/manualverification/applicantBiometric`
@@ -530,6 +609,21 @@ Failure :
 }
 ```
 
+Error Code | Error Message | Error Description
+-----|----------|-------------
+RPR-MVS-001 | Invalid file requested | Invalid file requested
+RPR-MVS-002 | Requested file is not present  | Requested file is not present
+RPR-MVS-005 | fields can not be empty  | fields can not be empty
+RPR-MVS-018 | Packet Not Found in Packet Store  | Packet Not Found in Packet Store 
+RPR-MVS-006 | Missing Input Parameter - requesttime  | Missing Input Parameter - requesttime 
+RPR-MVS-007 | Missing Input Parameter - id  | Missing Input Parameter - id 
+RPR-MVS-008 | Invalid Input Parameter - version  | Invalid Input Parameter - version 
+RPR-MVS-011 | Invalid Argument Exception  | Invalid Argument Exception 
+RPR-MVS-012 | Unknown Exception  | Unknown Exception 
+RPR-MVS-013 | Request Decoding Exception  |  Request Decoding Exception
+RPR-MVS-016 | Reg Id should not be null or empty  | Reg Id should not be null or empty
+RPR-MVS-022 | TablenotAccessibleException   | TablenotAccessibleException 
+
 ## 4.4 Manual Verification Applicant Demographic API
 
 - #### `POST /registrationprocessor/v1/manualverification/applicantDemographic`
@@ -592,6 +686,21 @@ Failure :
   }]
 }
 ```
+
+Error Code | Error Message | Error Description
+-----|----------|-------------
+RPR-MVS-002 | Requested file is not present  | Requested file is not present
+RPR-MVS-005 | fields can not be empty  | fields can not be empty
+RPR-MVS-018 | Packet Not Found in Packet Store  | Packet Not Found in Packet Store 
+RPR-MVS-006 | Missing Input Parameter - requesttime  | Missing Input Parameter - requesttime 
+RPR-MVS-007 | Missing Input Parameter - id  | Missing Input Parameter - id 
+RPR-MVS-008 | Invalid Input Parameter - version  | Invalid Input Parameter - version 
+RPR-MVS-011 | Invalid Argument Exception  | Invalid Argument Exception 
+RPR-MVS-012 | Unknown Exception  | Unknown Exception 
+RPR-MVS-013 | Request Decoding Exception  |  Request Decoding Exception
+RPR-MVS-016 | Reg Id should not be null or empty  | Reg Id should not be null or empty
+RPR-MVS-022 | TablenotAccessibleException in Manual verification  | TablenotAccessibleException in Manual verification
+
 ## 4.5 Manual Verification Packet Info API
 
 - #### `POST /registrationprocessor/v1/manualverification/packetInfo`
@@ -655,6 +764,19 @@ Failure :
 }
 ```
 
+Error Code | Error Message | Error Description
+-----|----------|-------------
+RPR-MVS-002 | Requested file is not present  | Requested file is not present
+RPR-MVS-005 | fields can not be empty  | fields can not be empty
+RPR-MVS-018 | Packet Not Found in Packet Store  | Packet Not Found in Packet Store 
+RPR-MVS-006 | Missing Input Parameter - requesttime  | Missing Input Parameter - requesttime 
+RPR-MVS-007 | Missing Input Parameter - id  | Missing Input Parameter - id 
+RPR-MVS-008 | Invalid Input Parameter - version  | Invalid Input Parameter - version 
+RPR-MVS-011 | Invalid Argument Exception  | Invalid Argument Exception 
+RPR-MVS-012 | Unknown Exception  | Unknown Exception 
+RPR-MVS-013 | Request Decoding Exception  |  Request Decoding Exception
+RPR-MVS-016 | Reg Id should not be null or empty  | Reg Id should not be null or empty
+RPR-MVS-022 | TablenotAccessibleException in Manual verification  | TablenotAccessibleException in Manual verification
 
 # 5 Bio Dedupe API
 
@@ -681,10 +803,30 @@ byte[]|Yes|byte array of CBEFF file|
 #### Response
 ###### Status codes: 200
 ###### Description : response code is always 200 if server receives the request.
-
+Success :
 ```JSON
 // byte array of CBEFF xml file
 ```
+
+Failure :
+```JSON
+{
+  "id" : "mosip.registration.biometrics",
+  "version" : "1.0",
+  "responsetime": "2019-02-14T12:40:59.768Z",
+  "response": null,
+  "errors" : [{
+	"errorCode" : "RPR-MVS-001",
+	"message" : "Access Denied"
+  }]
+}
+```
+
+Error Code | Error Message | Error Description
+-----|----------|-------------
+RPR-MVS-001 |	Access Denied	| Access Denied for the role
+RPR-AUT-01 |	Invalid Token Present	| Invalid Token Present
+
 
 # 6 Packet Generator API
 - #### `POST /registrationprocessor/v1/requesthandler/packetgenerator`
@@ -724,7 +866,7 @@ PacketGeneratorRequestDto|Yes|Dto containing information required for activate o
 #### Response
 ###### Status Code:200
 ###### Description : response code is always 200 if server receives the request.
-
+Success :
 ```JSON
 {
   "id": "mosip.registration.packetgenerator",
@@ -738,6 +880,38 @@ PacketGeneratorRequestDto|Yes|Dto containing information required for activate o
   "errors": null
 }
 ```
+
+Failure :
+```
+{
+  "id": "mosip.registration.packetgenerator",
+  "version": "1.0",
+  "responsetime": "2019-02-02T06:12:25.288Z",
+  "response": null,
+  "errors": [
+    {
+      "errorCode": "RPR-MVS-001",
+      "message": "Access Denied"
+    }
+  ]
+}
+```
+
+Error Code | Error Message | Error Description
+-----|----------|-------------
+RPR-MVS-001 |	Access Denied	| Access Denied for the role
+RPR-AUT-01 |	Invalid Token Present	| Invalid Token Present
+RPR-PGS-001 |	The Packet store set by the System is not accessible	| The Packet store set by the System is not accessible
+RPR-PGS-002 |	The key is invalid or illegal argument	| The key is invalid or illegal argument
+RPR-PGS-003 |	The Api resource is not available	| The Api resource is not available
+RPR-PGS-004 |	reg Based checked exception	| reg Based checked exception
+RPR-PGS-005 |	Exception while parsing object to JSON	| Exception while parsing object to JSON
+RPR-PGS-007 |	Exception occured while encryting the packet Invalid data	| Exception occured while encryting the packet Invalid data
+RPR-PGS-008 |	Exception occured while encryting the packet Invalid Key	| Exception occured while encryting the packet Invalid Key
+RPR-PGS-009 |	Packet meta info converter error	| Packet meta info converter error
+RPR-PGS-010 |	Missing Input Parameter	| Missing Input Parameter
+RPR-PGS-011 |	Invalid Input Parameter 	| Invalid Input Parameter 
+RPR-PGS-012 |	Input Data Validation Failed	| Input Data Validation Failed
 
 # 7 Packet Uploader API
 - #### `POST /registrationprocessor/v1/uploader/securezone`
@@ -867,6 +1041,22 @@ Error response
   ]
 }
 ```
+
+Error Code | Error Message | Error Description
+-----|----------|-------------
+RPR-MVS-001 |	Access Denied	| Access Denied for the role
+RPR-AUT-01 |	Invalid Token Present	| Invalid Token Present
+RPR-PGS-001 |	The Packet store set by the System is not accessible	| The Packet store set by the System is not accessible
+RPR-PGS-002 |	The key is invalid or illegal argument	| The key is invalid or illegal argument
+RPR-PGS-003 |	The Api resource is not available	| The Api resource is not available
+RPR-PGS-004 |	reg Based checked exception	| reg Based checked exception
+RPR-PGS-005 |	Exception while parsing object to JSON	| Exception while parsing object to JSON
+RPR-PGS-007 |	Exception occured while encryting the packet Invalid data	| Exception occured while encryting the packet Invalid data
+RPR-PGS-008 |	Exception occured while encryting the packet Invalid Key	| Exception occured while encryting the packet Invalid Key
+RPR-PGS-009 |	Packet meta info converter error	| Packet meta info converter error
+RPR-PGS-010 |	Missing Input Parameter	| Missing Input Parameter
+RPR-PGS-011 |	Invalid Input Parameter 	| Invalid Input Parameter 
+RPR-PGS-012 |	Input Data Validation Failed	| Input Data Validation Failed
 
 # 9 Registration Transaction API
 This API is used to find all the transactions for a registration id. This service accepts a registration id and returns all transactions associated with it.
@@ -1068,6 +1258,16 @@ Record not found :
 }
 
 ```
+Error Code | Error Message | Error Description
+-----|----------|-------------
+RPR-MVS-001 |	Access Denied	| Access Denied for the role
+RPR-AUT-01 |	Invalid Token Present	| Invalid Token Present
+RPR-RTS-001 |	RID Not Found	| RID Not Found
+RPR-RTS-002 |	Unknown Exception Occured	| Unknown Exception Occured
+RPR-RTS-003 |	Invalid request	| Invalid request
+RPR-RTS-004 |	globalMessages not found for input langCode	| globalMessages not found for input langCode
+
+
 # 10 Uincard API
 - #### `POST /registrationprocessor/v1/print/uincard`
 The residence service portal would call this API to get uin card upon receiving request from the applicant.
@@ -1133,6 +1333,29 @@ Error response :
   "response": null
 }
 ```
+
+Error Code | Error Message | Error Description
+-----|----------|-------------
+RPR-MVS-001 |	Access Denied	| Access Denied for the role
+RPR-AUT-01 |	Invalid Token Present	| Invalid Token Present
+RPR-PRT-001 |	Error while generating PDF for UIN Card	| Error while generating PDF for UIN Card
+RPR-PRT-002 |	UIN not found in database	| UIN not found in database
+RPR-PRT-003 |	PDF Generation Failed	| PDF Generation Failed
+RPR-PRT-004 |	Queue connection is null	| Queue connection is null
+RPR-PRT-005 |	Error while generating QR Code	| Error while generating QR Code
+RPR-PRT-006 |	Error while setting applicant photo	| Error while setting applicant photo 
+RPR-PRT-007 |	Error while setting qrCode for uin card	| Error while setting qrCode for uin card
+RPR-PRT-008 |	ID Repo response is null	| ID Repo response is null
+RPR-PRT-009 |	ID Repo response has no documents	| ID Repo response has no documents
+RPR-PRT-011 |	Error while print data validation	| Error while print data validation
+RPR-PRT-012 |	Invalid CardType : Enter UIN or MASKED_UIN	| Invalid CardType : Enter UIN or MASKED_UIN
+RPR-PRT-013 |	Invalid IdType : Enter UIN or VID or RID	| Invalid IdType : Enter UIN or VID or RID
+RPR-PRT-014 |	UIN is not valid	| UIN is not valid
+RPR-PRT-015 |	VID is not valid	| VID is not valid
+RPR-PRT-016 |	RID is not valid	| RID is not valid
+RPR-PRT-017 |	Error while creating VID	| Error while creating VID
+RPR-PRT-018 |	Could not generate/regenerate VID as per policy,Please use existing VID	| Could not generate/regenerate VID as per policy,Please use existing VID
+RPR-PRT-019 |	Invalid Input Parameter	| Invalid Input Parameter
 
 
 # 11 Lost UIN Or RID API
