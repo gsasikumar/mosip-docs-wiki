@@ -207,6 +207,7 @@ RPR-SYS-002 |	Bad Gateway	| Bad Gateway
 RPR-DBE-001 |	Data integrity violation exception	| Data integrity violation exception
 RPR-AUT-01 |	Invalid Token Present	| Invalid Token Present
 RPR-RGS-015 |	Invalid Request Value - Input Data is Incorrect	| Invalid Request Value - Input Data is Incorrect
+RPR-RGS-031 |	RID Not Found	| RID Not Found
 
 
 # 3 Sync registration API
