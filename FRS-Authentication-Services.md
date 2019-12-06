@@ -17,7 +17,7 @@
     * [6.1 Lock Authentication Types](#61-lock-authentication-types)
     * [6.2 Unlock Authentication Types](#62-unlock-authentication-types)
 - [7. Authentication Device Support](#7-authentication-device-support)
-  * [7.1 Registered Devices and Open Devices TBD](#71-registered-devices-and-open-devices-tbd-) _(IDA_FR_6.1)_
+  * [7.1 Registered Devices and Open Devices](#71-registered-devices-and-open-devices-) _(IDA_FR_6.1)_
 - [List of Configurable Parameters and Processes](#list-of-configurable-parameters-and-processes-)
 - [Authentication Services API](#authentication-services-api-)
 - [Process View](#process-view-)
@@ -544,9 +544,10 @@ When an individual’s particular authentication type is locked and wants to unl
 
 
 # 7. Authentication Device Support 
-## 7.1 Registered Devices and Open Devices TBD [**[↑]**](#table-of-contents)
+## 7.1 Registered Devices and Open Devices [**[↑]**](#table-of-contents)
 
-Technical story (Architects to contribute)
+The authentication services can be utilized only by a trusted partner and a registered set of devices. A device can be registered in the MOSIP ecosystem by the device provider through the device register API exposed by MOSIP. For details related to Device Registration and De-Registration features please to refer this [**link**](/mosip/mosip-docs/wiki/FRS-Administrator-Services#10-device-provider-management-).
+
 ### List of Configurable Parameters and Processes [**[↑]**](#table-of-contents)
 
 1. Configurable Parameters
