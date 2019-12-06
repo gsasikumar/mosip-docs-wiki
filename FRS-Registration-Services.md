@@ -30,8 +30,8 @@
 - [7. Packet Upload](#7-packet-upload-)
   * [7.1 Registration Packet Upload](#71-registration-packet-upload-) _(REG_FR_7.1)_
   * [7.2 Packet Exporter & Offline Upload from External Device](#72-offline-upload-packet-exporter-) _(REG_FR_7.2)_
-    * [7.2.1 Export Packets to External Device] _(REG_FR_7.2.1)_
-    * [7.2.2 Upload Packets from External Device to Server (To be Developed)] _(REG_FR_7.2.2)_
+    * [7.2.1 Export Packets to External Device](#721-export-packets-to-external-device-) _(REG_FR_7.2.1)_
+    * [7.2.2 Upload Packets from External Device to Server - To be Developed](#722-upload-packets-from-external-device-to-server-) _(REG_FR_7.2.2)_
 - [8. Analytics and Audit Logs](#8-analytics-and-audit-logs-) _(REG_FR_8)_
 - [9. Data Security](#9-data-security-)
 - [10. Installation and Software Version Upgrade](#10-software-version-upgrade-) _(REG_FR_10)_
@@ -720,7 +720,7 @@ The system then enables a registration officer to view the registration confirma
 
 ### 7.2 Packet Exporter & Offline Upload from External Device [**[↑]**](#table-of-contents)
 
-#### 7.2.1 Export Packets to External Device
+#### 7.2.1 Export Packets to External Device [**[↑]**](#table-of-contents)
 System exports registration packet data from client machine to an external device as follows:
 1. Allows the registration officer to select a destination folder.
    * The destination folder includes the laptop/desktop, an external hard drive or a remote location.
@@ -736,7 +736,7 @@ System exports registration packet data from client machine to an external devic
 1. For partial or full failure, the system displays error message.
 1. System captures and stores the transaction details for audit purpose (except PII data).
 
-#### 7.2.2 Upload Packets from External Device to Server (To be Developed)
+#### 7.2.2 Upload Packets from External Device to Server (To be Developed) [**[↑]**](#table-of-contents)
 1. Once the server acknowledges that the packets have been received (which is uploaded from the external device to the server through a defined mechanism - Yet to be defined/developed), the packets in the client will be marked as ‘Uploaded’ upon the next sync with Server.
    * Packets that remain in ‘Ready to Upload’ status will be exported again when the next export is executed.
    * Packets in ‘Uploaded’ or any other status will not be exported again.
