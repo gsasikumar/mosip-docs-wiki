@@ -28,6 +28,8 @@ Includes Functional requirements, Process flows, Architecture and High level des
    [**Link to Platform Documentation**](Platform-Documentation)
 ### 2. Detailed Documentation
 [**Low Level design**](https://github.com/mosip/mosip-platform/tree/master/design) and [**Test cases excel**](https://github.com/mosip/mosip-functional-tests/wiki/_files/testing/Test_automation/MOSIP-TCs-V1.0.xlsx)
+### 3. Platform Configurability for RBR    
+MOSIP Platform can be configured to be used for Real Biometrics.  [MOSIP Configurability for Real Biometrics](https://github.com/mosip/mosip-docs/wiki/MOSIP-Configurability-for-Real-Biometrics)
 
 ## Key Points [**[↑]**](#table-of-contents)
 

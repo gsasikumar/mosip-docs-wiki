@@ -61,7 +61,12 @@ QR code generator takes the content received along with the version number and c
 Crypto service encrypts or decrypts data across MOSIP with the help of Public/Private Keys.
 
 #### A. For Encryption
-The Crypto Service receives a request from an application with input parameters – Application ID, Reference ID, Timestamp and Data that needs to be encrypted. It calls the Key Generator API for a symmetric Key and encrypt data using that symmetric Key. It then calls Key Manager Service and get the public key for the Application ID and Timestamp received in the input parameters encrypts the symmetric key using the Public key and joins the Encrypted data and Encrypted Symmetric Key using a Key splitter and respond to the source with the joined data.
+The Crypto Service receives a request from an application with input parameters – Application ID, Reference ID, Timestamp and the Data which needs to be encrypted. 
+The Service then calls the Key Generator API to get a symmetric Key and encrypts the data using that symmetric Key. 
+
+The Service then calls the Key Manager Service with the Application ID and Timestamp received in the input parameters and gets the public key. 
+
+The Service then encrypts the symmetric key using the Public key and joins the Encrypted data and Encrypted Symmetric Key using a Key splitter and respond to the source with the joined data.
 #### B. For Decryption
 The Crypto Service will receive a request from an application with input parameters – Application ID, Reference ID, Timestamp and Data that needs to be decrypted. 
 
@@ -213,7 +218,7 @@ MOSIP system provides base exception framework.
 1. Creates wrapper class for methods defined in apache-commons File util
 1. Raises an alert in case of listed exceptions 
 ### 6.7 Json Utility [**[↑]**](#table-of-contents)
-1. Identifies jason util methods
+1. Identifies Json util methods
 1. Creates wrapper class for methods defined in apache-commons jason util
 1. Raises an alert in case of listed exceptions 
 ### 6.8 Math Utility [**[↑]**](#table-of-contents)
@@ -270,7 +275,7 @@ Virus Scanner utility allows for virus scanning across MOSIP at various places. 
 3. Scanning of Registration packet in Registration Processor
 
 Currently for Virus Scanner, MOSIP has integrated with Clam Antivirus which allows for 290 concurrent users.
-A Country may integrate their own Licensed version of anti virus as per their requirement.
+A Country may integrate their own Licensed version of antivirus as per their requirement.
 
 ### List of Configurable Parameters and Processes [**[↑]**](#table-of-contents)
 

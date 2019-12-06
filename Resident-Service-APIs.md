@@ -284,8 +284,7 @@ request: otp| Y | OTP | |
   "responseTime": "2018-12-09T06:39:04.683Z",
   "response": {
     "euin": "<uin-pdf byte string>",
-    "status": "success",
-    "message": "Notification has been sent to abXXXXXXXXXcd@xyz.com"
+    "message": "Notification has been sent to the provided contact detail(s)"
   },
   "errors": null
 }
@@ -372,8 +371,7 @@ request: otp| Y | OTP | |
   "responseTime": "2018-12-09T06:39:04.683Z",
   "response": {
 	"rid": "770872690593682",
-    "status": "success",
-    "message": "Notification has been sent to abXXXXXXXXXcd@xyz.com"
+    "message": "Notification has been sent to the provided contact detail(s)"
   },
   "errors": null
 }
@@ -492,8 +490,7 @@ request: demographics|N| Demographic data of an Individual| |
   "responseTime": "2018-12-09T06:39:04.683Z",
   "response": {
 	"uin": "989768897876565",
-    "status": "success",
-    "message": "Notification has been sent to abXXXXXXXXXcd@xyz.com"
+    "message": "Notification has been sent to the provided contact detail(s)"
   },
   "errors": null
 }
@@ -609,8 +606,7 @@ request: demographics|N| Demographic data of an Individual| |
   "responseTime": "2018-12-09T06:39:04.683Z",
   "response": {
     "rid": "989768897876565",
-    "status": "success",
-    "message": "Notification has been sent to abXXXXXXXXXcd@xyz.com"
+    "message": "Notification has been sent to the provided contact detail(s)"
   },
   "errors": null
 }
@@ -747,8 +743,7 @@ request: demographics|Y| Demographic data of an Individual| |
   "responseTime": "2018-12-09T06:39:04.683Z",
   "response": {
     "rid": "989768897876565",
-    "status": "success",
-    "message": "Notification has been sent to abXXXXXXXXXcd@xyz.com"
+    "message": "Notification has been sent to the provided contact detail(s)"
   },
   "errors": null
 }
@@ -837,8 +832,7 @@ request: otp| Y | OTP | |
   "responseTime": "2018-12-09T06:39:04.683Z",
    "response": {
     "vid": "989768897876565",
-    "status": "success",
-    "message": "Notification has been sent to abXXXXXXXXXcd@xyz.com"
+    "message": "Notification has been sent to the provided contact detail(s)"
   },
   "errors": null
 }
@@ -931,8 +925,7 @@ request: otp| Y | OTP | |
   "version": "v1",
   "responseTime": "2018-12-09T06:39:04.683Z",
    "response": {
-    "status": "success",
-    "message": "Notification has been sent to abXXXXXXXXXcd@xyz.com"
+    "message": "Notification has been sent to the provided contact detail(s)"
   },
   "errors": null
 }
@@ -1030,7 +1023,7 @@ request: otp| Y | OTP | |
   "responseTime": "2018-12-09T06:39:04.683Z",
    "response": {
     "status": "success",
-    "message": "Notification has been sent to abXXXXXXXXXcd@xyz.com"
+    "message": "Notification has been sent to the provided contact detail(s)"
   },
   "errors": null
 }
@@ -1129,7 +1122,7 @@ request: otp| Y | OTP | |
   "responseTime": "2018-12-09T06:39:04.683Z",
    "response": {
     "status": "success",
-   "message": "Notification has been sent to abXXXXXXXXXcd@xyz.com"
+   "message": "Notification has been sent to the provided contact detail(s)"
   },
   "errors": null
 }
@@ -1223,8 +1216,7 @@ request: otp| Y | OTP | |
   "responseTime": "2018-12-09T06:39:04.683Z",
    "response": {
 	"authHistory": [{authDetails1},{authDetails2}],   
-    "status": "success",
-    "message": "Notification has been sent to abXXXXXXXXXcd@xyz.com"
+    "message": "Notification has been sent to the provided contact detail(s)"
   },
   "errors": null
 }
