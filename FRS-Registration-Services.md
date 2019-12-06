@@ -199,7 +199,8 @@ Based on the configuration (turn on or turn off), the system allows a registrati
 
 1. The Registration Client receives a request to sync data (through manual trigger or scheduled job) from client to server.
 2. Client in turn sends request with the applicable data to server.
-   * Registration officer on-boarding data is synced.
+   * Registration officer on-boarding data with mapping to that machine is synced.
+   * Registration packets are synced
    * Only the additions, deletions, and modifications made since the last sync are sent.
 3. Client receives response from server as a success or failure message.
 4. Client displays a success or failure message on the UI
@@ -214,7 +215,6 @@ The system performs the following steps to ensure packet status sync from server
 1. The system allows a registration officer to either sync manually or automatically based on configured frequency.
 1. The system allows the application to request using registration packet ID and receive the registration packet status from the server
 1. The system displays the status (in progress/completed) of the operation to pull registration packet IDs from registration server.
-
 ### 2.5 Pre-registration Data Download [**[↑]**](#table-of-contents)
 
 
@@ -251,6 +251,8 @@ The downloaded pre-registration data overwrites the previously downloaded data f
 The downloaded pre-registration data is stored locally in the registered machine as configured.
 
 [**Link to design**](/mosip/mosip-platform/blob/master/design/registration/registration-sync-job.md)
+
+- Note: Additionally, we have the Policies sync, User to role mapping sync, Public Key Sync and User Salt Sync that takes place from Server to Client
 
 ## 3. Health Check [**[↑]**](#table-of-contents)
 ### 3.1 Peripherals Check [**[↑]**](#table-of-contents)
