@@ -101,10 +101,10 @@ The [code](https://github.com/mosip/mosip-platform/releases/tag/0.10.3) and [aut
 |Regression Testing|Tests to ensure that any change doesn't break existing functionality|
 	
 #### 5. Test Execution Summary [**[↑]**](#table-of-contents) **TBD**
-![Image]()  
+![Image](_images/test_rig_automation/ExecutionSummary_1.0.0.jpg)  
 
 ## Known Issues [**[↑]**](#table-of-contents)**TBD**
-![Image]() 
+![Image](_images/test_rig_automation/KnownIssues_1.0.0.jpg) 
 
 ## Support Process (To Be Determined) [**[↑]**](#table-of-contents)
 Process to be followed for support required, escalation matrix, etc.
