@@ -19,7 +19,7 @@ This release is with **real biometrics**. This means that MOSIP Platform is now 
 * Modules included – Pre-Registration, Registration Client, Registration Processor, ID Authentication, Administration, Reference GUI implementation of Pre-Registration and Registration Client. 
 * Modules not included – Partner Management, Resident Services, Reference GUI implementation of Administration
 
-Module-wise features released as part of this release can be found [here]()
+Module-wise features released as part of this release can be found [here](https://github.com/mosip/mosip-docs/wiki/_files/MOSIP_Feature_Release_v1.0.0.xlsx)
 
 ## Documentation [**[↑]**](#table-of-contents)
 ### 1. Platform Documentation 
