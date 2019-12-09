@@ -100,35 +100,11 @@ The [code](https://github.com/mosip/mosip-platform/releases/tag/0.10.3) and [aut
 |Integration Testing|Tests to ensure the inter module functionality works fine and in accordance with the integration requirements|
 |Regression Testing|Tests to ensure that any change doesn't break existing functionality|
 	
-#### 5. Test Execution Summary [**[↑]**](#table-of-contents)
-![Image](_images/test_rig_automation/Capture.JPG)  
+#### 5. Test Execution Summary [**[↑]**](#table-of-contents) **TBD**
+![Image]()  
 
-## Known Issues [**[↑]**](#table-of-contents)
-![Image](_images/test_rig_automation/image4.jpg) 
-To Be updated
-
-|Module|Issue Description|Issue ID|
-|----|----|----|
-|ID-Repository|ID tag in response should be mosip.vid.deactivate or reactivate for Deactivate/Reactivate VID Api|MOS-28700|
-|ID-Authentication|Internal OTP Authentication not working|MOS-28722|
-|ID-Authentication|Incorrect error message is displayed when there is a mismatch in the identity type in OTP Authentication|MOS-28208|
-|ID-Authentication|OTP Generate service with for internal authentication does not validate allowed ID Types|MOS-28663|
-|ID-Authentication|Email content should properly template it for OTP and auth email notfication|MOS-28713|
-|ID-Authentication|Valid response should come for internal/authtypes/status api|MOS-28966|
-|ID-Authentication|There should not be "null" value in lock and unlock UIN or VID response|MOS-28965|
-|ID-Authentication|ID Validation should happen for Lock and Unlock  UIN/VID Api|MOS-28964|
-|Registration-Client|Scan pop up gets retained after app gets logout|MOS-27928|
-|Registration-Client|Not all QA property value changes are getting synced using "Sync" in-home screen|MOS-27986|
-|Registration-Client|Exception photo is displayed in preview and acknowledgment screen for non-exception packets|MOS-28007|
-|Registration-Client|File status pop up gets retained after app gets logout|MOS-27986|
-|Registration-Client|Unable to download pre-registration data either by fetching PRID or by bulk download|MOS-28667|
-|Registration-Client|Application fails to displays navigation away alert when a user clicks new registration on ack screen|MOS-28808|
-|Registration-Client|Application fails to alert the user to capture exception photo for low-quality biometric exception scenario|MOS-28807|
-|Registration-Client|Unable to create a packet with low-quality biometric scenario|MOS-28805|
-|Registration-Client|Iris count for child packet is displayed as "3" when the user captures low quality biometric|MOS-28958|
-|Registration-Client|User is able to create update packet without capturing biometrics|MOS-28962|
-|Registration-Client|Scan button gets enabled though user has marked all biometrics as exception |MOS-28967|
-|Registrtaion-Client|Face photo capture is not working as expected |MOS-23698|
+## Known Issues [**[↑]**](#table-of-contents)**TBD**
+![Image]() 
 
 ## Support Process (To Be Determined) [**[↑]**](#table-of-contents)
 Process to be followed for support required, escalation matrix, etc.
