@@ -55,7 +55,7 @@ The [code](https://github.com/mosip/mosip-platform/releases/tag/0.10.3) and [aut
 
 ## Test Reports [**[↑]**](#table-of-contents)
 **Testing Scope**
-#### 1. In Scope [**[↑]**](#table-of-contents)
+#### 1. In scope [**[↑]**](#table-of-contents)
 
 |Title	|Description|
 |------|------|
@@ -69,7 +69,7 @@ The [code](https://github.com/mosip/mosip-platform/releases/tag/0.10.3) and [aut
 |OS Support|**Registration Client**    <li> Windows 10|
 |Language Support|French, Arabic, English|
 
-#### 2. Not in Scope [**[↑]**](#table-of-contents)
+#### 2. Not in scope [**[↑]**](#table-of-contents)
 
 |Title|	Description|
 |------|------|
