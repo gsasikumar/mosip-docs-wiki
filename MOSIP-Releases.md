@@ -1,5 +1,5 @@
 ## Latest Release (TBD)
-- Version: 0.10.4 (Stable)
+- Version: 1.0.0 (Stable)
 - Name:  Real Biometrics
 - Date:  06-Dec-2019
 - [Release Notes](Release-Notes---1.0.0)
