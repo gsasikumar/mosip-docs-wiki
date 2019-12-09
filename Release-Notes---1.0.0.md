@@ -26,7 +26,7 @@ Module-wise features released as part of this release can be found [here](https:
 Includes Functional requirements, Process flows, Architecture and High level design, Getting started and Deployment guide, Developer documentation etc.  
    [**Link to Platform Documentation**](Platform-Documentation)
 ### 2. Detailed Documentation
-[**Low Level design**](https://github.com/mosip/mosip-platform/tree/master/design)
+[**Low Level design**](https://github.com/mosip/mosip-platform/tree/master/design) and [**Test cases**](https://github.com/mosip/mosip-functional-tests/wiki/_files/testing/Test_automation)
 ### 3. Platform Configurability for RBR    
 MOSIP Platform can be configured to be used for Real Biometrics.  [Guide to configure MOSIP for Real Biometrics](https://github.com/mosip/mosip-docs/wiki/Guide-to-configure-MOSIP-for-Real-Biometrics)
 
