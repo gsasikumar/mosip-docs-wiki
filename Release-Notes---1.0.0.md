@@ -64,7 +64,7 @@ The [code](https://github.com/mosip/mosip-platform/releases/tag/0.10.3) and [aut
 |Test Methodology| <li>  Manual <li>  Test Automation|
 |Types of testing|<li>	 Smoke <li> Functional <li>  Integration <li> 	Regression|
 |Testing Levels|![Image](_images/test_rig_automation/image1.jpg) |
-|Configuration Parameters tested for| Refer to QA env properties file with suffix ‘qa’ in the filename, at [**Link**](https://github.com/mosip/mosip-config)|
+|Configuration Parameters tested for| Refer to properties file at [**Link**](https://github.com/mosip/mosip-config/tree/master/config-templates)|
 |Browser Support|**Pre-Registration**    <li> Chrome – 78.0.3904.108|
 |OS Support|**Registration Client**    <li> Windows 10|
 |Language Support|French, Arabic, English|
