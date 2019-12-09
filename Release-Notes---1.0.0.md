@@ -81,20 +81,15 @@ The [code](https://github.com/mosip/mosip-platform/releases/tag/0.10.3) and [aut
 |Sl. No.|	Module / Activity|Test Methodology|	Test Status|
 |------|------|------|------|
 |1|	Kernel	|<li> Test Automation	|PASS|	
-|2|	Pre-Registration|<li> Tested Manually <li> Test Automation|PASS |
+|2|	Pre-Registration|<li> Test Automation|PASS |
 |3|	Registration Client|<li> Tested Manually <li> Test Automation|PASS|
 |4|Registration Processor|<li> Tested Manually <li> Test Automation	|PASS |
 |5|	ID Authentication	|	<li>  Test Automation	|PASS|
 |6|	ID Repo	|	<li> Test Automation	|PASS|	
 |7|Pre-Registration to Registration Client integration testing|	<li> Tested Manually|PASS	|	
 |8|	Registration Client to Registration Processor integration testing|	<li> Tested Manually|PASS|	
-|9|	Registration Processor to Pre-Registration integration testing|<li>  Tested Manually|PASS	|	
-|10|	Registration Processor to Registration Client integration testing|<li> 	Tested Manually|PASS|
-|11|	Registration Client to IDA integration testing|<li> 	Tested Manually|PASS		|
-|12|	Registration Processor to IDA integration testing|<li> 	Tested Manually|PASS|
-|13|	IDA to ID Repo|<li> 	Tested Manually|PASS	|
-|14|Kernel API integration|	<li> Tested Manually <li> Test Automation|	PASS|
-|15|	End to end functional testing|	<li> Tested Manually|PASS|	
+|9|	Registration Processor to IDA integration testing|<li> 	Tested Manually|PASS|
+|10|	IDA to ID Repo|<li> 	Tested Manually|PASS	|
 
 #### 4. Types of Testing [**[↑]**](#table-of-contents)
 
