@@ -53,7 +53,7 @@ MOSIP Platform can be configured to be used for Real Biometrics.  [Guide to conf
 ## Code [**[↑]**](#table-of-contents)
 The [code](https://github.com/mosip/mosip-platform/releases/tag/0.10.3) and [automation tests](https://github.com/mosip/mosip-functional-tests) are available on GitHub. The code needs to be built and deployed as per the procedure documented in [**Building And Deploying MOSIP**](Platform-Documentation#9-building-and-deploying-mosip). We will actively support System Integrators during their first deployment.
 
-## Tests [**[↑]**](#table-of-contents)
+## Test Reports [**[↑]**](#table-of-contents)
 **Testing Scope**
 #### 1. In Scope [**[↑]**](#table-of-contents)
 
