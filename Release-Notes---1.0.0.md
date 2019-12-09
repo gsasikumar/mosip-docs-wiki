@@ -100,10 +100,10 @@ The [code](https://github.com/mosip/mosip-platform/releases/tag/0.10.3) and [aut
 |Integration Testing|Tests to ensure the inter module functionality works fine and in accordance with the integration requirements|
 |Regression Testing|Tests to ensure that any change doesn't break existing functionality|
 	
-#### 5. Test Execution Summary [**[↑]**](#table-of-contents) **TBD**
+#### 5. Test Execution Summary [**[↑]**](#table-of-contents)
 ![Image](_images/test_rig_automation/ExecutionSummary_1.0.0.jpg)  
 
-## Known Issues [**[↑]**](#table-of-contents)**TBD**
+## Known Issues [**[↑]**](#table-of-contents)
 ![Image](_images/test_rig_automation/KnownIssues_1.0.0.jpg) 
 
 ## Support Process (To Be Determined) [**[↑]**](#table-of-contents)
