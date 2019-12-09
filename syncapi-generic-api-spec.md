@@ -23,11 +23,18 @@ Requires Authentication | yes
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
 registrationCenterID|Yes|The id of the registered registration center|-NA-|JDUY283
-
+lastUpdated|Yes|Date in UTC ISO format|-NA-|-NA-
 
 #### Example Request
 ```
-https://mosip.io/v1/kernel/masterdata/sync/JDUY283
+{
+	"id": "mosip.kernel.masterdata.sync",
+	"ver": "1.0",
+	"responsetime": "2007-12-03T10:15:30Z",
+	"reqeust": {
+		"registrationCenterID":"JDUY283",
+		"lastUpdated":"2019-03-04T12:34:15.477Z"
+	}
 ```
 
 #### Response Structure
