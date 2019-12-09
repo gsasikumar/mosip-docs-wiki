@@ -51,7 +51,7 @@ MOSIP Platform can be configured to be used for Real Biometrics.  [Guide to conf
 |Transliteration|	ICU4J (Library with French, Arabic languages)|
 
 ## Code [**[↑]**](#table-of-contents)
-The [code](https://github.com/mosip/mosip-platform/releases/tag/0.10.3) and [automation tests](https://github.com/mosip/mosip-functional-tests) are available on GitHub. The code needs to be built and deployed as per the procedure documented in [**Building And Deploying MOSIP**](Platform-Documentation#9-building-and-deploying-mosip). We will actively support System Integrators during their first deployment.
+The [code](https://github.com/mosip/mosip-platform/releases/tag/1.0.0) and [automation tests](https://github.com/mosip/mosip-functional-tests) are available on GitHub. The code needs to be built and deployed as per the procedure documented in [**Building And Deploying MOSIP**](Platform-Documentation#9-building-and-deploying-mosip). We will actively support System Integrators during their first deployment.
 
 ## Test Reports [**[↑]**](#table-of-contents)
 **Testing Scope**
