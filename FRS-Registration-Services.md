@@ -723,19 +723,19 @@ The system then enables a registration officer to view the registration confirma
 
 #### 7.2.1 Export Packets to External Device [**[↑]**](#table-of-contents)
 System exports registration packet data from client machine to an external device as follows:
-1. Allows the registration officer to select a destination folder.
-   * The destination folder includes the laptop/desktop, an external hard drive or a remote location.
-   * External storage devices are not necessary to be MOSIP-registered devices.
-1. When the destination folder is selected, registration officer initiates export of packets.
+1. This feature allows the registration officer to select a destination folder to export the packets. By default all packets that can be uploaded, are exported to the external device
+   * The destination folder includes the laptop/desktop, an external hard drive or a remote location
+   * External storage devices are not necessary to be MOSIP-registered devices
+1. When the destination folder is selected, registration officer initiates export of packets
 1. System exports the packets to the selected folder and performs the following steps:
    * Identifies the packets in ‘Ready to Upload’ state.
-   * If EoD process is turned ON, packets that have been approved or rejected and packet ID sync is completed are considered ‘Ready to Upload’.
-   * If EoD process is turned OFF, packets are considered ‘Ready to Upload’ as soon as the registration is submitted and packet ID sync is completed.
+   * If EoD process is turned ON, packets that have been approved or rejected and packet ID sync is completed are considered ‘Ready to Upload’
+   * If EoD process is turned OFF, packets are considered ‘Ready to Upload’ as soon as the registration is submitted and packet ID sync is completed
    * Puts the packets in the destination folder
-1. All the Registration Officers and supervisors on-boarded to the client machine are able to export all packets.
-1. Supports the partial export. If the system is able to export some packets to the folder and no other files due to lack of storage space or unavailability of the folder, the successfully exported packets will remain on the destination folder.
-1. For partial or full failure, the system displays error message.
-1. System captures and stores the transaction details for audit purpose (except PII data).
+1. All the Registration Officers and supervisors on-boarded to the client machine will be able to export all packets
+1. Supports the partial export. If the system is able to export some packets to the folder and no other files due to lack of storage space or unavailability of the folder, the successfully exported packets will remain in the destination folder.
+1. For partial or full failure, the system displays error message
+1. System captures and stores the transaction details for audit purpose (except PII data)
 
 #### 7.2.2 Upload Packets from External Device to Server (To be Developed) [**[↑]**](#table-of-contents)
 1. Once the server acknowledges that the packets have been received (which is uploaded from the external device to the server through a defined mechanism - Yet to be defined/developed), the packets in the client will be marked as ‘Uploaded’ upon the next sync with Server.
