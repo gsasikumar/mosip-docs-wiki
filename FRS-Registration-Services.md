@@ -723,7 +723,7 @@ The system then enables a registration officer to view the registration confirma
 
 #### 7.2.1 Export Packets to External Device [**[↑]**](#table-of-contents)
 System exports registration packet data from client machine to an external device as follows:
-1. This feature allows the registration officer to select a destination folder to export the packets. By default all packets that can be uploaded, are exported to the external device
+1. This feature allows the registration officer to select a destination folder to export the packets. By default all packets that are listed/eligible to be uploaded, are exported to the external device
    * The destination folder includes the laptop/desktop, an external hard drive or a remote location
    * External storage devices are not necessary to be MOSIP-registered devices
 1. When the destination folder is selected, registration officer initiates export of packets
