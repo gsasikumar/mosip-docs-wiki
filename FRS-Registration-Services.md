@@ -491,7 +491,8 @@ The registration officer performs the following steps to retrieve a lost UIN of 
 1. The registration receipt contains details in a print-friendly format.
    * Receipt includes labels and data in two languages - the default language and the secondary language as configured. 
    * All labels and fields are in the default language. Only name and address labels and fields are shown in the secondary language
-   * Receipt displays the 2D bar code.
+   * Receipt displays the 2D bar code
+   * It also provides the finger print ranking of each finger from 1 to 10, 1 being the finger with the best quality. The finger with higher quality can further be used by the individual, for biometric/Finger Print authentication
 4. This print friendly receipt can then be printed using a printer
 
 #### B. Acknowledgement receipt sent by email on completion of registration process [**[↑]**](#table-of-contents)
