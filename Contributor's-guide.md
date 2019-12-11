@@ -82,7 +82,7 @@ Please go through the coding standards for,
 	
 	
 ### Git workflow
-MOSIP uses Github workflow. Refer [here](mosip-github-workflow.md) for steps to take the code from MOSIP and contribute back. 
+MOSIP uses Github workflow. Refer [MOSIP github workflow](mosip-github-workflow.md) for steps to take the code from MOSIP and contribute back. 
 
 
 ### How Requirement, Code, testing, documents, configuration and infra comes together?
