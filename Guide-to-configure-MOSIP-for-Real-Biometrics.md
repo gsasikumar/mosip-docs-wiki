@@ -25,7 +25,8 @@ mosip.registration.mds.face.dedup.enable.flag=Y
    i. Add Device Specification (like model, make, etc.) using [Device Specification API](https://github.com/mosip/mosip-docs/wiki/Device-APIs#post-devicespecifications)
    ii. Map Biometric Devices to Device Specifications using [Device API](https://github.com/mosip/mosip-docs/wiki/Device-APIs#post-devices)
    iii. Map White-listed Device to a Center ID to which Registration Client is tagged using [Registration Centre Device API](https://github.com/mosip/mosip-docs/wiki/Registration-Center-APIs#post-registrationcenterdevice)     
-   d. `Register Device` - Biometric device can be registered using MOSIP using [Register Device API](https://github.com/mosip/mosip-docs/wiki/Device-Management#post-registereddevices)    
+   d. `Register Device` - Biometric device can be registered using MOSIP using [Register Device API](https://github.com/mosip/mosip-docs/wiki/Device-Management#post-registereddevices)   
+   
 
 #### 2. Registration Processor    
 - **Configure ABIS queue** - ABIS queue can be configured in [RegistrationProcessorAbis-env.json](https://github.com/mosip/mosip-config/blob/master/config-templates/RegistrationProcessorAbis-env.json) file. registration-processor-abis-middleware-stage communicates to ABIS through queue configured. It sends request to inbound queue address and receives response from outbound queue address. If there are multiple ABIS, then it can be added in same file.
@@ -43,4 +44,6 @@ ida.composite.biometric.provider=<fully qualified classname of Biometric SDK>
    a. `Register Device Provider` - Device Provider can be registered with MOSIP using [Register Device Provider API](https://github.com/mosip/mosip-docs/wiki/Device-Management#post-deviceprovider)    
    b. `Register MDS` - MDS can be registered with MOSIP using [Register MDS API](https://github.com/mosip/mosip-docs/wiki/Device-Management#post-mds)   
    c. `Register Device` - Biometric device can be registered using MOSIP using [Register Device API](https://github.com/mosip/mosip-docs/wiki/Device-Management#post-registereddevices)     
+   d. Please update the code of the registered device to the serial number of the device in register_device_master
+and register_device_master_h table.
 - **Encrypt biometric data from MDS** - In order to capture encrypted biometrics from MDS, MDS should use Mosip Public Key. This key should be generated in MOSIP with `IDA-FIR` as reference-ID for Parter-based Individual Authentication and  'INTERNAL' as reference-ID for Internal Authentication.
