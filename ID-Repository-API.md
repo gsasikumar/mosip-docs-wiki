@@ -1011,6 +1011,26 @@ request: UIN| yes | Individual's UIN | | 981576026435
     "vidStatus": 'DEACTIVATED'
   }
 }
+
+##### Failure details
+Error Code | Error Message | Error Description
+-----------|----------|-------------
+IDR-VID-001|VID is <vid-status>|Here status could be REVOKED, EXPIRED, USED, INVALIDATED or DEACTIVATED
+IDR-VID-004|Deactivate UIN or Blocked UIN|UIN is either de-activated or blocked
+IDR-VID-006|Uin hash does not match|Error while matching hash of UIN against decrypted UIN 
+IDR-VID-005|Failed to retrieve uin data using Identity Service|Error while retrieving UIN details from Identity Service
+IDR-IDC-001|Missing Input Parameter - %s|Input Parameter Missing
+IDR-IDC-002|Invalid Input Parameter - %s|Invalid Input Parameter
+IDR-IDC-003|Invalid Request|Invalid Request attribute
+IDR-IDC-004|Unknown error occurred |An unknown error occurred
+IDR-IDC-005|Input Data Validation Failed|Validation on input fails
+IDR-IDC-006|Error occurred while performing DB operations|DB connectivity error
+IDR-IDC-007|No Record(s) found|No VID records found
+IDR-IDC-008|4XX - Client Error occurred|4XX error from Kernel APIs
+IDR-IDC-009|5XX - Server Error occurred|5XX error from Kernel APIs
+IDR-IDC-010|Connection timed out|Connection timed out while invoking REST APIs
+IDR-IDC-011|Authorization Failed|Input role is not authorized to access the service   
+
 ```
 ### PATCH /idrepository/v2/vid/reactivate   
 This service will re-activate VIDs mapped against the provided UIN, only if the current status of VID is 'DEACTIVATED', 'INACTIVE' and not 'EXPIRED'.
@@ -1059,3 +1079,22 @@ request: UIN| yes | Individual's UIN | | 981576026435
   }
 }
 ```
+
+##### Failure details
+Error Code | Error Message | Error Description
+-----------|----------|-------------
+IDR-VID-001|VID is <vid-status>|Here status could be REVOKED, EXPIRED, USED.
+IDR-VID-004|Deactivate UIN or Blocked UIN|UIN is either de-activated or blocked
+IDR-VID-006|Uin hash does not match|Error while matching hash of UIN against decrypted UIN 
+IDR-VID-005|Failed to retrieve uin data using Identity Service|Error while retrieving UIN details from Identity Service
+IDR-IDC-001|Missing Input Parameter - %s|Input Parameter Missing
+IDR-IDC-002|Invalid Input Parameter - %s|Invalid Input Parameter
+IDR-IDC-003|Invalid Request|Invalid Request attribute
+IDR-IDC-004|Unknown error occurred |An unknown error occurred
+IDR-IDC-005|Input Data Validation Failed|Validation on input fails
+IDR-IDC-006|Error occurred while performing DB operations|DB connectivity error
+IDR-IDC-007|No Record(s) found|No VID records found
+IDR-IDC-008|4XX - Client Error occurred|4XX error from Kernel APIs
+IDR-IDC-009|5XX - Server Error occurred|5XX error from Kernel APIs
+IDR-IDC-010|Connection timed out|Connection timed out while invoking REST APIs
+IDR-IDC-011|Authorization Failed|Input role is not authorized to access the service   
