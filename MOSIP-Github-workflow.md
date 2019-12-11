@@ -55,13 +55,13 @@ git rebase upstream/master
 b. Create your own feature branch, in case, if you want to add a feature. 
 
 ```sh
-git checkout -b feature/<JIRA_ID>
+git checkout -b feature/${JIRA_ID}
 ```
 
 c. Create your own issue branch, in case, if you want are working in a issue fix. 
 
 ```sh
-git checkout -b issue/<JIRA_ID>
+git checkout -b issue/${JIRA_ID}
 ```
 
 ### 4. Keeping your branch synced
@@ -82,7 +82,7 @@ DON'Ts:
  - Once you are done with the work, commit your changes using the following command, 
 
 ```sh
-git commit -m "<JIRA_ID>_<your meaningfule commit message>
+git commit -m "${JIRA_ID}_${your_meaningful_commit_message}
 ```
 
 For example, 
@@ -107,7 +107,7 @@ git push -f ${your_remote_name} feature
 
 For example, 
 ```sh
-git push -f origin feature/<JIRA_ID>
+git push -f origin feature/${JIRA_ID}
 ```
 
 ### 7. Pull request
