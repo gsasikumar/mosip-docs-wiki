@@ -11,7 +11,7 @@
    * [2.2 Retry Processing (In case of exceptions/failures)](#22-retry-processing-in-case-of-exceptionsfailures-) _(RPR_FR_2.2)_
    * [2.3 Resume Workflow](#23-resume-workflow-) _(RPR_FR_2.3)_
    * [2.4 Integration (System Integrator can integrate their system with MOSIP)](#24-integration-system-integrator-can-integrate-their-system-with-mosip-) _(RPR_FR_2.4)_
-   * [2.5 Multiple Workflows](#25-multiple-workflows-) (RPR_FR_2.6)_
+   * [2.5 Multiple Workflows](#25-multiple-workflows-) _(RPR_FR_2.6)_
    * [2.6 Scalability and Throughput](#26-scalability-and-throughput-) _(RPR_FR_2.7)_
  - [3. Types of Stages](#3-types-of-stages-) 
    * [3.1 Pre-processing Validations](#31-pre-processing-validations-) 
@@ -63,7 +63,7 @@ The packet received from the Registration Client goes through various sanity che
 
 A new ID issuance requires an individual to visit a registration center and provide the required information to register himself/herself in MOSIP for the first time.
 
-When a registration officer captures an individual’s information, the Registration Client packages the captured information in the form of encrypted packets and sends it to Registration Processor. After the encrypted packet reaches the Registration Processor, the system tries to find the individual’s information (i.e. demographic and biometric information) availability in the system (this process is known as Deduplication). If the system does not find any duplicates of the individual’s information, then the system registers the individual and allocates a unique ID and sends his/her ID credential through the country's configured printing and postal service.
+When a registration officer captures an individual’s information, the Registration Client packages the captured information in the form of encrypted packets and sends it to Registration Processor. After the encrypted packet reaches the Registration Processor, the system tries to find a duplicate using the individual’s information (i.e. demographic and biometric information) in the system (this process is known as Deduplication). If the system does not find any duplicates of the individual’s information, then the system registers the individual and allocates a unique ID and sends his/her ID credential through the country's configured printing and postal service.
 
 During the allocation of the Unique Identification Number (UIN), the system also allocates a Virtual Identification Number (VID) to the individual. VID is an alternative to UIN and is a temporary number that can be used for authentications of an individual. The individual can provide the VID instead of UIN to authenticate themselves and protect their UIN from being accessed by someone else. 
 
