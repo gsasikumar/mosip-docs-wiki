@@ -69,12 +69,14 @@ Once all the above items are completed, the feature will be signed-off for compl
 
 ### Roles
 Following are the various roles in the MOSIP open source community,
- - Developer
- - Automation Tester
- - Performance Tester
- - Development Reviewer
- - Test Reviewer
- - Product Manager
+ - DEVELOPER
+	- The developers can be contributing the development code or automation test code or performance test code or documents.
+ - REVIEWERS
+	- The reviewer accepts and approves the pull requests from the developer, after the necessary checklists have been passed. 
+ - PRODUCT_MANAGER
+	- The product manager decides which features goes in which version release. 
+ - DEVOPS
+	- This team members has the necessary permissions to pull the code and run in the automation stream.
  
 The roles and responsibilities can be found [here](roles-and-responsibilities.md)&lt;TODO&gt;
 	
