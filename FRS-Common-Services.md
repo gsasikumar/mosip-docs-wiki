@@ -219,7 +219,7 @@ MOSIP system provides base exception framework.
 1. Raises an alert in case of listed exceptions 
 ### 6.7 Json Utility [**[↑]**](#table-of-contents)
 1. Identifies Json util methods
-1. Creates wrapper class for methods defined in apache-commons jason util
+1. Creates wrapper class for methods defined in apache-commons Json util
 1. Raises an alert in case of listed exceptions 
 ### 6.8 Math Utility [**[↑]**](#table-of-contents)
 1. Identifies Math util methods
