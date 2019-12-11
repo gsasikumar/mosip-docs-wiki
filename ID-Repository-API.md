@@ -954,6 +954,7 @@ IDR-VID-002|Failed to generate VID|Error while generating VID
 IDR-VID-003|Could not generate/regenerate VID as per policy|Error while generating VID based on policy
 IDR-VID-004|Deactivate UIN or Blocked UIN|UIN is either de-activated or blocked
 IDR-VID-005|Failed to retrieve uin data using Identity Service|Error while retrieving UIN details from Identity Service
+IDR-VID-006|Uin hash does not match|Error while matching hash of UIN against decrypted UIN 
 IDR-IDC-001|Missing Input Parameter - %s|Input Parameter Missing
 IDR-IDC-002|Invalid Input Parameter - %s|Invalid Input Parameter
 IDR-IDC-003|Invalid Request|Invalid Request attribute
@@ -1011,6 +1012,7 @@ request: UIN| yes | Individual's UIN | | 981576026435
     "vidStatus": 'DEACTIVATED'
   }
 }
+```
 
 ##### Failure details
 Error Code | Error Message | Error Description
@@ -1031,7 +1033,6 @@ IDR-IDC-009|5XX - Server Error occurred|5XX error from Kernel APIs
 IDR-IDC-010|Connection timed out|Connection timed out while invoking REST APIs
 IDR-IDC-011|Authorization Failed|Input role is not authorized to access the service   
 
-```
 ### PATCH /idrepository/v2/vid/reactivate   
 This service will re-activate VIDs mapped against the provided UIN, only if the current status of VID is 'DEACTIVATED', 'INACTIVE' and not 'EXPIRED'.
 
