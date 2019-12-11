@@ -1,131 +1,127 @@
-- [Welcome note](#welcome-note)
-- [How to begin your contribution?](#how-to-begin-your-contribution)
-	- [Register yourself](#register-yourself)
-	- [Contributor License Agreement(CLA)](#contributor-license-agreementcla)
-	- [Code of conduct](#code-of-conduct)
-	- [Feature driven development](#feature-driven-development)
-	- [Roles](#roles)
-	- [Developers handbook](#developers-handbook)
-	- [Git workflow](#git-workflow)
-	- [How Requirement, Code, testing, documents, configuration and infra comes together?](#how-everythings-comes-together)
-	- [How to setup your development environment?](#how-to-setup-your-development-environment)
-	- [Quality metrics](#quality-metrics)
-- [Community](#community)
+### 1. Fork the MOSIP repository
+
+ a. Choose any of the following respositories for which you wish to contribute, 
+
+	https://github.com/mosip/mosip-platform
+
+	https://github.com/mosip/mosip-ref-impl
+
+	https://github.com/mosip/mosip-functional-tests
+
+	https://github.com/mosip/mosip-docs
 
 
-## Welcome note
-First of all, congratulations and a warm welcome to the contributors. This guide be the starting point for any contrubutor and will help the contributors to contribute to MOSIP. 
+ b. From the github website in the browser, click the Fork button on the right top of the page, to fork MOSIP repository
 
-Please go through the high level introduction about [MOSIP architecture and components](mosip-architecture-and-components.md)
+### 2. Clone the fork to local machine
+ - Go to github website in browser and switch to forked repository. Click the button "Clone or download" from the top right area. Copy the clone URL. 
+ - Create your directory and clone the repository for which you wish to contribute. For example, if you wish to contribute to "mosip-platform", execute the following command. 
 
+```sh
+git clone https://github.com/kumarps/mosip-platform.git
+cd mosip-platform
+git remote add upstream https://github.com/mosip/mosip-platform.git
+```
+NOTE: 
+ - You are cloning the forked repository in the above step. 
+ - You are adding the upstream of the main git repository. 
 
-## How to begin your contribution?
-Help is always welcome with MOSIP! Documentation can be simplified, code can be clarified, and test coverage can be improved. 
+Go inside the newly created cloned folder and execute the 
 
-If you want to get started on contributing, there are multiple ways to do so - 
-
-a)  Contribute to code (fix bugs, implement new features, enhance features)
-
-b)  Contribute to improve specifications.
-
-c)  Suggest new features and feature enhancements.
-
-d)  Test MOSIP and log bugs.
-
-e)  Help us fix documentation errors.
-
-f)   Help spread the word on MOSIP among interested developers.
-
-There are multiple repositories within the MOSIP organization. To contribute to (a) Code, take a look at the Open Issues that are not assigned to anyone and put a comment saying “I would like to take this up” along with your approach and design preferably with pseudo code. The issue shall be assigned to you after review.  Alternatively, please join our [developer mailing list](https://groups.io/g/mosip-dev) and send an email there. The core contributors team will interact with you via Github Issue comments.  You may work in the forked version of the repository and send pull requests via Github.
-
-For (b) - (e), i.e. new bugs, specs, features or documentation improvements, please log Github Issues under the appropriate repository, or join and write in at our [developer mailing list](https://groups.io/g/mosip-dev)
-
-If you wish to begin your contribution, following steps are helpful. 
-
-### Register yourself
-Please refer the [User Registration guide](user-registration-guide.md)&lt;TODO&gt; register yourself in the MOSIP community.
-	
-### Contributor License Agreement(CLA)
-Please refer the [Contributor License Agreement guide](contributor-license-agreement-guide.md)&lt;TODO&gt; for the instructions to sign the CLA.
-
-### Code of conduct
-Please go through the [Code of Conduct](code-of-conduct) before you begin the contribution. 
-
-### Platform documentation
-Check out [our repositories](https://github.com/mosip) and [Platform Documentation](https://github.com/mosip/mosip-docs/wiki/Platform-Documentation)
-	
-### Feature driven development
-The development methodology is [Feature driven development](feature-driven-development.md)
-
-
-### Roles
-Following are the various roles in the MOSIP open source community,
- - DEVELOPER
-	- The developers can be contributing the development code or automation test code or performance test code or documents.
- - REVIEWERS
-	- The reviewer accepts and approves the pull requests from the developer, after the necessary checklists have been passed. 
- - PRODUCT_MANAGER
-	- The product manager decides which features goes in which version release. 
- - DEVOPS
-	- This team members has the necessary permissions to pull the code and run in the automation stream.
+#### Never push to upstream master
+ - IMPORTANT: Make sure that you never push to upstream master
  
-The roles and responsibilities can be found [here](roles-and-responsibilities.md)&lt;TODO&gt;
-	
-### Developers handbook
-If you are a developer, please refer to the the [Developer's Handbook](developers-handbook.md)&lt;TODO&gt;
-	
-### Coding standards
-Please go through the coding standards for, 
-	- [Java coding standards](java-coding-standards.md)&lt;TODO&gt;
-	- [Micro services developer guidelines](micro-services-developer-guidelines.md)&lt;TODO&gt;
-	- [Vert.x guidelines](vertx-guidelines.md)&lt;TODO&gt;
-	
-	
-### Git workflow
-MOSIP uses Github workflow. Refer [MOSIP github workflow](mosip-github-workflow.md) for steps to take the code from MOSIP and contribute back. 
+```sh
+git remote set-url --push upstream no_push
+```
 
+#### Confirm that your remotes make sense:
+```sh
+git remote -v
+```
 
-### How Requirement, Code, testing, documents, configuration and infra comes together?
-This [link] gives a detailed description about how feature is completed from inception phase to completion phase. 
-	
-### How to setup your development environment?
-As the contributor, if you decide to work on the following modules, the corresponding startup guide of be a great help. 
+### 3. Creating your feature branch to work on
 
-- Kernel
-	- Services [Building and running kernel Services](building-and-running-kernel-services.md)&lt;TODO&gt;
-- Pre-registration
-	- Services [Building and running Pre Registration Services](building-and-running-pre-registration-services.md)&lt;TODO&gt;
-	- UI [Building and running Pre Registration UI](building-and-running-pre-pregistration-ui.md)&lt;TODO&gt;
-- Registration Client
-	- Services [Building and running Pre Registration Services](building-and-running-pre-registration-services.md)&lt;TODO&gt;
-- ID Repo
-	- Services [Building and running ID Repo Services](building-and-running-id-repo-services.md)&lt;TODO&gt;
-- Registration Processor
-	- Verticles [Building and running Registration Processor verticles](building-and-running-registration-processor-verticles.md)&lt;TODO&gt;
-- IDA
-	- Services [Building and running IDA Services](building-and-running-ida-services.md)&lt;TODO&gt;
-- Resident Services
-	- Services [Building and running Resident Services](building-and-running-resident-services.md)&lt;TODO&gt;
-	- UI [Building and running Resident Services UI](building-and-running-resident-services-ui.md)&lt;TODO&gt;
+ - Naming conventions for the branch is a must. 
 
-	
-Out of scope: This document doesn't cover Jenkins, Docker and Kubernetes. It is upto the user to choose any of the build automation or virtualization technlogies. 
-	
-### Quality metrics
+a. First, update your master with the latest changes from the community.
 
-- You can use SONAR to check the code quality
-- You can download the code quality rules from here [SONAR Code quality ruleset](code-quality-ruleset.md)&lt;TODO&gt;
+```sh
+git fetch upstream
+git checkout master
+git rebase upstream/master
+```
 
-## Community
+b. Create your own feature branch, in case, if you want to add a feature. 
 
-### Getting in touch
+```sh
+git checkout -b feature/${JIRA_ID}
+```
 
-If you have questions about the development process 
-* Feel free to jump into our [Gitter channel](https://gitter.im/mosip-community/community) or 
-* Join the [mosip-dev@groups.io](https://groups.io/g/mosip-dev) mailing list. 
-* Join us in our [chatroom](https://gitter.im/mosip-community/community) and [developer mailing list](https://groups.io/g/mosip-dev)
-* For general queries, try info@mosip.io 
+c. Create your own issue branch, in case, if you want are working in a issue fix. 
 
-### Community Events
+```sh
+git checkout -b issue/${JIRA_ID}
+```
 
-We actively organise online and in-person meetups and discussions. Keep an eye on [this page](https://www.mosip.io/news-events.php) for the latest.
+### 4. Keeping your branch synced
+
+```sh
+# While on your feature branch
+git fetch upstream
+git rebase upstream/master
+```
+
+DON'Ts: 
+ - Don't use `git pull` command. 
+ - Execute the following command to ensure that you don't use the pull command. 
+ - `git config branch.autoSetupRebase always`
+
+ 
+### 5. Commit
+ - Once you are done with the work, commit your changes using the following command, 
+
+```sh
+git commit -m "${JIRA_ID}_${your_meaningful_commit_message}
+```
+
+For example, 
+
+```sh
+git commit -m "MOS-2346_Adding new upload feature in Pre registration module for POA documents"
+```
+
+DOs:
+ - Start your comment with JIRA id, followed by an underscore '_' and then your comments. If the JIRA ID and the underscore is not there, your pull request will be rejected. 
+ - Give meaningful comments.
+
+### 6. Push
+ - you can push your branch to remote, in case of, 
+	 - Whenever you are done with the work or issue, 
+	 - Or in case, if you want to back up your on the remote repository
+ - Use the following command to push the code, 
+
+```sh
+git push -f ${your_remote_name} feature
+```
+
+For example, 
+```sh
+git push -f origin feature/${JIRA_ID}
+```
+
+### 7. Pull request
+When the feature or issue is completed, the contributor have to raise a pull request for the change to be merged to the MOSIP. Following are the DOs and DONTs
+
+#### Checklist before your submit a pull request
+ - In case of code contribution, ensure that your code completely builds with the necessary checklists as mentioned in the [Developer's Handbook](developers-handbook.md) such as Coding standards, Quality metrics, Documentation standards etc., 
+ - If any of the items in the checklist is not covered, your pull request will be rejected. 
+
+#### Get your code reviewed
+ - Following are the steps to raise a pull request, 
+	1. Visit your fork in the URL, `https://github.com/${user}/${repo-name}`. For example, `https://github.com/kumarps/mosip-platform`
+	2. Switch to your branch
+	2. Click the `Pull Request` button.
+
+#### Reviewer reviews the code
+ - Finally the pull request is reviewed by the reviewer and the code is merged to MOSIP. Reviewers please refer, [Pull Request test](pull-request-test.md)
