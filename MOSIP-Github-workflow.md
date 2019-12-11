@@ -122,4 +122,6 @@ When the feature or issue is completed, the contributor have to raise a pull req
 	1. Visit your fork in the URL, `https://github.com/${user}/${repo-name}`. For example, `https://github.com/kumarps/mosip-platform`
 	2. Switch to your branch
 	2. Click the `Pull Request` button.
-#### 
+
+#### Reviewer reviews the code
+ - Finally the pull request is reviewed by the reviewer and the code is merged to MOSIP. Reviewers please refer, [Pull Request test](pull-request-test.md)
