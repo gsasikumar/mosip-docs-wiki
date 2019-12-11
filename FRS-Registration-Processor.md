@@ -287,23 +287,34 @@ The System Integrator can plug-in a stage in the workflow, where the stage can c
 
 [**Link to design for HTTP Integration Stage**](/mosip/mosip-platform/blob/master/design/registration-processor/Approach_for_http_integration.md)
 
+**WIP - This is factored for future releases and is not part of current implementation.**
+
+
 #### 3.2.3.2 Data Enrichment [**[↑]**](#table-of-contents)
 
 Data enrichment is a value adding process, where external data from multiple sources is added to the existing data sets in MOSIP to enhance the quality and richness of the data.
 MOSIP receives some data from the external system in the form of Packet (as per MOSIP Standards). The System has the capability to receive this updated packet from external sources and process it with the packet received from Registration Client.
+
+**WIP - This is factored for future releases and is not part of current implementation.**
+
 
 #### 3.2.3.3 Manual Verification for ext. system data update (Pluggable by SI) [**[↑]**](#table-of-contents)
 
 When there are any discrepancies between the data received from external system vs. the data captured during registration, a country may opt to manually verify the data. 
 The System Integrator in such case may build a Manual Verification Module for External System data mismatch. MOSIP will enable the system integrator to integrate the manual verification system with MOSIP platform.
 
+**WIP - This is factored for future releases and is not part of current implementation.**
+
+
 [**Link to design**](/mosip/mosip-platform/blob/master/design/registration-processor/Approach_for_manual_adjudication.md)
 
 #### 3.2.3.4 Manual Adjudication (Pluggable by SI) [**[↑]**](#table-of-contents)
+
 When Biometric Deduplicates are found in [**Automated Biometric Identification System**](Automated-Biometric-Identification-System-(ABIS)-Interface), the System Integrator can plug-in the Manual Adjudication Stage, which would send the biometric and demographic data of the duplicates to a Manual Adjudicator. The Manual Adjudicator now can perform various validations on the duplicate data and inform the MOSIP system if the two records are duplicates or not.
 
 [**Link to design**](/mosip/mosip-platform/blob/master/design/registration-processor/Approach_for_manual_adjudication.md)
 #### 3.2.3.5 ABIS Integration (Incl. ABIS Middleware) [**[↑]**](#table-of-contents)
+
 The MOSIP System, in-order to perform Biometric Deduplication (validate if there are no biometric duplicates in system), integrates with an ABIS system ([**Automated Biometric Identification System**](Automated-Biometric-Identification-System-(ABIS)-Interface)). 
 
 ABIS Middleware, which is designed by MOSIP and MOSIP Middleware, designed by [**Automated Biometric Identification System**](Automated-Biometric-Identification-System-(ABIS)-Interface) is used to communicate between MOSIP system and ABIS.
@@ -312,22 +323,33 @@ ABIS Middleware, which is designed by MOSIP and MOSIP Middleware, designed by [*
 
 ### 3.2.4 ID Issuance [**[↑]**](#table-of-contents)
 #### 3.2.4.1 Identity Generation (Refer to UIN Generation service) – Incl. UIN Generation and UIN association [**[↑]**](#table-of-contents)
+
 After all the business validations are completed, the system gets a Unique Identification Number (UIN) from the [**UIN Generation**](UIN-Generation) API and allocates the UIN by sending the new UIN number and the individual's information to [**ID repository**](ID-Repository-API).
 
 [**Link to design**](/mosip/mosip-platform/blob/master/design/registration-processor/Approach_for_uin_generator.md)
 #### 3.2.4.2 Store/Update ID Repository (Refer to ID-Auth) [**[↑]**](#table-of-contents)
+
 After all the business validations are performed for a new ID issuance or updating an individual’s information, this information is sent to [**ID repository**](ID-Repository-API) for storing or updating the information respectively. 
 
 [**Link to design**](/mosip/mosip-platform/blob/master/design/registration-processor/Approach_for_uin_generator.md) 
 #### 3.2.4.3 Data Extractor for ID Authentication [**[↑]**](#table-of-contents)
+
 The system that extracts the latest copy of an individual’s data after the Individual has registered in MOSIP or has updated their data in MOSIP and sends it to ID Authentication. Now, ID Authentication can use the latest copy of the Individual’s data for Authentication.         
 
+**WIP - This is factored for future releases and is not part of current implementation.**
+
+
 ### 3.2.5 Capture Audit Trails/Analytics Data [**[↑]**](#table-of-contents)
+
 When any transaction is performed in MOSIP system or the packet fails any validations or any system level exception happens, then the same is captured as part of MOSIP Audit Trails, which can be further used for Reporting/Analytics as required.
+
 ## 3.3 Post-Processing [**[↑]**](#table-of-contents)
 ### 3.3.1 Notification (Pluggable by SI) [**[↑]**](#table-of-contents)
+
 Notification (SMS/Email as configured), which is received by an individual is the final step of all the life cycle processes. System sends a notification to the individual for various life cycle scenarios such as, successful or un-successful issuance of UIN, update of UIN data, activate or deactivate UIN, finding a lost UIN, etc. using kernel [**Template Merger**](FRS-Common-Services#45-template-merger-) and [**Notification Manager**](FRS-Common-Services#4-notification-).
+
 ### 3.3.2 Print & Post (Pluggable by SI) [**[↑]**](#table-of-contents)
+
 When an individual’s ID is created or an individual’s data is updated, the system sends the individual’s physical ID credential to the individual’s registered address. 
 
 This feature is the post processing integration point for Registration Processor, where a country can generate the PDF of the individual’s ID and sends it to the country’s configured printing and postal service provider. The printing and postal service provider in turn would print the physical ID credential and deliver it to the individual’s registered address.
@@ -342,7 +364,9 @@ After the Registration Client sends the packet to Registration Processor, it sta
 1. RESEND – Initial validation like virus scan and packet integrity check have failed for the packet for a configured number of times and Registration Client needs to resend the packet for processing.
 1. RE-REGISTER – The packet has failed a business validation like center-machine check, supervisor and officer validation, etc., due to which the system will not be able to process the packet. The registration officer will intimate the individual to come back to the center and re-register, post which registration client can delete the packet from its storage location.
 1. REJECTED – A duplicate packet was found against the individual’s biometrics. As processing of the packet is completed, Registration Client can delete the packet from it storage location.
+
 ### List of Configurable Parameters and Processes [**[↑]**](#table-of-contents)
+
 1. Configurable Parameters
 
    [**Link to Configurable Parameters of Registration Processor**](/mosip/mosip-config/blob/master/config/registration-processor.properties)

@@ -28,7 +28,9 @@
     * [6.9 String Utility](#69-string-utility-) _(CMN_FR_6.9)_
     * [6.10 UUID Utility](#610-uuid-utility-) _(CMN_FR_6.10)_
     * [6.11 Zip-Unzip Utility](#611-zip-unzip-utility-) _(CMN_FR_6.11)_
-   * [7. Virus Scaner](#7-virus-scanner-) _(CMN_FR_5)_
+    * [6.12 Log Utility](#612-log-utility-) _(CM_FR_6.12)_
+    * [6.13 ID Object Validator Utility](#613-id-object-validator-utility-) _(CM_FR_6.13)_
+   * [7. Virus Scaner](#7-virus-scanner-) _(CMN_FR_7)_
 - [List of Configurable Parameters and Processes](#list-of-configurable-parameters-and-processes-)
 - [Kernel API](#kernel-api-)
 # Common Services
@@ -59,7 +61,12 @@ QR code generator takes the content received along with the version number and c
 Crypto service encrypts or decrypts data across MOSIP with the help of Public/Private Keys.
 
 #### A. For Encryption
-The Crypto Service receives a request from an application with input parameters – Application ID, Reference ID, Timestamp and Data that needs to be encrypted. It calls the Key Generator API for a symmetric Key and encrypt data using that symmetric Key. It then calls Key Manager Service and get the public key for the Application ID and Timestamp received in the input parameters encrypts the symmetric key using the Public key and joins the Encrypted data and Encrypted Symmetric Key using a Key splitter and respond to the source with the joined data.
+The Crypto Service receives a request from an application with input parameters – Application ID, Reference ID, Timestamp and the Data which needs to be encrypted. 
+The Service then calls the Key Generator API to get a symmetric Key and encrypts the data using that symmetric Key. 
+
+The Service then calls the Key Manager Service with the Application ID and Timestamp received in the input parameters and gets the public key. 
+
+The Service then encrypts the symmetric key using the Public key and joins the Encrypted data and Encrypted Symmetric Key using a Key splitter and respond to the source with the joined data.
 #### B. For Decryption
 The Crypto Service will receive a request from an application with input parameters – Application ID, Reference ID, Timestamp and Data that needs to be decrypted. 
 
@@ -211,8 +218,8 @@ MOSIP system provides base exception framework.
 1. Creates wrapper class for methods defined in apache-commons File util
 1. Raises an alert in case of listed exceptions 
 ### 6.7 Json Utility [**[↑]**](#table-of-contents)
-1. Identifies jason util methods
-1. Creates wrapper class for methods defined in apache-commons jason util
+1. Identifies Json util methods
+1. Creates wrapper class for methods defined in apache-commons Json util
 1. Raises an alert in case of listed exceptions 
 ### 6.8 Math Utility [**[↑]**](#table-of-contents)
 1. Identifies Math util methods
@@ -238,6 +245,29 @@ MOSIP system provides base exception framework.
 
 [**Link to design for Utilities**](/mosip/mosip/blob/master/docs/design/kernel/kernel-utils.md)
 
+### 6.12 Log Utility [**[↑]**](#table-of-contents)
+1. Generate logs across the application
+1. Store generated logs in configured location
+1. Raises an alert in case of listed exceptions
+
+[**Link to design for Utilities**](/mosip/mosip/blob/master/docs/design/kernel/kernel-utils.md)
+
+### 6.13 ID Object Validator Utility [**[↑]**](#table-of-contents)
+1. Validate the Attributes in ID object against the Pre-Defined pattern and Master data values
+   * Validate Gender Types against country defined Masterdata
+   * Validate Document Categories against country defined Masterdata
+   * Validate Document Types country against defined Masterdata
+   * Validate Location and Location hierarchy against country defined Masterdata
+   * Validate Date of Birth against country configured pattern
+   * Validate Phone Number against country configured pattern
+   * Validate Email ID against country configured pattern
+   * Validate Age against country configured pattern
+   * Validate Full Name against country configured pattern
+   * Validate Address line 1,2 and 3 against country configured pattern
+   * Validate Reference Identity Number against country configured pattern
+   * Validate Country Code against country configured pattern
+2. Respond with proper error messages in case of any validation faliure
+
 ## 7 Virus Scanner [**[↑]**](#table-of-contents)
 Virus Scanner utility allows for virus scanning across MOSIP at various places. This includes:
 1. Scanning of Document uploaded in Pre-registration
@@ -245,7 +275,7 @@ Virus Scanner utility allows for virus scanning across MOSIP at various places. 
 3. Scanning of Registration packet in Registration Processor
 
 Currently for Virus Scanner, MOSIP has integrated with Clam Antivirus which allows for 290 concurrent users.
-A Country may integrate their own Licensed version of anti virus as per their requirement.
+A Country may integrate their own Licensed version of antivirus as per their requirement.
 
 ### List of Configurable Parameters and Processes [**[↑]**](#table-of-contents)
 

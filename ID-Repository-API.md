@@ -719,6 +719,8 @@ These services can be used to perform various operations on VID like generate or
 * [GET /idrepository/v1/vid/{VID}](#get-idrepositoryv1vidvid)
 * [PATCH /idrepository/v1/vid/{VID}](#patch-idrepositoryv1vidvid)
 * [POST /idrepository/v1/vid/{VID}/regenerate](#post-idrepositoryv1vidvidregenerate)
+* [PATCH /idrepository/v2/vid/deactivate](#patch-idrepositoryv2viddeactivate)
+* [PATCH /idrepository/v2/vid/reactivate](#patch-idrepositoryv2vidreactivate)
 
 #### Users of VID services -
 1. `Registration Processor` - *Registration Processor* will create a new perpetual VID once UIN is generated successfully.
@@ -952,12 +954,147 @@ IDR-VID-002|Failed to generate VID|Error while generating VID
 IDR-VID-003|Could not generate/regenerate VID as per policy|Error while generating VID based on policy
 IDR-VID-004|Deactivate UIN or Blocked UIN|UIN is either de-activated or blocked
 IDR-VID-005|Failed to retrieve uin data using Identity Service|Error while retrieving UIN details from Identity Service
+IDR-VID-006|Uin hash does not match|Error while matching hash of UIN against decrypted UIN 
 IDR-IDC-001|Missing Input Parameter - %s|Input Parameter Missing
 IDR-IDC-002|Invalid Input Parameter - %s|Invalid Input Parameter
 IDR-IDC-003|Invalid Request|Invalid Request attribute
 IDR-IDC-004|Unknown error occurred |An unknown error occurred
 IDR-IDC-005|Input Data Validation Failed|Validation on input fails
 IDR-IDC-006|Error occurred while performing DB operations|DB connectivity error
+IDR-IDC-008|4XX - Client Error occurred|4XX error from Kernel APIs
+IDR-IDC-009|5XX - Server Error occurred|5XX error from Kernel APIs
+IDR-IDC-010|Connection timed out|Connection timed out while invoking REST APIs
+IDR-IDC-011|Authorization Failed|Input role is not authorized to access the service   
+
+
+### PATCH /idrepository/v2/vid/deactivate   
+This service will de-activate VIDs mapped against the provided UIN, only if the current status of VID is 'ACTIVE'.
+
+#### Resource URL
+<div>https://mosip.io/idrepository/v2/vid/deactivate</div>
+
+#### Resource details
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+#### Request Body Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+id | yes | Id of the API | mosip.vid.deactivate| 
+version | yes | version of the API | | v2
+requesttime | yes | timestamp of the request | | 2019-04-30T06:12:25.288Z
+request | yes | Request Body attributes | | 
+request: UIN| yes | Individual's UIN | | 981576026435
+
+#### Request:
+```JSON
+{
+  "id": "mosip.vid.deactivate",
+  "version": "v2",
+  "requesttime": "2019-05-21T06:13:05.218Z",
+  "request": {
+    "UIN": 981576026435
+  }
+}
+```
+#### Responses:
+##### Success Response:
+###### Status code: '200'
+###### Description: VIDs de-activated successfully
+```JSON
+{
+  "id": "mosip.vid.deactivate",
+  "version": "v2",
+  "responsetime": "2019-05-21T06:13:05.218Z",
+  "response": {
+    "vidStatus": 'DEACTIVATED'
+  }
+}
+```
+
+##### Failure details
+Error Code | Error Message | Error Description
+-----------|----------|-------------
+IDR-VID-001|VID is <vid-status>|Here status could be REVOKED, EXPIRED, USED, INVALIDATED or DEACTIVATED
+IDR-VID-004|Deactivate UIN or Blocked UIN|UIN is either de-activated or blocked
+IDR-VID-006|Uin hash does not match|Error while matching hash of UIN against decrypted UIN 
+IDR-VID-005|Failed to retrieve uin data using Identity Service|Error while retrieving UIN details from Identity Service
+IDR-IDC-001|Missing Input Parameter - %s|Input Parameter Missing
+IDR-IDC-002|Invalid Input Parameter - %s|Invalid Input Parameter
+IDR-IDC-003|Invalid Request|Invalid Request attribute
+IDR-IDC-004|Unknown error occurred |An unknown error occurred
+IDR-IDC-005|Input Data Validation Failed|Validation on input fails
+IDR-IDC-006|Error occurred while performing DB operations|DB connectivity error
+IDR-IDC-007|No Record(s) found|No VID records found
+IDR-IDC-008|4XX - Client Error occurred|4XX error from Kernel APIs
+IDR-IDC-009|5XX - Server Error occurred|5XX error from Kernel APIs
+IDR-IDC-010|Connection timed out|Connection timed out while invoking REST APIs
+IDR-IDC-011|Authorization Failed|Input role is not authorized to access the service   
+
+### PATCH /idrepository/v2/vid/reactivate   
+This service will re-activate VIDs mapped against the provided UIN, only if the current status of VID is 'DEACTIVATED', 'INACTIVE' and not 'EXPIRED'.
+
+#### Resource URL
+<div>https://mosip.io/idrepository/v2/vid/reactivate</div>
+
+#### Resource details
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+#### Request Body Parameters
+Name | Required | Description | Default Value | Example
+-----|----------|-------------|---------------|--------
+id | yes | Id of the API | mosip.vid.reactivate| 
+version | yes | version of the API | | v2
+requesttime | yes | timestamp of the request | | 2019-04-30T06:12:25.288Z
+request | yes | Request Body attributes | | 
+request: UIN| yes | Individual's UIN | | 981576026435
+
+#### Request:
+```JSON
+{
+  "id": "mosip.vid.reactivate",
+  "version": "v2",
+  "requesttime": "2019-05-21T06:13:05.218Z",
+  "request": {
+    "UIN": 981576026435
+  }
+}
+```
+
+#### Responses:
+##### Success Response:
+###### Status code: '200'
+###### Description: VIDs re-activated successfully
+```JSON
+{
+  "id": "mosip.vid.reactivate",
+  "version": "v2",
+  "responsetime": "2019-05-21T06:13:05.218Z",
+  "response": {
+    "vidStatus": ‘ACTIVE’
+  }
+}
+```
+
+##### Failure details
+Error Code | Error Message | Error Description
+-----------|----------|-------------
+IDR-VID-001|VID is <vid-status>|Here status could be REVOKED, EXPIRED, USED.
+IDR-VID-004|Deactivate UIN or Blocked UIN|UIN is either de-activated or blocked
+IDR-VID-006|Uin hash does not match|Error while matching hash of UIN against decrypted UIN 
+IDR-VID-005|Failed to retrieve uin data using Identity Service|Error while retrieving UIN details from Identity Service
+IDR-IDC-001|Missing Input Parameter - %s|Input Parameter Missing
+IDR-IDC-002|Invalid Input Parameter - %s|Invalid Input Parameter
+IDR-IDC-003|Invalid Request|Invalid Request attribute
+IDR-IDC-004|Unknown error occurred |An unknown error occurred
+IDR-IDC-005|Input Data Validation Failed|Validation on input fails
+IDR-IDC-006|Error occurred while performing DB operations|DB connectivity error
+IDR-IDC-007|No Record(s) found|No VID records found
 IDR-IDC-008|4XX - Client Error occurred|4XX error from Kernel APIs
 IDR-IDC-009|5XX - Server Error occurred|5XX error from Kernel APIs
 IDR-IDC-010|Connection timed out|Connection timed out while invoking REST APIs

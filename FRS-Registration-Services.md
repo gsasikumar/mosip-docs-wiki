@@ -19,23 +19,25 @@
   * [4.2 UIN Update](#42-uin-update-) _(REG_FR_4.2)_
   * [4.3 Lost UIN](#43-lost-uin-) _(REG_FR_4.3)_
   * [4.4 Acknowledgement and Notifications](#44-acknowledgement-and-notifications-) _(REG_FR_4.4)_
-  * [4.5 Biometric Capture (SDK Integration, Extract and Match) (WIP)](#45-biometric-capture-sdk-integration-extract-and-match-wip-) _(REG_FR_4.5)_
+  * [4.5 Biometric Capture (SDK Integration, Extract and Match)](#45-biometric-capture-sdk-integration-extract-and-match-) _(REG_FR_4.5)_
   * [4.6 Biometric Exceptions](#46-biometric-exceptions-) _(REG_FR_4.6)_
   * [4.7 Registration Officer and Supervisor Approval](#47-registration-officer-and-supervisor-approval-) _(REG_FR_4.7)_
-  * [4.8 End of Day Process](#48-end-of-day-process-) _(REG_FR_4.8)_
+  * [4.8 End of Day Approval Process & Re-registration](#48-end-of-day-process-) _(REG_FR_4.8)_
 - [5. Geo-location](#5-geo-location-) _(REG_FR_5)_
 - [6. Language Support](#6-language-support-)
   * [6.1 Translation](#61-translation-) _(REG_FR_6.1)_
   * [6.2 Transliteration](#62-transliteration-) _(REG_FR_6.2)_
 - [7. Packet Upload](#7-packet-upload-)
   * [7.1 Registration Packet Upload](#71-registration-packet-upload-) _(REG_FR_7.1)_
-  * [7.2 Offline upload (Packet Exporter) (Work in Progress)](#72-offline-upload-packet-exporter-work-in-progress-) _(REG_FR_7.2)_
+  * [7.2 Packet Exporter & Offline Upload from External Device](#72-offline-upload-packet-exporter-) _(REG_FR_7.2)_
+    * [7.2.1 Export Packets to External Device](#721-export-packets-to-external-device-) _(REG_FR_7.2.1)_
+    * [7.2.2 Upload Packets from External Device to Server - To be Developed](#722-upload-packets-from-external-device-to-server-) _(REG_FR_7.2.2)_
 - [8. Analytics and Audit Logs](#8-analytics-and-audit-logs-) _(REG_FR_8)_
 - [9. Data Security](#9-data-security-)
-- [10. Software Version Upgrade](#10-software-version-upgrade-) _(REG_FR_10)_
+- [10. Installation and Software Version Upgrade](#10-software-version-upgrade-) _(REG_FR_10)_
 - [11. Clean up](#11-clean-up-)
   * [11.1 Data retention policies](#111-data-retention-policies-) _(REG_FR_11.1)_
-  * [11.2 Machine Retirement](#112-machine-retirement-) _(REG_FR_11.2)_
+  * [11.2 Machine Retirement & Re-mapping](#112-machine-retirement-) _(REG_FR_11.2)_
 - [List of Configurable Parameters and Processes](#list-of-configurable-parameters-and-processes-)
 - [Process View](#process-view-)
 
@@ -197,7 +199,8 @@ Based on the configuration (turn on or turn off), the system allows a registrati
 
 1. The Registration Client receives a request to sync data (through manual trigger or scheduled job) from client to server.
 2. Client in turn sends request with the applicable data to server.
-   * Registration officer on-boarding data is synced.
+   * Registration officer on-boarding data with mapping to that machine is synced.
+   * Registration packets are synced
    * Only the additions, deletions, and modifications made since the last sync are sent.
 3. Client receives response from server as a success or failure message.
 4. Client displays a success or failure message on the UI
@@ -212,7 +215,6 @@ The system performs the following steps to ensure packet status sync from server
 1. The system allows a registration officer to either sync manually or automatically based on configured frequency.
 1. The system allows the application to request using registration packet ID and receive the registration packet status from the server
 1. The system displays the status (in progress/completed) of the operation to pull registration packet IDs from registration server.
-
 ### 2.5 Pre-registration Data Download [**[↑]**](#table-of-contents)
 
 
@@ -249,6 +251,8 @@ The downloaded pre-registration data overwrites the previously downloaded data f
 The downloaded pre-registration data is stored locally in the registered machine as configured.
 
 [**Link to design**](/mosip/mosip-platform/blob/master/design/registration/registration-sync-job.md)
+
+- Note: Additionally, we have the Policies sync, User to role mapping sync, Public Key Sync and User Salt Sync that takes place from Server to Client
 
 ## 3. Health Check [**[↑]**](#table-of-contents)
 ### 3.1 Peripherals Check [**[↑]**](#table-of-contents)
@@ -393,7 +397,20 @@ When the registration officer scans the individual’s irises either individuall
 1. Validates all available irises that have been captured, the irises, which are above threshold quality and the maximum retries attempted.
 1. Retains only the capture, which has the highest quality score.
 1. System captures and stores the transaction details for audit purpose (except PII data).
-#### L. Restrict registration if the duration since the last export or upload is more than the configured limit
+
+#### L. MOSIP Device Manager (MDM)
+All devices that collect biometric data for MOSIP should operate within the defined specification. The MOSIP device specification provides compliance guidelines to devices for them to work with MOSIP. The compliance is based on device capability, trust and communication protocols. A MOSIP compliant device would follow the standards established in this document. It is expected that the devices are compliant to this specification and tested and validated. The details of each of these are outlined [**here**](/mosip/mosip-docs/wiki/MOSIP-Device-Service-Specification)
+
+#### M. Device Validation
+- All devices connected to Registration Client should be registered devices. 
+- On having logged in to Registration Client, when the Operator attempts to capture any modality of biometrics, system will validate if the connected Finger print scanning device/Iris device/Photo Capture device is registered, based on the Device ID. 
+- If the system is online, then the validation is executed against the master data in the server (Master data relevant to the registered devices)
+- If the system is offline, then the validation will be executed against the master data synced locally in the machine from which devices are being connected (Master data relevant to the registered devices)
+- If the device is identified to be registered as part of the Master data, then the device can be used & Operator is allowed to proceed with biometrics capture. Subsequently, the connected device(s) are then mapped to the machine from which the devices are connected - [Backend mapping of Machine with connected device(s)]
+- If the device is identified to be un-registered as part of the Master data of registered devices, then the Operator cannot proceed with biometrics capture
+For details on the specifications of the API and validation, refer [**here**](/mosip/mosip-docs/wiki/FRS-Administrator-Services#105-device-detail-validation-)
+
+#### N. Restrict registration if the duration since the last export or upload is more than the configured limit
 When the registration officer opts to start a new registration or UIN update. The system determines the time of the most recent export or upload (automatic uploads and manual uploads) of registration packets.
 If the duration since the last export or upload is not more than the configured limit, then system displays the demographic details page or UIN update page. If the configured limit is exceeded, then system displays an error message.
 
@@ -432,7 +449,7 @@ The System will render a standard set of mapped Doc Types for each Doc Category,
 1. System initiates the process to update UIN after the RID is generated.
    * Receiving a RID do not mean UIN update is successful.
 1. Registration officer views and prints acknowledgement. 
-1. SMS and/or email notifications are sent to the individual if the contact details are entered during the update process.
+1. SMS and/or email notifications are sent to the individual if the contact details are entered during the update process (Subject to notification configuration, refer Sec. 4.4.B)
 1. Refer to the [**Track Status of UIN Update**](FRS-Resident-Services#7-track-status-of-uin-update-) in Resident Services.
 
 #### D. UIN Update of Child
@@ -447,7 +464,7 @@ The system automatically calculates the age of an individual using date of birth
 
 ### 4.3 Lost UIN [**[↑]**](#table-of-contents)
 
-When an individual has lost his UIN and visits registration center for retrieval of UIN, the registration officer captures the biometric and demographic details of the individual and processes a request to retrieve the lost UIN. The system sends a notification to the individual upon successful creation of the UIN retrieval request.
+When an individual has lost his UIN and visits registration center for retrieval of UIN, the registration officer captures the biometric and demographic details of the individual and processes a request to retrieve the lost UIN. The system sends a notification to the individual upon successful creation of the UIN retrieval request. (Subject to notification configuration, refer Sec. 4.4.B)
 
 The registration officer performs the following steps to retrieve a lost UIN of the individual:
 
@@ -460,8 +477,8 @@ The registration officer performs the following steps to retrieve a lost UIN of 
 1. Views acknowledgement of Lost UIN request with a Registration ID assigned to it.
 1. System initiates the process to retrieve a lost UIN after the RID is provided to the individual.
    * Receiving a RID do not mean UIN is successfully retrieved.
-8. Prints acknowledgement of the UIN, then SMS and email notifications are sent to the individual if contact details of the individual are entered.
-1. The individual will be informed after a Lost UIN gets retrieve. Refer to [**Notification**](FRS-Registration-Processor#331-notification-pluggable-by-si-)
+8. Prints acknowledgement of the UIN, then SMS and email notifications are sent to the individual if contact details of the individual are entered. (Subject to notification configuration, refer Sec. 4.4.B)
+1. The individual will be informed after a Lost UIN gets retrieve. Refer to [**Notification**](FRS-Registration-Processor#331-notification-pluggable-by-si-) (Subject to notification configuration, refer Sec. 4.4.B)
 1. System captures and stores the transaction details for audit purpose (except PII data).
 
 [**Link to design**](/mosip/mosip-platform/blob/master/design/registration/registration-lost-UIN.md)
@@ -474,21 +491,24 @@ The registration officer performs the following steps to retrieve a lost UIN of 
 1. The registration receipt contains details in a print-friendly format.
    * Receipt includes labels and data in two languages - the default language and the secondary language as configured. 
    * All labels and fields are in the default language. Only name and address labels and fields are shown in the secondary language
-   * Receipt displays the 2D bar code.
+   * Receipt displays the 2D bar code
+   * It also provides the finger print ranking of each finger from 1 to 10, 1 being the finger with the best quality. The finger with higher quality can further be used by the individual, for biometric/Finger Print authentication
 4. This print friendly receipt can then be printed using a printer
 
 #### B. Acknowledgement receipt sent by email on completion of registration process [**[↑]**](#table-of-contents)
-1.The system sends an acknowledgement email to the individual after a registration is completed and Registration ID has been generated and assigned as per the configured notification language.
+Note: Notification Configuration: The trigger of notification is driven by the Notification configuration setup by the administrator, to allow a notification to be triggered by SMS/Email/Both or None
+
+1.The system sends an acknowledgement email to the individual after a registration is completed and Registration ID has been generated and assigned as per the configured notification language. (Subject to notification configuration, refer Sec. 4.4.B)
    * Notification language is set by a country's admin, who determines in which language, a notification is sent to the individual. Notification language can be either primary language or combination of both primary and secondary language.
    * In case of UIN Update or Lost UIN, the system sends a notification to the individual.
 2. The email template is defined by the admin at country level.
 3. Email is sent to the email address entered during registration.
 4. The subject and the body of the acknowledgement email are configured by admin.
 5. No email is sent under the following scenario
-   * If mode of confirmation is not set to ‘email’ or ‘email and SMS’
+   * If mode of confirmation is not set to ‘email’ or ‘email and SMS’ or is set to 'None'
    * If an email address is not provided during registration
    * If the client is not online during registration completion
-#### C. Acknowledgement receipt sent by SMS on completion of registration process
+#### C. Acknowledgement receipt sent by SMS on completion of registration process (Subject to notification configuration, refer Sec. 4.4.B)
 1.  The system sends an acknowledgement SMS to the individual after a registration is completed and Registration ID has been generated and assigned as per the configured notification language.
    * Notification language is set by a country's admin, who determines in which language, a notification is sent to the individual. Notification language can be either primary language or combination of both primary and secondary language.
    * In case of UIN Update or Lost UIN, the system sends a notification to the individual.
@@ -504,7 +524,7 @@ This feature enables Registration Client to send SMS and email acknowledgements 
 
 [**Link to design**](/mosip/mosip-platform/blob/master/design/registration/registration-acknowledgement-notification.md)
 
-### 4.5 Biometric Capture (SDK Integration, Extract and Match) (WIP) [**[↑]**](#table-of-contents)
+### 4.5 Biometric Capture (SDK Integration, Extract and Match) [**[↑]**](#table-of-contents)
 
 Registration Client performs a local duplicate check for irises and face of an individual against the mapped registration officers' biometrics
 1. The registration officer captures the irises of the individual and opts to proceed further in the registration process
@@ -563,7 +583,7 @@ When a registration officer captures biometric exceptions of an individual, then
 
 [**Link to design**](/mosip/mosip-platform/blob/master/design/registration/registration-New.md)
 
-### 4.8 End of Day Process [**[↑]**](#table-of-contents)
+### 4.8 End of Day Approval Process & Re-registration [**[↑]**](#table-of-contents)
 
 #### A. Approval of registrations through an end of day process.
 
@@ -699,25 +719,28 @@ The system then enables a registration officer to view the registration confirma
 
 [**Link to design**](/mosip/mosip-platform/blob/master/design/registration/registration-packetupload.md)
 
-### 7.2 Offline upload (Packet Exporter) (Work in Progress) [**[↑]**](#table-of-contents)
+### 7.2 Packet Exporter & Offline Upload from External Device [**[↑]**](#table-of-contents)
 
+#### 7.2.1 Export Packets to External Device [**[↑]**](#table-of-contents)
 System exports registration packet data from client machine to an external device as follows:
-1. Allows the registration officer to select a destination folder.
-   * The destination folder includes the laptop/desktop, an external hard drive or a remote location.
-   * External storage devices are not necessary to be MOSIP-registered devices.
-1. When the destination folder is selected, registration officer initiates export of packets.
+1. This feature allows the registration officer to select a destination folder to export the packets. By default all packets that are listed/eligible to be uploaded, are exported to the external device
+   * The destination folder includes the laptop/desktop, an external hard drive or a remote location
+   * External storage devices are not necessary to be MOSIP-registered devices
+1. When the destination folder is selected, registration officer initiates export of packets
 1. System exports the packets to the selected folder and performs the following steps:
    * Identifies the packets in ‘Ready to Upload’ state.
-   * If EoD process is turned ON, packets that have been approved or rejected and packet ID sync is completed are considered ‘Ready to Upload’.
-   * If EoD process is turned OFF, packets are considered ‘Ready to Upload’ as soon as the registration is submitted and packet ID sync is completed.
-   * Puts the packets in the destination folder.
-1. Once the server acknowledges that the packets have been received, which is uploaded from the external device to the server, the packets in the client will be marked as ‘Uploaded’.
+   * If EoD process is turned ON, packets that have been approved or rejected and packet ID sync is completed are considered ‘Ready to Upload’
+   * If EoD process is turned OFF, packets are considered ‘Ready to Upload’ as soon as the registration is submitted and packet ID sync is completed
+   * Puts the packets in the destination folder
+1. All the Registration Officers and supervisors on-boarded to the client machine will be able to export all packets
+1. Supports the partial export. If the system is able to export some packets to the folder and no other files due to lack of storage space or unavailability of the folder, the successfully exported packets will remain in the destination folder.
+1. For partial or full failure, the system displays error message
+1. System captures and stores the transaction details for audit purpose (except PII data)
+
+#### 7.2.2 Upload Packets from External Device to Server (To be Developed) [**[↑]**](#table-of-contents)
+1. Once the server acknowledges that the packets have been received (which is uploaded from the external device to the server through a defined mechanism - Yet to be defined/developed), the packets in the client will be marked as ‘Uploaded’ upon the next sync with Server.
    * Packets that remain in ‘Ready to Upload’ status will be exported again when the next export is executed.
    * Packets in ‘Uploaded’ or any other status will not be exported again.
-1. All the Registration Officers and supervisors on-boarded to the client machine are able to export all packets.
-1. Supports the partial export. If the system is able to export some packets to the folder and no other files due to lack of storage space or unavailability of the folder, the successfully exported packets will remain on the destination folder.
-1. For partial or full failure, the system displays error message.
-1. System captures and stores the transaction details for audit purpose (except PII data).
 
 [**Link to design**](/mosip/mosip-platform/blob/master/design/registration/registrtaion-packet_export.md)
 
@@ -740,11 +763,11 @@ The system uses a machine and centre specific public key to encrypt. Only the se
 
 [**Link to design**](/mosip/mosip-platform/blob/master/design/registration/registration-key-management.md)
 
-## 10. Software Version Upgrade [**[↑]**](#table-of-contents)
+## 10. Installation and Software Version Upgrade [**[↑]**](#table-of-contents)
 
 #### A. Registration Officer or Supervisor can download and unzip the client application set up kit
 
-Initial installation of the client software on a particular machine, supervisor or registration officer will download an installable software (setup kit) from an admin portal. Then unzip the setup kit and install it in the client machine.
+For initial installation of the client software on a particular machine, supervisor or registration officer will download an installable software (setup kit). Then unzip the setup kit and install it in the client machine.
 
 When a registration officer or supervisor opts to download setup kit and selects the OS-specific setup kit to download, the system allows the registration officer to download the setup kit to the storage location chosen by the registration officer. 
 1. Registration officer then unzips the setup kit.
@@ -817,12 +840,27 @@ When a set of audit data is uploaded to the server and the server has acknowledg
 
 Machine is termed as machine retirement due to following reason:
 * If the machine has obsolete specification.
-* When the machine is moved from one center to another, then the machine will retire from that old center.
+* When the machine is moved from one center to another (re-mapped), then the machine will retire from that old center.
 
 Before the machine is decommissioned, the following checks must be performed:
 
 1. All packets created must either be uploaded to server or exported to external device.
-2. All data locally saved in the machine must be cleaned up.
+2. All pending end of day approvals are completed and re-registrations pending action are cleared, refer below for more details
+3. All data locally saved in the machine must be cleaned up.
+
+Re-mapping of Machine:
+If a Machine has been re-mapped to another center, then:
+1. Officer will not be allowed to do any operation in Registration Client except,
+- Login/Logout
+- Approve packets as part of End of Day Approval process
+- Upload Packets
+- Inform Residents to Re-Register and mark action accordingly
+2. Once Packet Approval and Informing Resident is Completed, then
+- Packets will be auto uploaded if anything is pending
+- Initial Sync Flag is Turned On
+3. Once the Officer logs out and tries to login again, then
+- New Master data gets downloaded for the newly mapped Center
+
 ### List of Configurable Parameters and Processes [**[↑]**](#table-of-contents)
 
 1. Configurable Parameters

@@ -18,7 +18,9 @@ This section details about the service APIs in the Registration center modules
 
 * [Registration Center Type - Filter values](#post-regcentertypesfiltervalues)
 
-* [Create API - Primary/Secondary](#create-api)
+* [Create API - Primary/Secondary](#createupdate-api)
+
+* [Search API](#search-api)
 
 # Registration Centers API
 
@@ -37,6 +39,10 @@ This section details about the service APIs in the Registration center modules
 Master data is required across the platform. 
 
 This service will create the list of Registration Centers which are used in the MOSIP platform. 
+
+Please find the steps to create primary/secondary languages 
+
+https://github.com/mosip/mosip-docs/wiki/Registration-Center-APIs#createupdate-api
 
 ### Resource URL
 ### `POST /registrationcenters`
@@ -154,6 +160,7 @@ Requires Authentication | Yes
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
 name|Yes|Name of the registration center| | 
+id|Yes|Id of the registration center| | Incase of Primary empty and Generated id incase of Secondary 
 centertypecode|Yes|Code of the center type| | 
 addressline1|Yes|Line 1 of the address| | 
 addressline2|No|Line 2 of the address| | 
@@ -173,186 +180,40 @@ lunchstarttime|No|Lunch start time of the registration center| |
 lunchendtime|No|Lunch end time of the registration center| | 
 timezone |No | time zone of the registration center | |
 lang_code |Yes | language code  | |
+numberOfKiosks|No | Number of Kiosks  | |
 
 ### Example Request
 ```JSON
 {
-  "id": "string",
-  "metadata": {},
-  "request": [ {
-    "addressLine1": "Avenue Ouzguita1",
-    "addressLine2": "Rabat",
-    "addressLine3": "Morocco",
-    "centerEndTime": "17:00:00",
-    "centerStartTime": "09:00:00",
-    "centerTypeCode": "REG",
-    "contactPerson": "Mick Donalds",
-    "contactPhone": "803062069",
-    "holidayLocationCode": "RBT",
-    "langCode": "eng",
-   "id":"10022",
-    "latitude": "-33.9999",
-    "locationCode": "10190",
-    "longitude": "-6.815281",
-    "lunchEndTime": "14:00:00",
-    "lunchStartTime": "13:00:00",
-    "name": "Center Youssoufialvvvvv",
-    "perKioskProcessTime": "00:15:00",
-    "timeZone": "(GTM+01:00) CENTRAL EUROPEAN TIME",
-    "workingHours": "8:00:00",
-    "isActive": false
-  },
-{
-    "addressLine1": "Avenue Ouzguita2",
-    "addressLine2": "Rabat",
-    "addressLine3": "Morocco",
-    "centerEndTime": "17:00:00",
-    "centerStartTime": "09:00:00",
-    "centerTypeCode": "REG",
-    "contactPerson": "Mick Donalds",
-    "contactPhone": "803062069",
-    "holidayLocationCode": "RBT",
-    "id": "10022",
-    "langCode": "ara",
-    "latitude": "33.995612",
-    "locationCode": "10190",
-    "longitude": "-6.815281",
-    "lunchEndTime": "14:00:00",
-    "lunchStartTime": "13:00:00",
-    "name": "Center Youssoufial2vvvvv",
-    "perKioskProcessTime": "00:15:00",
-    "timeZone": "(GTM+01:00) CENTRAL EUROPEAN TIME",
-    "workingHours": "8:00:00",
-    "isActive": false
-  },
-  {
-    "addressLine1": "Avenue Ouzguita2",
-    "addressLine2": "Rabat",
-    "addressLine3": "Morocco",
-    "centerEndTime": "17:00:00",
-    "centerStartTime": "09:00:00",
-    "centerTypeCode": "REG",
-    "contactPerson": "Mick Donalds",
-    "contactPhone": "803062069",
-    "holidayLocationCode": "RBT",
-    "langCode": "fra",
-    "id":"10022",
-    "latitude": "33.995612",
-    "locationCode": "10190",
-    "longitude": "-6.815281",
-    "name": "Center Youssoufial2vvvvv",
-    "perKioskProcessTime": "00:15:00",
-    "timeZone": "(GTM+01:00) CENTRAL EUROPEAN TIME",
-    "workingHours": "8:00:00",
-    "isActive": false
-  }],
-  "requesttime": "2018-12-10T06:12:52.994Z",
-  "version": "string"
-}
-```
-### Example Response
-```JSON
-{
-    "id": "string",
-    "version": "string",
-    "responsetime": "2019-07-01T05:44:29.825Z",
-    "metadata": null,
-    "response": {
-        "registrationCenters": [
-            {
-                "id": "10022",
-                "name": "Center Youssoufialaaaa",
-                "centerTypeCode": "REG",
-                "addressLine1": "Avenue Ouzguita1",
-                "addressLine2": "Rabat",
-                "addressLine3": "Morocco",
-                "latitude": "-33.9999",
-                "longitude": "-6.815281",
-                "locationCode": "10190",
-                "holidayLocationCode": "RBT",
-                "contactPhone": "803062069",
-                "workingHours": "8:00:00",
-                "langCode": "eng",
-                "numberOfKiosks": 0,
-                "perKioskProcessTime": "00:15:00",
-                "centerStartTime": "09:00:00",
-                "centerEndTime": "17:00:00",
-                "timeZone": "(GTM+01:00) CENTRAL EUROPEAN TIME",
-                "contactPerson": "Mick Donalds",
-                "lunchStartTime": "13:00:00",
-                "lunchEndTime": "14:00:00",
-                "isActive": false,
-                "createdBy": "zonal-admin",
-                "createdDateTime": "2019-06-28T08:24:11.204Z",
-                "updatedBy": "zonal-admin",
-                "updatedDateTime": "2019-07-01T05:44:30.448Z",
-                "isDeleted": null,
-                "deletedDateTime": null
-            },
-            {
-                "id": "10022",
-               "name": "سوق الخميس مكرن",
-                "centerTypeCode": "REG",
-                "addressLine1": "الطريق N1",
-                "addressLine2": "مڭرن",
-                "addressLine3": "المغرب",
-                "latitude": "33.99999",
-                "longitude": "-6.815281",
-                "locationCode": "10190",
-                "holidayLocationCode": "RBT",
-                "contactPhone": "803062069",
-                "workingHours": "8:00:00",
-                "langCode": "ara",
-                "numberOfKiosks": 0,
-                "perKioskProcessTime": "00:15:00",
-                "centerStartTime": "09:00:00",
-                "centerEndTime": "17:00:00",
-                "timeZone": "(GTM+01:00) CENTRAL EUROPEAN TIME",
-                "contactPerson": "ماريو سبيدواجون",
-                "lunchStartTime": "13:00:00",
-                "lunchEndTime": "14:00:00",
-                "isActive": false,
-                "createdBy": "zonal-admin",
-                "createdDateTime": "2019-06-28T08:24:11.256Z",
-                "updatedBy": "zonal-admin",
-                "updatedDateTime": "2019-07-01T05:44:30.931Z",
-                "isDeleted": null,
-                "deletedDateTime": null
-            },
-            {
-                "id": "10022",
-                "name": "Souk Khemiss Mograne",
-                "centerTypeCode": "REG",
-                "addressLine1": "la route N1",
-                "addressLine2": "Mograne",
-                "addressLine3": "Maroc",
-                "latitude": "33.99999",
-                "longitude": "-6.81666",
-                "locationCode": "10190",
-                "holidayLocationCode": "RBT",
-                "contactPhone": "803062069",
-                "workingHours": "8:00:00",
-                "langCode": "fra",
-                "numberOfKiosks": 0,
-                "perKioskProcessTime": "00:15:00",
-                "centerStartTime": "09:00:00",
-                "centerEndTime": "17:00:00",
-                "timeZone": "(GTM+01:00) CENTRAL EUROPEAN TIME",
-                "contactPerson": "Mick Donalds",
-                "lunchStartTime": "13:00:00",
-                "lunchEndTime": "14:00:00",
-                "isActive": false,
-                "createdBy": "zonal-admin",
-                "createdDateTime": "2019-06-28T08:24:11.349Z",
-                "updatedBy": "zonal-admin",
-                "updatedDateTime": "2019-07-01T05:44:31.558Z",
-                "isDeleted": null,
-                "deletedDateTime": null
-            }
-        ],
-        "notUpdatedRegCenters": []
-    },
-    "errors": null
+	"id": "string",
+	"metadata": null,
+	"request": {
+		"addressLine1": "address 1",
+		"addressLine2": "",
+		"addressLine3": "",
+		"centerEndTime": "18:00:00",
+		"centerStartTime": "09:30:00",
+		"centerTypeCode": "REG",
+		"contactPerson": "fdsf",
+		"contactPhone": "",
+		"holidayLocationCode": "KTA",
+		"langCode": "eng",
+		"latitude": "2.1111",
+		"locationCode": "14000",
+		"longitude": "2.1111",
+		"lunchEndTime": "00:00:00",
+		"lunchStartTime": "00:00:00",
+		"name": "Regcenter 21",
+		"perKioskProcessTime": "00:15:00",
+		"timeZone": "(GTM+01:00) CENTRAL EUROPEAN TIME",
+		"workingHours": "8.5",
+		"zoneCode": "TTA",
+		"id": "10936",
+		"isActive": true,
+		"numberOfKiosks": 0
+	},
+	"version": "1.0",
+	"requesttime": "2019-12-02T15:32:26.503Z"
 }
 ```
 ##### Error Response:
@@ -1631,7 +1492,7 @@ sort|No|This is an array of the sort field and type| |
 sortfield| The field on which the sort is applied | | modifiedDate
 sorttype| This should be either of ['ASC','DESC']| | ASC
 pagination|The pagination parameter object| |
-pageStart|This is the start index | 0 | 10
+pageStart|This is the start index | 0 | 0
 pageFetch| This is the amount of records to be fetched | 10 | 10
 
 
@@ -1825,7 +1686,7 @@ sort|No|This is an array of the sort field and type| |
 sortfield| The field on which the sort is applied | | modifiedDate
 sorttype| This should be either of ['ASC','DESC']| | ASC
 pagination|The pagination parameter object| |
-pageStart|This is the start index | 0 | 10
+pageStart|This is the start index | 0 | 0
 pageFetch| This is the amount of records to be fetched | 10 | 10
 
 ### Filter Values
@@ -1964,10 +1825,14 @@ All the Create API's use the common class to create masterdata, Please find the 
 Create : 
 
 *) Primary language must be created first and then id must be passed in the secondary language request.
+
 *) Primary id must be passed blank for primary language request.
+
 *) Primary language will not be activated unless Secondary language is created.
+
 *) Primary Id for Center/Machine will be seqential Id's and other masterdata's will be auto generated values.
 
 Update :
 
 *) Activation and deactivation will be done , If we only pass the primary language with active/deactivate in the request.
+
