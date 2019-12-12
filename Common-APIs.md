@@ -2129,12 +2129,10 @@ pageStart|This is the start index | 0 | 0
 pageFetch| This is the amount of records to be fetched | 10 | 10
 
 ### Filter Values
-Filter Name| Search Values
------|----------
-Location Zone Name|["contains","equals","startsWith"]
-Holiday Date|["between"]
-Holiday Name|["contains","equals","startsWith"]
-Status|["contains","equals","startsWith"]
+Please find the filter columns used in search
+1) holidayName
+2) holidayDate|["between"]
+3) isActive
 
 ### Example Request
 ```JSON
@@ -2872,14 +2870,13 @@ pageStart|This is the start index | 0 | 0
 pageFetch| This is the amount of records to be fetched | 10 | 10
 
 ### Filter Values
-Filter Name| Search Values
------|----------
-Region|["contains","equals","startsWith"]
-Province|["contains","equals","startsWith"]
-City|["contains","equals","startsWith"]
-LAA|["contains","equals","startsWith"]
-Pincode|["contains","equals","startsWith"]
-Status|["contains","equals","startsWith"]
+Please find the filter columns used in search
+1) isActive
+2) region
+3) province
+4) city
+5) Zone
+6) postalCode
 
 ### Example Request
 ```JSON
@@ -4443,11 +4440,10 @@ pageFetch| This is the amount of records to be fetched | 10 | 10
 
 
 ### Filter Values
-Filter Name| Search Values
------|----------
-Word|["contains","equals","startsWith"]
-Language|["contains","equals","startsWith"]
-Status|["contains","equals","startsWith"]
+Please find the filter columns used in search
+1) word
+2) langCode
+3) isActive
 
 ### Example Request
 ```JSON

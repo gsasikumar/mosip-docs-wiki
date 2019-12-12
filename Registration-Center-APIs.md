@@ -1495,6 +1495,13 @@ pagination|The pagination parameter object| |
 pageStart|This is the start index | 0 | 0
 pageFetch| This is the amount of records to be fetched | 10 | 10
 
+FilterColumns :
+Please find the filter columns used in search
+1) id
+2) name
+3) centerTypeCode
+4) locationCode
+5) status
 
 ### Example Request
 ```JSON

@@ -797,6 +797,16 @@ pagination|The pagination parameter object| |
 pageStart|This is the start index | 0 | 0
 pageFetch| This is the amount of records to be fetched | 10 | 10
 
+
+### Filter Values
+Please find the filter columns used in search
+1) name
+2) isActive
+3) macAddress
+4) serialNum
+5) mapStatus
+6) deviceTypeName
+
 ### Filter Values
 Filter Name| Search Values
 -----|----------
@@ -906,10 +916,9 @@ pageStart|This is the start index | 0 | 0
 pageFetch| This is the amount of records to be fetched | 10 | 10
 
 ### Filter Values
-Filter Name| Search Values
------|----------
-name|["contains","equals","startsWith"]
-status|["contains","equals","startsWith"]
+Please find the filter columns used in search
+1) name
+2) status
 
 ### Example Request
 ```JSON
@@ -1005,13 +1014,10 @@ pageStart|This is the start index | 0 | 0
 pageFetch| This is the amount of records to be fetched | 10 | 10
 
 ### Filter Values
-Filter Name| Search Values
------|----------
-name|["contains","equals","startsWith"]
-brand|["contains","equals","startsWith"]
-model|["contains","equals","startsWith"]
-device type name|["contains","equals","startsWith"]
-status|["contains","equals","startsWith"]
+Please find the filter columns used in search
+1) name
+2) isActive
+3) deviceTypeName
 
 ### Example Request
 ```JSON

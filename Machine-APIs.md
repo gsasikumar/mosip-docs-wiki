@@ -715,6 +715,10 @@ pagination|The pagination parameter object| |
 pageStart|This is the start index | 0 | 10
 pageFetch| This is the amount of records to be fetched | 10 | 10
 
+### Filter Values
+Please find the filter columns used in search
+1) name
+2) status
 
 ### Example Request
 ```JSON
@@ -1174,14 +1178,12 @@ pageStart|This is the start index | 0 | 10
 pageFetch| This is the amount of records to be fetched | 10 | 10
 
 ### Filter Values
-Filter Name| Search Values
------|----------
-name|["contains","equals","startsWith"]
-brand|["contains","equals","startsWith"]
-model|["contains","equals","startsWith"]
-device type name|["contains","equals","startsWith"]
-status|["equals"]
-model|["contains","equals","startsWith"]
+Please find the filter columns used in search
+1) name
+2) isActive
+3) brand
+4) model
+5) machineTypeName
 
 ### Example Request
 ```JSON
@@ -1346,15 +1348,13 @@ pageStart|This is the start index | 0 | 0
 pageFetch| This is the amount of records to be fetched | 10 | 10
 
 ### Filter Values
-Filter Name| Search Values
------|----------
-Machine Name|["contains","equals","startsWith"]
-Status|["equals"]
-MAC Address|["contains","equals","startsWith"]
-Serial Number|["contains","equals","startsWith"]
-Map Status|["contains","equals","startsWith"]
-Machine Type|["contains","equals","startsWith"]
-Machine Specification ID|["contains","equals","startsWith"]
+Please find the filter columns used in search
+1) name
+2) isActive
+3) macAddress
+4) serialNum
+5) mapStatus
+6) machineTypeName
 
 ### Example Request
 ```JSON

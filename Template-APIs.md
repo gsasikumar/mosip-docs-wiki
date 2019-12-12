@@ -619,6 +619,12 @@ pagination|The pagination parameter object| |
 pageStart|This is the start index | 0 | 10
 pageFetch| This is the amount of records to be fetched | 10 | 10
 
+### Filter Values
+Please find the filter columns used in search
+1) name
+2) moduleId
+3) moduleName
+4) isActive
 
 ### Example Request
 ```JSON
