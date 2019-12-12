@@ -99,10 +99,10 @@ DOs:
  - you can push your branch to remote, in case of, 
 	 - Whenever you are done with the work or issue, 
 	 - Or in case, if you want to back up your on the remote repository
- - Use the following command to push the code, 
+ - Use the following command to push the feature branch, 
 
 ```sh
-git push -f ${your_remote_name} feature
+git push -f ${your_remote_name} feature_branch
 ```
 
 For example, 
