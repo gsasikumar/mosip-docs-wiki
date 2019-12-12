@@ -30,8 +30,8 @@
 - [7. Packet Upload](#7-packet-upload-)
   * [7.1 Registration Packet Upload](#71-registration-packet-upload-) _(REG_FR_7.1)_
   * [7.2 Packet Exporter & Offline Upload from External Device](#72-offline-upload-packet-exporter-) _(REG_FR_7.2)_
-    * [7.2.1 Export Packets to External Device] _(REG_FR_7.2.1)_
-    * [7.2.2 Upload Packets from External Device to Server (To be Developed)] _(REG_FR_7.2.2)_
+    * [7.2.1 Export Packets to External Device](#721-export-packets-to-external-device-) _(REG_FR_7.2.1)_
+    * [7.2.2 Upload Packets from External Device to Server - To be Developed](#722-upload-packets-from-external-device-to-server-) _(REG_FR_7.2.2)_
 - [8. Analytics and Audit Logs](#8-analytics-and-audit-logs-) _(REG_FR_8)_
 - [9. Data Security](#9-data-security-)
 - [10. Installation and Software Version Upgrade](#10-software-version-upgrade-) _(REG_FR_10)_
@@ -199,7 +199,8 @@ Based on the configuration (turn on or turn off), the system allows a registrati
 
 1. The Registration Client receives a request to sync data (through manual trigger or scheduled job) from client to server.
 2. Client in turn sends request with the applicable data to server.
-   * Registration officer on-boarding data is synced.
+   * Registration officer on-boarding data with mapping to that machine is synced.
+   * Registration packets are synced
    * Only the additions, deletions, and modifications made since the last sync are sent.
 3. Client receives response from server as a success or failure message.
 4. Client displays a success or failure message on the UI
@@ -214,7 +215,6 @@ The system performs the following steps to ensure packet status sync from server
 1. The system allows a registration officer to either sync manually or automatically based on configured frequency.
 1. The system allows the application to request using registration packet ID and receive the registration packet status from the server
 1. The system displays the status (in progress/completed) of the operation to pull registration packet IDs from registration server.
-
 ### 2.5 Pre-registration Data Download [**[↑]**](#table-of-contents)
 
 
@@ -251,6 +251,8 @@ The downloaded pre-registration data overwrites the previously downloaded data f
 The downloaded pre-registration data is stored locally in the registered machine as configured.
 
 [**Link to design**](/mosip/mosip-platform/blob/master/design/registration/registration-sync-job.md)
+
+- Note: Additionally, we have the Policies sync, User to role mapping sync, Public Key Sync and User Salt Sync that takes place from Server to Client
 
 ## 3. Health Check [**[↑]**](#table-of-contents)
 ### 3.1 Peripherals Check [**[↑]**](#table-of-contents)
@@ -395,7 +397,20 @@ When the registration officer scans the individual’s irises either individuall
 1. Validates all available irises that have been captured, the irises, which are above threshold quality and the maximum retries attempted.
 1. Retains only the capture, which has the highest quality score.
 1. System captures and stores the transaction details for audit purpose (except PII data).
-#### L. Restrict registration if the duration since the last export or upload is more than the configured limit
+
+#### L. MOSIP Device Manager (MDM)
+All devices that collect biometric data for MOSIP should operate within the defined specification. The MOSIP device specification provides compliance guidelines to devices for them to work with MOSIP. The compliance is based on device capability, trust and communication protocols. A MOSIP compliant device would follow the standards established in this document. It is expected that the devices are compliant to this specification and tested and validated. The details of each of these are outlined [**here**](/mosip/mosip-docs/wiki/MOSIP-Device-Service-Specification)
+
+#### M. Device Validation
+- All devices connected to Registration Client should be registered devices. 
+- On having logged in to Registration Client, when the Operator attempts to capture any modality of biometrics, system will validate if the connected Finger print scanning device/Iris device/Photo Capture device is registered, based on the Device ID. 
+- If the system is online, then the validation is executed against the master data in the server (Master data relevant to the registered devices)
+- If the system is offline, then the validation will be executed against the master data synced locally in the machine from which devices are being connected (Master data relevant to the registered devices)
+- If the device is identified to be registered as part of the Master data, then the device can be used & Operator is allowed to proceed with biometrics capture. Subsequently, the connected device(s) are then mapped to the machine from which the devices are connected - [Backend mapping of Machine with connected device(s)]
+- If the device is identified to be un-registered as part of the Master data of registered devices, then the Operator cannot proceed with biometrics capture
+For details on the specifications of the API and validation, refer [**here**](/mosip/mosip-docs/wiki/FRS-Administrator-Services#105-device-detail-validation-)
+
+#### N. Restrict registration if the duration since the last export or upload is more than the configured limit
 When the registration officer opts to start a new registration or UIN update. The system determines the time of the most recent export or upload (automatic uploads and manual uploads) of registration packets.
 If the duration since the last export or upload is not more than the configured limit, then system displays the demographic details page or UIN update page. If the configured limit is exceeded, then system displays an error message.
 
@@ -476,7 +491,8 @@ The registration officer performs the following steps to retrieve a lost UIN of 
 1. The registration receipt contains details in a print-friendly format.
    * Receipt includes labels and data in two languages - the default language and the secondary language as configured. 
    * All labels and fields are in the default language. Only name and address labels and fields are shown in the secondary language
-   * Receipt displays the 2D bar code.
+   * Receipt displays the 2D bar code
+   * It also provides the finger print ranking of each finger from 1 to 10, 1 being the finger with the best quality. The finger with higher quality can further be used by the individual, for biometric/Finger Print authentication
 4. This print friendly receipt can then be printed using a printer
 
 #### B. Acknowledgement receipt sent by email on completion of registration process [**[↑]**](#table-of-contents)
@@ -705,23 +721,23 @@ The system then enables a registration officer to view the registration confirma
 
 ### 7.2 Packet Exporter & Offline Upload from External Device [**[↑]**](#table-of-contents)
 
-#### 7.2.1 Export Packets to External Device
+#### 7.2.1 Export Packets to External Device [**[↑]**](#table-of-contents)
 System exports registration packet data from client machine to an external device as follows:
-1. Allows the registration officer to select a destination folder.
-   * The destination folder includes the laptop/desktop, an external hard drive or a remote location.
-   * External storage devices are not necessary to be MOSIP-registered devices.
-1. When the destination folder is selected, registration officer initiates export of packets.
+1. This feature allows the registration officer to select a destination folder to export the packets. By default all packets that are listed/eligible to be uploaded, are exported to the external device
+   * The destination folder includes the laptop/desktop, an external hard drive or a remote location
+   * External storage devices are not necessary to be MOSIP-registered devices
+1. When the destination folder is selected, registration officer initiates export of packets
 1. System exports the packets to the selected folder and performs the following steps:
    * Identifies the packets in ‘Ready to Upload’ state.
-   * If EoD process is turned ON, packets that have been approved or rejected and packet ID sync is completed are considered ‘Ready to Upload’.
-   * If EoD process is turned OFF, packets are considered ‘Ready to Upload’ as soon as the registration is submitted and packet ID sync is completed.
+   * If EoD process is turned ON, packets that have been approved or rejected and packet ID sync is completed are considered ‘Ready to Upload’
+   * If EoD process is turned OFF, packets are considered ‘Ready to Upload’ as soon as the registration is submitted and packet ID sync is completed
    * Puts the packets in the destination folder
-1. All the Registration Officers and supervisors on-boarded to the client machine are able to export all packets.
-1. Supports the partial export. If the system is able to export some packets to the folder and no other files due to lack of storage space or unavailability of the folder, the successfully exported packets will remain on the destination folder.
-1. For partial or full failure, the system displays error message.
-1. System captures and stores the transaction details for audit purpose (except PII data).
+1. All the Registration Officers and supervisors on-boarded to the client machine will be able to export all packets
+1. Supports the partial export. If the system is able to export some packets to the folder and no other files due to lack of storage space or unavailability of the folder, the successfully exported packets will remain in the destination folder.
+1. For partial or full failure, the system displays error message
+1. System captures and stores the transaction details for audit purpose (except PII data)
 
-#### 7.2.2 Upload Packets from External Device to Server (To be Developed)
+#### 7.2.2 Upload Packets from External Device to Server (To be Developed) [**[↑]**](#table-of-contents)
 1. Once the server acknowledges that the packets have been received (which is uploaded from the external device to the server through a defined mechanism - Yet to be defined/developed), the packets in the client will be marked as ‘Uploaded’ upon the next sync with Server.
    * Packets that remain in ‘Ready to Upload’ status will be exported again when the next export is executed.
    * Packets in ‘Uploaded’ or any other status will not be exported again.

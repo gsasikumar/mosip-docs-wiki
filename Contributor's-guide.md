@@ -3,7 +3,7 @@
 	- [Register yourself](#register-yourself)
 	- [Contributor License Agreement(CLA)](#contributor-license-agreementcla)
 	- [Code of conduct](#code-of-conduct)
-	- [Feature wise development](#feature-wise-development)
+	- [Feature driven development](#feature-driven-development)
 	- [Roles](#roles)
 	- [Developers handbook](#developers-handbook)
 	- [Git workflow](#git-workflow)
@@ -54,27 +54,20 @@ Please go through the [Code of Conduct](code-of-conduct) before you begin the co
 ### Platform documentation
 Check out [our repositories](https://github.com/mosip) and [Platform Documentation](https://github.com/mosip/mosip-docs/wiki/Platform-Documentation)
 	
-### Feature wise development
-The development methodology is [Feature driven development](feature-driven-development.md)&lt;TODO&gt;
+### Feature driven development
+The development methodology is [Feature driven development](feature-driven-development.md)
 
-A feature consists of the following items, 
-1.	Feature description or requirement
-2.	Docs
-3.	Application code
-4.	Automation test cases
-5.	Performance test cases
-6.	Infra code
-
-Once all the above items are completed, the feature will be signed-off for completion. 
 
 ### Roles
 Following are the various roles in the MOSIP open source community,
- - Developer
- - Automation Tester
- - Performance Tester
- - Development Reviewer
- - Test Reviewer
- - Product Manager
+ - DEVELOPER
+	- The developers can be contributing the development code or automation test code or performance test code or documents.
+ - REVIEWERS
+	- The reviewer accepts and approves the pull requests from the developer, after the necessary checklists have been passed. 
+ - PRODUCT_MANAGER
+	- The product manager decides which features goes in which version release. 
+ - DEVOPS
+	- This team members has the necessary permissions to pull the code and run in the automation stream.
  
 The roles and responsibilities can be found [here](roles-and-responsibilities.md)&lt;TODO&gt;
 	
@@ -89,12 +82,8 @@ Please go through the coding standards for,
 	
 	
 ### Git workflow
-MOSIP uses Github workflow. Refer [here](mosip-github-workflow.md)&lt;TODO&gt; for steps to take the code from MOSIP and contribute back. 
-&lt;move the following to mosip-github-workflow.md file&gt;
- - How Github-workflow works?
- - Pull request
- - Review process
- - Closing the pull request
+MOSIP uses Github workflow. Refer [MOSIP github workflow](mosip-github-workflow.md) for steps to take the code from MOSIP and contribute back. 
+
 
 ### How Requirement, Code, testing, documents, configuration and infra comes together?
 This [link] gives a detailed description about how feature is completed from inception phase to completion phase. 
@@ -125,7 +114,7 @@ Out of scope: This document doesn't cover Jenkins, Docker and Kubernetes. It is 
 ### Quality metrics
 
 - You can use SONAR to check the code quality
-- You can download the code quality rules from here [SONAR Code quality ruleset](code-quality-ruleset.md)&lt;TODO&gt;&lt;TODO&gt;
+- You can download the code quality rules from here [SONAR Code quality ruleset](code-quality-ruleset.md)&lt;TODO&gt;
 
 ## Community
 
