@@ -1,5 +1,5 @@
 ## 1. Setup Keycloak Standalone Server setup 6.0.1
-**documentation for setting up keycloak server**
+**Dcumentation for setting up keycloak server**
 ### Before you begin
 
 1. Install java (java-8-openjdk) to all the machines in the cluster and setup the JAVA_HOME environment variable for the same.
@@ -86,9 +86,9 @@ TimeoutStopSec=600
 [Install]
 WantedBy=multi-user.target
 ```
-**Enable ssl for keycloak server**
+**Enable SSL for Keycloak server**
 
-To enable ssl we need a certificate which here in example we will use Lets encrypt
+To enable SSL we need a certificate which here in example we will use Lets encrypt
 
 Follow the steps in this link to create a certificate for your domain
 
@@ -160,14 +160,14 @@ While registering change the schema name if you want.
 </interface>
 </interfaces>
 ```
-2. Default ports from 8080 -> 80 and 8443 -> 443 to not give ports at time of accessing keycloak
+2. Default ports from 8080 -> 80 and 8443 -> 443 to not give ports at time of accessing Keycloak
 ```
 <socket-binding  name="http"  port="${jboss.http.port:80}"/>
 
 <socket-binding  name="https"  port="${jboss.https.port:443}"/>
 ```
 
-2.5 Adding a ssl certificate to keycloak
+2.5 Adding a SSL certificate to Keycloak
 
 Here we will give the keystore we created to keycloak
 
@@ -215,9 +215,9 @@ first name : user-attribute-ldap-mapper
 email : user-attribute-ldap-mapper
  ```
 
- 6. Sync Users and Roles from Ldap.
+ 6. Sync Users and Roles from LDAP .
  7. Create INDIVIDUAL, RESIDENT Role from Keycloak in Realm Roles
- 8. Assign Roles from Ldap and Keycloak to All Clients
+ 8. Assign Roles from LDAP and Keycloak to All Clients
  ```
  IDA => ID_AUTHENTICATION
  Registration-Processor => REGISTRATION_PROCESSOR
