@@ -1,0 +1,1 @@
+### Keycloak Standalone Server Setup
