@@ -17,6 +17,8 @@ When a reviewer gets a pull request from a contributor, the reviewer have to do 
  
  - The branch should be available in your local repository. So, switch to that branch ``` git checkout MOS-123``` and you can compile, run tests etc.,
  
+ NOTE: For one feature, there can be multiple changes in multiple repositories. When you accept a pull request, identify the other dependent pull request in other repositories also. For example, for one feature, there can be changes in mosip-platform and mosip-config repositories. To functionally run the feature in your local machine, you might have to test the pull requests from both mosip-platform and mosip-config repositories. 
+ 
 ### Automatic approach &lt; TODO: following approach is yet to be developed &gt;
  - When a pull request is recieved, a Jenkins job is triggered, which does the following, 
 	1. Compiles the code. 
