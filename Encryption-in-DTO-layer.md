@@ -30,7 +30,7 @@ The data level encryption is handled in the DTO layer in the application.
 	
 - Encryption:
 	- The properties in the entities which are supposed to be encrypted are configured in the config server.
-	- During the encryption, a listener is installed in the DAO layer to intercept the incoming entity objects. If those property are supposed to be, encrypted or not, is recieved from the config server. 
+	- During the encryption, a listener is installed in the DAO layer to intercept the incoming entity objects. If those property are supposed to be, encrypted or not, is received from the config server. 
 	- The data is encrypted and prefixed with the index of the key, which is used for the encryption, and stored in the data store. 
 	- The key itself is encrypted with the master key from HSM and stored in a separate data store. 
 	- The index is incremented, if the old index is expired. 
@@ -40,7 +40,7 @@ The data level encryption is handled in the DTO layer in the application.
 ![Encryption](_images/security/admin-encryption-flow.jpg)		
 
 - Decryption:
-	- When a request is recieved, the DTO fields are checked for the sensitivity, from the config server.
+	- When a request is received, the DTO fields are checked for the sensitivity, from the config server.
 	- If the DTO field is sensitive, the decryption() method is called. 
 	- During the decryption, the index is calculated by the delimiter. This index is used to find the Key, which was used for the encryption. 
 	- The Key itself have to decrypted by the master key from HSM, before decrypting the content. 
