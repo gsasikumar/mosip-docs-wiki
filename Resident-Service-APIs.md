@@ -155,7 +155,7 @@ XXX-XXX-002 | Invalid VID | No active VID found
 
 
 ## POST /resident/v1/rid/check-status
-This service will respond with service request (UIN Generation/Updation,Reprint etc) status and notification will be sent to phone/email.
+This service will respond with service request (UIN Generation/Updataion,Reprint etc) status and notification will be sent to phone/email.
 
 #### Resource URL
 <div>https://mosip.io/resident/v1/rid/check-status</div>
@@ -668,67 +668,29 @@ request: demographics|Y| Demographic data of an Individual| |
 
 #### Request Body
 ```JSON
-{
-  "id": "mosip.resident.uin",
-  "version": "v1",
-  "requestTime": "2018-12-09T06:39:04.683Z",
-  "request": {
-  "transactionID": "dabed834-974f-11e9-bc42-526af7764f64",
-  "individualId": "9830872690593682",
-  "individualIdType": "UIN",
-  "otp": "123456",
-  "demographics": {
-      "addressLine1": [
-      {
-        "language": "ara",
-        "value": "عنوان العينة سطر 1"
-      },
-      {
-        "language": "fra",
-        "value": "exemple d'adresse ligne 1"
-      }
-    ],
-    "addressLine2": [
-      {
-        "language": "ara",
-        "value": "عنوان العينة سطر 2"
-      },
-      {
-        "language": "fra",
-        "value": "exemple d'adresse ligne 2"
-      }
-    ],
-    "addressLine3": [
-      {
-        "language": "ara",
-        "value": "عنوان العينة سطر 2"
-      },
-      {
-        "language": "fra",
-        "value": "exemple d'adresse ligne 2"
-      }
-    ],
-    "region": [
-      {
-        "language": "fra",
-        "value": "RSK"
-      }
-    ],
-    "province": [
-      {
-        "language": "fra",
-        "value": "Kénitra"
-      }
-    ],
-    "city": [
-      {
-        "language": "fra",
-        "value": "Kénitra"
-      }
-    ],
-    "postalCode": "10111"
-    }
-  }
+{ 
+   "id":"mosip.resident.uin",
+   "version":"v1",
+   "requestTime":"2018-12-09T06:39:04.683Z",
+   "request":{ 
+      "transactionID":"dabed834-974f-11e9-bc42-526af7764f64",
+      "individualId":"9830872690593682",
+      "individualIdType":"UIN",
+      "otp":"123456",
+      "identityJson":"<base64 encoded identity json byte array>",
+      "documents":[ 
+         { 
+            "name":"<document name same as present inside id json>",
+            "type":"<document type example - txt, pdf>",
+            "value":"<base64 encoded document byte array>"
+         },
+         { 
+            "name":"<document name same as present inside id json>",
+            "type":"<document type example - txt, pdf>",
+            "value":"<base64 encoded document byte array>"
+         }
+      ]
+   }
 }
 ```
 
