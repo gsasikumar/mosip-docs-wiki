@@ -135,7 +135,7 @@ Error Response
 
 ## 1.2 Authenticate UserId and OTP
 
-This service authenticates the use ID and the OTP. If the authentication is successfull, an AuthToken will be sent in the Response header. 
+This service authenticates the use ID and the OTP. If the authentication is successful, an AuthToken will be sent in the Response header. 
 
 ### Resource URL
 ### `POST /v1/authenticate/useridOTP`
