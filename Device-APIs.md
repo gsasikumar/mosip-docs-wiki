@@ -379,7 +379,7 @@ Description: Error occurred while deleting Device
 #### Failure details
 Error Code | Error Message | Error Description
 ------------|------------------------------|-------------
-KER-MSD-009 | Error occured while fetching Devices | Fetch Issue
+KER-MSD-009 | Error occurred while fetching Devices | Fetch Issue
 KER-MSD-069 | Error occurred while inserting Device details | Insertion Issue
 KER-MSD-010 | Device not Found | Data Not Found
 KER-MSD-083 | Error while updating | Update Issue
