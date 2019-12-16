@@ -287,7 +287,7 @@ Syncs master data between the MOSIP master data server and the client local data
 Syncs public keys between the MOSIP DB and client DB
 
 ### Sync Handler-Configuration changes
-Syncs the cofigurations stored in  MOSIP config server with the locally stored configs of client
+Syncs the configuration stored in  MOSIP config server with the locally stored configs of client
 
 ### Sync Handler-List of Roles and users
 Syncs user role data between the MOSIP  server and the client local database
