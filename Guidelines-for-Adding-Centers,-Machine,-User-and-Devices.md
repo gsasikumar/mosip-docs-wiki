@@ -67,7 +67,7 @@ Following roles have to be created using the process as mentioned above.([Refer 
 1. **Is_Active**: TRUE. If set as false, this Registration will not be shown up in Pre-Registration UI and no appointments will be generated for this Center
 1. **Cr_by**: `<username>` ideally name of the admin
 1. **cr_dtimes**: The time at which the Center is getting created
-<br>**Note**: A Registration Center is needed to be created in all the languages supported by the country. if a country supports primary langauge as French and Secondary language as arabic, create the same registration center twice. One with language code as **fra** for French and one with language code as **ara** for Arabic. Center ID should be same for both the records as both the records are for one center only.<br>
+<br>**Note**: A Registration Center is needed to be created in all the languages supported by the country. if a country supports primary language as French and Secondary language as arabic, create the same registration center twice. One with language code as **fra** for French and one with language code as **ara** for Arabic. Center ID should be same for both the records as both the records are for one center only.<br>
 ### 2.3 Create a Machine:
 1. **Machine ID**: This should be a 5-digit ID and Ideally should be in an incremental sequence for each machine added. The sequence should start from 10000. Keeping length other than 5 digits will fail validations as the same Machine ID is used to generate the Request ID(Registration ID)
 1. **Machine Name**: Machine Host name
