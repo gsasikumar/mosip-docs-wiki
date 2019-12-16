@@ -265,10 +265,10 @@ Performs virus scan on registration and pre-registration packet
 Merges an pre-configured template with dynamic values
 
 ### pdfgenerator
-This utility enables PDF file creation of received contente.g.acknoledge and notification templates
+This utility enables PDF file creation of received contente.g.acknowledge and notification templates
 
 ### QR Code Generator
-This utility enable QR code generation for Pre-reg,reg and UIN acknoledgement
+This utility enable QR code generation for Pre-reg,reg and UIN acknowledgement
 
 ### FTP - Upload packet
 Provides a upload portal for registration client to upload packets for sending it to registration processor
