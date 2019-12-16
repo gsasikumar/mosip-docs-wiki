@@ -284,7 +284,7 @@ Provides an interface to send a Email notification
 Syncs master data between the MOSIP master data server and the client local database
 
 ### Sync Handler-Public keys
-Syncs public keys between the MOSIP DB and clinet DB
+Syncs public keys between the MOSIP DB and client DB
 
 ### Sync Handler-Configuration changes
 Syncs the cofigurations stored in  MOSIP config server with the locally stored configs of client
