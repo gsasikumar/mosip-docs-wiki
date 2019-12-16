@@ -766,7 +766,7 @@ Requires Authentication | Yes
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
 hierarchylevel|Yes|The hierarchy level for which the list of enrollment centers are needed| | 
-textvalue|Yes|This is a free text. The search will happen with the combination of heirarchy level, language code and this free text. The enrollment centers which satisfy these 3 criteria will be returned| | 
+textvalue|Yes|This is a free text. The search will happen with the combination of hierarchy level, language code and this free text. The enrollment centers which satisfy these 3 criteria will be returned| | 
 languagecode|Yes|The enrollment center description will be returned in this language code | | 
 
 
