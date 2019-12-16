@@ -1,7 +1,7 @@
 ## Audience
 * Data Modelers
 * DBAs
-* Database Deverlopers
+* Database Developers
 * Application Developers
 
 A simple and consistent naming convention for database objects, when followed rigorously, can help database application developers greatly.  This is because developers, once they get used to the convention, can quickly identify objects belonging to their application and are less likely to make mistakes regarding the contents of columns.  In fact, an inadequate or improperly followed convention can actually increase the development effort by unnecessarily tying the application code to intricacies of the database physical design and by making application developers overly dependent on the DBA’s.
