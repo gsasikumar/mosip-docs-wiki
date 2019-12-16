@@ -103,8 +103,8 @@ The following acronyms are used in the data model
 |dob|Date of Birth||dt|Date|
 |dtime|Date Time||dtimes|Date Timestamp|
 |expiry|Expiry||fk|Foreign Key|
-|ibio|Indivisual Biometric||id|Identifier|
-|ida|Identity and authentication||idem|Indivisual Demographic|
+|ibio|Individual Biometric||id|Identifier|
+|ida|Identity and authentication||idem|Individual Demographic|
 |idsvr|ID Issuance Server||idsw|ID Issuance Software|
 |Idx|Index||ins|Insert|
 |ip|IP Address||lang|Language |
