@@ -190,7 +190,7 @@ Notification Manager, Master Data, User Salt Service,
 User Detail Service</td>
         </tr>
         <tr>
-            <td rowspan=1>Pre-Registrtaion Services</td>
+            <td rowspan=1>Pre-Registration Services</td>
             <td>Pre-Registration Sync Service</td>
         </tr>
         <tr>
