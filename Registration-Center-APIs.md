@@ -1837,7 +1837,7 @@ Create :
 
 *) Primary language will not be activated unless Secondary language is created.
 
-*) Primary Id for Center/Machine will be seqential Id's and other masterdata's will be auto generated values.
+*) Primary Id for Center/Machine will be sequential Id's and other masterdata's will be auto generated values.
 
 Update :
 
