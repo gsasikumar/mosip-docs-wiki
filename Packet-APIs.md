@@ -32,7 +32,7 @@ Name | Required | Description | Default Value | Example
 code|Yes|Code of the reason category| | 
 name|Yes|Name of the reason category| | 
 description|Yes|description for the reason category| | 
-isActive|Yes|whether the reason cateogry is in use| | 
+isActive|Yes|whether the reason category is in use| | 
 langCode|Yes|language code of the reason category| | 
 
 
