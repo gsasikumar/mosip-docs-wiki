@@ -476,7 +476,7 @@ In case if Apache Commons doesn't have the necessary utilities, the util project
 
 ## 10.11 Miscellaneous Practices
 
-Following are the miscellaneous practices which are followed in MOSIS.
+Following are the miscellaneous practices which are followed in MOSIP.
 
 ### 10.11.1 Parentheses
 
