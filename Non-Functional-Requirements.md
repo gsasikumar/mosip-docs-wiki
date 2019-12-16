@@ -86,7 +86,7 @@ Once the application is live, following items are considered for the maintenance
 ### 6.1 Monitoring
 Critical services health are monitored manually. No monitoring tool and no automatic triggers and notifications are configured. 
 ### 6.2 Software Upgrades/Updates
-Periodic scanning of the libararies and code are done to get the latest vulnerabilities and the bug fixes. Following are the components which have to be checked for the upgrades, 
+Periodic scanning of the libraries and code are done to get the latest vulnerabilities and the bug fixes. Following are the components which have to be checked for the upgrades, 
 1. Operating Systems
 2. 3rd party Java libraries
 3. Virus scanner databases
