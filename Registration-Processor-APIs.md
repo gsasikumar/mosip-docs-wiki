@@ -1265,7 +1265,7 @@ Error Code | Error Message | Error Description
 RPR-MVS-001 |	Access Denied	| Access Denied for the role
 RPR-AUT-01 |	Invalid Token Present	| Invalid Token Present
 RPR-RTS-001 |	RID Not Found	| RID Not Found
-RPR-RTS-002 |	Unknown Exception Occured	| Unknown Exception Occured
+RPR-RTS-002 |	Unknown Exception occurred	| Unknown Exception occurred
 RPR-RTS-003 |	Invalid request	| Invalid request
 RPR-RTS-004 |	globalMessages not found for input langCode	| globalMessages not found for input langCode
 
