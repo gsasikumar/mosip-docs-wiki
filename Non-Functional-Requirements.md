@@ -61,7 +61,7 @@ Virtualization techniques are used to scale up or down. Based on the load, the s
 ## 4. Security [**[↑]**](#table-of-contents)
 Security is the prime concern in the platform. Security comes above all other Non-functional requirements. Following are the main areas in which the security had been looked into, 
 ### 4.1 Network Security
-The various machines and devices in the network are differentiated and located in segregated zones. These zones has separate policy and network parameters for better accesibility. Please refer to the <TODO> document for the network architecture diagram. 
+The various machines and devices in the network are differentiated and located in segregated zones. These zones has separate policy and network parameters for better accessibility. Please refer to the <TODO> document for the network architecture diagram. 
 ### 4.2 Privacy
 The privacy of individuals data is maintained. None of the PII data is kept in plain human readable format. 
 ### 4.3 Confidentiality
