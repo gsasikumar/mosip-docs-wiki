@@ -49,7 +49,7 @@ It doesn't detail about each methods level information since that are covered in
 
 |**Functionality:**| Packet Export |  
 |:------:|-----|  
-|**Main Service class and method:**| PacketExportService.getSynchedRecords() - to fetch the packet to be exported. updateRegistrationStatus(List<PacketStatusDTO> exportedPackets) - update the status once exported. |  
+|**Main Service class and method:**| PacketExportService.getSyncedRecords() - to fetch the packet to be exported. updateRegistrationStatus(List<PacketStatusDTO> exportedPackets) - update the status once exported. |  
 |**Input Parameter:**|	List of packet object. |  
 |**Auth:**| No. |  
 |**External Connectivity:**| DB, File system |  
@@ -137,7 +137,7 @@ It doesn't detail about each methods level information since that are covered in
 |Packet Approved|  APPROVED   |  
 |'Re-Register' packet approved| RE_REGISTER_APPROVED  |
 |Packet Rejected| REJECTED |  
-|Packet IDs synched with Server| SYNCED   |     
+|Packet IDs Synced with Server| SYNCED   |     
 |Packet pushed to Server| PUSHED |     
 |Packet exported to device| EXPORTED |     
 
