@@ -795,7 +795,7 @@ Name | Required | Description | Default Value | Example
 
 # GET /doccattypes
 
-This service will give back the document category and it's corresponding category types based on Individal type code, Age group type code and Gender type code. 
+This service will give back the document category and it's corresponding category types based on Individual type code, Age group type code and Gender type code. 
 
 ### Resource URL
 ### `GET /doccattypes`
