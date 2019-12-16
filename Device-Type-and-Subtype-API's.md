@@ -179,7 +179,7 @@ Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
 code|Yes|code of the device type| | 
 name|No|name of the device type| | 
-descr|No|decription of the device type| | 
+descr|No|description of the device type| | 
 
 ### Example Request
 ```JSON
@@ -487,7 +487,7 @@ Name | Required | Description | Default Value | Example
 code|Yes|code of the device subtype| | 
 deviceTypeCode|Yes|devicetype code of the device subtype| | 
 name|Yes|name of the device subtype| | 
-descr|No|decription of the device subtype| | 
+descr|No|description of the device subtype| | 
 
 ### Example Request
 ```JSON
