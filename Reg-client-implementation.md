@@ -33,8 +33,8 @@ It doesn't detail about each methods level information since that are covered in
 
 |**Functionality:**|  PACKET SYNC– Sync all the Approved/ Rejected/ Re-Register Approved packets before Uploading to server |   
 |:------:|-----|  
-|**Main Service class and method:**| PacketSyncServiceImpl.java - packetSync(List<PacketStatusDTO> packetsToBeSynched)|
-|**Input Parameter:**|    packetsToBeSynched – The packet details which needs to be Synched. |  
+|**Main Service class and method:**| PacketSyncServiceImpl.java - packetSync(List<PacketStatusDTO> packetsToBeSynced)|
+|**Input Parameter:**|    packetsToBeSynced – The packet details which needs to be Synced. |  
 |**Auth:**| Authentication token required. |  
 |**External Connectivity:**| Packet Sync service REST call |  
 
