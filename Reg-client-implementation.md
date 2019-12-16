@@ -207,8 +207,8 @@ There are few jobs are configured to clean the transactions histories from local
 |10.|id_type| It contains list of Id types [Registration Id, Pre Registration Id] that are being used in Registration with respect to language code | Sync from server master table | 
 |11.|language| It contains list of languages that are being used in Registration | Sync from server master table |
 |12.|location| It contains list of locations that are being used in Registration with respect to language code | Sync from server master table |
-|13.|machine_master| It conatins list of machine related data[mac address, serial number, machine name...] with respect to language code | Sync from server master table |
-|14.|machine_spec| It conatins list of machine specifications[brand, model...] with respect to language code | Sync from server master table |
+|13.|machine_master| It contains list of machine related data[mac address, serial number, machine name...] with respect to language code | Sync from server master table |
+|14.|machine_spec| It contains list of machine specifications[brand, model...] with respect to language code | Sync from server master table |
 |15.|machine_type|  It contains list of machine types[Desktop,Laptop...] with respect to language code | Sync from server master table |
 |16.|reason_category| It contains list of reason categories[Client Rejection, Manual Adjudication...] with respect to language code | Sync from server master table |
 |17.|reason_list| It contains list of reasons [Invalid Address, Gender-Photo Mismatch...] that are listed during Registration Approval/Rejection with respect to language code |  Sync from server master table |
