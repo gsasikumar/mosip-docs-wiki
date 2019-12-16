@@ -62,7 +62,7 @@ Following roles have to be created using the process as mentioned above.([Refer 
 1. **Lunch End Time**: Ending of Lunch Time the Center would have in-between the Working hours. It is used by Pre-Registration to calculate appointment slots. Should be in format **hh:mm:ss**
 1. **Time Zone**: (GTM+01:00) CENTRAL EUROPEAN TIME
 1. **Holiday Location Code**: Refers to the location to which country defined holidays are mapped in holiday location table. Should come from the Holiday master table. Current values can only be “**KTA**” or “**RBT**” as holidays are only defined for these two location codes.
-1. **Zone Code**: Contains the Zone code to which the Registration Center should be tagged to. The Administrative Zones are defined by a country to better manage the resources(Centers, Machines and Devices) used in Registration Process. These are defined in Masterdata table 'zone' in hierarcical fasion similar to Location masterdata
+1. **Zone Code**: Contains the Zone code to which the Registration Center should be tagged to. The Administrative Zones are defined by a country to better manage the resources(Centers, Machines and Devices) used in Registration Process. These are defined in Masterdata table 'zone' in hierarchical fashion similar to Location masterdata
 1. **Language Code**: Should be the language code for the languages supported by the Country as primary/secondary Language. (E.g English - eng, French - fra, Arabic - ara)
 1. **Is_Active**: TRUE. If set as false, this Registration will not be shown up in Pre-Registration UI and no appointments will be generated for this Center
 1. **Cr_by**: `<username>` ideally name of the admin
