@@ -57,7 +57,7 @@ The data level encryption is handled in the DTO layer in the application.
 		- When a request comes to the system, the key is checked for the expiry. 
 		- If the old key had expired, then a new index is generated and persisted in the Indexes. If there is no key exists in the Key store, a new key is created for the encryption. And the new key is used for further encryptions. 
 	- Bulk:
-		- There are times, that the total encrypted data are re-encrypted again. A scheduler is maintained to oversee this. During the scheduled time, the encrypted data is read and re-encryped once again and saved. The newly encryped data will have the new index in front of the encryped content separated by a delimiter. 
+		- There are times, that the total encrypted data are re-encrypted again. A scheduler is maintained to oversee this. During the scheduled time, the encrypted data is read and re-encrypted once again and saved. The newly encrypted data will have the new index in front of the encrypted content separated by a delimiter. 
 		- Bulk mode is used to removed the expired keys and data is encrypted with the new key.
 
 		
