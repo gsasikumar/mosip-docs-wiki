@@ -24,7 +24,7 @@ WIP
   * [9.1 Archival Policy](#91-archival-policy) _(NFR_9.1)_
 
 ## 1. Performance [**[↑]**](#table-of-contents)
-Performance plays a very important role in the MOSIP platform. The services and the UI have to adhere to the agreed SLAs. Following are the important factors in the peformance section, 
+Performance plays a very important role in the MOSIP platform. The services and the UI have to adhere to the agreed SLAs. Following are the important factors in the Performance section, 
 ### 1.1 Response Time
  - Any response of the API service does not exceed 300 milliseconds.
  - Any UI page load in the supported browsers does not exceed 2 seconds.
