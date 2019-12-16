@@ -831,7 +831,7 @@ Description: Success
 #### Failure details
 Error Code | Error Message | Error Description
 ------------|------------------------------|-------------
-KER-MSD-041 | Error occured while fetching Registration Centers | registration center fetch exception
+KER-MSD-041 | Error occurred while fetching Registration Centers | registration center fetch exception
 KER-MSD-111 | Error occurred while updating Registration Center details | registration center update exception
 KER-MSD-112 | Error occurred while deleting Registration Center details | registration center delete exception
 KER-MSD-042 | Registration Center not found | registration center not found
