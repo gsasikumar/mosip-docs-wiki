@@ -155,7 +155,7 @@ XXX-XXX-002 | Invalid VID | No active VID found
 
 
 ## POST /resident/v1/rid/check-status
-This service will respond with service request (UIN Generation/Updataion,Reprint etc) status and notification will be sent to phone/email.
+This service will respond with service request (UIN Generation/Updation,Reprint etc) status and notification will be sent to phone/email.
 
 #### Resource URL
 <div>https://mosip.io/resident/v1/rid/check-status</div>
