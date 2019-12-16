@@ -271,7 +271,7 @@ This utility enables PDF file creation of received contente.g.acknoledge and not
 This utility enable QR code generation for Pre-reg,reg and UIN acknoledgement
 
 ### FTP - Upload packet
-Provides a upload portal for registarion client to upload packets for sending it to registration processor
+Provides a upload portal for registration client to upload packets for sending it to registration processor
 
 ## Features
 ### Notification Manager-notification-sms
