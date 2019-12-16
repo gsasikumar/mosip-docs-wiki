@@ -233,9 +233,9 @@ There are few jobs are configured to clean the transactions histories from local
 |36.|GLOBAL_PARAM| It contains list of Configuration related  details used in Registration application. | Sync from server configuration [registration.properties, application.properties] |
 |37.|user_detail| It contains list of User details[id,name, email..] | Sync from server master table |
 |38.|user_pwd| It contains User Password details | Sync from server master table |
-|39.|user_role| It conatins data of roles which were mapped to the user |Sync from server master table |
+|39.|user_role| It contains data of roles which were mapped to the user |Sync from server master table |
 |40.|user_biometric| It contains User biometrics[Fingerprint, Iris..] details[minutia, biometric type..] | During Onboarding Process |
-|41.|key_store| It conatins Mosip Public key , Packet creation key | During Public key Sync and Policy sync |
+|41.|key_store| It contains Mosip Public key , Packet creation key | During Public key Sync and Policy sync |
 |42.|sync_control| It contains information about the jobs which are executed successfully along with its last time stamp | During Manual Sync and Scheduled Jobs |
 |43.|sync_transaction| It contains data about all sync transactions | During Manual Sync and Scheduled Jobs |  
 |44.|registration| It contains data about Registration Packet[Registration Id, Status..] | During Registration process |
