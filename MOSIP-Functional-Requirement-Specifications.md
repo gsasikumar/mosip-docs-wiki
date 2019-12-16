@@ -205,7 +205,7 @@ Verifies the authenticity of an individual using multiple attributes provided in
 
 ### Log Manager (mosip-logging)
 Provide the following logging utility
-* Generate logs for implentation events across the application
+* Generate logs for implementation events across the application
 * Stores the genrated logs in configured location
 * Each log can be genrated as a file/console
 * Raise an alert in case of listed exceptions (File not found, No such file exists, to be identified)
