@@ -22,7 +22,7 @@ We will be using MOSIP config server (Spring cloud configuration Server) to mana
    _**{NameOfFile}-{profileName}.xml**_
 ## Microservices Configuration Clients:<br/>
 ### Spring boot client<br/>
-All the microservices will act as clients and reuqest configuration from config server.<br/>
+All the microservices will act as clients and request configuration from config server.<br/>
 1. Microservices should include _spring-cloud-starter-config_ dependency, which can be added through maven in their pom.xml.
 
 `		<dependency>`<br/>
