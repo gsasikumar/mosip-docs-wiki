@@ -940,7 +940,7 @@ id|Yes|id of the mds| |
 deviceProviderId|Yes|Deviceproviderid of the mds| | 
 regDeviceSubCode|Yes|Devicetypecode of the mds| | 
 regDeviceTypeCode|Yes|Devicesubtypecode of the mds| | 
-swversion|Yes|sofware version of the mds| | 
+swversion|Yes|software version of the mds| | 
 swBinaryHash|Yes|binary hash of the mds| | 
 make|Yes|make of the mds| | 
 model|Yes|model of the mds| | 
