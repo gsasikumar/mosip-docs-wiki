@@ -2,7 +2,7 @@
 
 ## 1.1 Send OTP
 
-This service sends an OTP to the user. The caller of this service have to send the channel in which the OTP will be sent. Based on the application ID, the corresponding channel's recepient address will be found out and the OTP is send accordingly. Note: At this point of time, no Auth Token will be generated. 
+This service sends an OTP to the user. The caller of this service have to send the channel in which the OTP will be sent. Based on the application ID, the corresponding channel's recipient address will be found out and the OTP is send accordingly. Note: At this point of time, no Auth Token will be generated. 
 
 ### Resource URL
 ### `POST /v1/authenticate/sendotp`
@@ -19,7 +19,7 @@ Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
 userid|Yes|This is the userid of the user. Based on the useridtype, this will vary.| -NA- | M392380
 otpchannel|Yes|This is the channel in which the OTP will be sent. It is an array of the enumeration {"EMAIL", "MOBILE"}. If the channel is not found, ChannelNotSupported error will be sent back| -NA- | MOBILENUMBER
-useridtype|Yes|This field is the user id type. It should be one the {"UIN", "USERID"}. Based on the combination of "appid" and "useridtype" the system identifies from which system to pickup the channel's recepient address| -NA- | USERID
+useridtype|Yes|This field is the user id type. It should be one the {"UIN", "USERID"}. Based on the combination of "appid" and "useridtype" the system identifies from which system to pickup the channel's recipient address| -NA- | USERID
 appid|Yes|This is the application ID of the caller of this service. It should be on of the {"PREREGISTRATION", "REGISTRATIONCLIENT", "REGISTRATIONPROCESSOR", "IDA"}| -NA- | PREREGISTRATION
 templateVariables|No|This is the map of custom template variables|-NA-|{"UIN":"2530192395"}
 context|Yes|This shows the purpose of the sending otp like Login,notification etc|"auth-otp" for default OTP|auth-otp,auth-login-otp
