@@ -113,5 +113,7 @@ Process to be followed for support required, escalation matrix, etc.
 [**Refer to List Of Acronyms**](Platform-Documentation#12-list-of-acronyms)
 
 
+#### 6. Deployment instructions [**[↑]**](#deployment-instructions)
+Deployment instructions are in the https://github.com/mosip/mosip-infra-mt/tree/master/releases/1.0.0
 
 
