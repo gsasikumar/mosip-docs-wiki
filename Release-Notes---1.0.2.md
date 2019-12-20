@@ -35,7 +35,7 @@ MOSIP Platform can be configured to be used for Real Biometrics.  [Guide to conf
 
 |Key Points|	Details|
 |----|----|
-|Pre Registration - Browser support |	Chrome 74.0.3729)|
+|Pre Registration - Browser support |	Chrome 74.0.3729|
 |Deployment Script Environment|	Microsoft Azure|
 |Registration Client – OS version|	Windows 10 (English version)  with TPM 2.0|
 |Camera|	Logitech / Default windows camera|
