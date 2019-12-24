@@ -73,7 +73,7 @@
   * [10.4 Devices (Register/De-Register)](#104-devices-registerde-register-) _(ASR_FR_10.4)_
   * [10.5 Device Detail Validation](#105-device-detail-validation-) _(ASR_FR_10.5)_
 - [11. Multi-language Support (WIP)](#11-multi-language-support-wip-) _(ASR_FR_11)_
-    * [11.1 i18N](#101-i18n-) _(ASR_FR_11.1)_
+    * [11.1 i18N](#111-i18n-) _(ASR_FR_11.1)_
     * [11.2 Implementation in English (Labels etc)](#102-implementation-in-english-labels-etc) _(ASR_FR_11.2)_
     * [11.3 Language Specific Setup](#103-language-specific-setup) _(ASR_FR_11.3)_
 - [12. Responsive UI](#12-responsive-ui-wip-) _(ASR_FR_12)
