@@ -51,22 +51,24 @@ devicemodel|Yes|Mac ID of the device| |
 ```JSON
 {
   "id": "string",
-  "version": "string",
   "metadata": {},
-  "requesttime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "request" : {
-		"devices": {
-				"deviceSpecId": "string",
-                                "id": "string",
-                                "ipAddress": "string",
-                                "isActive": true,
-                                "langCode": "string",
-                                "macAddress": "string",
-                                "name": "string",
-                                "serialNum": "string",
-                                "validityDateTime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"				
-			   }
-	      }
+  "request": {
+         "id": "",
+        "name": "Test device1",
+        "serialNum": "BS563Q2230898",
+        "deviceSpecId": "165",
+        "macAddress": "85-BB-97-4B-14-05",
+        "ipAddress": "10.4.6.8",
+        "langCode": "eng",
+        "validityDateTime": "2019-08-07T09:13:22.221Z",
+        "zoneCode": "NTH",
+        "zone": "North",
+        "deviceTypeName": "Finger Print Scanner",
+        "mapStatus": "unassigned",
+        "isActive": true
+  },
+  "requesttime": "2018-12-10T06:12:52.994Z",
+  "version": "string"
 }
 ```
 ### Example Response
@@ -74,13 +76,29 @@ devicemodel|Yes|Mac ID of the device| |
 {
   "id": "string",
   "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": null,
- "response": {
-	     "successfully_created_devices": {
-			                     "deviceid": "string"
-		                             }	
+  "responsetime": "2019-11-25T06:22:33.367Z",
+  "metadata": null,
+  "response": {
+    "id": "7b40b97c-2db6-4e2c-b11f-dd5d5fd0ca79",
+    "langCode": "eng",
+    "name": "Test device1",
+    "serialNum": "BS563Q2230898",
+    "ipAddress": "10.4.6.8",
+    "macAddress": "85-BB-97-4B-14-05",
+    "deviceSpecId": "165",
+    "validityDateTime": "2019-08-07T09:13:22.221Z",
+    "zoneCode": "NTH",
+    "deviceSpecification": null,
+    "mapStatus": "unassigned",
+    "isActive": false,
+    "createdBy": "110005",
+    "createdDateTime": "2019-11-25T06:22:33.382Z",
+    "updatedBy": null,
+    "updatedDateTime": null,
+    "isDeleted": null,
+    "deletedDateTime": null
+  },
+  "errors": null
 }
 ```
 ### Response codes
@@ -247,20 +265,24 @@ Name | Required | Description | Default Value | Example
 ```JSON
 {
   "id": "string",
-  "version": "string",
   "metadata": {},
-  "requesttime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
   "request": {
-               "deviceSpecId": "string",
-               "id": "string",
-               "ipAddress": "string",
-               "isActive": true,
-               "langCode": "string",
-               "macAddress": "string",
-               "name": "string",
-               "serialNum": "string",
-               "validityDateTime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-  }
+         "id": "7b40b97c-2db6-4e2c-b11f-dd5d5fd0ca79",
+        "name": "Test device2",
+        "serialNum": "BS563Q2230898",
+        "deviceSpecId": "165",
+        "macAddress": "85-BB-97-4B-14-05",
+        "ipAddress": "10.4.6.8",
+        "langCode": "eng",
+        "validityDateTime": "2019-08-07T09:13:22.221Z",
+        "zoneCode": "NTH",
+        "zone": "North",
+        "deviceTypeName": "Finger Print Scanner",
+        "mapStatus": "unassigned",
+        "isActive": true
+  },
+  "requesttime": "2018-12-10T06:12:52.994Z",
+  "version": "string"
 }
 ```
 ### Example Response
@@ -272,7 +294,19 @@ Name | Required | Description | Default Value | Example
   "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
   "errors": null,
   "response":{
-                 "id": "string"
+        "id": "7b40b97c-2db6-4e2c-b11f-dd5d5fd0ca79",
+        "name": "Test device2",
+        "serialNum": "BS563Q2230898",
+        "deviceSpecId": "165",
+        "macAddress": "85-BB-97-4B-14-05",
+        "ipAddress": "10.4.6.8",
+        "langCode": "eng",
+        "validityDateTime": "2019-08-07T09:13:22.221Z",
+        "zoneCode": "NTH",
+        "zone": "North",
+        "deviceTypeName": "Finger Print Scanner",
+        "mapStatus": "unassigned",
+        "isActive": true
              }
 }
 ```

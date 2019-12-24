@@ -48,33 +48,48 @@ isactive|Yes|Is the machine active?| |
 ```JSON
 {
   "id": "string",
-  "version": "string",
   "metadata": {},
-  "requesttime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
   "request": {
-              "id": "string",
-              "ipAddress": "string",
-              "isActive": true,
-              "langCode": "string",
-              "macAddress": "string",
-              "machineSpecId": "string",
-              "name": "string",
-              "serialNum": "string",
-              "validityDateTime": "2018-12-24T05:52:46.758Z"
-            }
+  	"id":"10091",
+    "ipAddress": "192.168.0.150",
+    "isActive": true,
+    "langCode": "eng",
+    "macAddress": "8C-16-45-5A-5D-0D",
+    "machineSpecId": "1001",
+    "name": "test machine1",
+    "serialNum": "NM5328114630",
+    "validityDateTime": "2018-12-10T06:12:52.994Z",
+    "zoneCode": "NTH"
+  },
+  "requesttime": "2018-12-10T06:12:52.994Z",
+  "version": "string"
 }
 ```
 ### Example Response
 ```JSON
 {
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": null,
- "response": {
-               "id": "string"
-             }
+    "id": "string",
+    "version": "string",
+    "responsetime": "2019-11-26T04:26:01.049Z",
+    "metadata": null,
+    "response": {
+        "isActive": false,
+        "createdBy": "110006",
+        "createdDateTime": "2019-11-26T04:26:01.179Z",
+        "updatedBy": null,
+        "updatedDateTime": null,
+        "isDeleted": null,
+        "deletedDateTime": null,
+        "id": "10100",
+        "name": "test machine1",
+        "serialNum": "NM5328114630",
+        "macAddress": "8C-16-45-5A-5D-0D",
+        "ipAddress": "192.168.0.150",
+        "machineSpecId": "1001",
+        "langCode": "eng",
+        "validityDateTime": "2018-12-10T06:12:52.994Z"
+    },
+    "errors": null
 }
 ```
 ### Response codes
@@ -360,33 +375,48 @@ Name | Required | Description | Default Value | Example
 ```JSON
 {
   "id": "string",
-  "version": "string",
   "metadata": {},
-  "requesttime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "request":  {
-               "machineSpecId": "string",
-               "id": "string",
-               "ipAddress": "string",
-               "isActive": true,
-               "langCode": "string",
-               "macAddress": "string",
-               "name": "string",
-               "serialNum": "string",
-               "validityDateTime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-            }
+  "request": {
+  	"id":"10100",
+    "ipAddress": "192.168.0.150",
+    "isActive": true,
+    "langCode": "eng",
+    "macAddress": "8C-16-45-5A-5D-0D",
+    "machineSpecId": "1001",
+    "name": "test machine1",
+    "serialNum": "NM5328114630",
+    "validityDateTime": "2018-12-10T06:12:52.994Z",
+    "zoneCode": "NTH"
+  },
+  "requesttime": "2018-12-10T06:12:52.994Z",
+  "version": "string"
 }
 ```
 ### Example Response
 ```JSON
 {
-  "id": "string",
-  "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": null,
-"response": {
-               "id": "string"
-            }
+    "id": "string",
+    "version": "string",
+    "responsetime": "2019-11-26T04:31:08.982Z",
+    "metadata": null,
+    "response": {
+        "isActive": true,
+        "createdBy": "110006",
+        "createdDateTime": "2019-11-26T04:31:15.344Z",
+        "updatedBy": "110006",
+        "updatedDateTime": "2019-11-26T04:31:15.344Z",
+        "isDeleted": null,
+        "deletedDateTime": null,
+        "id": "10100",
+        "name": "test machine1",
+        "serialNum": "NM5328114630",
+        "macAddress": "8C-16-45-5A-5D-0D",
+        "ipAddress": "192.168.0.150",
+        "machineSpecId": "1001",
+        "langCode": "eng",
+        "validityDateTime": "2018-12-10T06:12:52.994Z"
+    },
+    "errors": null
 }
 ```
 ### Response codes
