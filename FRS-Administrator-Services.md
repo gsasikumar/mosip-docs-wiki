@@ -521,6 +521,10 @@ For API design, [refer here.](https://github.com/mosip/mosip-docs/wiki/Device-Ma
 
 ## 11. Multi-language Support (WIP) [**[↑]**](#table-of-contents)
 ### 11.1 i18N
+Admin portal provides support for multiple languages which can be configured by a country. The portal can support two languages one of which will be primary and another a secondary language. Both can be configured as per the Country’s requirements. The portal will render all the functionalities (View, Create and Update) in two languages thus allowing the Admin to access these functionality in both the languages simultaneously. Although the Home page, Labels and certain functionalities like ‘Viewing Packet Status based on RID’ will only be rendered in the primary language.
+
+If a Country wants to use only one language in MOSIP, both primary and secondary language must be configured as the same language. If configured, the portal will render the screens in only one configured language. Although to be noted, both the primary and secondary languages must be configured. If not, The portal won’t allow the Admin to login and will be shown a message saying “The system has encountered a technical error. Administrator to setup the necessary language configuration(s)".
+
 ### 11.2 Implementation in English (Labels etc)
 ### 11.3 Language Specific Setup
 ## 12. Responsive UI (WIP) [**[↑]**](#table-of-contents)
