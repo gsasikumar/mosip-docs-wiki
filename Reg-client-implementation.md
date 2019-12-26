@@ -17,9 +17,9 @@ It doesn't detail about each methods level information since that are covered in
 |**External Connectivity:**| Service and DB |  
 
 
-|**Functionality:**| Packet Creation - New Registation / Update UIN/ Lost UIN |   
+|**Functionality:**| Packet Creation - New Registration / Update UIN/ Lost UIN |   
 |:------:|-----|  
-|**Technical Detail:**| Based on the business need [New Registation / Update UIN/ Lost UIN] this 'RegistrationDTO' object should be populated with the relevant  data and also pass the 'RegistrationMetaDataDTO.RegistrationCategory' as [New/ Update/ Lost].  |
+|**Technical Detail:**| Based on the business need [New Registration / Update UIN/ Lost UIN] this 'RegistrationDTO' object should be populated with the relevant  data and also pass the 'RegistrationMetaDataDTO.RegistrationCategory' as [New/ Update/ Lost].  |
 |**Main Service class and methods**| PacketHandlerService.handle(RegistrationDTO registrationDTO)|  
 |**Input Parameter:**|  The RegistrationDTO object contains the RID, PRID, registration details of the individual and also contains the officer and supervisor details. This object has the following sub-classes: a. DemographicDTO - Details of the Demographic and Documents, b. BiometricDTO - Biometrics (Fingerprints, Irises, Face and Exception Face) of the individual, parent (or guardian), officer and supervisor, c.  RegistrationMetaDataDTO - Metadata related to registration and d. OSIDataDTO - Details of the officer and supervisor who had authenticated the registration.  |  
 |**Auth:**| SessionContext is required for creating the packet |  
@@ -33,8 +33,8 @@ It doesn't detail about each methods level information since that are covered in
 
 |**Functionality:**|  PACKET SYNC– Sync all the Approved/ Rejected/ Re-Register Approved packets before Uploading to server |   
 |:------:|-----|  
-|**Main Service class and method:**| PacketSyncServiceImpl.java - packetSync(List<PacketStatusDTO> packetsToBeSynched)|
-|**Input Parameter:**|    packetsToBeSynched – The packet details which needs to be Synched. |  
+|**Main Service class and method:**| PacketSyncServiceImpl.java - packetSync(List<PacketStatusDTO> packetsToBeSynced)|
+|**Input Parameter:**|    packetsToBeSynced – The packet details which needs to be Synced. |  
 |**Auth:**| Authentication token required. |  
 |**External Connectivity:**| Packet Sync service REST call |  
 
@@ -49,7 +49,7 @@ It doesn't detail about each methods level information since that are covered in
 
 |**Functionality:**| Packet Export |  
 |:------:|-----|  
-|**Main Service class and method:**| PacketExportService.getSynchedRecords() - to fetch the packet to be exported. updateRegistrationStatus(List<PacketStatusDTO> exportedPackets) - update the status once exported. |  
+|**Main Service class and method:**| PacketExportService.getSyncedRecords() - to fetch the packet to be exported. updateRegistrationStatus(List<PacketStatusDTO> exportedPackets) - update the status once exported. |  
 |**Input Parameter:**|	List of packet object. |  
 |**Auth:**| No. |  
 |**External Connectivity:**| DB, File system |  
@@ -137,7 +137,7 @@ It doesn't detail about each methods level information since that are covered in
 |Packet Approved|  APPROVED   |  
 |'Re-Register' packet approved| RE_REGISTER_APPROVED  |
 |Packet Rejected| REJECTED |  
-|Packet IDs synched with Server| SYNCED   |     
+|Packet IDs Synced with Server| SYNCED   |     
 |Packet pushed to Server| PUSHED |     
 |Packet exported to device| EXPORTED |     
 
@@ -207,8 +207,8 @@ There are few jobs are configured to clean the transactions histories from local
 |10.|id_type| It contains list of Id types [Registration Id, Pre Registration Id] that are being used in Registration with respect to language code | Sync from server master table | 
 |11.|language| It contains list of languages that are being used in Registration | Sync from server master table |
 |12.|location| It contains list of locations that are being used in Registration with respect to language code | Sync from server master table |
-|13.|machine_master| It conatins list of machine related data[mac address, serial number, machine name...] with respect to language code | Sync from server master table |
-|14.|machine_spec| It conatins list of machine specifications[brand, model...] with respect to language code | Sync from server master table |
+|13.|machine_master| It contains list of machine related data[mac address, serial number, machine name...] with respect to language code | Sync from server master table |
+|14.|machine_spec| It contains list of machine specifications[brand, model...] with respect to language code | Sync from server master table |
 |15.|machine_type|  It contains list of machine types[Desktop,Laptop...] with respect to language code | Sync from server master table |
 |16.|reason_category| It contains list of reason categories[Client Rejection, Manual Adjudication...] with respect to language code | Sync from server master table |
 |17.|reason_list| It contains list of reasons [Invalid Address, Gender-Photo Mismatch...] that are listed during Registration Approval/Rejection with respect to language code |  Sync from server master table |
@@ -233,9 +233,9 @@ There are few jobs are configured to clean the transactions histories from local
 |36.|GLOBAL_PARAM| It contains list of Configuration related  details used in Registration application. | Sync from server configuration [registration.properties, application.properties] |
 |37.|user_detail| It contains list of User details[id,name, email..] | Sync from server master table |
 |38.|user_pwd| It contains User Password details | Sync from server master table |
-|39.|user_role| It conatins data of roles which were mapped to the user |Sync from server master table |
+|39.|user_role| It contains data of roles which were mapped to the user |Sync from server master table |
 |40.|user_biometric| It contains User biometrics[Fingerprint, Iris..] details[minutia, biometric type..] | During Onboarding Process |
-|41.|key_store| It conatins Mosip Public key , Packet creation key | During Public key Sync and Policy sync |
+|41.|key_store| It contains Mosip Public key , Packet creation key | During Public key Sync and Policy sync |
 |42.|sync_control| It contains information about the jobs which are executed successfully along with its last time stamp | During Manual Sync and Scheduled Jobs |
 |43.|sync_transaction| It contains data about all sync transactions | During Manual Sync and Scheduled Jobs |  
 |44.|registration| It contains data about Registration Packet[Registration Id, Status..] | During Registration process |
@@ -282,7 +282,7 @@ Below find the list of error code and description which are thrown from applicat
 |RegIdObjectValidator			|REG-IOS-002	|Invalid ID Object Pattern															|
 |RegIdObjectValidator			|REG-IOS-003	|Invalid Master Data Object Pattern													|
 |RestClientAuthAdvice			|REG-RCA-001	|Generic Exception reported by server, while invoking web-service.    							|
-|RestClientAuthAdvice			|REG-RCA-002	|Exception while generating the signature of resquest body							|
+|RestClientAuthAdvice			|REG-RCA-002	|Exception while generating the signature of request body							|
 |RestClientAuthAdvice			|REG-SDU-004	|Response header received from the web-service is not as expected					|	
 |DemographicDetailController            |KER-IDV-102    |PRID should not contain any sequential and repeated block of number for 2 or more than two digits 
 |UpdateUINController                    |KER-IDV-203    |UIN length should be as per configured digit.

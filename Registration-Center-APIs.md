@@ -766,7 +766,7 @@ Requires Authentication | Yes
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
 hierarchylevel|Yes|The hierarchy level for which the list of enrollment centers are needed| | 
-textvalue|Yes|This is a free text. The search will happen with the combination of heirarchy level, language code and this free text. The enrollment centers which satisfy these 3 criteria will be returned| | 
+textvalue|Yes|This is a free text. The search will happen with the combination of hierarchy level, language code and this free text. The enrollment centers which satisfy these 3 criteria will be returned| | 
 languagecode|Yes|The enrollment center description will be returned in this language code | | 
 
 
@@ -831,7 +831,7 @@ Description: Success
 #### Failure details
 Error Code | Error Message | Error Description
 ------------|------------------------------|-------------
-KER-MSD-041 | Error occured while fetching Registration Centers | registration center fetch exception
+KER-MSD-041 | Error occurred while fetching Registration Centers | registration center fetch exception
 KER-MSD-111 | Error occurred while updating Registration Center details | registration center update exception
 KER-MSD-112 | Error occurred while deleting Registration Center details | registration center delete exception
 KER-MSD-042 | Registration Center not found | registration center not found
@@ -1837,7 +1837,7 @@ Create :
 
 *) Primary language will not be activated unless Secondary language is created.
 
-*) Primary Id for Center/Machine will be seqential Id's and other masterdata's will be auto generated values.
+*) Primary Id for Center/Machine will be sequential Id's and other masterdata's will be auto generated values.
 
 Update :
 

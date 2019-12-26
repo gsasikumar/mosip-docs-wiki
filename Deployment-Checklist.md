@@ -190,13 +190,13 @@ Notification Manager, Master Data, User Salt Service,
 User Detail Service</td>
         </tr>
         <tr>
-            <td rowspan=1>Pre-Registrtaion Services</td>
+            <td rowspan=1>Pre-Registration Services</td>
             <td>Pre-Registration Sync Service</td>
         </tr>
         <tr>
             <td rowspan=1>Registration  
 Processor Services</td>
-            <td>Packet Reciever, Packet Sync Status, Packet Status</td>
+            <td>Packet Receiver, Packet Sync Status, Packet Status</td>
         </tr>
         <tr>
             <td rowspan=1>ID Authentication Services</td>

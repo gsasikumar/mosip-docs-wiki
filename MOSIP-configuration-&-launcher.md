@@ -15,7 +15,7 @@ Please refer to [**developer documentation**](MOSIP-Configuration-Server) for us
 ![Config Server Setup](_images/arch_diagrams/MOSIP_config_server_setup.png)
 
 # MOSIP Launcher
-MOSIP lanucher will be used by system owners to deploy the modules of MOSIP, do the environment setup and prepare the system for use. The key steps of MOSIP launcher are
+MOSIP Launcher will be used by system owners to deploy the modules of MOSIP, do the environment setup and prepare the system for use. The key steps of MOSIP launcher are
 
 1. Read the MOSIP ID definition and MOSIP platform config XML's and validate them (structural and value)
 2. Deploy the artifacts (microservices and DB schemas) based on the platform config XML

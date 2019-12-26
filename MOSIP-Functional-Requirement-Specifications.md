@@ -205,9 +205,9 @@ Verifies the authenticity of an individual using multiple attributes provided in
 
 ### Log Manager (mosip-logging)
 Provide the following logging utility
-* Generate logs for implentation events across the application
-* Stores the genrated logs in configured location
-* Each log can be genrated as a file/console
+* Generate logs for implementation events across the application
+* Stores the generated logs in configured location
+* Each log can be generated as a file/console
 * Raise an alert in case of listed exceptions (File not found, No such file exists, to be identified)
 * Links various logs associated to one applicant
 
@@ -265,13 +265,13 @@ Performs virus scan on registration and pre-registration packet
 Merges an pre-configured template with dynamic values
 
 ### pdfgenerator
-This utility enables PDF file creation of received contente.g.acknoledge and notification templates
+This utility enables PDF file creation of received contente.g.acknowledge and notification templates
 
 ### QR Code Generator
-This utility enable QR code generation for Pre-reg,reg and UIN acknoledgement
+This utility enable QR code generation for Pre-reg,reg and UIN acknowledgement
 
 ### FTP - Upload packet
-Provides a upload portal for registarion client to upload packets for sending it to registration processor
+Provides a upload portal for registration client to upload packets for sending it to registration processor
 
 ## Features
 ### Notification Manager-notification-sms
@@ -284,10 +284,10 @@ Provides an interface to send a Email notification
 Syncs master data between the MOSIP master data server and the client local database
 
 ### Sync Handler-Public keys
-Syncs public keys between the MOSIP DB and clinet DB
+Syncs public keys between the MOSIP DB and client DB
 
 ### Sync Handler-Configuration changes
-Syncs the cofigurations stored in  MOSIP config server with the locally stored configs of client
+Syncs the configuration stored in  MOSIP config server with the locally stored configs of client
 
 ### Sync Handler-List of Roles and users
 Syncs user role data between the MOSIP  server and the client local database

@@ -1,5 +1,5 @@
 ## 1. Setup Keycloak Standalone Server setup 6.0.1
-**documentation for setting up keycloak server**
+**Dcumentation for setting up keycloak server**
 ### Before you begin
 
 1. Install java (java-8-openjdk) to all the machines in the cluster and setup the JAVA_HOME environment variable for the same.
@@ -34,9 +34,8 @@ sudo tar xzf keycloak-6.0.1.tar.gz
 
 Install Postgres in your vm
 
-```
-refer postgres
-```
+[Install  Postgres](https://github.com/mosip/mosip-docs/wiki/Getting-Started#61-install-and-use-postgresql-version-102-on-rhel-75)
+
 Within the  _…​/modules/_  directory of your Keycloak distribution, you need to create a directory structure to hold your module definition. The convention is use the Java package name of the JDBC driver for the name of the directory structure. For PostgreSQL, create the directory  _org/postgresql/main_. Copy your database driver JAR into this directory and create an empty  _module.xml_  file within it too.
 
 Module Directory
@@ -87,9 +86,9 @@ TimeoutStopSec=600
 [Install]
 WantedBy=multi-user.target
 ```
-**Enable ssl for keycloak server**
+**Enable SSL for Keycloak server**
 
-To enable ssl we need a certificate which here in example we will use Lets encrypt
+To enable SSL we need a certificate which here in example we will use Lets encrypt
 
 Follow the steps in this link to create a certificate for your domain
 
@@ -117,7 +116,7 @@ openssl pkcs12 -export -inkey{{private key pem path}} -in {{certificate pem path
 2.2  Change the datasource properties
 ```
 <datasource  jndi-name="java:jboss/datasources/KeycloakDS"  pool-name="KeycloakDS"  enabled="true"  use-java-context="true">
-<connection-url>jdbc:postgresql://localhost:9001/{{database_name}}</connection-url>
+<connection-url>jdbc:postgresql://<Host>:<Port>/{{database_name}}</connection-url>
 <driver>{{}drivername}</driver>
 <pool>
 <max-pool-size>pool size</max-pool-size>
@@ -161,14 +160,14 @@ While registering change the schema name if you want.
 </interface>
 </interfaces>
 ```
-2. Default ports from 8080 -> 80 and 8443 -> 443 to not give ports at time of accessing keycloak
+2. Default ports from 8080 -> 80 and 8443 -> 443 to not give ports at time of accessing Keycloak
 ```
 <socket-binding  name="http"  port="${jboss.http.port:80}"/>
 
 <socket-binding  name="https"  port="${jboss.https.port:443}"/>
 ```
 
-2.5 Adding a ssl certificate to keycloak
+2.5 Adding a SSL certificate to Keycloak
 
 Here we will give the keystore we created to keycloak
 
@@ -177,3 +176,65 @@ Here we will give the keystore we created to keycloak
 <keystore  path="your key store pass relative to the next property"  relative-to="jboss.server.config.dir"  keystore-password="yourpassword"  alias="your alias"/>
 </ssl>
 ```
+
+**Configure Keycloak**
+
+ 1. Create a new Realm.(Eg Mosip)   
+ 2.  Create clients for every module.(IDA,Pre-Registration,Registration-processor,Registration-Client,Auth,Resident,Mosip-Client)
+ 3. Enable Service Account for every Client. These clients will be used by all modules to get secret.
+ 
+ **Configure User Federation**
+For this Example we will be configuring LDAP as user federation
+ 
+ 1. Go to User Federation.
+ 2. Create a new User Federation for LDAP.
+ 3. Make Edit Mode Writable.
+ 4. Configure field based on your LDAP
+ 5. Go to Mappers and Create mappers for each field you want keycloak to take from LDAP
+ ```
+ isActive : user-attribute-ldap-mapper
+
+username : user-attribute-ldap-mapper
+
+rid : user-attribute-ldap-mapper
+
+creation date : user-attribute-ldap-mapper
+
+roles : role-ldap-mapper
+
+last name : user-attribute-ldap-mapper
+
+userPassword : user-attribute-ldap-mapper
+
+mobile : user-attribute-ldap-mapper
+
+dob : user-attribute-ldap-mapper
+
+first name : user-attribute-ldap-mapper
+
+email : user-attribute-ldap-mapper
+ ```
+
+ 6. Sync Users and Roles from LDAP .
+ 7. Create INDIVIDUAL, RESIDENT Role from Keycloak in Realm Roles
+ 8. Assign Roles from LDAP and Keycloak to All Clients
+ ```
+ IDA => ID_AUTHENTICATION
+ Registration-Processor => REGISTRATION_PROCESSOR
+ Registration-Client => REGISTRATION_ADMIN
+                        REGISTRATION_SUPERVISOR
+                        REGISTRATION_OFFICER
+                        REGISTRATION_OPERATOR
+ Resident => RESIDENT
+ Pre-Registration => PRE_REGISTRATION
+                     INDIVIDUAL
+Auth => AUTH
+ ```
+
+**KEYCLOAK SERVER START**
+
+```
+ systemctl start keycloak
+```
+ 
+ 

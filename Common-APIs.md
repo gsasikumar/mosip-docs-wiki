@@ -40,6 +40,10 @@ This section details about the service APIs in the common modules
 
 * [BlackListed Words - Filter values](#post-blacklistedwordsfiltervalues)
 
+* [Working days](#working-days)
+
+* [Exceptional holidays](#exceptional-holidays)
+
 # Titles Master API
 
 * [POST /title](#post-title)
@@ -4570,4 +4574,312 @@ languagecode|Yes|Language code in Language code in ISO 639-2 format| |
  }
 }
 ```
+# Working days
+
+* [GET /weekdays](#get-weekdays)
+* [GET /workingdays](#get-workingdays)
+
+### GET /weekdays
+
+This service returns all the week days.
+
+#### Resource URL
+<div>https://mosip.io/v1/masterdata/weekdays/{registrationCenterId}/{languagecode} </div>
+
+#### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+#### Request Part Parameters
+Name | Required | Description |  Example
+-----|----------|-------------|--------
+registrationCenterID |Yes|Id of the registration center| 
+languagecode|Yes|Language code in ISO 639-2 standard| -NA- |eng
+
+
+#### Response Part Parameters
+Name | Required | Description |  Example
+-----|----------|-------------|--------
+name |Yes|Id of the registration center| 
+order |Yes|This is the order of the weekdays. If the weekdays are in the order of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday. The order will be 1-Sunday, 2-Monday, 3-Tuesday, 4-Wednesday, 5-Thursday, 6-Friday, 7-Saturday and 8-Sunday.| 
+languagecode|Yes|Language code in ISO 639-2 standard| -NA- |eng
+
+
+#### Responses:
+##### Success Response:
+###### Status code: '200'
+###### Description: decrypt the encrypted symmetric key successfully
+```
+{
+	"id": "mosip.kernel.weekdays",
+	"version": "1.0",
+	"metadata": {},
+	"responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+	"errors": null,
+	"response": {
+        "weekdays": [
+            {
+                "name": "MON",
+                "order": 2,
+                "languageCode": "eng"
+            },
+            {
+                "name": "TUE",
+                "order": 3,
+                "languageCode": "eng"
+            },
+            {
+                "name": "WED",
+                "order": 4,
+                "languageCode": "eng"
+            },
+            {
+                "name": "THU",
+                "order": 5,
+                "languageCode": "eng"
+            },
+            {
+                "name": "FRI",
+                "order": 6,
+                "languageCode": "eng"
+            }
+        ]
+    }
+}
+
+```
+
+##### Error Response:
+```
+{
+  "id": "mosip.kernel.weekdays",
+  "version": "1.0",
+  "metadata": {},
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+ "response": null
+}
+
+```
+
+#### Failure details
+Error Code | Error Message | Error Description
+-----|----------|-------------
+KER-WKDS-001 |	reg_working_nonworking table not accessible | Table not accessible
+KER-WKDS-002 |	No week day found | No data present in week day table 
+
+
+
+### GET /workingdays/{registrationCenterID}
+
+This service returns the working days of a particular registration center. 
+
+#### Resource URL
+<div>https://mosip.io/v1/masterdata/workingdays/{registrationCenterId}/{languagecode}</div>
+
+#### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+#### Request Part Parameters
+Name | Required | Description |  Example
+-----|----------|-------------|--------
+registrationCenterID |Yes|Id of the registration center| 
+languagecode|Yes|Language code in ISO 639-2 standard| -NA- |eng
+
+#### Responses:
+##### Success Response:
+###### Status code: '200'
+###### Description: decrypt the encrypted symmetric key successfully
+```
+{
+	"id": "mosip.kernel.workingdays",
+	"version": "1.0",
+	"metadata": {},
+	"responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+	"errors": null,
+	"response": {
+        "workingdays": [
+            {
+                "name": "SUN",
+                "dayCode": "101",
+                "languagecode": "eng",
+                "working": false,
+                "globalWorking": false
+            },
+            {
+                "name": "MON",
+                "dayCode": "102",
+                "languagecode": "eng",
+                "working": true,
+                "globalWorking": true
+            },
+            {
+                "name": "TUE",
+                "dayCode": "103",
+                "languagecode": "eng",
+                "working": true,
+                "globalWorking": true
+            },
+            {
+                "name": "WED",
+                "dayCode": "104",
+                "languagecode": "eng",
+                "working": true,
+                "globalWorking": true
+            },
+            {
+                "name": "THU",
+                "dayCode": "105",
+                "languagecode": "eng",
+                "working": true,
+                "globalWorking": true
+            },
+            {
+                "name": "FRI",
+                "dayCode": "106",
+                "languagecode": "eng",
+                "working": true,
+                "globalWorking": true
+            },
+            {
+                "name": "SAT",
+                "dayCode": "107",
+                "languagecode": "eng",
+                "working": false,
+                "globalWorking": false
+            }
+        ]
+    }
+}
+
+```
+
+##### Error Response:
+```
+{
+  "id": "mosip.kernel.workingdays",
+  "version": "1.0",
+  "metadata": {},
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+ "response": null
+}
+
+```
+
+#### Failure details
+Error Code | Error Message | Error Description
+-----|----------|-------------
+KER-WKDS-001 |	reg_working_nonworking table not accessible | Table not accessible
+KER-WKDS-003 |	No working/non working day data found | No Data present in Working days table.
+
+# Exceptional holidays
+
+* [GET /exceptionholidays](#get-exceptionholidays)
+
+### GET /exceptionholidays
+
+This service returns the exceptional holidays of a particular registration center. 
+
+#### Resource URL
+<div>https://mosip.io/v1/masterdata/exceptionholidays/{registrationCenterId}/{languagecode} </div>
+
+#### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+#### Request Part Parameters
+Name | Required | Description |  Example
+-----|----------|-------------|--------
+registrationCenterID |Yes|Id of the registration center| 
+languagecode|Yes|Language code in ISO 639-2 standard| -NA- |eng
+
+#### Responses:
+##### Success Response:
+###### Status code: '200'
+###### Description: decrypt the encrypted symmetric key successfully
+```
+{
+  "id": "mosip.kernel.weekdays",
+  "version": "1.0",
+  "metadata": {},
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "errors": null,
+  "response": {
+        "exceptionalHolidayList": [
+            {
+                "holidayDate": "2019-09-24",
+                "holidayDay": "2",
+                "holidayMonth": "9",
+                "holidayYear": "2019",
+                "holidayName": "Emergency Holiday",
+                "holidayReason": "Emergency Holiday",
+                "registrationCenterID": null,
+                "isDeleted": null,
+                "langCode": "eng",
+                "isActive": true
+            },
+            {
+                "holidayDate": "2019-09-25",
+                "holidayDay": "3",
+                "holidayMonth": "9",
+                "holidayYear": "2019",
+                "holidayName": "Emergency Holiday",
+                "holidayReason": "Emergency Holiday",
+                "registrationCenterID": null,
+                "isDeleted": null,
+                "langCode": "eng",
+                "isActive": true
+            }
+        ]
+    }
+}
+
+```
+
+##### Error Response:
+```
+{
+  "id": "mosip.kernel.weekdays",
+  "version": "1.0",
+  "metadata": {},
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+ "response": null
+}
+
+```
+
+#### Failure details
+Error Code | Error Message | Error Description
+-----|----------|-------------
+KER-EHD-001 |	Error occured while fetching Exceptional Holidays | Database exception
+KER-EHD-002 |	Exceptional Holiday not founds | Exceptional holidays data not present for registration center id and language code
+
+
 	

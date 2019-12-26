@@ -18,6 +18,7 @@ This release is with **real biometrics**. This means that MOSIP Platform is now 
 
 * Modules included – Pre-Registration, Registration Client, Registration Processor, ID Authentication, Administration, Reference GUI implementation of Pre-Registration and Registration Client. 
 * Modules not included – Partner Management, Resident Services, Reference GUI implementation of Administration
+* IAM - The Identity and Access Management(IAM) had been changed from custom implementation to Keycloak. 
 
 Module-wise features released as part of this release can be found [here](https://github.com/mosip/mosip-docs/wiki/_files/MOSIP_Feature_Release_v1.0.0.xlsx)
 
@@ -34,7 +35,7 @@ MOSIP Platform can be configured to be used for Real Biometrics.  [Guide to conf
 
 |Key Points|	Details|
 |----|----|
-|Pre Registration - Browser support |	Chrome 74.0.3729)|
+|Pre Registration - Browser support |	Chrome 74.0.3729|
 |Deployment Script Environment|	Microsoft Azure|
 |Registration Client – OS version|	Windows 10 (English version)  with TPM 2.0|
 |Camera|	Logitech / Default windows camera|
@@ -113,7 +114,5 @@ Process to be followed for support required, escalation matrix, etc.
 [**Refer to List Of Acronyms**](Platform-Documentation#12-list-of-acronyms)
 
 
-#### 6. Deployment instructions [**[↑]**](#deployment-instructions)
-Deployment instructions are in the https://github.com/mosip/mosip-infra-mt/tree/master/releases/1.0.0
 
 

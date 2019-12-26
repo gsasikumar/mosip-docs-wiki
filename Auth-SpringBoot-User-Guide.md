@@ -37,7 +37,7 @@ Look at the below example for reference.
 
 There are few more methods available apart from hasAnyRole like hasRole. Look in to the [@PreAuthorize](//docs.spring.io/spring-security/site/docs/3.0.x/reference/el-access.html) documentation for more details.
 
-**Note:** Now we support ony hasRole and hasAnyRole methods.
+**Note:** Now we support only hasRole and hasAnyRole methods.
 
 ## Use restTemplate for Http calls
 

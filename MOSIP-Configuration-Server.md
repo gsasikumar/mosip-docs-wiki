@@ -22,7 +22,7 @@ We will be using MOSIP config server (Spring cloud configuration Server) to mana
    _**{NameOfFile}-{profileName}.xml**_
 ## Microservices Configuration Clients:<br/>
 ### Spring boot client<br/>
-All the microservices will act as clients and reuqest configuration from config server.<br/>
+All the microservices will act as clients and request configuration from config server.<br/>
 1. Microservices should include _spring-cloud-starter-config_ dependency, which can be added through maven in their pom.xml.
 
 `		<dependency>`<br/>
@@ -163,7 +163,7 @@ In the above snippet we are using @RefreshScope annotation which will help the c
         			`	req.response().end("I am running on the port fetched from the configuration "`<br/>
         						`+ "stored in Spring config server")).listen(port);`<br/>
 
-**NOTE:** <br/>**Whenever there is a change in the configuration in GIT Repo, every microservice/application which  is using that particular configuration has to call the refresh endpoint in order to get that latest configuration without restarting. If the client doesnt call the refresh API, it will keep on getting the old configuration.** <br/>
+**NOTE:** <br/>**Whenever there is a change in the configuration in GIT Repo, every microservice/application which  is using that particular configuration has to call the refresh endpoint in order to get that latest configuration without restarting. If the client doesn't call the refresh API, it will keep on getting the old configuration.** <br/>
 The refresh end point is following:<br/>
 **POST  {Microservice-URL} /actuator/refresh**
 

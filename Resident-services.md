@@ -7,7 +7,7 @@ Following are the architecturally significant use cases which affects the archit
 The user have to use these services with ease of use. Only the OTP is used as the means of authentication. Security is a trade off for the usability. There is no multi factor authentication is implemented except for OTP, to make the life of the user easy. 
 
 ### Secured services
-The Resident services which can be invoked from the public domain should be secured enough, when the request goes to the backend modules such as Registration processor and ID Repository. The backend modules are highly protected and the permissions are added from the server side after the one-time OTP authentication is successfull from the client side. 
+The Resident services which can be invoked from the public domain should be secured enough, when the request goes to the backend modules such as Registration processor and ID Repository. The backend modules are highly protected and the permissions are added from the server side after the one-time OTP authentication is successful from the client side. 
 The resident services are classified as "Public" services and in turn will call the "Private" services of Registration Processor or IDA. 
 Except for the "/login" functionality, all the services in both the Public and Private area should be defined with authorization. 
 

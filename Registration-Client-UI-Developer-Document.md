@@ -37,7 +37,7 @@ It doesn't detail about each methods level information since that is covered in 
 
 |**Functionality:**| Demographic Screen  |  
 |:------:|-----|  
-|**Technical Detail:**| This screen helps to capture the demographic information of the Resident like Name,Age/DOB , Address, Parent/Gaurdian Details,Email ID and Mobile Number|  
+|**Technical Detail:**| This screen helps to capture the demographic information of the Resident like Name,Age/DOB , Address, Parent/Guardian Details,Email ID and Mobile Number|  
 |**FXML and Controller class**| **Registration.fxml, DemographicDetail.fxml**  --> **RegistrationController.java**. For each controller always the **initialization()** method will be called from the controller to initialize the screen|  
 |**Input parameter:**| The required buttons, text fields, Radio buttons, On-click events directly mapped to the Controllers of the public methods|   
 
@@ -142,7 +142,7 @@ It doesn't detail about each methods level information since that is covered in 
 
 |**Functionality:**| UIN - Update Selection Screen  |  
 |:------:|-----|  
-|**Technical Detail:**| This screen helps the officer to select the required fields to be updated as part of the UIN update screen. W.r.t the selection of the relevant fields and screen will be displayed subsequentially.|
+|**Technical Detail:**| This screen helps the officer to select the required fields to be updated as part of the UIN update screen. W.r.t the selection of the relevant fields and screen will be displayed subsequently.|
 |**FXML and Controller class**| **UpdateUIN.fxml**  --> **UpdateUINController.java**. For each controller always the **initialization()** method will be called from the controller to initialize the screen|  
 |**Input parameter:**| The required buttons, text fields, Radio buttons, On-click events directly mapped to the Controllers of the public methods.|
 

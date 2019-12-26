@@ -560,11 +560,11 @@ languagecode|Yes|Language code in Language code in ISO 639-2 format| |
 #### Failure details
 Error Code | Error Message | Error Description
 ------------|------------------------------|-------------
-KER-MSD-013 | Error occured while fetching Document Category details | Fetch Issue
-KER-MSD-051 | Error occured while inserting Document Category details | Insertion Issue
+KER-MSD-013 | Error occurred while fetching Document Category details | Fetch Issue
+KER-MSD-051 | Error occurred while inserting Document Category details | Insertion Issue
 KER-MSD-014 | Document Category not found | Data Not Found
-KER-MSD-089 | Error occured while updating Document Category details | Update Issue
-KER-MSD-090 | Error occured while deleting Document Category details | Deletion Issue
+KER-MSD-089 | Error occurred while updating Document Category details | Update Issue
+KER-MSD-090 | Error occurred while deleting Document Category details | Deletion Issue
 KER-MSD-123 | Cannot delete dependency found | Deletion Issue because of dependency
 
 
@@ -797,7 +797,7 @@ Name | Required | Description | Default Value | Example
 
 # GET /doccattypes
 
-This service will give back the document category and it's corresponding category types based on Individal type code, Age group type code and Gender type code. 
+This service will give back the document category and it's corresponding category types based on Individual type code, Age group type code and Gender type code. 
 
 ### Resource URL
 ### `GET /doccattypes`
@@ -1074,12 +1074,12 @@ languagecode|Yes|Language code in Language code in ISO 639-2 format| |
 #### Failure details
 Error Code | Error Message | Error Description
 -----|----------|-------------
-KER-MSD-015 | Error occured while fetching Document Types
-KER-MSD-052 | Error occured while inserting Document Type details
+KER-MSD-015 | Error occurred while fetching Document Types
+KER-MSD-052 | Error occurred while inserting Document Type details
 KER-MSD-118 | Document Type not found
 KER-MSD-091 | Error occur while updating Document Type details
 KER-MSD-124 | Cannot delete dependency found
-KER-MSD-092 | Error occured while deleting Document Type details
+KER-MSD-092 | Error occurred while deleting Document Type details
 
 
 # Valid documents API

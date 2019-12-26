@@ -907,8 +907,8 @@ RPR-PGS-002 |	The key is invalid or illegal argument	| The key is invalid or ill
 RPR-PGS-003 |	The Api resource is not available	| The Api resource is not available
 RPR-PGS-004 |	reg Based checked exception	| reg Based checked exception
 RPR-PGS-005 |	Exception while parsing object to JSON	| Exception while parsing object to JSON
-RPR-PGS-007 |	Exception occured while encryting the packet Invalid data	| Exception occured while encryting the packet Invalid data
-RPR-PGS-008 |	Exception occured while encryting the packet Invalid Key	| Exception occured while encryting the packet Invalid Key
+RPR-PGS-007 |	Exception occurred while encrypting the packet Invalid data	| Exception occurred while encrypting the packet Invalid data
+RPR-PGS-008 |	Exception occurred while encrypting the packet Invalid Key	| Exception occurred while encrypting the packet Invalid Key
 RPR-PGS-009 |	Packet meta info converter error	| Packet meta info converter error
 RPR-PGS-010 |	Missing Input Parameter	| Missing Input Parameter
 RPR-PGS-011 |	Invalid Input Parameter 	| Invalid Input Parameter 
@@ -1052,8 +1052,8 @@ RPR-PGS-002 |	The key is invalid or illegal argument	| The key is invalid or ill
 RPR-PGS-003 |	The Api resource is not available	| The Api resource is not available
 RPR-PGS-004 |	reg Based checked exception	| reg Based checked exception
 RPR-PGS-005 |	Exception while parsing object to JSON	| Exception while parsing object to JSON
-RPR-PGS-007 |	Exception occured while encryting the packet Invalid data	| Exception occured while encryting the packet Invalid data
-RPR-PGS-008 |	Exception occured while encryting the packet Invalid Key	| Exception occured while encryting the packet Invalid Key
+RPR-PGS-007 |	Exception occurred while encrypting the packet Invalid data	| Exception occurred while encrypting the packet Invalid data
+RPR-PGS-008 |	Exception occurred while encrypting the packet Invalid Key	| Exception occurred while encrypting the packet Invalid Key
 RPR-PGS-009 |	Packet meta info converter error	| Packet meta info converter error
 RPR-PGS-010 |	Missing Input Parameter	| Missing Input Parameter
 RPR-PGS-011 |	Invalid Input Parameter 	| Invalid Input Parameter 
@@ -1265,7 +1265,7 @@ Error Code | Error Message | Error Description
 RPR-MVS-001 |	Access Denied	| Access Denied for the role
 RPR-AUT-01 |	Invalid Token Present	| Invalid Token Present
 RPR-RTS-001 |	RID Not Found	| RID Not Found
-RPR-RTS-002 |	Unknown Exception Occured	| Unknown Exception Occured
+RPR-RTS-002 |	Unknown Exception occurred	| Unknown Exception occurred
 RPR-RTS-003 |	Invalid request	| Invalid request
 RPR-RTS-004 |	globalMessages not found for input langCode	| globalMessages not found for input langCode
 

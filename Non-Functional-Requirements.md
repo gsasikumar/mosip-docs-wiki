@@ -24,7 +24,7 @@ WIP
   * [9.1 Archival Policy](#91-archival-policy) _(NFR_9.1)_
 
 ## 1. Performance [**[↑]**](#table-of-contents)
-Performance plays a very important role in the MOSIP platform. The services and the UI have to adhere to the agreed SLAs. Following are the important factors in the peformance section, 
+Performance plays a very important role in the MOSIP platform. The services and the UI have to adhere to the agreed SLAs. Following are the important factors in the Performance section, 
 ### 1.1 Response Time
  - Any response of the API service does not exceed 300 milliseconds.
  - Any UI page load in the supported browsers does not exceed 2 seconds.
@@ -61,7 +61,7 @@ Virtualization techniques are used to scale up or down. Based on the load, the s
 ## 4. Security [**[↑]**](#table-of-contents)
 Security is the prime concern in the platform. Security comes above all other Non-functional requirements. Following are the main areas in which the security had been looked into, 
 ### 4.1 Network Security
-The various machines and devices in the network are differentiated and located in segregated zones. These zones has separate policy and network parameters for better accesibility. Please refer to the <TODO> document for the network architecture diagram. 
+The various machines and devices in the network are differentiated and located in segregated zones. These zones has separate policy and network parameters for better accessibility. Please refer to the <TODO> document for the network architecture diagram. 
 ### 4.2 Privacy
 The privacy of individuals data is maintained. None of the PII data is kept in plain human readable format. 
 ### 4.3 Confidentiality
@@ -86,7 +86,7 @@ Once the application is live, following items are considered for the maintenance
 ### 6.1 Monitoring
 Critical services health are monitored manually. No monitoring tool and no automatic triggers and notifications are configured. 
 ### 6.2 Software Upgrades/Updates
-Periodic scanning of the libararies and code are done to get the latest vulnerabilities and the bug fixes. Following are the components which have to be checked for the upgrades, 
+Periodic scanning of the libraries and code are done to get the latest vulnerabilities and the bug fixes. Following are the components which have to be checked for the upgrades, 
 1. Operating Systems
 2. 3rd party Java libraries
 3. Virus scanner databases
