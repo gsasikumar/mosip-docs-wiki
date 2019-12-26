@@ -477,12 +477,6 @@ KER-MSD-148 | Cannot delete as dependency found | Deletion Issue because of depe
 
 # Machine Types Master API
 
-
-
-
-
-
-
 * [POST /machinetypes](#post-machinetypes)
 * [GET /machinetypes](#get-machinetypes)
 * [GET /machinetypes/{languagecode}](#get-machinetypeslanguagecodee)
