@@ -42,6 +42,8 @@ This section details about the service APIs in the common modules
 
 * [Working days](#working-days)
 
+* [Exceptional holidays](#exceptional-holidays)
+
 # Titles Master API
 
 * [POST /title](#post-title)
@@ -4787,5 +4789,97 @@ Error Code | Error Message | Error Description
 -----|----------|-------------
 KER-WKDS-001 |	reg_working_nonworking table not accessible | Table not accessible
 KER-WKDS-003 |	No working/non working day data found | No Data present in Working days table.
+
+# Exceptional holidays
+
+* [GET /exceptionholidays](#get-exceptionholidays)
+
+### GET /exceptionholidays
+
+This service returns the exceptional holidays of a particular registration center. 
+
+#### Resource URL
+<div>https://mosip.io/v1/masterdata/exceptionholidays/{registrationCenterId}/{languagecode} </div>
+
+#### Resource details
+
+Resource Details | Description
+------------ | -------------
+Response format | JSON
+Requires Authentication | Yes
+
+#### Request Part Parameters
+Name | Required | Description |  Example
+-----|----------|-------------|--------
+registrationCenterID |Yes|Id of the registration center| 
+languagecode|Yes|Language code in ISO 639-2 standard| -NA- |eng
+
+#### Responses:
+##### Success Response:
+###### Status code: '200'
+###### Description: decrypt the encrypted symmetric key successfully
+```
+{
+  "id": "mosip.kernel.weekdays",
+  "version": "1.0",
+  "metadata": {},
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "errors": null,
+  "response": {
+        "exceptionalHolidayList": [
+            {
+                "holidayDate": "2019-09-24",
+                "holidayDay": "2",
+                "holidayMonth": "9",
+                "holidayYear": "2019",
+                "holidayName": "Emergency Holiday",
+                "holidayReason": "Emergency Holiday",
+                "registrationCenterID": null,
+                "isDeleted": null,
+                "langCode": "eng",
+                "isActive": true
+            },
+            {
+                "holidayDate": "2019-09-25",
+                "holidayDay": "3",
+                "holidayMonth": "9",
+                "holidayYear": "2019",
+                "holidayName": "Emergency Holiday",
+                "holidayReason": "Emergency Holiday",
+                "registrationCenterID": null,
+                "isDeleted": null,
+                "langCode": "eng",
+                "isActive": true
+            }
+        ]
+    }
+}
+
+```
+
+##### Error Response:
+```
+{
+  "id": "mosip.kernel.weekdays",
+  "version": "1.0",
+  "metadata": {},
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+ "response": null
+}
+
+```
+
+#### Failure details
+Error Code | Error Message | Error Description
+-----|----------|-------------
+KER-EHD-001 |	Error occured while fetching Exceptional Holidays | Database exception
+KER-EHD-002 |	Exceptional Holiday not founds | Exceptional holidays data not present for registration center id and language code
+
 
 	
