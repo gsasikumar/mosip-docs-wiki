@@ -416,7 +416,9 @@ pageFetch| This is the amount of records to be fetched | 10 | 10
 Filter Name| Search Values
 -----|----------
 
-Status|["contains","equals","startsWith"]
+Please find the filter columns used in search
+1) name
+2) status
 
 ### Example Request
 ```JSON
