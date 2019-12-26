@@ -40,6 +40,8 @@ This section details about the service APIs in the common modules
 
 * [BlackListed Words - Filter values](#post-blacklistedwordsfiltervalues)
 
+* [Working days](#working-days)
+
 # Titles Master API
 
 * [POST /title](#post-title)
@@ -4570,7 +4572,7 @@ languagecode|Yes|Language code in Language code in ISO 639-2 format| |
  }
 }
 ```
-# Working days (Public)
+# Working days
 
 * [GET /weekdays](#get-weekdays)
 * [GET /workingdays](#get-workingdays)
