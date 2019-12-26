@@ -953,7 +953,7 @@ swExpiryDateTime|Yes|Expiry date time of MDS| |
   "id": "string",
   "metadata": {},
   "request": {
-    "active": true,
+    "isActive": true,
     "deviceProviderId": "11123",
     "id": "77777",
     "make": "make1",
