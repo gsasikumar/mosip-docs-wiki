@@ -110,21 +110,34 @@ zoneCode|Yes|Zone code of device| |
 }
 ```
 ### Response codes
-202
 
-Description: Accepted
+200 Ok
 
-400
+##### Error Response:
+```
+{
+  "id": "string",
+  "version": "string",
+  "metadata": {},
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+ "response": null
+}
 
-Description: Bad request
+```
 
-401
-
-Description: Unauthorized
-
-403
-
-Description: Forbidden
+#### Failure details
+Error Code  | Error Message | Error Description
+-----|----------|-------------
+KER-MSD-500 |Internal Server Error|If system error occurs
+KER-ATH-403 |Forbidden|If unauthorized role detected
+KER-ATH-401 |Authentication Failed|If no role/invalid token is detected
+KER-MSD-069 |Error occurred while inserting Device details
 
 # GET /devices/{languagecode}
 
@@ -319,33 +332,34 @@ Name | Required | Description | Default Value | Example
 }
 ```
 ### Response codes
-200
 
-Description: When Device updated successfully
+200 Ok
 
-201
+##### Error Response:
+```
+{
+  "id": "string",
+  "version": "string",
+  "metadata": {},
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+ "response": null
+}
 
-Description: Created
+```
 
-400
-
-Description: When Request body passed is null or invalid
-
-401
-
-Description: Unauthorized
-
-403
-
-Description: Forbidden
-
-404
-
-Description: When Device is not found
-
-500
-
-Description: While updating device any error occurred
+#### Failure details
+Error Code  | Error Message | Error Description
+-----|----------|-------------
+KER-MSD-500 |Internal Server Error|If system error occurs
+KER-ATH-403 |Forbidden|If unauthorized role detected
+KER-ATH-401 |Authentication Failed|If no role/invalid token is detected
+KER-MSD-083 |Error occurred while updating Device details
 
 # DELETE /devices/{id}
 
@@ -379,29 +393,8 @@ deviceId|Yes|The device Id| |
             }
 }
 ```
-200
-
-Description: When Device deleted successfully
-
-204
-
-Description: No Content
-
-401
-
-Description: Unauthorized
-
-403
-	
-Description: Forbidden
-
-404
-
-Description: When Device not found
-
-500
-
-Description: Error occurred while deleting Device
+### Response codes
+200 OK
 
 ### Failure Response:
 ```JSON

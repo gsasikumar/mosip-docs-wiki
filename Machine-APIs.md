@@ -437,34 +437,7 @@ zoneCode|Yes|Zone code of machine| |
 }
 ```
 ### Response codes
-200
-
-Description: When machine updated successfully
-
-201
-
-Description: Created
-
-400
-
-Description: When Request body passed is null or invalid
-
-401
-
-Description: Unauthorized
-
-403
-
-Description: Forbidden
-
-404
-
-Description: When Machine is not found
-
-500
-
-Description: While updating machine any error occurred
-
+200 Ok
 
 ### Failure Response
 ```JSON

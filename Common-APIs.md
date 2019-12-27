@@ -2247,56 +2247,76 @@ isActive|Yes|Is this location active| |
 ```JSON
 {
   "id": "string",
-  "version": "string",
   "metadata": {},
-  "requesttime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
   "request": {
-                      "code": "string",
-                      "hierarchyLevel": 0,
-                      "hierarchyName": "string",
-                      "isActive": true,
-                      "langCode": "string",
-                      "name": "string",
-                      "parentLocCode": "string"
-              }
+    "code": "",
+    "hierarchyLevel": 4,
+    "hierarchyName": "Zone",
+    "isActive": false,
+    "langCode": "eng",
+    "name": "Souissi1",
+    "parentLocCode": ""
+  },
+  "requesttime": "2019-11-18T00:37:08.886Z",
+  "version": "string"
 }
 ```
 ### Example Response
 ```JSON
 {
+    "id": "string",
+    "version": "string",
+    "responsetime": "2019-11-19T12:34:43.989Z",
+    "metadata": null,
+    "response": {
+        "code": "d2382b5a-6f7b-44c0-98b7-85e289b3f6e0",
+        "name": "Souissi1",
+        "hierarchyLevel": 4,
+        "hierarchyName": "Zone",
+        "parentLocCode": "",
+        "langCode": "eng",
+        "registrationCenters": null,
+        "isActive": false,
+        "createdBy": "110005",
+        "createdDateTime": "2019-11-19T12:34:43.944Z",
+        "updatedBy": null,
+        "updatedDateTime": null,
+        "isDeleted": null,
+        "deletedDateTime": null
+    },
+    "errors": null
+	}
+```
+### Response codes
+200 Ok
+
+##### Error Response:
+```
+{
   "id": "string",
   "version": "string",
   "metadata": {},
   "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": null,
-  "response":{
-             "code": "string",
-             "isActive": true,
-             "parentLocCode": "string"
-             }
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+ "response": null
 }
+
 ```
-### Response codes
-201
 
-Description: Created
-
-202
-
-Description: Accepted
-
-400
-
-Description: Bad request
-
-401
-
-Description: Unauthorized
-
-403
-
-Description: Forbidden
-
+#### Failure details
+Error Code  | Error Message | Error Description
+-----|----------|-------------
+KER-MSD-500 |Internal Server Error|If system error occurs
+KER-ATH-403 |Forbidden|If unauthorized role detected
+KER-ATH-401 |Authentication Failed|If no role/invalid token is detected
+KER-MSD-389 |Parent location not found
+KER-MSD-385 |Location already exist under the hierarchy
+KER-MSD-064 |Error occured while inserting location hierarchy details
 
 # PUT /locations
 
@@ -2326,53 +2346,75 @@ isActive|Yes|Is this location active| |
 ```JSON
 {
   "id": "string",
-  "version": "string",
   "metadata": {},
-  "requesttime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
   "request": {
-                      "code": "string",
-                      "hierarchyLevel": 0,
-                      "hierarchyName": "string",
-                      "isActive": true,
-                      "langCode": "string",
-                      "name": "string",
-                      "parentLocCode": "string"
-            }
+    "code": "d2382b5a-6f7b-44c0-98b7-85e289b3f6e0",
+    "hierarchyLevel": 4,
+    "hierarchyName": "Zone",
+    "isActive": false,
+    "langCode": "eng",
+    "name": "Souissi1",
+    "parentLocCode": ""
+  },
+  "requesttime": "2019-11-18T00:37:08.886Z",
+  "version": "string"
 }
 ```
 ### Example Response
 ```JSON
 {
+    "id": "string",
+    "version": "string",
+    "responsetime": "2019-11-19T12:34:43.989Z",
+    "metadata": null,
+    "response": {
+        "code": "d2382b5a-6f7b-44c0-98b7-85e289b3f6e0",
+        "name": "Souissi1",
+        "hierarchyLevel": 4,
+        "hierarchyName": "Zone",
+        "parentLocCode": "",
+        "langCode": "eng",
+        "registrationCenters": null,
+        "isActive": false,
+        "createdBy": "110005",
+        "createdDateTime": "2019-11-19T12:34:43.944Z",
+        "updatedBy": "110005",
+        "updatedDateTime": "2019-11-19T12:34:43.944Z",
+        "isDeleted": null,
+        "deletedDateTime": null
+    },
+    "errors": null
+	}
+```
+### Response codes
+
+200 Ok
+
+##### Error Response:
+```
+{
   "id": "string",
   "version": "string",
   "metadata": {},
   "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": null,
-  "response":{
-               "code": "string",
-               "langCode:"string"
-
-            }
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+ "response": null
 }
+
 ```
-### Response codes
 
-202
-
-Description: Accepted
-
-400
-
-Description: Bad request
-
-401
-
-Description: Unauthorized
-
-403
-
-Description: Forbidden
-
+#### Failure details
+Error Code  | Error Message | Error Description
+-----|----------|-------------
+KER-MSD-500 |Internal Server Error|If system error occurs
+KER-ATH-403 |Forbidden|If unauthorized role detected
+KER-ATH-401 |Authentication Failed|If no role/invalid token is detected
+KER-MSD-097 |Error occured while updating location hierarchy details
 
 
 # DELETE /locations/{locationcode}
