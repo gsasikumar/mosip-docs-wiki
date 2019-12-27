@@ -585,6 +585,10 @@ KER-MSD-123 | Cannot delete dependency found | Deletion Issue because of depende
 
 This service will create the list of Documents types which are used in the MOSIP platform. There is another service to map the document category and document type.
 
+Please find the steps to create primary/secondary languages 
+
+https://github.com/mosip/mosip-docs/wiki/Registration-Center-APIs#createupdate-api
+
 ### Resource URL
 ### `POST /documenttype`
 
@@ -600,21 +604,24 @@ Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
 code|Yes|Code of document type| | 
 name|Yes|Name of the document type| | 
-descr|Yes|Description of the document type| | 
-lang_code|Yes|Language code of the document type| | 
+description|Yes|Description of the document type| | 
+langCode|Yes|Language code of the document type| | 
+isActive|Yes|Active field of the document type| | 
 
 ### Example Request
 ```JSON
 {
   "id": "string",
-  "version": "string",
   "metadata": {},
-  "requesttime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
   "request": {
-  "documenttypes": [
-		{"code": "code", "name": "name", "descr":"descr", "lang_code":"lang_code", "is_active":"is_active"}
-	     ]
-          }
+    "code": "",
+    "description": "test desc",
+    "isActive": true,
+    "langCode": "eng",
+    "name": "test1"
+  },
+  "requesttime": "2018-12-10T06:12:52.994Z",
+  "version": "string"
 }
 ```
 ### Example Response
@@ -622,17 +629,22 @@ lang_code|Yes|Language code of the document type| |
 {
   "id": "string",
   "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [{
-      "errorCode": "string",
-      "message": "string"
-    }],
+  "responsetime": "2019-12-26T11:41:18.276Z",
+  "metadata": null,
   "response": {
-  "successfully_created_documenttypes": [
-		{"code": "code", "name": "name", "descr":"descr", "lang_code":"lang_code", "is_active":"is_active"}
-	]
-       }
+    "code": "c05d4d28-f00d-414c-b23a-e29a6c93f108",
+    "langCode": "eng",
+    "name": "test1",
+    "description": "test desc",
+    "isActive": true,
+    "createdBy": "110006",
+    "createdDateTime": "2019-12-26T11:41:18.297Z",
+    "updatedBy": null,
+    "updatedDateTime": null,
+    "isDeleted": null,
+    "deletedDateTime": null
+  },
+  "errors": null
 }
 ```
 
@@ -655,20 +667,24 @@ Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
 code|Yes|Code of document type| | 
 name|Yes|Name of the document type| | 
-descr|Yes|Description of the document type| | 
-lang_code|Yes|Language code of the document type| | 
+description|Yes|Description of the document type| | 
+langCode|Yes|Language code of the document type| | 
+isActive|Yes|Active field of the document type| | 
 
 ### Example Request
 ```JSON
 {
   "id": "string",
-  "version": "string",
   "metadata": {},
-  "requesttime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
   "request": {
-  "documenttypes": [
-		{"code": "code", "name": "name", "descr":"descr", "lang_code":"lang_code", "is_active":"is_active"},
-         }
+    "code": "c05d4d28-f00d-414c-b23a-e29a6c93f108",
+    "description": "test desc",
+    "isActive": true,
+    "langCode": "eng",
+    "name": "test"
+  },
+  "requesttime": "2018-12-10T06:12:52.994Z",
+  "version": "string"
 }
 ```
 ### Example Response

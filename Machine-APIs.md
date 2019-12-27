@@ -23,8 +23,12 @@ This section details about the service APIs in the Document modules
 
 
 # POST /machines
-
+z
 This service will create the list of Machines which are used in the MOSIP platform. 
+
+Please find the steps to create primary/secondary languages 
+
+https://github.com/mosip/mosip-docs/wiki/Registration-Center-APIs#createupdate-api
 
 ### Resource URL
 ### `POST /machines`
@@ -39,10 +43,15 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-machinename|Yes|Name of the machine| | 
-macid|Yes|Mac ID of the machine| | 
-serialnumber|Yes|Serial number of the machine| | 
-isactive|Yes|Is the machine active?| | 
+id|Yes|Id of the machine| | 
+name|Yes|Name of the machine| | 
+machineSpecId|Yes|Machine specification Id of the machine| | 
+serialNum|Yes|Serial number of the machine| | 
+langCode|Yes|Language code of the machine| | 
+ipAddress|No|Ip Address of the machine| | 
+isActive|Yes|Is the machine active?| | 
+validityDateTime|Yes|Validity date of machine| | 
+zoneCode|Yes|Zone code of machine| | 
 
 ### Example Request
 ```JSON
@@ -368,7 +377,15 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
--NA-
+id|Yes|Id of the machine| | 
+name|Yes|Name of the machine| | 
+machineSpecId|Yes|Machine specification Id of the machine| | 
+serialNum|Yes|Serial number of the machine| | 
+langCode|Yes|Language code of the machine| | 
+ipAddress|No|Ip Address of the machine| | 
+isActive|Yes|Is the machine active?| | 
+validityDateTime|Yes|Validity date of machine| | 
+zoneCode|Yes|Zone code of machine| | 
 
 
 ### Example Request

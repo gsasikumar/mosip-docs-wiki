@@ -31,6 +31,10 @@ This section details about the service APIs in the Document modules
 
 This service will create the list of Devices which are used in the MOSIP platform. 
 
+Please find the steps to create primary/secondary languages 
+
+https://github.com/mosip/mosip-docs/wiki/Registration-Center-APIs#createupdate-api
+
 ### Resource URL
 ### `POST /devices`
 
@@ -44,8 +48,15 @@ Requires Authentication | Yes
 ### Parameters
 Name | Required | Description | Default Value | Example
 -----|----------|-------------|---------------|--------
-devicetype|Yes|Name of the device| | 
-devicemodel|Yes|Mac ID of the device| | 
+id|Yes|Id of the device| | 
+name|Yes|Name of the device| | 
+deviceSpecId|Yes|Device specification Id of the device| | 
+serialNum|Yes|Serial number of the device| | 
+langCode|Yes|Language code of the device| | 
+ipAddress|No|Ip Address of the device| | 
+isActive|Yes|Is the device active?| | 
+validityDateTime|Yes|Validity date of device| | 
+zoneCode|Yes|Zone code of device| | 
 
 ### Example Request
 ```JSON
@@ -62,9 +73,6 @@ devicemodel|Yes|Mac ID of the device| |
         "langCode": "eng",
         "validityDateTime": "2019-08-07T09:13:22.221Z",
         "zoneCode": "NTH",
-        "zone": "North",
-        "deviceTypeName": "Finger Print Scanner",
-        "mapStatus": "unassigned",
         "isActive": true
   },
   "requesttime": "2018-12-10T06:12:52.994Z",
@@ -276,9 +284,6 @@ Name | Required | Description | Default Value | Example
         "langCode": "eng",
         "validityDateTime": "2019-08-07T09:13:22.221Z",
         "zoneCode": "NTH",
-        "zone": "North",
-        "deviceTypeName": "Finger Print Scanner",
-        "mapStatus": "unassigned",
         "isActive": true
   },
   "requesttime": "2018-12-10T06:12:52.994Z",
@@ -290,24 +295,29 @@ Name | Required | Description | Default Value | Example
 {
   "id": "string",
   "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": null,
-  "response":{
-        "id": "7b40b97c-2db6-4e2c-b11f-dd5d5fd0ca79",
-        "name": "Test device2",
-        "serialNum": "BS563Q2230898",
-        "deviceSpecId": "165",
-        "macAddress": "85-BB-97-4B-14-05",
-        "ipAddress": "10.4.6.8",
-        "langCode": "eng",
-        "validityDateTime": "2019-08-07T09:13:22.221Z",
-        "zoneCode": "NTH",
-        "zone": "North",
-        "deviceTypeName": "Finger Print Scanner",
-        "mapStatus": "unassigned",
-        "isActive": true
-             }
+  "responsetime": "2019-11-25T06:22:33.367Z",
+  "metadata": null,
+  "response": {
+    "id": "7b40b97c-2db6-4e2c-b11f-dd5d5fd0ca79",
+    "langCode": "eng",
+    "name": "Test device1",
+    "serialNum": "BS563Q2230898",
+    "ipAddress": "10.4.6.8",
+    "macAddress": "85-BB-97-4B-14-05",
+    "deviceSpecId": "165",
+    "validityDateTime": "2019-08-07T09:13:22.221Z",
+    "zoneCode": "NTH",
+    "deviceSpecification": null,
+    "mapStatus": "unassigned",
+    "isActive": false,
+    "createdBy": "110005",
+    "createdDateTime": "2019-11-25T06:22:33.382Z",
+    "updatedBy": "110005",
+    "updatedDateTime": "2019-11-25T06:22:33.382Z",
+    "isDeleted": null,
+    "deletedDateTime": null
+  },
+  "errors": null
 }
 ```
 ### Response codes

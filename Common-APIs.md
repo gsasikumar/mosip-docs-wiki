@@ -2215,6 +2215,12 @@ Please find the filter columns used in search
 
 # `POST /locations`
 
+This masterdata service creates the location.
+
+Please find the steps to create primary/secondary languages 
+
+https://github.com/mosip/mosip-docs/wiki/Registration-Center-APIs#createupdate-api
+
 ### Resource URL
 ### `POST /locations`
 
