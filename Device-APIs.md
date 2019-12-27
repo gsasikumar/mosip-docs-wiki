@@ -307,8 +307,6 @@ Name | Required | Description | Default Value | Example
     "deviceSpecId": "165",
     "validityDateTime": "2019-08-07T09:13:22.221Z",
     "zoneCode": "NTH",
-    "deviceSpecification": null,
-    "mapStatus": "unassigned",
     "isActive": false,
     "createdBy": "110005",
     "createdDateTime": "2019-11-25T06:22:33.382Z",

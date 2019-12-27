@@ -647,6 +647,30 @@ isActive|Yes|Active field of the document type| |
   "errors": null
 }
 ```
+##### Error Response:
+```
+{
+  "id": "string",
+  "version": "string",
+  "metadata": {},
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+ "response": null
+}
+```
+
+#### Failure details
+Error Code  | Error Message | Error Description
+-----|----------|-------------
+KER-MSD-500 |Internal Server Error|If system error occurs
+KER-ATH-403 |Forbidden|If unauthorized role detected
+KER-ATH-401 |Authentication Failed|If no role/invalid token is detected
+KER-MSD-101 |Error occurred while inserting application details
 
 # PUT /documenttype
 
@@ -692,19 +716,48 @@ isActive|Yes|Active field of the document type| |
 {
   "id": "string",
   "version": "string",
-  "metadata": {},
-  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-  "errors": [{
-      "errorCode": "string",
-      "message": "string"
-    }],
+  "responsetime": "2019-12-26T11:41:18.276Z",
+  "metadata": null,
   "response": {
-  "successfully_updated_documenttypes": [
-		{"code": "code", "name": "name", "descr":"descr", "lang_code":"lang_code", "is_active":"is_active"}
-	     ]
-         }
+    "code": "c05d4d28-f00d-414c-b23a-e29a6c93f108",
+    "langCode": "eng",
+    "name": "test1",
+    "description": "test desc",
+    "isActive": true,
+    "createdBy": "110006",
+    "createdDateTime": "2019-12-26T11:41:18.297Z",
+    "updatedBy": "110006",
+    "updatedDateTime": "2019-12-26T11:41:18.297Z",
+    "isDeleted": null,
+    "deletedDateTime": null
+  },
+  "errors": null
 }
 ```
+##### Error Response:
+```
+{
+  "id": "string",
+  "version": "string",
+  "metadata": {},
+  "responsetime": "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+  "errors": [
+    {
+      "errorCode": "string",
+      "message": "string"
+    }
+  ],
+ "response": null
+}
+```
+#### Failure details
+Error Code  | Error Message | Error Description
+-----|----------|-------------
+KER-MSD-500 |Internal Server Error|If system error occurs
+KER-ATH-403 |Forbidden|If unauthorized role detected
+KER-ATH-401 |Authentication Failed|If no role/invalid token is detected
+KER-MSD-091 |Error occurred while updating application details
+KER-MSD-118 |Document Type not found
 
 # GET /documenttypes/{documentcategorycode}/{langcode}
 
