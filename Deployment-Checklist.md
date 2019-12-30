@@ -211,7 +211,7 @@ Processor Services</td>
             <td>registration.properties, application.properties,  
 spring.properties  
 Required properties for library URL, HealthCheck URL, TPM availability needs to be changed in the file present at -  
-"registrtaion-services/src/main/resources  
+"Registration-services/src/main/resources  
 /spring.properties"</td>
         </tr>
      <tr>
