@@ -1,6 +1,6 @@
-* [PacketStatus Services](#packetstatus-services)
+* [PacketStatus Services](#packet-status-services)
 
-# UIN Services
+# Packet Status Services
 
 * [GET /packetstatusupdate](#get-packetstatusupdate)
 
