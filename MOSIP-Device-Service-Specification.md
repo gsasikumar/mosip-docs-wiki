@@ -1,4 +1,4 @@
-#### Aug 2019 | Version: 0.9.2 
+#### Jan 2020 | Version: 0.9.3 
 #### Status: Draft 
 
 ## Table of Contents 
