@@ -1270,6 +1270,8 @@ Response:
 
     “status”:  "registration status",
 
+    "digitalId": "signed digital id of the device",
+
     “error”: {
 
    	 "code": "error code if registration fails",
