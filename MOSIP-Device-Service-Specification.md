@@ -1314,6 +1314,21 @@ Request:
 }
 ```
 
+Response
+
+```
+  {
+    status: "Success",
+    “error”: {
+
+   	 "code": "error code if de-registration fails",
+
+   	 "message": "human readable description of the error code",
+
+    }
+  }
+```
+
 ---
 
 ## 7. Management Server
