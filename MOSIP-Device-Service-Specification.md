@@ -1,4 +1,4 @@
-#### Jan 2020 | Version: 0.9.3 
+#### Aug 2019 | Version: 0.9.4 
 #### Status: Draft 
 
 ## Table of Contents 
@@ -385,6 +385,14 @@ Refer ISO 19794-5:2011
    </td>
   </tr>
   <tr>
+   <td>Exception Image Specification
+   </td>
+   <td>Full Frontal with FACE features, two palms next to the face, waist up photo. 6X4 mm
+   </td>
+   <td>N/A
+   </td>
+  </tr>
+  <tr>
    <td>Image quality
    </td>
    <td>ICAO - Full frontal image, +/- 5 degrees rotation, 24 bit RGB, white background, 35 mm width, 45 mm height
@@ -411,15 +419,30 @@ We recommend that countries look at ergonomics, accessibility, ease of usage, an
 
 MOSIP compliant devices provide a trust environment for the devices to be used in registration, KYC and auth scenarios. The trust level is established based on the device support for trusted execution.
 
+  L1 - The trust is provided by a secure chip with secure execution environment.
+
+  L2 - The trust is provided by a secure chip with secure execution environment and complete tamper protection across the entire device.
+
+  L0 - The trust is provided at the software level. No hardware releated trust exist. This type of compliance is used in controlled environments.
+
+  
+
 ### Foundational Trust Module (FTM):
 
 The foundational trust module would be created using a secure microprocessor capable of performing all required biometric processing and secure storage of keys. The foundational device trust would satisfy the below requirements.
+
 1. The module has the ability to securely generate, store and process cryptographic keys.
-2. Generation of asymmetric keys and symmetric keys in random.
+2. Generation of asymmetric keys and symmetric keys with TRNG.
 3. The module has the ability to protect keys from extraction.
 4. The module has to protect the keys from physical tampering, temperature, frequency and voltage related attacks.
-5. The module has the ability to perform a cryptographically validatable secure boot.
-6. The module has the ability to run trusted applications.
+5. The module could withstand against Hardware cloning.
+6. The module could withstand probing attacks
+7. The module provides memory segreagation for cryptographic operations and protection against buffer over flow attacks
+8. The module provides ability to withstand cryotographic side channel attacks like Differential Power analysis attacks, Timing attacks.
+9. CAVP validated implementaion of the cryptographic algorithm.
+10. The module has the ability to perform a cryptographically validatable secure boot.
+11. The module has the ability to run trusted applications.
+
 The foundational device trust derived from this module is used to enable trust-based computing for biometric capture.
 The foundational device trust module provides for a trusted execution environment based on the following.
 1. Secure Boot
@@ -427,19 +450,72 @@ The foundational device trust module provides for a trusted execution environmen
     2. Ability to check for integrity violation of the module/device
     3. Halt upon failure.
     4. Ability to securely upgrade and perform forward only upgrades, to thwart downgrade attacks. 
+    5. SHA256 hash equivalent or above should be used for all hashing requirements
+    6. All root of trust is provisioned upon first boot or before
+    7. All upgrades would be considered success only after the successfull boot with proper hash and signature verification. 
+    8. The boot should fail upon hash/signature failures and would never operate in a intermediatory state. 
+    9. Maximum of 10  failed attempts should lock the upgrade process and brick the device. However chip manufactures can decide to be less than 10.
+
 1. Secure application
     1. Ability to run applications that are trusted.
     2. Protect against downgrading of applications.
+    3. Isolated memory to support cryptographic operations. 
+    4. All trust are anchored during the first boot and not modifiable.
+
+**Certification:**
+The FTM should have a at least one of the following certifications in each category to meet the given requirement.
+
+Category: Cryptographic Algorithm Implementation
+
+    * CAVP (RSA, AES, SHA256, TRNG (DRBGVS)
+
+Category:  FTM Chip
+    
+    * FIPS 140-2 L3 or above
+    * PCI PTS 5 or above (Pre certified)
+    * Common Criteria (EAL4 and above)
+      * TODO:FILL IN
+
+Category Tamper:
+  
+  * For L1 level compliance the FTM should support tamper evidence and tamper resistance.
+  * For L2 level compliance the FTM should support all of L1 and capabilities to adopt tamper responsiveness.
+
 
 **Foundational Trust Module Identity:**
 
-The foundational module upon its first boot is expected to generate a random asymmetric key pair and provide the public part of the key to obtain a valid certificate. The entire certificate issuance would be in a secured provisioning facility. The certificate issued to the module will have a defined validity period as per the MOSIP certificate policy document defined by the MOSIP adopters.
+Upon an FTM provider approved by the MOSIP adopters, the FTM provider would submit a self signed public certificate to the adopter. Let us call this as the FTM root.
+
+The adopter would use this certificate to seed their device trust database.The FTM root and their key pairs should be generated and stored in FIPS 140-2 Level 3 or more compliant devices with no possible mechanism to extract the keys.
+
+The foundational module upon its first boot is expected to generate a random asymmetric key pair and provide the public part of the key to obtain a valid certificate. 
+
+The FTM provider would validate to ensure that the chip is unique and would issue a certificate with the issuer set to FTM root. 
+
+The entire certificate issuance would be in a secured provisioning facility. Auditable upon notice by the adopters or its approved auditors.
+
+The certificate issued to the module will have a defined validity period as per the MOSIP certificate policy document defined by the MOSIP adopters.
+
+This certificate and private key within the FTM chip is expected to be in it permenant memory.
+
+***_Note:_*** The validity for the chip certificate can not exceed 20 years from the date of manufacturing.
+
+---
+### Device: 
+
+Mosip devices are most often used to collect biometrics. The devices are expected to follow the specification for all level of compliance and its usage. The mosip devices fall under the category of Trust Level 3 (TL3) as defined in MOSIP architecture. At TL3 device is expected to be whitelisted wtih a fully capable PKI and secure storage of keys at the hardware. 
+
+L0 - A device can obtain L0 certification when it uses software level cryptographic library with no secure boot or FTM.  These devices will follow different device identity and the same would be mentioned as part of exception flows.
+
+L1 - A device can obtain L1 certification when its built in secure facility with one of the certified FTM.
+
+L2 - A device can obtain L2 certification when its build in secure facilty with one of the certified FTM with tamper responsiveness. Also the device should be capable of demonstrating tamper responsivenss during its entire life time.
 
 **Device Identity:**
 
-As MOSIP deals with biometrics it is imperative that all devices that connect to MOSIP are identifiable. MOSIP believes in cryptographic Identity as its basis for trust.
+It is imperative that all devices that connect to MOSIP are identifiable. MOSIP believes in cryptographic Identity as its basis for trust.
 
-**Physical Id:** An identification mark that shows MOSIP compliance and a readable unique device serial number (minimum of 12 digits), make and model. The same information has to be available over a 2D QR Code or Barcode.
+**Physical Id:** An identification mark that shows MOSIP compliance and a readable unique device serial number (minimum of 12 digits), make and model. The same information has to be available over a 2D QR Code or Barcode. This is to help field support and validation. 
 
 **Digital Id:** A digital device Id in MOSIP would be a signed JSON (RFC 7515) as follows:
 ```
@@ -464,43 +540,53 @@ As MOSIP deals with biometrics it is imperative that all devices that connect to
 ```
 Signed with the JSON Web Signature (RFC 7515) using the “Foundational Trust Module” Identity key, this data is the fundamental identity of the device.  Every MOSIP compliant device will need the foundational trust module. 
 
-The only exception to this rule is for the devices that have the purpose (explained below during device registration)  as "Registration". Those devices are called as L0 where there is not FTM. These devices would sign the request with device key.
+The only exception to this rule is for the L0 compliant devices that have the purpose (explained below during device registration)  as "Registration". L0 devices would sign the Digital Id with the device key.
 
 Signed Digital Id would look as follows.
 ```
 "digitalId": "base64urlencoded(header).base64urlencoded(payload).base64urlencoded(signature)"
+
 ```
+The header in the digital id would have 
+```
+"alg": "RS256",
+"type": "JWT",
+"x5c": "<Certificate of the FTM chip, If in case the chain of certificates are sent then the same will be ignored">
+```
+
+MOSIP assumes that the first certificate in the x5c is the FTM's chip public certificate issued by the FTM root certificate.
+
 Unsigned digital Id would look as follows.
 ```
 "digitalId": "base64urlencoded(payload)"
 ```
 payload is the Digital ID json object.
 
-**Accepted Values**:
+**Accepted Values:**:
 ```
-    serialNo - Same as the Physical Id
+    serialNo - Serial number of the device. This value should be same as printed on the device (Refer Physical ID)
 
-    make - Brand name
+    make - Brand name. This value should be same as printed on the device (Refer Physical ID)
 
-    model - Model of the device
+    model - Model of the device. This value should be same as printed on the device (Refer Physical ID)
 
     type - [“Fingerprint”, “Iris”, “Face’’], //More types will be added.
     
-    subType - subtype is based on the type.
-
-	Finger - “Slab”, “Single”, “Touchless”
-
-                Iris - “Single”, “Double”,
-
-               Face - Full face
+    subType - subtype is based on the type. 
+    
+              Finger - “Slab”, “Single”, “Touchless”
+              Iris - “Single”, “Double”,
+              Face - "Full face"
 
     deviceProvider - Device provider name, This would be a legal entity in the country,
 
-    deviceProviderId: Device provider Id issued by MOSIP
+    deviceProviderId: Device provider Id issued by MOSIP adopters
     
-    dateTime:  ISO format with timezone.  Identity request time 
+    dateTime:  ISO format with timezone.  The time during the issuance of this identity
 ```
+
 ---
+
 ## 5. Device Service - Communication Interfaces
 
 The section explains the necessary details of the biometric device connectivity, accessibility, discoverability and protocols used to build and communicate with the device.
@@ -523,7 +609,7 @@ Discovery Request:
 
 }
 ```
-**Accepted Values **
+**Accepted Values:**
 ```
 type: “Biometric Device”, “Fingerprint”, “Face”, “Iris”
 
@@ -539,7 +625,7 @@ Note: “Biometric Device” - is a special type and used in case if you are loo
     “serviceVersion”: "device service version",
     “deviceSubId”: "device sub Id’s",
     “callbackId”: "baseurl to reach to the device“,
-    "digitalId": "unsigned digital id of the device",
+    "digitalId": "digital id of the device",
     "deviceCode": "A unique code given by MOSIP after successful registration",
     "specVersion": ["Array of supported MDS specification version"],
     "purpose": "Auth  or Registration or empty if not registered",
@@ -551,12 +637,12 @@ Note: “Biometric Device” - is a special type and used in case if you are loo
     ...
 ]
 ```
-**Accepted values:**
+**Accepted Values:**
 ```
 
 deviceStatus - “Active”, “Inactive or Not Registered”
 
-certification - “L0”, “L1” - Level of certification
+certification - “L0”, “L1”, "L2" - Level of certification
 
 serviceVersion - Version of the MDS specification that is supported.
 
@@ -566,7 +652,7 @@ deviceSubId - is the internal Id of the device. For example in case of iris capt
 
 callbackId - this differs as per the OS. In case of Linux and windows operating systems it is a http URL. In the case of android, it is the intent name. In IOS it is the URL scheme. The call back url takes precedence over future request as a base URL.
 
-digitalId - unsigned digital id as per the Digital Id definition.  
+digitalId - Digital id as per the Digital Id definition.  
 
 deviceCode: A unique code given by MOSIP after successful registration,
 
@@ -578,9 +664,9 @@ errorCode - standardized error code.
 errorInfo - description of the error that can be displayed to end user. Multi lingual support. 
 
 ```
-Note: The response is an array that we could have a single device enumerating with multiple biometric options.
+***_Note:_*** The response is an array that we could have a single device enumerating with multiple biometric options.
 
-Note: The service should ensure to respond only if the type parameter matches the type of device or the type parameter is a “Biometric Device”.
+***_Note:_*** The service should ensure to respond only if the type parameter matches the type of device or the type parameter is a “Biometric Device”.
 
 
 #### Windows/Linux:
@@ -607,9 +693,9 @@ Content-Type: application/json
 Connection: Closed
 ```
 
-Note: the pay loads are json in both the cases and are part of the body.
+***_Note:_*** the pay loads are json in both the cases and are part of the body.
 
-*callbackId would be set to the [http://127.0.0.1](http://127.0.0.1):<device_service_port>. So, the caller will use the respective verb and the url to call the service.
+*callbackId would be set to the [http://127.0.0.1:<device_port>](http://127.0.0.1:<device_port>). So, the caller will use the respective http verb/method and the url to call the service.
 
 
 #### Android:
@@ -623,20 +709,19 @@ All device on an IOS device would respond to the url schema as follows.
 MOSIPDISC://<call-back-app-url>?ext=<caller app name>&type=<type as defined in mosip device request>
 If a MOSIP compliant device service app exist then the url would launch the service. The service in return should respond back to the caller using the call-back-app-url with the base64 encoded json as the url parameter for the key data.
 
-Note: In IOS there are restrictions to have multiple apps registering to the same URL schema.
+***_Note:_*** In IOS there are restrictions to have multiple apps registering to the same URL schema.
 
 *callbackId would be set to the device service appname. So, the caller has to call appnameInfo or appnameCapture as the url scheme.
 
 ### 5.2 Device Info:
 The device information API would be used to identify the MOSIP compliant devices and their status by the applications.
 
-Device Info Request:
 
 **Request:**
 
 NONE
 
-**Accepted Values**
+**Accepted Values:**
 
 **Response:**
 ```
@@ -901,19 +986,24 @@ customOpts - If in case the device vendor has additional parameters that they ca
 ]
 ```
 
-**Accepted values:**
-
+**Accepted Values:**
+```
 data.bioValue - Encrypted and Encoded to base64urlencode biometric value. AES GCM encryption with a random key. The IV for the encryption is set to last 16 digits of the timestamp. ISO formated bioValue. Look at the Authentication document to understand more about the encryption.  
 
+hash - the value of the previousHash atribute in the request object or the value of hash atribute of the previous data block (used to chain every single data block) concatenated with the hex encode sha256 hash of the current data block before encryption.  
+
+sessionKey - Random AES key used for the encryption of the bioValue. The encryption key is encrypted using the public key with RSA OAEP. Sent as base64urlencoded
+
+```
+
 data - The entire data object is stored as follows. 
+
 ```
 "data" : "base64urlencode(header).base64urlencode(payload).base64urlencode(signature)
 
-payload is defined as the entire byte array of data block. The data block
-```
+payload - is defined as the entire byte array of data block. 
 
-hash - the value of the previousHash atribute in the request object or the value of hash atribute of the previous data block (used to chain every single data block) concatenated with the hex encode sha256 hash of the current data block before encryption.  
-sessionKey - Random AES key used for the encryption of the bioValue. The encryption key is encrypted using the public key with RSA OAEP. Sent as base64urlencoded
+```
 
 #### Windows/Linux:
 
@@ -921,7 +1011,7 @@ The applications that requires to capture biometric data from a MOSIP devices co
 
 **_HTTP Request:_**
 
-CAPTURE [http://127.0.0.1](http://127.0.0.1):<device service port>/capture
+CAPTURE [http://127.0.0.1:<device_port>/capture](http://127.0.0.1/capture)
 
 HOST: 127.0.0.1: <apps port>
 
@@ -975,7 +1065,7 @@ Used only for the registration module compatible devices. This api is visible on
 }
 ```
 
-**Accepted Values **
+**Accepted Values:**
 
 ```
 deviceId - Internal Id
@@ -988,7 +1078,6 @@ Live Video stream with quality of 3 frames per second or more using M-JPEG2000 h
 
 **_Note:_** Preview should have the quality markings and segement marking. The preview would also be used to display any error message to the user screen. All error messages should be localizable.
 
-**Accepted values:**
 
 #### Windows/Linux:
 
@@ -1015,11 +1104,12 @@ No support for streaming
 No support for streaming
 
 ### 5.5 Device Registration Capture:
+
 The registration client application will send sample API. The sample API’s response will provide the actual biometric data in a digitally signed non encrypted form.   When the Device Registration Capture API is called the frames should not be added to the stream. The device is expected to send the images as well as its extraction values. For e.g. the segmented JPEG image is in the bioValue and the segmented and extracted will fit into the bioExtract.
 
 The requestedScore is in the scale of 1-100.  In case the requestedScore is for all the count as average. So, in cases where you have four fingers the average of all will be considered for capture threshold.
 
-Device Registration Capture Request:
+**Device Registration Capture Request:**
 
 The API is used by the devices that are compatible for the registration module.
 
@@ -1072,7 +1162,7 @@ customOpts:
 }
 ```
 
-**Accepted Values**
+**Accepted Values:**
 
 ```
 env - Allowed values are Staging| Developer| Pre-Production | Production
@@ -1087,7 +1177,7 @@ bio.type - “FMR”,  “FIR” , “IIR”, “Face”
 
 bio.count - number of biometric data that is collected for a given type. The device should validate and ensure this number is in line with the type of biometric that's captured.
 
-bio.exception: “LF_INDEX”, “LF_MIDDLE”, “LF_RING”, “LF_LITTLE”,  “LF_THUMB” “RF_INDEX”, “RF_MIDDLE”, “RF_RING”, “RF_LITTLE”,  “RF_THUMB”, “L_IRIS”, “R_IRIS”. This is an array and all the exceptions are marked. In case of an empty element assume there is no exception.
+bio.exception: “LF_INDEX”, “LF_MIDDLE”, “LF_RING”, “LF_LITTLE”,  “LF_THUMB” “RF_INDEX”, “RF_MIDDLE”, “RF_RING”, “RF_LITTLE”,  “RF_THUMB”, “L_IRIS”, “R_IRIS”. This is an array and all the exceptions are marked. In case of an empty element assume there is no exception. In case exceptions are sent for face then follow the exception photo specification above.
 
 bio.requestedScore - what is the expected quality? Upon reaching the necessary quality the biometric device is expected to auto capture the image.
 
@@ -1110,11 +1200,13 @@ bio.previousHash - The previous hash for the image captured by this device per r
 
             "digitalId": "Unsigned digital id of the device as per the Digital Id definition..",
 
+            "bioType": "Biometric type",
+
             "deviceCode": "A unique code given by MOSIP after successfull registration",
 
             "deviceServiceVersion": "",
 
-            "bioSubType": "Middle Finger",
+            "bioSubType": "IndexFinger",
 
             "purpose": "Auth  or Registration",
             "env":  "target environment",
@@ -1151,11 +1243,13 @@ bio.previousHash - The previous hash for the image captured by this device per r
 
             "deviceCode": "",
 
+            "bioType" : "Iris",
+
             "digitalId": "Unsigned digital id of the device as per the Digital Id definition.", 
 
             "deviceServiceVersion": "",
 
-            "bioSubType": "LEFT",
+            "bioSubType": "Left",
 
             "purpose": "Auth  or Registration",
             "env":  "<target environment>",             
@@ -1186,9 +1280,15 @@ bio.previousHash - The previous hash for the image captured by this device per r
 }
 ```
 
-**Accepted values:**
+**Accepted Values:**
+```
 data - base64urlencode(header).base64urlencode(payload).base64urlencode(signature)
 
+data.bioType - “FMR”,  “FIR” , “IIR”, “Face”
+
+data.bioSubType - “LF_INDEX”, “LF_MIDDLE”, “LF_RING”, “LF_LITTLE”,  “LF_THUMB” “RF_INDEX”, “RF_MIDDLE”, “RF_RING”, “RF_LITTLE”,  “RF_THUMB”, “L_IRIS”, “R_IRIS”
+
+```
 #### Windows/Linux: 
 
 The applications that require more details of the MOSIP devices could get them by sending the http request to the supported port range.
@@ -1221,9 +1321,13 @@ The device server exposes two external device APIs to manage devices. These will
 
 ### 6.1 Registration:
 The MOSIP server would provide the following device registration API which is whitelisted to the management servers of the device provider or their partners.
-Note: This API is exposed by the MOSIP server to the device providers.
-http://device.mosip.io /device/register
+
+***_Note:_*** This API is exposed by the MOSIP server to the device providers.
+
+http://device.mosip.io/device/register
+
 HTTP Request
+
 Type: POST
 
 ```
@@ -1254,7 +1358,13 @@ Type: POST
 
 }
 ```
-Accepted Values:
+**Accepted Values:**
+
+```
+deviceId - Unique device id that the device provider uses to identify the device. (This can also be serial no if the device provider is sure of maintaing the uniqueness across all their devices)
+
+digitalId - Digital id is signed by the FTM chip key in L1 & L2. In case of L0 the digital id is signed by the device key.
+```
 device data is sent in the following format.
 
 "deviceData" : base64urlencode(header).base64urlencode(payload).base64urlencode(signature)
@@ -1269,8 +1379,6 @@ Response:
 "response": {
 
     “status”:  "registration status",
-
-    "digitalId": "signed digital id of the device",
 
     “error”: {
 
@@ -1292,43 +1400,62 @@ Response:
 
 ```
 The response is of the following format
-
+```
 "response" : base64urlencode(header).base64urlencode(payload).base64urlencode(signature)
-
+```
 The response should be sent to the device. The device is expected to store the deviceCode within its storage in a safe manner. This device code is used during the capture stage.
 
-<b>Note</b>: The device once registered for a specific purpose can not be changed after successfull registration. The device can only be used for that specific mosip process.
+***_Note:_*** The device once registered for a specific purpose can not be changed after successfull registration. The device can only be used for that specific mosip process.
 
 ### 6.2 De-Register:
-http://device.mosip.io /device/deregister
-Request:
+http://device.mosip.io/device/deregister
+
+**Request:**
 
 ```
 {
- device: {
-“deviceCode”: <device code>,
-“env”: <environment>
- “timestamp”: <iso format time of successful registration of the device>
-}
- “signature”: “signature of the device element using the device provider certificate”
-}
-```
-
-Response
-
-```
-  {
-    status: "Success",
-    “error”: {
-
-   	 "code": "error code if de-registration fails",
-
-   	 "message": "human readable description of the error code",
-
-    }
+  "id": "mosip.identity.registration",
+  "version": "v1",
+  device: {
+    “deviceCode”: "<device code>",
+    “env”: "<environment>",
+    “timestamp”: "<iso format time of successful registration of the device>"
   }
+}
+```
+The entire request is sent as a JWT format. So the final request will look like
+
+```
+{
+  device : "base64urlencode(header).base64urlencode(payload).base64urlencode(signature)"
+}
 ```
 
+
+**Response:**
+```
+   {
+     "id": "mosip.identity.registration",
+     "version": "v1",
+     "response" {
+       "status": "Success",
+       "deviceCode": "<device code>",
+       "env": "<environment>",
+       "timestamp": "<iso format time of successful registration of the device>,
+       "error": {
+         "code" : "<error code if de-registration fails>",
+         "message" : "<human readable description of the error code>"
+    }
+     }
+    
+  }
+
+```
+The entire response is sent as a JWT format. So the final request will look like
+
+```
+  "response" : "base64urlencode(header).base64urlencode(payload).base64urlencode(signature)"
+```
 ---
 
 ## 7. Management Server
@@ -1348,7 +1475,11 @@ The Management Server is created and hosted by the device provider outside of MO
 ---
 
 ## 8. Compliance
+
+L2 Certified Device / L2 Device - A device certified as cabale of performing encryption on the device inside its trusted zone with tamper responsive features
+
 L1 Certified Device / L1 Device - A device certified as capable of performing encryption on the device inside its trusted zone.
+
 L0 Certified Device / L0 Device - A device certified as one where the encryption is done on the host inside its device driver or the MOSIP device service.
 
 <table>
@@ -1361,25 +1492,25 @@ L0 Certified Device / L0 Device - A device certified as one where the encryption
   <tr>
    <td>Device Discovery
    </td>
-   <td>L0/L1
+   <td>L0/L1/L2
    </td>
   </tr>
   <tr>
    <td>Device Info
    </td>
-   <td>L0/L1
+   <td>L0/L1/L2
    </td>
   </tr>
   <tr>
    <td>Capture
    </td>
-   <td>L1
+   <td>L1/L2
    </td>
   </tr>
   <tr>
    <td>Registration Capture
    </td>
-   <td>L0/L1
+   <td>L0/L1/L2
    </td>
   </tr>
 </table>
