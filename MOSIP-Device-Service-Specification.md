@@ -1324,6 +1324,8 @@ The MOSIP server would provide the following device registration API which is wh
 
 ***_Note:_*** This API is exposed by the MOSIP server to the device providers.
 
+**Version:** v1
+
 http://device.mosip.io/device/register
 
 HTTP Request
@@ -1332,6 +1334,26 @@ Type: POST
 
 ```
 {
+
+  "id": "io.mosip.deviceregister",
+
+  "request": {
+
+    "deviceData": "JWT of the below device data"
+
+  },
+
+  "requesttime": "current timestamp in ISO format",
+
+  "version": "registration server api version as defined above"
+
+}
+```
+
+**Device Data:**
+
+```
+
 
 “deviceData”: { 
 
@@ -1352,11 +1374,8 @@ Type: POST
 
     “timestamp”:  "ISO format datetime with timezone"
     },
-“foundationalTrustProviderId” : "foundation trust provider Id, in case of L0 this is empty"
-
-}
-
-}
+    “foundationalTrustProviderId” : "foundation trust provider Id, in case of L0 this is empty"
+  }
 ```
 **Accepted Values:**
 
@@ -1371,16 +1390,40 @@ device data is sent in the following format.
 
 payload is the object in deviceData.
 
-Response:
+**Response:**
 
 ```
 {
+    "id": "io.mosip.deviceregister",
+
+    "version": "registration server api version as defined above",
+
+    "responsetime": "iso time format",
+
+    "response": "JWT of the below device data",
+
+    "errors": null
+
+}
+
+```
+**Definition of response:**
+
+```
 
 "response": {
 
     “status”:  "registration status",
 
-    “error”: {
+    "digitalId": "digital id of the device a sent by the request", 
+
+    "deviceCode": "UUID RFC4122 Version 4 for the device issued by the mosip server",
+
+    "timestamp": "timestamp in ISO format",
+
+    "env": "prod/development/stage",
+
+    “error”: { //Filled in case of error. remaining keys above are dropped in case of errors.
 
    	 "code": "error code if registration fails",
 
@@ -1388,15 +1431,8 @@ Response:
 
     }
 
-    "deviceCode": "UUID RFC4122 Version 4 for the device issued by the mosip server",
+ }
 
-    "timestamp": "timestamp in ISO format",
-
-    "env": "prod/development/stage"
-
-    }
-
-}
 
 ```
 The response is of the following format
@@ -1410,17 +1446,24 @@ The response should be sent to the device. The device is expected to store the d
 ### 6.2 De-Register:
 http://device.mosip.io/device/deregister
 
+**Version:** v1
+
+HTTP Request
+
+Type: POST
+
 **Request:**
 
 ```
 {
-  "id": "mosip.identity.registration",
-  "version": "v1",
+  "id": "io.mosip.deviceregister",
+  "version": "de-registration server api version as defined above",
   device: {
     “deviceCode”: "<device code>",
     “env”: "<environment>",
-    “timestamp”: "<iso format time of successful registration of the device>"
+    "timestamp": "timestamp in ISO format",
   }
+  "requesttime": "current timestamp in ISO format",
 }
 ```
 The entire request is sent as a JWT format. So the final request will look like
@@ -1435,23 +1478,23 @@ The entire request is sent as a JWT format. So the final request will look like
 **Response:**
 ```
    {
-     "id": "mosip.identity.registration",
-     "version": "v1",
+     "id": "io.mosip.deviceregister",
+     "version": "de-registration server api version as defined above",
+     "responsetime": "iso time format",
      "response" {
        "status": "Success",
        "deviceCode": "<device code>",
        "env": "<environment>",
-       "timestamp": "<iso format time of successful registration of the device>,
+       "timestamp": "timestamp in ISO format"
+       }
        "error": {
          "code" : "<error code if de-registration fails>",
          "message" : "<human readable description of the error code>"
-    }
-     }
-    
-  }
+         }
+   }
 
 ```
-The entire response is sent as a JWT format. So the final request will look like
+The entire response is sent as a JWT format. So the final response will look like
 
 ```
   "response" : "base64urlencode(header).base64urlencode(payload).base64urlencode(signature)"
