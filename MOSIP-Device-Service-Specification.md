@@ -61,6 +61,7 @@ All devices that collect biometric data for MOSIP should operate within the spec
 * header in signature - Header in signature means the attribute with "type" set to "MDSSign" "alg" set to RS256 and x5c set to base64encoded certificate.
 * payload is the byte array of the actual data, always represented as base64urlencoded.
 * signature - base64urlencoded signature bytes
+* ISO Format Time - ISO 8601 with format yyyy-mm-dd HH:MM:ssZ
 ---
 ## 3. Device Specification
 
@@ -438,7 +439,7 @@ The foundational trust module would be created using a secure microprocessor cap
 5. The module could withstand against Hardware cloning.
 6. The module could withstand probing attacks
 7. The module provides memory segreagation for cryptographic operations and protection against buffer over flow attacks
-8. The module provides ability to withstand cryotographic side channel attacks like Differential Power analysis attacks, Timing attacks.
+8. The module provides ability to withstand cryptographic side channel attacks like Differential Power analysis attacks, Timing attacks.
 9. CAVP validated implementaion of the cryptographic algorithm.
 10. The module has the ability to perform a cryptographically validatable secure boot.
 11. The module has the ability to run trusted applications.
@@ -574,7 +575,7 @@ payload is the Digital ID json object.
     
     subType - subtype is based on the type. 
     
-              Finger - “Slab”, “Single”, “Touchless”
+              Finger - “Slap”, “Single”, “Touchless”
               Iris - “Single”, “Double”,
               Face - "Full face"
 
@@ -654,7 +655,7 @@ callbackId - this differs as per the OS. In case of Linux and windows operating 
 
 digitalId - Digital id as per the Digital Id definition.  
 
-deviceCode: A unique code given by MOSIP after successful registration,
+deviceCode - A unique code given by MOSIP after successful registration,
 
 specVersion - Array of supported MDS specification version",
 
@@ -769,19 +770,19 @@ So the API would respond in the following format.
 
 ```
 
-deviceInfo.status - “Ready”, “Busy”, “Not Ready”, "Not Registered" 
+deviceInfo.status - “Ready”, “Busy”, “Not Ready”, "Not Registered". 
 deviceInfo.deviceId - Internal Id to identify the actual biometric device within the device service.
-deviceInfo.deviceStatus - "Active" or "InActive"
-deviceInfo.firmware - Exact version of the firmware
-deviceInfo.certification - “L0”, “L1” - Level of certification
+deviceInfo.deviceStatus - "Active" or "InActive".
+deviceInfo.firmware - Exact version of the firmware.
+deviceInfo.certification - “L0”, “L1” - Level of certification.
 deviceInfo.serviceVersion - Version of the current document.
 deviceInfo.biometric device within the device service.
 deviceInfo.deviceSubId - is the internal id of the device. In case of iris when we have two iris capture modules in a single device, it is possible to address each device with a sub Id so we can identify or command each of it in isolation. This in an index that always starts with 1 and increments sequentially.
-deviceInfo.callbackId - base URL to communicate
+deviceInfo.callbackId - base URL to communicate.
 deviceInfo.digitalId - as defined under the digital id section for unsigned digital id.
-deviceInfo.purpose - "Auth" or "Registration" or empty in case the status is "Not Registered"
-deviceInfo.specVersion: "Array of MDS specification version",
-error - relevant errors as defined under the "Error section" of this document
+deviceInfo.purpose - "Auth" or "Registration" or empty in case the status is "Not Registered".
+deviceInfo.specVersion - "Array of MDS specification version".
+error - relevant errors as defined under the "Error section" of this document.
 
 ```
 **_Note_**: The response is an array that we could have a single device enumerating with multiple biometric options.
