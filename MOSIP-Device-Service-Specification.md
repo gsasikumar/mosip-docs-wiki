@@ -1,6 +1,6 @@
-#### Aug 2019 | Version: 0.9.4 
+#### Aug 2019 | Version: 0.9.5 
 #### Status: Draft 
-#### Last updated date: 30th March 2020
+#### Last updated date: 24th April 2020
 
 ## Table of Contents 
 
@@ -58,7 +58,7 @@ All devices that collect biometric data for MOSIP should operate within the spec
 * FPS - Frames Per Second
 * Management Server - A server run by the device provider to manage the life cycle of the biometric devices.
 * Device Registration - The process of registering the device with MOSIP servers.
-* Signature - All signature are formated as per RFC 7515.
+* Signature - All signature should be as per RFC 7515.
 * header in signature - Header in signature means the attribute with "type" set to "MDSSign" "alg" set to RS256 and x5c set to base64encoded certificate.
 * payload is the byte array of the actual data, always represented as base64urlencoded.
 * signature - base64urlencoded signature bytes
@@ -830,7 +830,7 @@ deviceInfo.deviceStatus - [“Ready”, “Busy”, “Not Ready”, "Not Regis
 deviceInfo.deviceId - Internal Id to identify the actual biometric device within the device service.
 deviceInfo.firmware - Exact version of the firmware, In case of L0 this is same as serviceVersion.
 deviceInfo.certification - “L0”, “L1” - Level of certification.
-deviceInfo.serviceVersion - Version of the current document.
+deviceInfo.serviceVersion - Version of the current service.
 deviceInfo.deviceSubId - is the internal id of the device. In case of iris when we have two iris capture modules in a single device, it is possible to address each device with a sub Id so we can identify or command each of it in isolation. This in an index that always starts with 1 and increments sequentially.
 deviceInfo.callbackId - base URL to communicate.
 deviceInfo.digitalId - as defined under the digital id section.
@@ -921,11 +921,11 @@ env - Allowed values are Staging| Developer| Pre-Production | Production
 
 purpose - Allowed values are Auth| Registration
 
-version - version of the biometric block as specified in the authentication or customer registration specification.
+specVersion - version of the biometric block as specified in the authentication or customer registration specification.
 
 timeout - Max time the app will wait for the capture. Its expected that the api will respond back before timeout with the best frame. All timeouts are in milliseconds
 
-captureTime - time of capture in ISO format with timezone.
+captureTime - time of capture in ISO format with timezone. The time is as per the requesting application.
 
 domainUri - unique uri per auth providers. This can be used to federate across multiple providers or countries or unions.
 
@@ -1031,6 +1031,8 @@ customOpts - If in case the device vendor has additional parameters that they ca
 
           "sessionKey": "encrypted with MOSIP public key and encoded session key biometric",
 
+          "thumbprint": "SHA256 thumbprint of the certificate that was used for encryption of session key",
+
           "error": {
 
              "errorcode": "101",
@@ -1047,6 +1049,8 @@ customOpts - If in case the device vendor has additional parameters that they ca
 **Accepted Values:**
 ```
 data.bioValue - Encrypted and Encoded to base64urlencode biometric value. AES GCM encryption with a random key. The IV for the encryption is set to last 16 digits of the timestamp. ISO formatted bioValue. Look at the Authentication document to understand more about the encryption.  
+
+data.timestamp - Time as per the biometric device. Note: The biometric device is expected to sync its time from the management server at regular intervals so accurate time could be maintained on the device.
 
 hash - the value of the previousHash attribute in the request object or the value of hash attribute of the previous data block (used to chain every single data block) concatenated with the hex encode sha256 hash of the current data block before encryption.  
 
@@ -1215,11 +1219,11 @@ customOpts:
 ```
 env - Allowed values are Staging| Developer| Pre-Production | Production
 
-version - version of the biometric block as specified in the registration specification.
+specVersion - version of the biometric block as specified in the registration specification.
 
 timeout - Max time the app will wait for the capture.
 
-captureTime - time of capture in ISO format with timezone.
+captureTime - time of capture in ISO format with timezone, This is time as per the request application.
 
 bio.type - “FIR” , “IIR”, “Face”
 
@@ -1332,6 +1336,8 @@ data.bioType - “FIR” , “IIR”, “Face”
 
 data.bioSubType - “LF_INDEX”, “LF_MIDDLE”, “LF_RING”, “LF_LITTLE”,  “LF_THUMB” “RF_INDEX”, “RF_MIDDLE”, “RF_RING”, “RF_LITTLE”,  “RF_THUMB”, “L_IRIS”, “R_IRIS”
 
+data.timestamp - Time as per the biometric device. Note: The biometric device is expected to sync its time from the management server at regular intervals so accurate time could be maintained on the device.
+
 ```
 #### Windows/Linux: 
 
@@ -1426,7 +1432,10 @@ Type: POST
 ```
 deviceId - Unique device id that the device provider uses to identify the device. (This can also be serial no if the device provider is sure of maintaining the uniqueness across all their devices)
 
-digitalId - Digital id is signed by the FTM chip key in L1 & L2. In case of L0 the digital id is signed by the device key.
+digitalId - Digital id is signed by the FTM chip key in L1. In case of L0 the digital id is signed by the device key. 
+
+***__Note:__ During the registration of L0 devices please sign using the key thats generated inside the device and send the public key in x509 encoded spec form. After successful registration the management server should issue a certificate against the same public key as a response to the registration call.
+
 ```
 device data is sent in the following format.
 
@@ -1448,7 +1457,13 @@ The request is signed with the device provider key at the management server.
 
     "response": "JWT of the below device data",
 
-    "errors": null
+    “error”: [{ //Filled in case of error. remaining keys above are dropped in case of errors.
+
+   	 "code": "error code if registration fails",
+
+   	 "message": "description of the error code",
+
+    } ]
 
 }
 
@@ -1467,15 +1482,7 @@ The request is signed with the device provider key at the management server.
 
     "timestamp": "timestamp in ISO format",
 
-    "env": "prod/development/stage",
-
-    “error”: { //Filled in case of error. remaining keys above are dropped in case of errors.
-
-   	 "code": "error code if registration fails",
-
-   	 "message": "description of the error code",
-
-    }
+    "env": "prod/development/stage"
 
  }
 
@@ -1502,20 +1509,29 @@ Type: POST
 
 ```
 {
-  "id": "io.mosip.deviceregister",
+  "id": "io.mosip.devicederegister",
   "version": "de-registration server api version as defined above",
-  device: {
-    “deviceCode”: "<device code>",
-    “env”: "<environment>"
+  "request": { 
+      "device": {
+      “deviceCode”: "<device code>",
+      “env”: "<environment>"
+    }
   }
   "requesttime": "current timestamp in ISO format",
+   “error”: [{ //Filled in case of error. remaining keys above are dropped in case of errors.
+
+   	 "code": "error code if registration fails",
+
+   	 "message": "description of the error code",
+
+    } ]
 }
 ```
 The entire request is sent as a JWT format. So the final request will look like
 
 ```
-{
-  device : "base64urlencode(header).base64urlencode(payload).base64urlencode(signature)"
+"request": {
+  "device" : "base64urlencode(header).base64urlencode(payload).base64urlencode(signature)"
 }
 ```
 
@@ -1523,19 +1539,20 @@ The entire request is sent as a JWT format. So the final request will look like
 **Response:**
 ```
    {
-     "id": "io.mosip.deviceregister",
+     "id": "io.mosip.devicederegister",
      "version": "de-registration server api version as defined above",
      "responsetime": "iso time format",
      "response" {
        "status": "Success",
        "deviceCode": "<device code>",
        "env": "<environment>",
-       "timestamp": "timestamp in ISO format"
-       }
+       "timestamp": "timestamp in ISO format",
        "error": {
          "code" : "<error code if de-registration fails>",
          "message" : "<human readable description of the error code>"
          }
+       }
+       
    }
 
 ```
@@ -1546,7 +1563,57 @@ The entire response is sent as a JWT format. So the final response will look lik
 ```
 ---
 
-## 7. Management Server
+
+### 6.2 Certificates:
+http://device.mosip.io/device/encryptioncertficates
+
+**Version:** v1
+
+HTTP Request
+
+Type: GET
+
+**Request:**
+
+```
+{
+  "id": "io.mosip.auth.country.certificate",
+  "version": "de-registration server api version as defined above",
+  request: {
+    "country" : "if empty return the current certificate, if a country is defined then send out the countries keys"
+  },
+  "requesttime": "current timestamp in ISO format"
+}
+```
+The request is sent as a JWT format. So the final request will look as below.
+
+```
+  request : {
+    "country": "base64urlencode(header).base64urlencode(payload).base64urlencode(signature)"
+    }
+```
+
+
+**Response:**
+```
+   {
+     "id": "io.mosip.auth.country.certificate",
+     "version": "de-registration server api version as defined above",
+     "responsetime": "iso time format",
+     "response" [{
+       "certificate": "base64encoded certificate as x509 V3 format"
+       }]
+   }
+
+```
+The entire response is sent as a JWT format. So the final response will look like
+
+```
+  "response" : "base64urlencode(header).base64urlencode(payload).base64urlencode(signature)"
+```
+---
+
+## 7. Management Server Functionalities and Interactions
 
 The management server has the following objectives.
 1. Validate the devices to ensure its a genuine device from the respective device provider. This can be achieved using the device info and the certificates for the Foundational Trust Module.
@@ -1554,10 +1621,30 @@ The management server has the following objectives.
 1. Manage/Sync time between the end device the server. The time to be synced should be the only trusted time accepted by the device.
 1. Ability to issue commands to the end device for
     1. De-registration of the device (Device Keys)
-    1. Collect device info
+    1. Collect device information to maintain, manage, support and upgrade a device remotely.
 1. A central repository of all the approved devices from the device provider.
 1. Safe storage of keys using HSM FIPS 140-2 Level 3. These keys are used to issue the device certificate upon registration.
 The Management Server is created and hosted by the device provider outside of MOSIP software. The communication protocols between the MDS and the Management Server can be decided by the respective device provider. Such communication should be restricted to the above specified interactions only. No transactional information should be sent to this server.
+1. Should have the ability to push updates from the server to the client devices.
+
+
+### Management Client
+Management client is the interface that connects the device with the respective management server. Its important that the communication between the management server and its clients are designed with scalability, robustness, performance and security. The management server may add many more capabilities than what is described here, But the basic security objectives should be met at all times irrespective of the offerings. 
+
+1. For better and efficient handling of device at large volume, we expect the devices to auto register to the Management server.
+1. All communication to the server and from the server should follow that below properties.
+  a) All communication are digitally signed with the approved algorithms 
+  b) All communication to the server are encrypted using one of the approved public key cryptography.
+  c) All request has timestamps attached in ISO format to the milliseconds inside the signature.
+  d) All communication back and fourth should have the signed digital id as one of the attribute.
+1. Its expected that the auto registration has an absolute way to identify and validate the devices.
+1. The management client should be able to detect the devices in a plug and play model.
+1. All key rotation should be triggered from the server.
+1. Should have the ability to detect if its speaking to the right management server.
+1. All upgrades should be verifiable and the client should have ability to verify software upgrades. 
+1. Should not allow any downgrade of software.
+1. Should not expose any API to capture biometric. The management server should have no ability to trigger a capture request.
+1. No logging of biometric data is allowed. (Both in the encrypted and unencrypted format)
 
 ---
 
@@ -1568,6 +1655,21 @@ L2 Certified Device / L2 Device - A device certified as capable of performing en
 L1 Certified Device / L1 Device - A device certified as capable of performing encryption on the device inside its trusted zone.
 
 L0 Certified Device / L0 Device - A device certified as one where the encryption is done on the host inside its device driver or the MOSIP device service.
+
+### Secure Provisioning
+
+Secure provisioning is applicable to both the FTM and the Device providers. 
+
+1. The devices and FTM should have a mechanism to protect against fraudulent attempts to create or replicate.
+1. The device and FTM trust should be programmed in a secure facility which is certified by the respective MOSIP adopters. 
+1. Organization should have mechanism to segregate the FTM's and Devices built for MOSIP using cryptographically valid and repeatable process.
+1. All debug options within the FTM or device should be disabled permanently
+1. All key creations need for provisioning should happen automatically using FIPS 140-2 Level 3 or higher devices. No individual or a group or organization should have mechanism to influence this behavior.
+1. Before the devices/FTM leaving the secure provisioning facility all the necessary trust should be established and should not be re-programable. 
+
+
+
+### Compliance Level
 
 <table>
   <tr>
